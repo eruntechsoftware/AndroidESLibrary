@@ -49,6 +49,11 @@ public class ButtonOK extends Button implements IDataInitialize, IFunctionProtec
 		}
 	}
 
+	public ButtonOK(Context context, AttributeSet attrs, int defStyle)
+	{
+		super(context, attrs, defStyle);
+	}
+
 	protected OnClickListener clickListener = new OnClickListener()
 	{
 		public Boolean onClicking()

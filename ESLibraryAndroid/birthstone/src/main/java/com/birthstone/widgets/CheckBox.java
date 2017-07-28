@@ -55,6 +55,11 @@ public class CheckBox extends android.widget.CheckBox implements ICollectible, I
 		}
 	}
 
+	public CheckBox(Context context, AttributeSet attrs, int defStyle)
+	{
+		super(context, attrs, defStyle);
+	}
+
 	public void dataInitialize()
 	{
 		if(mActivity != null)

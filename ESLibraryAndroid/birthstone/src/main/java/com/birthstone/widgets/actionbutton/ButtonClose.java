@@ -45,6 +45,11 @@ public class ButtonClose extends Button implements IDataInitialize, IFunctionPro
 		}
 	}
 
+	public ButtonClose(Context context, AttributeSet attrs, int defStyle)
+	{
+		super(context, attrs, defStyle);
+	}
+
 	protected OnClickListener clickListener = new OnClickListener()
 	{
 		public Boolean onClicking()

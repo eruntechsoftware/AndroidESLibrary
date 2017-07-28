@@ -50,6 +50,11 @@ public class DatePicker extends android.widget.DatePicker implements ICollectibl
         }
     }
 
+    public DatePicker(Context context, AttributeSet attrs, int defStyle)
+    {
+        super(context, attrs, defStyle);
+    }
+
     protected OnDateChangedListener ChangedListener = new OnDateChangedListener() {
 
         public void onDateChanged(android.widget.DatePicker view, int year, int monthOfYear, int dayOfMonth) {

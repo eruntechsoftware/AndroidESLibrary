@@ -44,6 +44,11 @@ public class DateTimeView extends EditText implements ICollectible, IDataInitial
 		}
 	}
 
+	public DateTimeView(Context context, AttributeSet attrs, int defStyle)
+	{
+		super(context, attrs, defStyle);
+	}
+
 	/**
 	 * 数据收集，返回DataCollection
 	 * **/

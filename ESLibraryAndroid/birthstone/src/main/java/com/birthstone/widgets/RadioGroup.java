@@ -66,7 +66,6 @@ public class RadioGroup extends android.widget.RadioGroup implements ICollectibl
 			Log.e("RadioGroup", ex.getMessage());
 		}
 	}
-
 	/**
 	 * ѡ
 	 */

@@ -48,6 +48,11 @@ public abstract class Button extends android.widget.Button implements IFunctionP
         this.setOnClickListener(clickListener);
     }
 
+    public Button(Context context, AttributeSet attrs, int defStyle)
+    {
+        super(context, attrs, defStyle);
+    }
+
     public void click() {
     }
 

@@ -62,6 +62,11 @@ public class ActionLoadPage extends TextView implements IDataInitialize, IDataQu
 		}
 	}
 
+	public ActionLoadPage(Context context, AttributeSet attrs, int defStyle)
+	{
+		super(context, attrs, defStyle);
+	}
+
 	/**
 	 * 
 	 *@:   2012-5-22

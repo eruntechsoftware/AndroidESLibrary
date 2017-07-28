@@ -54,6 +54,11 @@ public class TextView extends android.widget.TextView implements ICollectible, I
 		}
 	}
 
+	public TextView(Context context, AttributeSet attrs, int defStyle)
+	{
+		super(context, attrs, defStyle);
+	}
+
 	public void dataInitialize()
 	{
 		if(mActivity != null)

@@ -69,6 +69,11 @@ public class ButtonQuery extends android.widget.Button implements IFunctionProte
 		}
 	}
 
+	public ButtonQuery(Context context, AttributeSet attrs, int defStyle)
+	{
+		super(context, attrs, defStyle);
+	}
+
 	public void click()
 	{
 		try
