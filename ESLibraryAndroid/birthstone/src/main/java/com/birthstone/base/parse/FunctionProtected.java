@@ -30,7 +30,7 @@ public class FunctionProtected implements IControlSearcherHandler
 		}
 		catch(Exception ex)
 		{
-			Log.e("Ȩ޿", ex.getMessage());
+			Log.e("FunctionProtected", ex.getMessage());
 		}
 	}
 
