@@ -9,7 +9,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 
 import com.birthstone.base.activity.Activity;
-import com.birthstone.base.activity.helper.InitializeHelper;
+import com.birthstone.base.helper.InitializeHelper;
 import com.birthstone.core.helper.DataType;
 import com.birthstone.core.helper.StringToArray;
 import com.birthstone.core.helper.ValidatorHelper;
@@ -36,7 +36,7 @@ public class DatePicker extends android.widget.DatePicker implements ICollectibl
     protected String mName;
     protected String mTime;
     protected String mTipText = "";
-    protected String mNameSpace = "http://schemas.android.com/res/eruntech.birthStone.widgets";
+    protected String mNameSpace = "http://schemas.android.com/res/com.birthStone.widgets";
 
     public DatePicker(Context context, AttributeSet attrs) {
         super(context, attrs);

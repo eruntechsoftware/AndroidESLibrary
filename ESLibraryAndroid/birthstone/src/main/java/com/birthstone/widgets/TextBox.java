@@ -12,8 +12,8 @@ import android.util.Log;
 import android.widget.EditText;
 
 import com.birthstone.base.activity.Activity;
-import com.birthstone.base.activity.event.OnTextBoxChangedListener;
-import com.birthstone.base.activity.helper.InitializeHelper;
+import com.birthstone.base.event.OnTextBoxChangedListener;
+import com.birthstone.base.helper.InitializeHelper;
 import com.birthstone.core.helper.DataType;
 import com.birthstone.core.helper.DataTypeHelper;
 import com.birthstone.core.helper.DateTimeHelper;
@@ -40,7 +40,7 @@ public class TextBox extends EditText implements ICollectible, IValidatible, IRe
 	protected String mName;
 	protected String mTipText = "";
 	protected String mUserTipText = "";
-	protected String mNameSpace = "http://schemas.android.com/res/eruntech.birthStone.widgets";
+	protected String mNameSpace = "http://schemas.android.com/res/com.birthstone.widgets";
 	private OnTextBoxChangedListener onTextBoxChangedListener;
 
 	public TextBox(Context context)

@@ -11,8 +11,8 @@ import android.util.Log;
 import android.widget.RadioButton;
 
 import com.birthstone.base.activity.Activity;
-import com.birthstone.base.activity.event.OnCheckedChangedListener;
-import com.birthstone.base.activity.helper.InitializeHelper;
+import com.birthstone.base.event.OnCheckedChangedListener;
+import com.birthstone.base.helper.InitializeHelper;
 import com.birthstone.core.helper.DataType;
 import com.birthstone.core.helper.DataTypeHelper;
 import com.birthstone.core.helper.StringToArray;
@@ -39,7 +39,7 @@ public class RadioGroup extends android.widget.RadioGroup implements ICollectibl
 	private String mTipText = "";
 	private RadioButton mSelectedRadioButton;
 	private OnCheckedChangedListener onCheckedChangedListener;
-	public String mNameSpace = "http://schemas.android.com/res/eruntech.birthStone.widgets";
+	public String mNameSpace = "http://schemas.android.com/res/com.birthStone.widgets";
 
 	public RadioGroup( Context context, AttributeSet attrs )
 	{

@@ -14,9 +14,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
 import com.birthstone.base.activity.Activity;
-import com.birthstone.base.activity.event.OnItemSelectIndexChangeListener;
-import com.birthstone.base.activity.helper.InitializeHelper;
-import com.birthstone.base.activity.parse.CollectForm;
+import com.birthstone.base.event.OnItemSelectIndexChangeListener;
+import com.birthstone.base.helper.InitializeHelper;
+import com.birthstone.base.parse.CollectForm;
 import com.birthstone.core.Sqlite.SQLiteDatabase;
 import com.birthstone.core.helper.DataType;
 import com.birthstone.core.helper.StringToArray;
@@ -55,7 +55,7 @@ public class Spinner extends android.widget.Spinner implements ICollectible, IVa
 	protected String mCharCode;
 	protected String mTipText = "";
 	protected String mDefaultValue = "";
-	protected String mNameSpace = "http://schemas.android.com/res/eruntech.birthStone.widgets";
+	protected String mNameSpace = "http://schemas.android.com/res/com.birthStone.widgets";
 	protected String[] displayArray = null;
 	protected String[] valueArray = null;
 	protected OnItemSelectIndexChangeListener mOnItemSelectIndexChangeListener;

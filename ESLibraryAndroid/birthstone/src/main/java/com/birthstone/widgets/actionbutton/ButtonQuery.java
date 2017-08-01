@@ -10,13 +10,13 @@ import android.util.Log;
 import android.view.View;
 
 import com.birthstone.base.activity.Activity;
-import com.birthstone.base.activity.event.OnClickedListener;
-import com.birthstone.base.activity.event.OnClickingListener;
-import com.birthstone.base.activity.helper.FormHelper;
-import com.birthstone.base.activity.helper.InitializeHelper;
-import com.birthstone.base.activity.helper.MessageBox;
-import com.birthstone.base.activity.parse.CollectForm;
-import com.birthstone.base.activity.parse.DataBindForm;
+import com.birthstone.base.event.OnClickedListener;
+import com.birthstone.base.event.OnClickingListener;
+import com.birthstone.base.helper.FormHelper;
+import com.birthstone.base.helper.InitializeHelper;
+import com.birthstone.base.helper.MessageBox;
+import com.birthstone.base.parse.CollectForm;
+import com.birthstone.base.parse.DataBindForm;
 import com.birthstone.core.Sqlite.SQLiteDatabase;
 import com.birthstone.core.helper.StringToArray;
 import com.birthstone.core.interfaces.ICollector;
@@ -33,7 +33,7 @@ import java.util.LinkedList;
 
 public class ButtonQuery extends android.widget.Button implements IFunctionProtected, IStateProtected, IDataInitialize, IDataQuery, IReleasable
 {
-	protected String mNameSpace = "http://schemas.android.com/res/eruntech.birthStone.widgets";
+	protected String mNameSpace = "http://schemas.android.com/res/com.birthStone.widgets";
 	protected SQLiteDatabase mSqlDb;
 	protected Boolean mAutoLoad = false;
 	protected String mFuncSign;

@@ -5,7 +5,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 
 import com.birthstone.base.activity.Activity;
-import com.birthstone.base.activity.helper.InitializeHelper;
+import com.birthstone.base.helper.InitializeHelper;
 import com.birthstone.core.helper.DataType;
 import com.birthstone.core.helper.DataTypeHelper;
 import com.birthstone.core.helper.DateTimeHelper;
@@ -26,7 +26,7 @@ public class TextView extends android.widget.TextView implements ICollectible, I
 	protected Boolean mEmpty2Null = true;
 	protected Activity mActivity;
 	protected String mName;
-	protected String mNameSpace = "http://schemas.android.com/res/eruntech.birthStone.widgets";
+	protected String mNameSpace = "http://schemas.android.com/res/com.birthStone.widgets";
 
 	public TextView( Context context, AttributeSet attrs )
 	{

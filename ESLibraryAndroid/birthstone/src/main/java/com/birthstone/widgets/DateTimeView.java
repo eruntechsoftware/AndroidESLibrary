@@ -8,7 +8,7 @@ import android.util.Log;
 import android.widget.EditText;
 
 import com.birthstone.base.activity.Activity;
-import com.birthstone.base.activity.helper.InitializeHelper;
+import com.birthstone.base.helper.InitializeHelper;
 import com.birthstone.core.helper.DataType;
 import com.birthstone.core.helper.DateTimeHelper;
 import com.birthstone.core.helper.StringToArray;
@@ -25,7 +25,7 @@ public class DateTimeView extends EditText implements ICollectible, IDataInitial
 	protected Boolean mEmpty2Null = true;
 	protected Activity mActivity;
 	protected String mName;
-	protected String mNameSpace = "http://schemas.android.com/res/eruntech.birthStone.widgets";
+	protected String mNameSpace = "http://schemas.android.com/res/com.birthStone.widgets";
 
 	public DateTimeView( Context context, AttributeSet attrs )
 	{

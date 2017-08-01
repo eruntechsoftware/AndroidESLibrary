@@ -6,15 +6,16 @@ import android.content.DialogInterface;
 import android.util.AttributeSet;
 import android.util.Log;
 
-import com.birthstone.base.activity.event.OnClickedListener;
-import com.birthstone.base.activity.event.OnClickingListener;
-import com.birthstone.base.activity.helper.MessageBox;
-import com.birthstone.base.activity.parse.CollectForm;
-import com.birthstone.base.activity.parse.ReleaseForm;
-import com.birthstone.base.activity.parse.ValidatorForm;
+import com.birthstone.base.event.OnClickedListener;
+import com.birthstone.base.event.OnClickingListener;
+import com.birthstone.base.helper.MessageBox;
+import com.birthstone.base.parse.CollectForm;
+import com.birthstone.base.parse.ReleaseForm;
+import com.birthstone.base.parse.ValidatorForm;
 import com.birthstone.core.Sqlite.SQLiteDatabase;
 import com.birthstone.core.interfaces.ICollector;
 import com.birthstone.core.interfaces.IReleaser;
+import com.birthstone.widgets.Button;
 
 
 public abstract class ExecuteSqlButtonBase extends Button

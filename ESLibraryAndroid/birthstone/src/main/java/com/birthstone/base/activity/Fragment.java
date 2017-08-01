@@ -7,11 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.birthstone.base.activity.event.OnReleasedListener;
-import com.birthstone.base.activity.event.OnReleaseingListener;
-import com.birthstone.base.activity.helper.FormHelper;
-import com.birthstone.base.activity.helper.FragmentManager;
-import com.birthstone.base.activity.helper.StatusBarUtil;
+import com.birthstone.base.event.OnReleasedListener;
+import com.birthstone.base.event.OnReleaseingListener;
+import com.birthstone.base.helper.FormHelper;
+import com.birthstone.base.helper.FragmentManager;
+import com.birthstone.base.helper.StatusBarUtil;
 import com.birthstone.core.parse.Data;
 import com.birthstone.core.parse.DataCollection;
 

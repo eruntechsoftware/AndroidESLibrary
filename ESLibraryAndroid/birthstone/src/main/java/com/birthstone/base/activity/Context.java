@@ -1,7 +1,7 @@
 package com.birthstone.base.activity;
 
 
-import com.birthstone.base.activity.helper.FormHelper;
+import com.birthstone.base.helper.FormHelper;
 import com.birthstone.core.parse.DataCollection;
 
 public abstract class Context extends android.content.Context
