@@ -3,6 +3,7 @@ package com.birthstone.widgets;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 import com.birthstone.base.activity.Activity;
@@ -23,10 +24,6 @@ import java.util.LinkedList;
 public abstract class ESButton extends android.widget.Button implements IFunctionProtected, IReleasable, IStateProtected, IDataInitialize {
 
     public String mFuncSign;
-    public String mSign;
-    public String mSql;
-    public String mMessage;
-    public String mConfirmMessage;
     public String mStateHiddenId;
     public String mWantedStateValue;
     public String mName;
@@ -38,14 +35,14 @@ public abstract class ESButton extends android.widget.Button implements IFunctio
 
     public ESButton(Context context, AttributeSet attrs) {
         super(context, attrs);
-        mFuncSign = attrs.getAttributeValue(mNameSpace, "funcSign");
-        mMessage = attrs.getAttributeValue(mNameSpace, "message");
-        mSign = attrs.getAttributeValue(mNameSpace, "sign");
-        mSql = attrs.getAttributeValue(mNameSpace, "sql");
-        mConfirmMessage = attrs.getAttributeValue(mNameSpace, "confirmMessage");
-        mStateHiddenId = attrs.getAttributeValue(mNameSpace, "stateHiddenId");
-        mWantedStateValue = attrs.getAttributeValue(mNameSpace, "wantedStateValue");
-        this.setOnClickListener(clickListener);
+        try {
+            setOnClickListener(clickListener);
+            mFuncSign = attrs.getAttributeValue(mNameSpace, "funcSign");
+            mStateHiddenId = attrs.getAttributeValue(mNameSpace, "stateHiddenId");
+            mWantedStateValue = attrs.getAttributeValue(mNameSpace, "wantedStateValue");
+        }catch (Exception ex){
+            Log.e(ESButton.this.toString(),ex.getMessage());
+        }
     }
 
     public ESButton(Context context, AttributeSet attrs, int defStyle)
@@ -112,31 +109,6 @@ public abstract class ESButton extends android.widget.Button implements IFunctio
         return mName;
     }
 
-
-    public void setSql(String sql) {
-        this.mSql = sql;
-    }
-
-    public String getSql() {
-        return mSql;
-    }
-
-    public void setMessage(String message) {
-        this.mMessage = message;
-    }
-
-    public String getMessage() {
-        return mMessage;
-    }
-
-    public void setConfirmMessage(String confirmMessage) {
-        this.mConfirmMessage = confirmMessage;
-    }
-
-    public String getConfirmMessage() {
-        return mConfirmMessage;
-    }
-
     public Object getActivity() {
         return mActivity;
     }
@@ -161,10 +133,6 @@ public abstract class ESButton extends android.widget.Button implements IFunctio
         } else {
             this.setVisibility(View.GONE);
         }
-    }
-
-    public String[] getSigns() {
-        return StringToArray.stringConvertArray(this.mSign);
     }
 
     public String getStateHiddenId() {
@@ -219,14 +187,6 @@ public abstract class ESButton extends android.widget.Button implements IFunctio
 
     public void setFuncSign(String funcSign) {
         this.mFuncSign = funcSign;
-    }
-
-    public String getSign() {
-        return mSign;
-    }
-
-    public void setSign(String sign) {
-        this.mSign = sign;
     }
 
     public String getNameSpace() {
