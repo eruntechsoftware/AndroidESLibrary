@@ -21,7 +21,7 @@ import java.util.LinkedList;
 
 
 @SuppressLint("DefaultLocale")
-public abstract class ESButton extends android.widget.Button implements IFunctionProtected, IReleasable, IStateProtected, IDataInitialize {
+public class ESButton extends android.widget.Button implements IFunctionProtected, IReleasable, IStateProtected, IDataInitialize {
 
     public String mFuncSign;
     public String mStateHiddenId;
