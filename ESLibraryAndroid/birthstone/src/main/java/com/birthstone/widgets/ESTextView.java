@@ -19,7 +19,7 @@ import com.birthstone.core.parse.DataCollection;
 import java.util.LinkedList;
 
 
-public class TextView extends android.widget.TextView implements ICollectible, IReleasable, IDataInitialize
+public class ESTextView extends android.widget.TextView implements ICollectible, IReleasable, IDataInitialize
 {
 	protected DataType mDataType;
 	protected String mCollectSign;
@@ -28,7 +28,7 @@ public class TextView extends android.widget.TextView implements ICollectible, I
 	protected String mName;
 	protected String mNameSpace = "http://schemas.android.com/res/com.birthStone.widgets";
 
-	public TextView( Context context, AttributeSet attrs )
+	public ESTextView(Context context, AttributeSet attrs )
 	{
 		super(context, attrs);
 		try
@@ -54,7 +54,7 @@ public class TextView extends android.widget.TextView implements ICollectible, I
 		}
 	}
 
-	public TextView(Context context, AttributeSet attrs, int defStyle)
+	public ESTextView(Context context, AttributeSet attrs, int defStyle)
 	{
 		super(context, attrs, defStyle);
 	}

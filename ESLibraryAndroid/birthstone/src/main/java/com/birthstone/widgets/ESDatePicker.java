@@ -27,7 +27,7 @@ import java.util.LinkedList;
 
 
 @SuppressLint({"DrawAllocation", "DefaultLocale"})
-public class DatePicker extends android.widget.DatePicker implements ICollectible, IReleasable, ICellTitleStyleRequire, IValidatible, IDataInitialize {
+public class ESDatePicker extends android.widget.DatePicker implements ICollectible, IReleasable, ICellTitleStyleRequire, IValidatible, IDataInitialize {
     protected DataType mDataType;
     protected Boolean mIsRequired;
     protected String mCollectSign;
@@ -38,7 +38,7 @@ public class DatePicker extends android.widget.DatePicker implements ICollectibl
     protected String mTipText = "";
     protected String mNameSpace = "http://schemas.android.com/res/com.birthStone.widgets";
 
-    public DatePicker(Context context, AttributeSet attrs) {
+    public ESDatePicker(Context context, AttributeSet attrs) {
         super(context, attrs);
         try {
             mIsRequired = attrs.getAttributeBooleanValue(mNameSpace, "isRequired", false);
@@ -50,7 +50,7 @@ public class DatePicker extends android.widget.DatePicker implements ICollectibl
         }
     }
 
-    public DatePicker(Context context, AttributeSet attrs, int defStyle)
+    public ESDatePicker(Context context, AttributeSet attrs, int defStyle)
     {
         super(context, attrs, defStyle);
     }

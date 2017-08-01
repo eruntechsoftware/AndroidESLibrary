@@ -25,7 +25,7 @@ import java.util.Date;
 import java.util.LinkedList;
 
 
-public class TimePicker extends android.widget.TimePicker implements ICollectible, IReleasable, ICellTitleStyleRequire, IValidatible, IDataInitialize
+public class ESTimePicker extends android.widget.TimePicker implements ICollectible, IReleasable, ICellTitleStyleRequire, IValidatible, IDataInitialize
 {
 	protected DataType mDataType;
 	protected Boolean mIsRequired;
@@ -37,7 +37,7 @@ public class TimePicker extends android.widget.TimePicker implements ICollectibl
 	protected String mTipText = "";
 	protected String mNameSpace = "http://schemas.android.com/res/com.birthStone.widgets";
 
-	public TimePicker( Context context, AttributeSet attrs )
+	public ESTimePicker(Context context, AttributeSet attrs )
 	{
 		super(context, attrs);
 		try
@@ -54,7 +54,7 @@ public class TimePicker extends android.widget.TimePicker implements ICollectibl
 		}
 	}
 
-	public TimePicker(Context context, AttributeSet attrs, int defStyle)
+	public ESTimePicker(Context context, AttributeSet attrs, int defStyle)
 	{
 		super(context, attrs, defStyle);
 	}

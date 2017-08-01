@@ -23,7 +23,7 @@ import com.birthstone.core.interfaces.IReleaser;
 import com.birthstone.core.parse.DataTable;
 
 
-public class ActionLoadPage extends TextView implements IDataInitialize, IDataQuery, IReleaser
+public class ESActionLoadPage extends TextView implements IDataInitialize, IDataQuery, IReleaser
 {
 	private SQLiteDatabase mSqlDb;
 	protected Activity mActivity;
@@ -33,7 +33,7 @@ public class ActionLoadPage extends TextView implements IDataInitialize, IDataQu
 	protected DataType mDataType;
 	protected String mNameSpace = "http://schemas.android.com/res/com.birthstone.widgets";
 
-	public ActionLoadPage( Context context, AttributeSet attrs )
+	public ESActionLoadPage( Context context, AttributeSet attrs )
 	{
 		super(context, attrs);
 		try
@@ -62,19 +62,11 @@ public class ActionLoadPage extends TextView implements IDataInitialize, IDataQu
 		}
 	}
 
-	public ActionLoadPage(Context context, AttributeSet attrs, int defStyle)
+	public ESActionLoadPage(Context context, AttributeSet attrs, int defStyle)
 	{
 		super(context, attrs, defStyle);
 	}
 
-	/**
-	 * 
-	 *@:   2012-5-22
-	 *@޸:
-	 *@޸ʱ䣺
-	 *@ܣFormϡForm
-	 * @return
-	 */
 	private Boolean onInit()
 	{
 		mSqlDb = new SQLiteDatabase(mActivity.getApplicationContext());

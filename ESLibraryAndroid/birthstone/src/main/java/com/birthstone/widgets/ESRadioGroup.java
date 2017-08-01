@@ -24,7 +24,7 @@ import com.birthstone.core.interfaces.IValidatible;
 import com.birthstone.core.parse.Data;
 import com.birthstone.core.parse.DataCollection;
 
-public class RadioGroup extends android.widget.RadioGroup implements ICollectible, IValidatible, IReleasable, ICellTitleStyleRequire, IDataInitialize
+public class ESRadioGroup extends android.widget.RadioGroup implements ICollectible, IValidatible, IReleasable, ICellTitleStyleRequire, IDataInitialize
 {
 
 	private DataType mDataType;
@@ -41,7 +41,7 @@ public class RadioGroup extends android.widget.RadioGroup implements ICollectibl
 	private OnCheckedChangedListener onCheckedChangedListener;
 	public String mNameSpace = "http://schemas.android.com/res/com.birthStone.widgets";
 
-	public RadioGroup( Context context, AttributeSet attrs )
+	public ESRadioGroup(Context context, AttributeSet attrs )
 	{
 		super(context, attrs);
 		try

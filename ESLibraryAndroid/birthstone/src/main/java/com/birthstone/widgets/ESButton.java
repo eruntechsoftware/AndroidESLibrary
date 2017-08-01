@@ -20,7 +20,7 @@ import java.util.LinkedList;
 
 
 @SuppressLint("DefaultLocale")
-public abstract class Button extends android.widget.Button implements IFunctionProtected, IReleasable, IStateProtected, IDataInitialize {
+public abstract class ESButton extends android.widget.Button implements IFunctionProtected, IReleasable, IStateProtected, IDataInitialize {
 
     public String mFuncSign;
     public String mSign;
@@ -36,7 +36,7 @@ public abstract class Button extends android.widget.Button implements IFunctionP
     public OnClickedListener onClickedListener;
     public String mNameSpace = "http://schemas.android.com/res/com.birthStone.widgets";
 
-    public Button(Context context, AttributeSet attrs) {
+    public ESButton(Context context, AttributeSet attrs) {
         super(context, attrs);
         mFuncSign = attrs.getAttributeValue(mNameSpace, "funcSign");
         mMessage = attrs.getAttributeValue(mNameSpace, "message");
@@ -48,7 +48,7 @@ public abstract class Button extends android.widget.Button implements IFunctionP
         this.setOnClickListener(clickListener);
     }
 
-    public Button(Context context, AttributeSet attrs, int defStyle)
+    public ESButton(Context context, AttributeSet attrs, int defStyle)
     {
         super(context, attrs, defStyle);
     }

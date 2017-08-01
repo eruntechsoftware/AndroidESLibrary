@@ -34,7 +34,7 @@ import com.birthstone.core.parse.DataTable;
 import java.util.LinkedList;
 
 
-public class Spinner extends android.widget.Spinner implements ICollectible, IValidatible, IReleasable, IDataInitialize, ICellTitleStyleRequire, IDataQuery
+public class ESSpinner extends android.widget.Spinner implements ICollectible, IValidatible, IReleasable, IDataInitialize, ICellTitleStyleRequire, IDataQuery
 {
 	protected DataType mDataType;
 	protected Boolean mIsRequired;
@@ -60,7 +60,7 @@ public class Spinner extends android.widget.Spinner implements ICollectible, IVa
 	protected String[] valueArray = null;
 	protected OnItemSelectIndexChangeListener mOnItemSelectIndexChangeListener;
 
-	public Spinner( Context context, AttributeSet attrs )
+	public ESSpinner(Context context, AttributeSet attrs )
 	{
 		super(context, attrs);
 		try
@@ -91,7 +91,7 @@ public class Spinner extends android.widget.Spinner implements ICollectible, IVa
 		}
 	}
 
-	public Spinner(Context context, AttributeSet attrs, int defStyle)
+	public ESSpinner(Context context, AttributeSet attrs, int defStyle)
 	{
 		super(context, attrs, defStyle);
 	}
@@ -212,7 +212,7 @@ public class Spinner extends android.widget.Spinner implements ICollectible, IVa
 			ArrayAdapter<String> adapter = new ArrayAdapter<String>(mActivity, android.R.layout.simple_spinner_item, displayArray);
 			adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 			setAdapter(adapter);
-			Spinner.this.setVisibility(View.VISIBLE);
+			ESSpinner.this.setVisibility(View.VISIBLE);
 		}
 	}
 
@@ -355,9 +355,9 @@ public class Spinner extends android.widget.Spinner implements ICollectible, IVa
 			Log.v("SelectValue", "**" + mSelectValue.toString());
 			mSelectText = displayArray[arg2];
 			Log.v("SelectText", mSelectText);
-			if(Spinner.this.mOnItemSelectIndexChangeListener != null)
+			if(ESSpinner.this.mOnItemSelectIndexChangeListener != null)
 			{
-				Spinner.this.mOnItemSelectIndexChangeListener.selectIndexChange(mSelectValue.toString());
+				ESSpinner.this.mOnItemSelectIndexChangeListener.selectIndexChange(mSelectValue.toString());
 			}
 		}
 

@@ -24,7 +24,7 @@ import com.birthstone.core.parse.DataCollection;
 
 
 @SuppressLint("HandlerLeak")
-public class ButtonOK extends Button implements IDataInitialize, IFunctionProtected
+public class ESButtonOK extends Button implements IDataInitialize, IFunctionProtected
 {
 	protected Activity mActivity;
 	protected String mFuncSign;
@@ -34,7 +34,7 @@ public class ButtonOK extends Button implements IDataInitialize, IFunctionProtec
 	protected ProgressDialog mAlter;
 	protected String mNameSpace = "http://schemas.android.com/res/com.birthStone.widgets";
 
-	public ButtonOK( Context context, AttributeSet attrs )
+	public ESButtonOK(Context context, AttributeSet attrs )
 	{
 		super(context, attrs);
 		try
@@ -49,7 +49,7 @@ public class ButtonOK extends Button implements IDataInitialize, IFunctionProtec
 		}
 	}
 
-	public ButtonOK(Context context, AttributeSet attrs, int defStyle)
+	public ESButtonOK(Context context, AttributeSet attrs, int defStyle)
 	{
 		super(context, attrs, defStyle);
 	}

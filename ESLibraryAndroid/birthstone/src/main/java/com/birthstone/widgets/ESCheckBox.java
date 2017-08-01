@@ -20,7 +20,7 @@ import com.birthstone.core.parse.DataCollection;
 import java.util.LinkedList;
 
 
-public class CheckBox extends android.widget.CheckBox implements ICollectible, IValidatible, IReleasable, ICellTitleStyleRequire, IDataInitialize
+public class ESCheckBox extends android.widget.CheckBox implements ICollectible, IValidatible, IReleasable, ICellTitleStyleRequire, IDataInitialize
 {
 	protected DataType mDataType;
 	protected Boolean mIsRequired;
@@ -30,7 +30,7 @@ public class CheckBox extends android.widget.CheckBox implements ICollectible, I
 	protected String mName;
 	protected String mNameSpace = "http://schemas.android.com/res/com.birthstone.widgets";
 
-	public CheckBox( Context context, AttributeSet attrs )
+	public ESCheckBox(Context context, AttributeSet attrs )
 	{
 		super(context, attrs);
 		try
@@ -55,7 +55,7 @@ public class CheckBox extends android.widget.CheckBox implements ICollectible, I
 		}
 	}
 
-	public CheckBox(Context context, AttributeSet attrs, int defStyle)
+	public ESCheckBox(Context context, AttributeSet attrs, int defStyle)
 	{
 		super(context, attrs, defStyle);
 	}

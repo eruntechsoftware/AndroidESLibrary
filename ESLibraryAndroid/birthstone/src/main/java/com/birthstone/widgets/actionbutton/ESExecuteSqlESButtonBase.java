@@ -15,10 +15,10 @@ import com.birthstone.base.parse.ValidatorForm;
 import com.birthstone.core.Sqlite.SQLiteDatabase;
 import com.birthstone.core.interfaces.ICollector;
 import com.birthstone.core.interfaces.IReleaser;
-import com.birthstone.widgets.Button;
+import com.birthstone.widgets.ESButton;
 
 
-public abstract class ExecuteSqlButtonBase extends Button
+public abstract class ESExecuteSqlESButtonBase extends ESButton
 {
 
 	private SQLiteDatabase mSqlDb;
@@ -26,7 +26,7 @@ public abstract class ExecuteSqlButtonBase extends Button
 	protected ReleaseForm mReleaseForm;
 	protected ValidatorForm mValidatorForm;
 
-	public ExecuteSqlButtonBase( Context context, AttributeSet attrs )
+	public ESExecuteSqlESButtonBase(Context context, AttributeSet attrs )
 	{
 		super(context, attrs);
 		mFuncSign = attrs.getAttributeValue(mNameSpace, "funcSign");

@@ -18,7 +18,7 @@ import com.birthstone.core.parse.Data;
 import com.birthstone.core.parse.DataCollection;
 
 
-public class DateTimeView extends EditText implements ICollectible, IDataInitialize
+public class ESDateTimeView extends EditText implements ICollectible, IDataInitialize
 {
 	protected DataType mDataType;
 	protected String mCollectSign;
@@ -27,7 +27,7 @@ public class DateTimeView extends EditText implements ICollectible, IDataInitial
 	protected String mName;
 	protected String mNameSpace = "http://schemas.android.com/res/com.birthStone.widgets";
 
-	public DateTimeView( Context context, AttributeSet attrs )
+	public ESDateTimeView(Context context, AttributeSet attrs )
 	{
 		super(context, attrs);
 		try
@@ -44,7 +44,7 @@ public class DateTimeView extends EditText implements ICollectible, IDataInitial
 		}
 	}
 
-	public DateTimeView(Context context, AttributeSet attrs, int defStyle)
+	public ESDateTimeView(Context context, AttributeSet attrs, int defStyle)
 	{
 		super(context, attrs, defStyle);
 	}

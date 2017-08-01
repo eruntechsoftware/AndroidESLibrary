@@ -9,7 +9,7 @@ import com.birthstone.core.interfaces.IControlSearcherHandler;
 import com.birthstone.core.interfaces.IFunctionProtected;
 import com.birthstone.core.interfaces.IReleasable;
 import com.birthstone.core.interfaces.IStateProtected;
-import com.birthstone.widgets.HiddenFeild;
+import com.birthstone.widgets.ESHiddenFeild;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -102,7 +102,7 @@ public class FunctionProtected implements IControlSearcherHandler
 					String getValue = aprotected.getWantedStateValue();
 					if(getValue != null)
 					{
-						HiddenFeild hidden = null;
+						ESHiddenFeild hidden = null;
 						IReleasable release;
 						int size = form.getViews().size();
 						for(int i = 0; i < size; i++)
@@ -112,7 +112,7 @@ public class FunctionProtected implements IControlSearcherHandler
 								release = (IReleasable) form.getViews().get(i);
 								if(release.getName().equals(aprotected.getStateHiddenId()))
 								{
-									hidden = (HiddenFeild) form.getViews().get(i);
+									hidden = (ESHiddenFeild) form.getViews().get(i);
 								}
 							}
 						}

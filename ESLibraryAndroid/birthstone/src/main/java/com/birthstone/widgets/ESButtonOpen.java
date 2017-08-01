@@ -20,7 +20,7 @@ import com.birthstone.core.interfaces.IStateProtected;
 import com.birthstone.core.parse.DataCollection;
 
 
-public class ButtonOpen extends Button implements IDataInitialize, IFunctionProtected, IStateProtected
+public class ESButtonOpen extends Button implements IDataInitialize, IFunctionProtected, IStateProtected
 {
 	protected Activity mActivity;
 	protected String mStateHiddenId;
@@ -33,7 +33,7 @@ public class ButtonOpen extends Button implements IDataInitialize, IFunctionProt
 	protected OnClickedListener onClickedListener;
 	protected String mNameSpace = "http://schemas.android.com/res/com.birthStone.widgets";
 
-	public ButtonOpen( Context context, AttributeSet attrs )
+	public ESButtonOpen(Context context, AttributeSet attrs )
 	{
 		super(context, attrs);
 		try
@@ -57,7 +57,7 @@ public class ButtonOpen extends Button implements IDataInitialize, IFunctionProt
 		}
 	}
 
-	public ButtonOpen(Context context, AttributeSet attrs, int defStyle)
+	public ESButtonOpen(Context context, AttributeSet attrs, int defStyle)
 	{
 		super(context, attrs, defStyle);
 	}

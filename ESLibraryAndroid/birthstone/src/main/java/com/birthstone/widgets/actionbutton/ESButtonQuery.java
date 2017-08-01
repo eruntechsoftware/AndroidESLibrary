@@ -31,7 +31,7 @@ import com.birthstone.core.parse.DataTable;
 import java.util.LinkedList;
 
 
-public class ButtonQuery extends android.widget.Button implements IFunctionProtected, IStateProtected, IDataInitialize, IDataQuery, IReleasable
+public class ESButtonQuery extends android.widget.Button implements IFunctionProtected, IStateProtected, IDataInitialize, IDataQuery, IReleasable
 {
 	protected String mNameSpace = "http://schemas.android.com/res/com.birthStone.widgets";
 	protected SQLiteDatabase mSqlDb;
@@ -49,7 +49,7 @@ public class ButtonQuery extends android.widget.Button implements IFunctionProte
 	protected DataTable mDataSource = null;
 	protected CollectForm mCollForm;
 
-	public ButtonQuery( Context context, AttributeSet attrs )
+	public ESButtonQuery(Context context, AttributeSet attrs )
 	{
 		super(context, attrs);
 		try
@@ -69,7 +69,7 @@ public class ButtonQuery extends android.widget.Button implements IFunctionProte
 		}
 	}
 
-	public ButtonQuery(Context context, AttributeSet attrs, int defStyle)
+	public ESButtonQuery(Context context, AttributeSet attrs, int defStyle)
 	{
 		super(context, attrs, defStyle);
 	}

@@ -30,7 +30,7 @@ import com.birthstone.core.parse.DataCollection;
 import java.util.LinkedList;
 
 
-public class TextBox extends EditText implements ICollectible, IValidatible, IReleasable, ICellTitleStyleRequire, IDataInitialize
+public class ESTextBox extends EditText implements ICollectible, IValidatible, IReleasable, ICellTitleStyleRequire, IDataInitialize
 {
 	protected DataType mDataType;
 	protected Boolean mIsRequired;
@@ -43,12 +43,12 @@ public class TextBox extends EditText implements ICollectible, IValidatible, IRe
 	protected String mNameSpace = "http://schemas.android.com/res/com.birthstone.widgets";
 	private OnTextBoxChangedListener onTextBoxChangedListener;
 
-	public TextBox(Context context)
+	public ESTextBox(Context context)
 	{
 		super(context);
 	}
 	
-	public TextBox( Context context, AttributeSet attrs )
+	public ESTextBox(Context context, AttributeSet attrs )
 	{
 		super(context, attrs);
 		try
@@ -80,7 +80,7 @@ public class TextBox extends EditText implements ICollectible, IValidatible, IRe
 
 	}
 	
-	public TextBox(Context context, AttributeSet attrs, int defStyle)
+	public ESTextBox(Context context, AttributeSet attrs, int defStyle)
 	{
 		super(context, attrs, defStyle);
 	}

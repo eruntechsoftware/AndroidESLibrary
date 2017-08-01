@@ -20,7 +20,7 @@ import com.birthstone.core.parse.DataCollection;
 
 
 @SuppressLint("HandlerLeak")
-public class ButtonClose extends Button implements IDataInitialize, IFunctionProtected
+public class ESButtonClose extends Button implements IDataInitialize, IFunctionProtected
 {
 	protected String mFuncSign;
 	protected Activity mActivity;
@@ -30,7 +30,7 @@ public class ButtonClose extends Button implements IDataInitialize, IFunctionPro
 	//protected ProgressDialog alter;
 	protected String mNameSpace = "http://schemas.android.com/res/com.birthStone.widgets";
 
-	public ButtonClose( Context context, AttributeSet attrs )
+	public ESButtonClose(Context context, AttributeSet attrs )
 	{
 		super(context, attrs);
 		try
@@ -45,7 +45,7 @@ public class ButtonClose extends Button implements IDataInitialize, IFunctionPro
 		}
 	}
 
-	public ButtonClose(Context context, AttributeSet attrs, int defStyle)
+	public ESButtonClose(Context context, AttributeSet attrs, int defStyle)
 	{
 		super(context, attrs, defStyle);
 	}
