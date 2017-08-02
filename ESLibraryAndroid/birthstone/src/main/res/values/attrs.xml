@@ -8,7 +8,6 @@
 	<attr name="name" format="string"></attr>
 	<attr name="collectName" format="string"></attr>
 	<attr name="form" format="string"></attr>
-	<attr name="funSign" format="string"></attr>
 	<attr name="sign" format="string"></attr>
 	<attr name="sql" format="string"></attr>
 	<attr name="isClosed" format="boolean"></attr>
@@ -16,7 +15,7 @@
 	<attr name="message" format="string"></attr>
 	<attr name="confirmMessage" format="string"></attr>
 	<attr name="stateHiddenId" format="string"></attr>
-	<attr name="wantedStateValue" format="string"></attr>
+	<attr name="wantedStateValue" format="dimension"></attr>
 	<attr name="funcSign" format="string"></attr>
 	<!-- openForm废弃，以后使用open  -->
 	<attr name="open" format="string"></attr>
@@ -26,11 +25,8 @@
 	<attr name="layoutID" format="string"></attr>
 	<attr name="bindID" format="string"></attr>
 	<attr name="isEmpty" format="boolean"></attr>
-	
-	<attr name="rowHeight" format="string"></attr>
-	<attr name="leftWidth" format="string"></attr>
-	<attr name="marginWidth" format="string"></attr>
-	<attr name="textSize" format="string"></attr>
+
+	<attr name="textSize" format="dimension"></attr>
 	<attr name="textColor" format="color"></attr>
 	<attr name="clickedColor" format="color"></attr>
 </declare-styleable>

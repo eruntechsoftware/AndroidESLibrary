@@ -2,10 +2,12 @@ package com.birthstone.widgets;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 
+import com.birthstone.R;
 import com.birthstone.base.activity.Activity;
 import com.birthstone.base.event.OnClickedListener;
 import com.birthstone.base.event.OnClickingListener;
@@ -37,9 +39,10 @@ public class ESButton extends android.widget.Button implements IFunctionProtecte
         super(context, attrs);
         try {
             setOnClickListener(clickListener);
-            mFuncSign = attrs.getAttributeValue(mNameSpace, "funcSign");
-            mStateHiddenId = attrs.getAttributeValue(mNameSpace, "stateHiddenId");
-            mWantedStateValue = attrs.getAttributeValue(mNameSpace, "wantedStateValue");
+            TypedArray a = context.obtainStyledAttributes(attrs,R.styleable.eruntech);
+            mFuncSign = a.getString(R.styleable.eruntech_funcSign);
+            mStateHiddenId = a.getString(R.styleable.eruntech_stateHiddenId);
+            mWantedStateValue = a.getString(R.styleable.eruntech_wantedStateValue);
         }catch (Exception ex){
             Log.e(ESButton.this.toString(),ex.getMessage());
         }
