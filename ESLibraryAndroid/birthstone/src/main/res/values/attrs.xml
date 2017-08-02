@@ -15,7 +15,7 @@
 	<attr name="message" format="string"></attr>
 	<attr name="confirmMessage" format="string"></attr>
 	<attr name="stateHiddenId" format="string"></attr>
-	<attr name="wantedStateValue" format="dimension"></attr>
+	<attr name="wantedStateValue" format="string"></attr>
 	<attr name="funcSign" format="string"></attr>
 	<!-- openForm废弃，以后使用open  -->
 	<attr name="open" format="string"></attr>
