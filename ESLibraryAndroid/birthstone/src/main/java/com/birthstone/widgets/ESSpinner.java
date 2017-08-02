@@ -1,6 +1,7 @@
 package com.birthstone.widgets;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
+import com.birthstone.R;
 import com.birthstone.base.activity.Activity;
 import com.birthstone.base.event.OnItemSelectIndexChangeListener;
 import com.birthstone.base.helper.InitializeHelper;
@@ -65,25 +67,28 @@ public class ESSpinner extends android.widget.Spinner implements ICollectible, I
 		super(context, attrs);
 		try
 		{
+			TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.eruntech);
 			if(mCollectName == null)
 			{
-				mCollectName = attrs.getAttributeValue(mNameSpace, "collectName");
+				mCollectName = a.getString(R.styleable.eruntech_collectName);
 			}
-			mDisplayValue = attrs.getAttributeValue(mNameSpace, "displayValue");
-			mBindValue = attrs.getAttributeValue(mNameSpace, "bindValue");
-			mSql = attrs.getAttributeValue(mNameSpace, "sql");
-			mIsRequired = attrs.getAttributeBooleanValue(mNameSpace, "isRequired", false);
-			mCollectSign = attrs.getAttributeValue(mNameSpace, "collectSign");
-			mSign = attrs.getAttributeValue(mNameSpace, "sign");
+			mDisplayValue = a.getString(R.styleable.eruntech_displayValue);
+
+			mBindValue = a.getString(R.styleable.eruntech_bindValue);
+			mSql = a.getString(R.styleable.eruntech_sql);
+			mIsRequired = a.getBoolean(R.styleable.eruntech_isRequired,false);
+			mCollectSign = a.getString(R.styleable.eruntech_collectSign);
+			mSign = a.getString(R.styleable.eruntech_sign);
 			if(mSign == null)
 			{
 				mSign = "";
 			}
-			mEmpty2Null = attrs.getAttributeBooleanValue(mNameSpace, "empty2Null", true);
-			mIsEmpty = attrs.getAttributeBooleanValue(mNameSpace, "isEmpty", false);
-			mAutoLoad = attrs.getAttributeBooleanValue(mNameSpace, "autoLoad", true);
+			mEmpty2Null = a.getBoolean(R.styleable.eruntech_empty2Null, true);
+			mIsEmpty = a.getBoolean(R.styleable.eruntech_isEmpty, true);
+			mAutoLoad = a.getBoolean(R.styleable.eruntech_autoLoad, true);
 			mDataType = DataType.String;
 			this.setOnItemSelectedListener(onItemSelected);
+			a.recycle();
 		}
 		catch(Exception ex)
 		{

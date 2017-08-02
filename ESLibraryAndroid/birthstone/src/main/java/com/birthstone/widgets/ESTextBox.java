@@ -1,6 +1,7 @@
 package com.birthstone.widgets;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -11,6 +12,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.widget.EditText;
 
+import com.birthstone.R;
 import com.birthstone.base.activity.Activity;
 import com.birthstone.base.event.OnTextBoxChangedListener;
 import com.birthstone.base.helper.InitializeHelper;
@@ -38,8 +40,9 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 	protected Boolean mEmpty2Null = true;
 	protected Activity mActivity;
 	protected String mName;
-	protected String mTipText = "";
-	protected String mUserTipText = "";
+	protected String mIsRequiredTooltip = "";
+	protected String mRegularExpression = "";
+	protected String mRegularTooltip = "";
 	protected String mNameSpace = "http://schemas.android.com/res/com.birthstone.widgets";
 	private OnTextBoxChangedListener onTextBoxChangedListener;
 
@@ -53,16 +56,18 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 		super(context, attrs);
 		try
 		{
-			mTipText = attrs.getAttributeValue(mNameSpace, "tipText");
-			mUserTipText = attrs.getAttributeValue(mNameSpace, "tipText");
-			mIsRequired = attrs.getAttributeBooleanValue(mNameSpace, "isRequired", false);
-			mCollectSign = attrs.getAttributeValue(mNameSpace, "collectSign");
-			mEmpty2Null = attrs.getAttributeBooleanValue(mNameSpace, "empty2Null", true);
+			TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.eruntech);
+			mIsRequiredTooltip = a.getString(R.styleable.eruntech_isRequiredTooltip);
+			mRegularExpression = a.getString(R.styleable.eruntech_regularExpression);
+			mRegularTooltip = a.getString(R.styleable.eruntech_regularTooltip);
+			mIsRequired = a.getBoolean(R.styleable.eruntech_isRequired,false);
+			mCollectSign = a.getString(R.styleable.eruntech_collectSign);
+			mEmpty2Null = a.getBoolean(R.styleable.eruntech_empty2Null,true);
 			this.addTextChangedListener(textOnchange);
 			
 			try
 			{
-				String dataType = attrs.getAttributeValue(mNameSpace, "dataType");
+				String dataType = a.getString(R.styleable.eruntech_dataType);
 				if(dataType != null && dataType.length() > 0)
 				{
 					this.mDataType = DataTypeHelper.valueOf(dataType);
@@ -72,6 +77,7 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 			{
 				this.mDataType = DataType.String;
 			}
+			a.recycle();
 		}
 		catch(Exception ex)
 		{
@@ -89,16 +95,16 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 	{
 		super.onDraw(canvas);
 		String value =  this.getText().toString().trim();
-		if(mTipText!=null && !"".equals(mTipText) && mIsRequired==true && value.length()==0)
+		if(mIsRequiredTooltip!=null && !"".equals(mIsRequiredTooltip) && mIsRequired==true && value.length()==0)
 		{
 			Paint mPaint = new Paint();
 			mPaint.setColor(Color.RED);
 			mPaint.setTextSize(this.getTextSize());
 			mPaint.setFlags(Paint.ANTI_ALIAS_FLAG);
 			Rect rect = new Rect();
-			mPaint.getTextBounds(mTipText, 0, mTipText.length(), rect);
+			mPaint.getTextBounds(mIsRequiredTooltip, 0, mIsRequiredTooltip.length(), rect);
 			
-			canvas.drawText(mTipText, this.getPaddingLeft()+8, this.getHeight() / 2 + rect.height()/2, mPaint);
+			canvas.drawText(mIsRequiredTooltip, this.getPaddingLeft()+8, this.getHeight() / 2 + rect.height()/2, mPaint);
 		}
 	}
 
@@ -106,20 +112,20 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 	{
 		try
 		{
-			mTipText = ValidatorHelper.createDataTypeValidator(mDataType, getText().toString());
+			mIsRequiredTooltip = ValidatorHelper.createDataTypeValidator(mDataType, getText().toString());
 			if(mIsRequired)
 			{
-				if(mUserTipText !=null && !"".equals(mUserTipText))
+				if(mRegularExpression !=null && !"".equals(mRegularExpression))
 				{
-					mTipText = mUserTipText;
+					mIsRequiredTooltip = mRegularExpression;
 				}
 				else
 				{
-					mTipText = ValidatorHelper.createRequiredValidator(getText().toString().trim());
+					mIsRequiredTooltip = ValidatorHelper.createRequiredValidator(getText().toString().trim());
 				}
 			}
 			invalidate();
-			if(mTipText.length() != 0) { return false; }
+			if(mIsRequiredTooltip.length() != 0) { return false; }
 		}
 		catch(Exception ex)
 		{
@@ -277,13 +283,13 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 
 	public String getTipText()
 	{
-		return mTipText;
+		return mIsRequiredTooltip;
 	}
 
 	public void setTipText(String tipText)
 	{
-		this.mTipText = tipText;
-		this.mUserTipText = tipText;
+		this.mIsRequiredTooltip = tipText;
+		this.mRegularExpression = tipText;
 	}
 
 	public String getNameSpace()

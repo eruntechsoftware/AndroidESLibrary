@@ -1,9 +1,11 @@
 package com.birthstone.widgets;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.util.Log;
 
+import com.birthstone.R;
 import com.birthstone.base.activity.Activity;
 import com.birthstone.base.helper.InitializeHelper;
 import com.birthstone.core.helper.DataType;
@@ -35,7 +37,8 @@ public class ESCheckBox extends android.widget.CheckBox implements ICollectible,
 		super(context, attrs);
 		try
 		{
-			String dataType = attrs.getAttributeValue(mNameSpace, "dataType");
+			TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.eruntech);
+			String dataType = a.getString(R.styleable.eruntech_dataType);
 			if(dataType != null && dataType.length() > 0)
 			{
 				this.mDataType = DataTypeHelper.valueOf(dataType);
@@ -45,9 +48,10 @@ public class ESCheckBox extends android.widget.CheckBox implements ICollectible,
 				this.mDataType = com.birthstone.core.helper.DataType.String;
 			}
 
-			mIsRequired = attrs.getAttributeBooleanValue(mNameSpace, "isRequired", false);
-			mEmpty2Null = attrs.getAttributeBooleanValue(mNameSpace, "empty2Null", true);
-			mCollectSign = attrs.getAttributeValue(mNameSpace, "collectSign");
+			mIsRequired = a.getBoolean(R.styleable.eruntech_isRequired,false);
+			mEmpty2Null = a.getBoolean(R.styleable.eruntech_empty2Null, true);
+			mCollectSign = a.getString(R.styleable.eruntech_collectSign);
+			a.recycle();
 		}
 		catch(Exception ex)
 		{

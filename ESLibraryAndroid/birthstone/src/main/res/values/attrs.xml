@@ -1,8 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<attr name="dataType">
+		<enum name="String" value="0" />
+        <enum name="Integer" value="1" />
+        <enum name="Numeric" value="2" />
+        <enum name="Money" value="3" />
+        <enum name="Date" value="4" />
+        <enum name="DateTime" value="5" />
+        <enum name="Guid" value="6" />
+        <enum name="Boolean" value="7" />
+        <enum name="Binary" value="8" />
+	</attr>
+
+    <attr name="isRequired">
+        <enum name="YES" value="1" />
+        <enum name="NO" value="0" />
+    </attr>
 <declare-styleable name="eruntech">
-	<attr name="dataType" format="string"></attr>
-	<attr name="isRequired" format="boolean"></attr>
+	<attr name="dataType"></attr>
+	<attr name="isRequired"></attr>
 	<attr name="collectSign" format="string"></attr>
 	<attr name="empty2Null" format="boolean"></attr>
 	<attr name="name" format="string"></attr>
@@ -29,5 +45,13 @@
 	<attr name="textSize" format="dimension"></attr>
 	<attr name="textColor" format="color"></attr>
 	<attr name="clickedColor" format="color"></attr>
+
+	<!--ESTextBox专用属性-->
+	<!--必填项错误提示-->
+	<attr name="isRequiredTooltip" format="string"></attr>
+	<!--正则表达式-->
+	<attr name="regularExpression" format="string"></attr>
+	<!--正则表达式校验错误提示-->
+	<attr name="regularTooltip" format="string"></attr>
 </declare-styleable>
 </resources>

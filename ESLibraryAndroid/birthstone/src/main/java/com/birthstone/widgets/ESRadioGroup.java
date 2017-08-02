@@ -1,8 +1,7 @@
 package com.birthstone.widgets;
 
-import java.util.LinkedList;
-
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -10,6 +9,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.widget.RadioButton;
 
+import com.birthstone.R;
 import com.birthstone.base.activity.Activity;
 import com.birthstone.base.event.OnCheckedChangedListener;
 import com.birthstone.base.helper.InitializeHelper;
@@ -24,6 +24,8 @@ import com.birthstone.core.interfaces.IValidatible;
 import com.birthstone.core.parse.Data;
 import com.birthstone.core.parse.DataCollection;
 
+import java.util.LinkedList;
+
 public class ESRadioGroup extends android.widget.RadioGroup implements ICollectible, IValidatible, IReleasable, ICellTitleStyleRequire, IDataInitialize
 {
 
@@ -33,7 +35,6 @@ public class ESRadioGroup extends android.widget.RadioGroup implements ICollecti
 	private Boolean mEmpty2Null = true;
 	private Activity mActivity;
 	private String mName;
-	private Integer mOrientation = 0;
 	private Object mSelectItemValue = null;
 	private Object mSelectItemText = null;
 	private String mTipText = "";
@@ -46,7 +47,8 @@ public class ESRadioGroup extends android.widget.RadioGroup implements ICollecti
 		super(context, attrs);
 		try
 		{
-			String dataType = attrs.getAttributeValue(mNameSpace, "DataType");
+			TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.eruntech);
+			String dataType = a.getString(R.styleable.eruntech_dataType);
 			if(dataType != null && dataType.length() > 0)
 			{
 				this.mDataType = DataTypeHelper.valueOf(dataType);
@@ -55,20 +57,18 @@ public class ESRadioGroup extends android.widget.RadioGroup implements ICollecti
 			{
 				this.mDataType = DataType.String;
 			}
-			mIsRequired = attrs.getAttributeBooleanValue(mNameSpace, "isRequired", false);
-			mEmpty2Null = attrs.getAttributeBooleanValue(mNameSpace, "empty2Null", true);
-			mCollectSign = attrs.getAttributeValue(mNameSpace, "collectSign");
-			mOrientation = attrs.getAttributeIntValue(mNameSpace, "orientation", 0);
+			mIsRequired = a.getBoolean(R.styleable.eruntech_isRequired,false);
+			mEmpty2Null = a.getBoolean(R.styleable.eruntech_empty2Null, true);
+			mCollectSign = a.getString(R.styleable.eruntech_collectSign);
 			this.setOnCheckedChangeListener(onCheckedChangeListener);
+			a.recycle();
 		}
 		catch(Exception ex)
 		{
 			Log.e("RadioGroup", ex.getMessage());
 		}
 	}
-	/**
-	 * ѡ
-	 */
+
 	OnCheckedChangeListener onCheckedChangeListener = new OnCheckedChangeListener()
 	{
 		public void onCheckedChanged(android.widget.RadioGroup group, int checkedId)
@@ -266,16 +266,6 @@ public class ESRadioGroup extends android.widget.RadioGroup implements ICollecti
 	public void setEmpty2Null(Boolean empty2Null)
 	{
 		this.mEmpty2Null = empty2Null;
-	}
-
-	public int getOrientation()
-	{
-		return this.mOrientation;
-	}
-
-	public void setOrientation(Integer orientation)
-	{
-		this.mOrientation = orientation;
 	}
 
 	public Object getSelectItemValue()

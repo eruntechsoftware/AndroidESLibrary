@@ -1,12 +1,14 @@
 package com.birthstone.widgets;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.widget.EditText;
 
+import com.birthstone.R;
 import com.birthstone.base.activity.Activity;
 import com.birthstone.base.helper.InitializeHelper;
 import com.birthstone.core.helper.DataType;
@@ -32,11 +34,13 @@ public class ESDateTimeView extends EditText implements ICollectible, IDataIniti
 		super(context, attrs);
 		try
 		{
-			mCollectSign = attrs.getAttributeValue(mNameSpace, "collectSign");
-			mEmpty2Null = attrs.getAttributeBooleanValue(mNameSpace, "empty2Null", true);
+			TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.eruntech);
+			mEmpty2Null = a.getBoolean(R.styleable.eruntech_empty2Null, true);
+			mCollectSign = a.getString(R.styleable.eruntech_collectSign);
 			this.setEnabled(false);
 			this.setText("");
 			this.mDataType = DataType.String;
+			a.recycle();
 		}
 		catch(Exception ex)
 		{

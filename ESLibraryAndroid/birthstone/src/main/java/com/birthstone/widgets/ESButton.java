@@ -26,6 +26,7 @@ import java.util.LinkedList;
 public class ESButton extends android.widget.Button implements IFunctionProtected, IReleasable, IStateProtected, IDataInitialize {
 
     public String mFuncSign;
+    protected String mSign;
     public String mStateHiddenId;
     public String mWantedStateValue;
     public String mName;
@@ -41,8 +42,10 @@ public class ESButton extends android.widget.Button implements IFunctionProtecte
             setOnClickListener(clickListener);
             TypedArray a = context.obtainStyledAttributes(attrs,R.styleable.eruntech);
             mFuncSign = a.getString(R.styleable.eruntech_funcSign);
+            mSign = a.getString(R.styleable.eruntech_sign);
             mStateHiddenId = a.getString(R.styleable.eruntech_stateHiddenId);
             mWantedStateValue = a.getString(R.styleable.eruntech_wantedStateValue);
+            a.recycle();
         }catch (Exception ex){
             Log.e(ESButton.this.toString(),ex.getMessage());
         }

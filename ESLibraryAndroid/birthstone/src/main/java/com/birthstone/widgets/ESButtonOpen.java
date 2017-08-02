@@ -1,13 +1,14 @@
 package com.birthstone.widgets;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.os.Looper;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
+import com.birthstone.R;
 import com.birthstone.base.activity.Activity;
 import com.birthstone.base.event.OnClickedListener;
 import com.birthstone.base.event.OnClickingListener;
@@ -20,17 +21,10 @@ import com.birthstone.core.interfaces.IStateProtected;
 import com.birthstone.core.parse.DataCollection;
 
 
-public class ESButtonOpen extends Button implements IDataInitialize, IFunctionProtected, IStateProtected
+public class ESButtonOpen extends ESButton implements IDataInitialize, IFunctionProtected, IStateProtected
 {
-	protected Activity mActivity;
-	protected String mStateHiddenId;
-	protected String mWantedStateValue;
-	protected String mOpenForm;
-	protected String mSign;
-	protected String mFuncSign = "";
+	protected String mOpen;
 	protected Boolean mIsClosed = false;
-	protected OnClickingListener onClickingListener;
-	protected OnClickedListener onClickedListener;
 	protected String mNameSpace = "http://schemas.android.com/res/com.birthStone.widgets";
 
 	public ESButtonOpen(Context context, AttributeSet attrs )
@@ -38,18 +32,10 @@ public class ESButtonOpen extends Button implements IDataInitialize, IFunctionPr
 		super(context, attrs);
 		try
 		{
-			setOnClickListener(clickListener);
-			mFuncSign = attrs.getAttributeValue(mNameSpace, "funcSign");
-			mOpenForm = attrs.getAttributeValue(mNameSpace, "openForm");
-			if(mOpenForm==null || "".equals(mOpenForm))
-			{
-				mOpenForm = attrs.getAttributeValue(mNameSpace, "open");
-			}
-			mSign = attrs.getAttributeValue(mNameSpace, "sign");
-			mStateHiddenId = attrs.getAttributeValue(mNameSpace, "stateHiddenId");
-			mWantedStateValue = attrs.getAttributeValue(mNameSpace, "wantedStateValue");
-			mFuncSign = attrs.getAttributeValue(mNameSpace, "funcSign");
-			mIsClosed = attrs.getAttributeBooleanValue(mNameSpace, "isClosed", false);
+			TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.eruntech);
+			mOpen = a.getString(R.styleable.eruntech_open);
+			mIsClosed = a.getBoolean(R.styleable.eruntech_isClosed,false);
+			a.recycle();
 		}
 		catch(Exception ex)
 		{
@@ -121,26 +107,26 @@ public class ESButtonOpen extends Button implements IDataInitialize, IFunctionPr
 						Log.v("OpenFormDatas", String.valueOf(datas.size()));
 						// MessageBox.ShowMessage(Form, "Ϣ",
 						// String.valueOf(Form.Controls.size()));
-						if(mOpenForm.contains("."))
+						if(mOpen.contains("."))
 						{
-							formHelper.open(mActivity, mOpenForm, datas);
+							formHelper.open(mActivity, mOpen, datas);
 						}
 						else
 						{
-							formHelper.open(mActivity, mActivity.getClass().getPackage().getName() + "." + mOpenForm, datas);
+							formHelper.open(mActivity, mActivity.getClass().getPackage().getName() + "." + mOpen, datas);
 						}
 					}
 					else
 					{
-						if(mOpenForm != null)
+						if(mOpen != null)
 						{
-							if(mOpenForm.contains("."))
+							if(mOpen.contains("."))
 							{
-								formHelper.open(mActivity, mOpenForm);
+								formHelper.open(mActivity, mOpen);
 							}
 							else
 							{
-								formHelper.open(mActivity, mActivity.getClass().getPackage().getName() + "." + mOpenForm);
+								formHelper.open(mActivity, mActivity.getClass().getPackage().getName() + "." + mOpen);
 							}
 						}
 						else
@@ -210,12 +196,12 @@ public class ESButtonOpen extends Button implements IDataInitialize, IFunctionPr
 
 	public String getOpenForm()
 	{
-		return mOpenForm;
+		return mOpen;
 	}
 
 	public void setOpenForm(String openForm)
 	{
-		this.mOpenForm = openForm;
+		this.mOpen = openForm;
 	}
 
 	public String getSign()

@@ -1,6 +1,7 @@
 package com.birthstone.widgets;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
@@ -9,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.birthstone.R;
 import com.birthstone.base.activity.Activity;
 import com.birthstone.base.helper.InitializeHelper;
 import com.birthstone.base.parse.CollectForm;
@@ -41,20 +43,22 @@ public class ESActionLoadPage extends TextView implements IDataInitialize, IData
 			this.setVisibility(View.GONE);
 			try
 			{
-				String dataType = attrs.getAttributeValue(mNameSpace, "dataType");
+				TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.eruntech);
+				String dataType = a.getString(R.styleable.eruntech_dataType);
 				if(dataType != null && dataType.length() > 0)
 				{
 					this.mDataType = DataTypeHelper.valueOf(dataType);
 				}
+				this.mSign = a.getString(R.styleable.eruntech_sign);
+				this.mSql = a.getString(R.styleable.eruntech_sql);
+				this.mAutoLoad = a.getBoolean(R.styleable.eruntech_autoLoad,true);
+				a.recycle();
 			}
 			catch(Exception ex)
 			{
 				Log.e("ʹ", ex.getMessage());
 				this.mDataType = DataType.String;
 			}
-			this.mSign = attrs.getAttributeValue(mNameSpace, "sign");
-			this.mSql = attrs.getAttributeValue(mNameSpace, "sql");
-			this.mAutoLoad = attrs.getAttributeBooleanValue(mNameSpace, "autoLoad", false);
 		}
 		catch(Exception ex)
 		{

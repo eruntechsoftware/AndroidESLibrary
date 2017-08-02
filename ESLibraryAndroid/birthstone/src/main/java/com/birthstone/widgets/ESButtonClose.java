@@ -7,7 +7,6 @@ import android.os.Message;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 
 import com.birthstone.base.activity.Activity;
 import com.birthstone.base.event.OnClickedListener;
@@ -20,7 +19,7 @@ import com.birthstone.core.parse.DataCollection;
 
 
 @SuppressLint("HandlerLeak")
-public class ESButtonClose extends Button implements IDataInitialize, IFunctionProtected
+public class ESButtonClose extends ESButton implements IDataInitialize, IFunctionProtected
 {
 	protected String mFuncSign;
 	protected Activity mActivity;
@@ -33,16 +32,6 @@ public class ESButtonClose extends Button implements IDataInitialize, IFunctionP
 	public ESButtonClose(Context context, AttributeSet attrs )
 	{
 		super(context, attrs);
-		try
-		{
-			this.setOnClickListener(clickListener);
-			this.mFuncSign = attrs.getAttributeValue(mNameSpace, "FuncSign");
-			this.mSign = attrs.getAttributeValue(mNameSpace, "Sign");
-		}
-		catch(Exception ex)
-		{
-			Log.e("ButtonClose", ex.getMessage());
-		}
 	}
 
 	public ESButtonClose(Context context, AttributeSet attrs, int defStyle)

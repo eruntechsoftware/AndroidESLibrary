@@ -2,12 +2,14 @@ package com.birthstone.widgets;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.util.Log;
 
+import com.birthstone.R;
 import com.birthstone.base.activity.Activity;
 import com.birthstone.base.helper.InitializeHelper;
 import com.birthstone.core.helper.DataType;
@@ -41,10 +43,12 @@ public class ESDatePicker extends android.widget.DatePicker implements ICollecti
     public ESDatePicker(Context context, AttributeSet attrs) {
         super(context, attrs);
         try {
-            mIsRequired = attrs.getAttributeBooleanValue(mNameSpace, "isRequired", false);
-            mCollectSign = attrs.getAttributeValue(mNameSpace, "collectSign");
-            mEmpty2Null = attrs.getAttributeBooleanValue(mNameSpace, "empty2Null", true);
+            TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.eruntech);
+            mIsRequired = a.getBoolean(R.styleable.eruntech_isRequired,false);
+            mEmpty2Null = a.getBoolean(R.styleable.eruntech_empty2Null, true);
+            mCollectSign = a.getString(R.styleable.eruntech_collectSign);
             mDataType = com.birthstone.core.helper.DataType.DateTime;
+            a.recycle();
         } catch (Exception ex) {
             Log.e("DatePicker", ex.getMessage());
         }

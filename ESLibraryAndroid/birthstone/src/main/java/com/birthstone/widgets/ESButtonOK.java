@@ -9,7 +9,6 @@ import android.os.Message;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 
 import com.birthstone.base.activity.Activity;
 import com.birthstone.base.event.OnClickedListener;
@@ -24,29 +23,14 @@ import com.birthstone.core.parse.DataCollection;
 
 
 @SuppressLint("HandlerLeak")
-public class ESButtonOK extends Button implements IDataInitialize, IFunctionProtected
+public class ESButtonOK extends ESButton implements IDataInitialize, IFunctionProtected
 {
-	protected Activity mActivity;
-	protected String mFuncSign;
-	protected OnClickingListener onClickingListener;
-	protected OnClickedListener onClickedListener;
-	protected String mSign;
 	protected ProgressDialog mAlter;
 	protected String mNameSpace = "http://schemas.android.com/res/com.birthStone.widgets";
 
 	public ESButtonOK(Context context, AttributeSet attrs )
 	{
 		super(context, attrs);
-		try
-		{
-			this.setOnClickListener(clickListener);
-			mSign = attrs.getAttributeValue(mNameSpace, "sign");
-			mFuncSign = attrs.getAttributeValue(mNameSpace, "funcSign");
-		}
-		catch(Exception ex)
-		{
-			Log.e("ButtonOK", ex.getMessage());
-		}
 	}
 
 	public ESButtonOK(Context context, AttributeSet attrs, int defStyle)
