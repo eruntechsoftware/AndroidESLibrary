@@ -458,7 +458,7 @@ public class Fragment extends android.support.v4.app.Fragment implements IUINavi
         super.onDestroy();
         
         for(View view : views){
-        	if(view.hasOnClickListeners())
+        	if(view!=null && view.hasOnClickListeners())
         	{
         		view.setOnClickListener(null);
         	}

@@ -936,14 +936,14 @@ public abstract class Activity extends android.app.Activity implements IUINaviga
     protected void onDestroy() {
         super.onDestroy();
         for(View view : views){
-        	if(view.hasOnClickListeners())
+        	if(view!=null && view.hasOnClickListeners())
         	{
         		view.setOnClickListener(null);
         	}
         	view = null;
         }
         views.clear();
-        views=null;
+		views = null;
         
         if(mTransferParams!=null){
         	mTransferParams.clear();

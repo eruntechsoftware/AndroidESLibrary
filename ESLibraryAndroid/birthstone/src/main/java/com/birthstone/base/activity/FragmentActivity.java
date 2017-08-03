@@ -824,7 +824,7 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
     protected void onDestroy() {
         super.onDestroy();
         for(View view : views){
-        	if(view.hasOnClickListeners())
+			if(view!=null && view.hasOnClickListeners())
         	{
         		view.setOnClickListener(null);
         	}
