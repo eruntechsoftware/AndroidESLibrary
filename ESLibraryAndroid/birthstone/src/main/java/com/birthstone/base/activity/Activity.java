@@ -85,6 +85,7 @@ public abstract class Activity extends android.app.Activity implements IUINaviga
 					.penaltyDeath().build());
 		}
 		super.onCreate(savedInstanceState);
+		initalizeNavigationBar();
 		DisplayMetrics metric = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(metric);
 		DENSITY = metric.density;
@@ -170,7 +171,6 @@ public abstract class Activity extends android.app.Activity implements IUINaviga
 	public void setContentView(int layoutResID)
 	{
 		super.setContentView(layoutResID);
-		initalizeNavigationBar();
 	}
 
 	/**
