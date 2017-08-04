@@ -52,6 +52,7 @@ public class Fragment extends android.support.v4.app.Fragment implements IUINavi
 		this.mInflater = inflater;
 		this.mContainer = container;
 		this.mSavedInstanceState = savedInstanceState;
+		ViewInjectUtils.inject(this);
 		return mView;
 	}
 
@@ -87,7 +88,6 @@ public class Fragment extends android.support.v4.app.Fragment implements IUINavi
 				}
 			}
 		}
-		ViewInjectUtils.inject(this);
 	}
 	
 	/**
