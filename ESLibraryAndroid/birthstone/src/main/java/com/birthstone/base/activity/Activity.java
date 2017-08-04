@@ -74,7 +74,6 @@ public abstract class Activity extends android.app.Activity implements IUINaviga
 	@SuppressLint("NewApi")
 	protected void onCreate(Bundle savedInstanceState)
 	{
-		ViewInjectUtils.inject(this);
 		if(Build.VERSION.SDK_INT > 13)
 		{
 			StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().detectDiskReads().detectDiskWrites().detectNetwork()
@@ -85,6 +84,7 @@ public abstract class Activity extends android.app.Activity implements IUINaviga
 					.penaltyDeath().build());
 		}
 		super.onCreate(savedInstanceState);
+		ViewInjectUtils.inject(this);
 		initalizeNavigationBar();
 		DisplayMetrics metric = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(metric);
@@ -203,9 +203,6 @@ public abstract class Activity extends android.app.Activity implements IUINaviga
 			ViewGroup viewGroup = (ViewGroup) rootView;
 			mUINavigationBar = new UINavigationBar(this, true);
 			mUINavigationBar.UINavigationBarDelegat=this;
-			if(UINavigationBar.BACKGROUND_COLOR != 0){
-				mUINavigationBar.setTitleBarBackground(UINavigationBar.BACKGROUND_COLOR);
-			}
 			viewGroup.addView(mUINavigationBar);
 
 			if(mUINavigationBar.getVisibility() == View.VISIBLE)

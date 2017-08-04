@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.birthstone.annotation.ViewInjectUtils;
 import com.birthstone.base.event.OnReleasedListener;
 import com.birthstone.base.event.OnReleaseingListener;
 import com.birthstone.base.helper.ActivityManager;
@@ -81,7 +82,8 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
 					.penaltyDeath().build());
 		}
 		super.onCreate(savedInstanceState);
-		
+		ViewInjectUtils.inject(this);
+		initalizeNavigationBar();
 		//ܶ
 		DisplayMetrics metric = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metric);
@@ -157,7 +159,7 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
 				this.dataParams = this.mReceiveDataParams;
 			}
 		}
-		
+		onCreateView();
 	}
 	
 	/**
@@ -167,7 +169,6 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
 	public void setContentView(int layoutResID)
 	{
 		super.setContentView(layoutResID);
-		initalizeNavigationBar();
 	}
 
 	/**
