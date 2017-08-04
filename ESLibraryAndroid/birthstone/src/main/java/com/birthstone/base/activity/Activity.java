@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.birthstone.annotation.ViewInjectUtils;
 import com.birthstone.base.event.OnReleasedListener;
 import com.birthstone.base.event.OnReleaseingListener;
 import com.birthstone.base.helper.ActivityManager;
@@ -49,7 +50,7 @@ public abstract class Activity extends android.app.Activity implements IUINaviga
 	public DataCollection dataParams = new DataCollection();
 	private DataCollection releaseParams, mReceiveDataParams, mTransferDataParams;
 	protected String mTitle, mRightButtonText;
-	private Boolean mShowBtnBack=true, mShowNavigationbar = true, mParentRefresh = false, mIsParentStart=false;
+	private Boolean mParentRefresh = false, mIsParentStart=false;
 	protected int index = 0;
 
 	protected int mReleaseCount = 0;
@@ -93,8 +94,6 @@ public abstract class Activity extends android.app.Activity implements IUINaviga
 		{
 			String activityType = intent.getStringExtra("ActivityType");
 			mTransferParams = (ArrayList<Data>) intent.getSerializableExtra("Parameter");// intent.getStringExtra("Parameter");
-			mShowNavigationbar = intent.getBooleanExtra("Navigationbar", true);
-			mShowBtnBack = intent.getBooleanExtra("ShowBtnBack", false);
 
 			if(activityType != null && activityType.equals("Activity"))
 			{
@@ -163,14 +162,14 @@ public abstract class Activity extends android.app.Activity implements IUINaviga
 	}
 
 	/**
-	 *
-	 * 
-	 * @param layoutResID id
+	 * 设置内容视图资源ID
+	 * @param layoutResID 资源ID
 	 * **/
 	public void setContentView(int layoutResID)
 	{
 		super.setContentView(layoutResID);
 		initalizeNavigationBar();
+		ViewInjectUtils.inject(this);
 	}
 
 	/**
@@ -201,31 +200,24 @@ public abstract class Activity extends android.app.Activity implements IUINaviga
 		if(rootView instanceof ViewGroup)
 		{
 			ViewGroup viewGroup = (ViewGroup) rootView;
-			mUINavigationBar = new UINavigationBar(this, mShowBtnBack);
+			mUINavigationBar = new UINavigationBar(this, true);
 			mUINavigationBar.UINavigationBarDelegat=this;
 			if(UINavigationBar.BACKGROUND_COLOR != 0){
 				mUINavigationBar.setTitleBarBackground(UINavigationBar.BACKGROUND_COLOR);
 			}
 			viewGroup.addView(mUINavigationBar);
 
-			if(!mShowNavigationbar)
-			{
-				mUINavigationBar.setVisibility(View.GONE);
-			}
-
-			// ?
 			if(mUINavigationBar.getVisibility() == View.VISIBLE)
 			{
 				StatusBarUtil.setTranslucent(this);
 				StatusBarUtil.setColorNoTranslucent(this, UINavigationBar.BACKGROUND_COLOR);
 			}
-			/** ? **/
+
 			if(mRightButtonText != null)
 			{
 				mUINavigationBar.setRightText(mRightButtonText);
 			}
 
-			/** ? **/
 			if(mTitle != null)
 			{
 				mUINavigationBar.setTitle(mTitle);
@@ -718,7 +710,7 @@ public abstract class Activity extends android.app.Activity implements IUINaviga
 	}
 
 	/**
-	 * ?
+	 *获取导航栏
 	 */
 	public UINavigationBar getNavigationBar()
 	{
@@ -726,20 +718,41 @@ public abstract class Activity extends android.app.Activity implements IUINaviga
 	}
 
 	/**
-	 * ?
-	 * 
-	 * @param color
+	 * 设置NavigationBar左侧按钮是否可见
+	 * @param visible 设置可见性
 	 * **/
-	public void setStatusBackgroundColor(int color)
+	public void setUINavigationBarLeftButtonVisibility(int visible)
 	{
-		StatusBarUtil.setTranslucent(this);
-		// ?
-		StatusBarUtil.setColorNoTranslucent(this, color);
+		if (mUINavigationBar!=null){
+			mUINavigationBar.setLeftButtonVisibility(visible);
+		}
+
 	}
 
 	/**
-	 * ?
-	 * 
+	 * 设置NavigationBar右侧按钮是否可见
+	 * @param visible 设置可见性
+	 * **/
+	public void setUINavigationBarRightButtonVisibility(int visible)
+	{
+		if(this.getNavigationBar()!=null){
+			this.getNavigationBar().setRightButtonVisibility(visible);
+		}
+	}
+
+	/**
+	 * 设置NavigationBar是否可见
+	 * @param visible 设置可见性
+	 * **/
+	public void setUINavigationBarVisibility(int visible)
+	{
+		if(this.getNavigationBar()!=null){
+			this.getNavigationBar().setVisibility(visible);
+		}
+	}
+
+	/**
+	 *
 	 * @param title
 	 * **/
 	public void setTitleText(String title)
@@ -752,110 +765,23 @@ public abstract class Activity extends android.app.Activity implements IUINaviga
 	}
 
 	/**
-	 * ?
-	 * 
-	 * @param resouceid ?
+	 *设置左侧按钮图片
+	 * @param resouceid 图片资源
 	 * **/
 	public void setLeftButtonImage(int resouceid)
 	{
-		LEFT_IMAGE_RESOURCE_ID = resouceid;
-		Fragment.LEFT_IMAGE_RESOURCE_ID = resouceid;
+		LEFT_IMAGE_RESOURCE_ID=resouceid;
+		Activity.LEFT_IMAGE_RESOURCE_ID = resouceid;
 		FragmentActivity.LEFT_IMAGE_RESOURCE_ID = resouceid;
-		if(this.getNavigationBar() != null)
+		if(getNavigationBar() != null)
 		{
 			this.getNavigationBar().setLeftButtonImage(LEFT_IMAGE_RESOURCE_ID);
 		}
 	}
 
 	/**
-	 * ?
-	 * 
-	 * @param resouceid ?
-	 * **/
-	public void setRightButtonImage(int resouceid)
-	{
-		if(this.getNavigationBar() != null)
-		{
-			this.getNavigationBar().setRightButtonImage(resouceid);
-		}
-	}
-	
-	/**
-	 * ?
-	 * **/
-	public Boolean getIsParentStart()
-	{
-		return mIsParentStart;
-	}
-
-	/**
-	 * NavigationBar
-	 * **/
-	public void setShowBtnBack(boolean mShowBtnBack)
-	{
-		this.mShowBtnBack = mShowBtnBack;
-	}
-
-	/**
-	 * ?NavigationBar
-	 * **/
-	public Boolean getShowBtnBack()
-	{
-		return mShowBtnBack;
-	}
-	
-	/**
-	 *
-	 * @param visiility ?
-	 * **/
-	public void setRightButtonVisibility(int visiility)
-	{
-		if(this.getNavigationBar()!=null){
-			this.getNavigationBar().setRightButtonVisibility(visiility);
-		}
-	}
-	
-	/**
-	 *
-	 * @param visiility ?
-	 * **/
-	public void setLeftButtonVisibility(int visiility)
-	{
-		if(this.getNavigationBar()!=null){
-			this.getNavigationBar().setLeftButtonVisibility(visiility);
-		}
-	}
-
-	/**
-	 * NavigationBar
-	 * **/
-	public void setShowNavigationbar(boolean mShowNavigationbar)
-	{
-		this.mShowNavigationbar = mShowNavigationbar;
-	}
-
-	/**
-	 * ?NavigationBar
-	 * **/
-	public Boolean getShowNavigationbar()
-	{
-		return mShowNavigationbar;
-	}
-
-	/**
-	 * ?onRefresh
-	 * 
-	 * @param mParentRefresh ?
-	 * **/
-	public void setParentRefresh(boolean mParentRefresh)
-	{
-		this.mParentRefresh = mParentRefresh;
-	}
-
-	/**
-	 *
-	 * 
-	 * @param buttonText
+	 * 设置导航栏右侧按钮文本
+	 * @param buttonText 按钮文本
 	 * **/
 	public void setRightText(String buttonText)
 	{
@@ -866,23 +792,11 @@ public abstract class Activity extends android.app.Activity implements IUINaviga
 		}
 	}
 
-	public void setLeftText(String buttonText)
-	{
-		if(this.getNavigationBar() != null)
-		{
-			this.getNavigationBar().setLeftText(buttonText);
-		}
-	}
-
 	/**
 	 * 左侧按钮单击事件
 	 * **/
 	public void onLeftClick(){
-		try{
-			Activity.this.finish();
-		}catch (Exception ex){
-			Log.e("leftClick",ex.getMessage());
-		}
+
 	}
 
 	/**
@@ -890,6 +804,27 @@ public abstract class Activity extends android.app.Activity implements IUINaviga
 	 * **/
 	public void onRightClick(){
 
+	}
+
+
+	/*
+	* 设置状态栏颜色，实现沉浸式状态栏
+	* @param color 颜色id
+	* */
+	public void setStatusBackgroundColor(int color)
+	{
+		StatusBarUtil.setTranslucent(this);
+		StatusBarUtil.setColorNoTranslucent(this, color);
+	}
+
+	/**
+	 * ?onRefresh
+	 *
+	 * @param mParentRefresh ?
+	 * **/
+	public void setParentRefresh(boolean mParentRefresh)
+	{
+		this.mParentRefresh = mParentRefresh;
 	}
 
 	/**

@@ -45,7 +45,7 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
 	protected ArrayList<Data> mTransferParams =   null;
 	private DataCollection releaseParams,mReceiveDataParams, mTransferDataParams;
 	protected String mTitle, mRightButtonText;
-	protected Boolean mShowBtnBack=true, mShowNavigationbar, mParentRefresh=false, mIsParentStart=false;
+	protected Boolean mParentRefresh=false, mIsParentStart=false;
 	protected int index = 0;
 	protected int mReleaseCount = 0;
 	
@@ -92,8 +92,6 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
 		{
 			String activityType = intent.getStringExtra("ActivityType");
 			mTransferParams = (ArrayList<Data>) intent.getSerializableExtra("Parameter");
-			mShowNavigationbar =  intent.getBooleanExtra("Navigationbar", false);
-			mShowBtnBack = intent.getBooleanExtra("ShowBtnBack", false);
 			
 			if(activityType!=null && activityType.equals("Activity"))
 			{
@@ -163,16 +161,13 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
 	}
 	
 	/**
-	 * òԴ
-	 * @param layoutResID Դid
+	 * 设置内容视图资源ID
+	 * @param layoutResID 资源ID
 	 * **/
 	public void setContentView(int layoutResID)
 	{
 		super.setContentView(layoutResID);
-		if(mShowNavigationbar)
-		{
-			initalizeNavigationBar();
-		}
+		initalizeNavigationBar();
 	}
 
 	/**
@@ -202,15 +197,15 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
 		View rootView = ((ViewGroup)this.findViewById(android.R.id.content)).getChildAt(0);
 		if(rootView instanceof ViewGroup){
 			ViewGroup viewGroup = (ViewGroup)rootView;
-			//ص
-			mUINavigationBar = new UINavigationBar(this, mShowBtnBack);
+
+			mUINavigationBar = new UINavigationBar(this, true);
 			mUINavigationBar.UINavigationBarDelegat=this;
 			viewGroup.addView(mUINavigationBar);
 			
 			StatusBarUtil.setTranslucent(this);
 
 			StatusBarUtil.setColorNoTranslucent(this, UINavigationBar.BACKGROUND_COLOR);
-			/**Ҳఴı**/
+
 			if(mRightButtonText != null)
 			{
 				mUINavigationBar.setRightText(mRightButtonText);
@@ -221,7 +216,6 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
 			{
 				mUINavigationBar.setTitle(mTitle);
 			}
-			/**ఴͼƬԴ**/
 			mUINavigationBar.setLeftButtonImage(LEFT_IMAGE_RESOURCE_ID);
 			
 		}
@@ -678,26 +672,49 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
 	{
 		this.onReleasedListener = onReleasedListener;
 	}
-	
+
 	/**
-	 *
+	 *获取导航栏
 	 */
 	public UINavigationBar getNavigationBar()
 	{
 		return mUINavigationBar;
 	}
-	
+
 	/**
-
-	 * @param color ֵ
+	 * 设置NavigationBar左侧按钮是否可见
+	 * @param visible 设置可见性
 	 * **/
-	public void setStatusBackgroundColor(int color)
+	public void setUINavigationBarLeftButtonVisibility(int visible)
 	{
-		StatusBarUtil.setTranslucent(this);
+		if (mUINavigationBar!=null){
+			mUINavigationBar.setLeftButtonVisibility(visible);
+		}
 
-		StatusBarUtil.setColorNoTranslucent(this, color);
 	}
-	
+
+	/**
+	 * 设置NavigationBar右侧按钮是否可见
+	 * @param visible 设置可见性
+	 * **/
+	public void setUINavigationBarRightButtonVisibility(int visible)
+	{
+		if(this.getNavigationBar()!=null){
+			this.getNavigationBar().setRightButtonVisibility(visible);
+		}
+	}
+
+	/**
+	 * 设置NavigationBar是否可见
+	 * @param visible 设置可见性
+	 * **/
+	public void setUINavigationBarVisibility(int visible)
+	{
+		if(this.getNavigationBar()!=null){
+			this.getNavigationBar().setVisibility(visible);
+		}
+	}
+
 	/**
 	 *
 	 * @param title
@@ -710,60 +727,25 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
 			this.getNavigationBar().setTitle(mTitle);
 		}
 	}
-	
+
 	/**
-	 * Ҳ಼ʾ״̬
-	 * @param visiility ʾ״̬
-	 * **/
-	public void setRightButtonVisibility(int visiility)
-	{
-		if(this.getNavigationBar()!=null){
-			this.getNavigationBar().setRightButtonVisibility(visiility);
-		}
-	}
-	
-	/**
-	 * ಼ʾ״̬
-	 * @param visiility ʾ״̬
-	 * **/
-	public void setLeftButtonVisibility(int visiility)
-	{
-		if(this.getNavigationBar()!=null){
-			this.getNavigationBar().setLeftButtonVisibility(visiility);
-		}
-	}
-	
-	/**
-	 *
-	 * @param resouceid ͼƬԴ
+	 *设置左侧按钮图片
+	 * @param resouceid 图片资源
 	 * **/
 	public void setLeftButtonImage(int resouceid)
 	{
 		LEFT_IMAGE_RESOURCE_ID=resouceid;
 		Activity.LEFT_IMAGE_RESOURCE_ID = resouceid;
 		FragmentActivity.LEFT_IMAGE_RESOURCE_ID = resouceid;
-		if(this.getNavigationBar() != null)
+		if(getNavigationBar() != null)
 		{
 			this.getNavigationBar().setLeftButtonImage(LEFT_IMAGE_RESOURCE_ID);
 		}
 	}
-	
+
 	/**
-	 * Ҳ
-	 * 
-	 * @param resouceid ͼƬԴ
-	 * **/
-	public void setRightButtonImage(int resouceid)
-	{
-		if(this.getNavigationBar() != null)
-		{
-			this.getNavigationBar().setRightButtonImage(resouceid);
-		}
-	}
-	
-	/**
-	 * Ҳఴʾı
-	 * @param buttonText ı
+	 * 设置导航栏右侧按钮文本
+	 * @param buttonText 按钮文本
 	 * **/
 	public void setRightText(String buttonText)
 	{
@@ -778,11 +760,7 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
 	 * 左侧按钮单击事件
 	 * **/
 	public void onLeftClick(){
-		try{
-			FragmentActivity.this.finish();
-		}catch (Exception ex){
-			Log.e("leftClick",ex.getMessage());
-		}
+
 	}
 
 	/**
@@ -790,6 +768,17 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
 	 * **/
 	public void onRightClick(){
 
+	}
+
+	/*
+	* 设置状态栏颜色，实现沉浸式状态栏
+	* @param color 颜色id
+	* */
+	public void setStatusBackgroundColor(int color)
+	{
+		StatusBarUtil.setTranslucent(this);
+
+		StatusBarUtil.setColorNoTranslucent(this, color);
 	}
 	
 	/**

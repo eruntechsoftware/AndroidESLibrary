@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.birthstone.annotation.ViewInjectUtils;
 import com.birthstone.base.event.OnReleasedListener;
 import com.birthstone.base.event.OnReleaseingListener;
 import com.birthstone.base.helper.FormHelper;
@@ -35,7 +36,7 @@ public class Fragment extends android.support.v4.app.Fragment implements IUINavi
 	public OnReleasedListener onReleasedListener;
 	public static int LEFT_IMAGE_RESOURCE_ID;
 	protected String mTitle, mRightButtonText;
-	protected Boolean mShowBtnBack=true, mShowNavigationbar, mParentRefresh=false, mIsParentStart=true;
+	protected Boolean mParentRefresh=false, mIsParentStart=true;
 //	protected OnClickListener mLeftViewOnClickListener, mRightViewOnClickListener;
 	
 	public static int RESULT_OK = 185324;
@@ -53,25 +54,21 @@ public class Fragment extends android.support.v4.app.Fragment implements IUINavi
 		this.mSavedInstanceState = savedInstanceState;
 		return mView;
 	}
-	
+
+	/**
+	 * 设置内容视图资源ID
+	 * @param resID 资源ID
+	 * **/
 	public void setCreateView(int resID)
 	{
-		mView = mInflater.inflate(resID,mContainer, false); 
-		
+		mView = mInflater.inflate(resID,mContainer, false);
+		initalizeNavigationBar();
+
 		if(mSavedInstanceState != null)
 		{
 			String activityType = mSavedInstanceState.getString("ActivityType");
 			mTransferParams = (ArrayList<Data>) mSavedInstanceState.getSerializable("Parameter");
-			mShowNavigationbar =  mSavedInstanceState.getBoolean("Navigationbar", false);
-			mShowBtnBack = mSavedInstanceState.getBoolean("ShowBtnBack", false);
-			
-			/**Ƿص**/
-			if(mShowNavigationbar)
-			{
-				initalizeNavigationBar();
-			}
-			
-			/**ݲ**/
+
 			if(activityType!=null)
 			{
 				android.support.v4.app.Fragment fragment = FragmentManager.last();
@@ -90,6 +87,7 @@ public class Fragment extends android.support.v4.app.Fragment implements IUINavi
 				}
 			}
 		}
+		ViewInjectUtils.inject(this);
 	}
 	
 	/**
@@ -99,7 +97,7 @@ public class Fragment extends android.support.v4.app.Fragment implements IUINavi
 	{
 		if(mView instanceof ViewGroup){
 			ViewGroup viewGroup = (ViewGroup)mView;
-			mUINavigationBar = new UINavigationBar(this.getActivity(), mShowBtnBack);
+			mUINavigationBar = new UINavigationBar(this.getActivity(), true);
 			mUINavigationBar.UINavigationBarDelegat=this;
 			viewGroup.addView(mUINavigationBar);
 
@@ -184,8 +182,8 @@ public class Fragment extends android.support.v4.app.Fragment implements IUINavi
 	}
 	
 	/**
-	 * ôݵһĲ
-	 * @param transferDataParams ݲ
+	 *
+	 * @param transferDataParams
 	 * **/
 	public void setTransferDataParams(DataCollection transferDataParams)
 	{
@@ -224,14 +222,8 @@ public class Fragment extends android.support.v4.app.Fragment implements IUINavi
 	{
 		this.onReleasedListener = onReleasedListener;
 	}
-	
-	/**
-	 *
-	 */
-	public UINavigationBar getNavigationBar()
-	{
-		return mUINavigationBar;
-	}
+
+
 	
 	/**
 	 * Ƿת򿪵ǰҳ
@@ -242,68 +234,45 @@ public class Fragment extends android.support.v4.app.Fragment implements IUINavi
 	}
 
 	/**
-	 * NavigationBar
-	 * **/
-	public void setShowBtnBack(boolean mShowBtnBack)
+	 *获取导航栏
+	 */
+	public UINavigationBar getNavigationBar()
 	{
-		this.mShowBtnBack = mShowBtnBack;
+		return mUINavigationBar;
 	}
 
 	/**
-	 * NavigationBar
+	 * 设置NavigationBar左侧按钮是否可见
+	 * @param visible 设置可见性
 	 * **/
-	public Boolean getShowBtnBack()
+	public void setUINavigationBarLeftButtonVisibility(int visible)
 	{
-		return mShowBtnBack;
-	}
-	
-	/**
-	 * Ҳ಼ʾ״̬
-	 * @param visiility ʾ״̬
-	 * **/
-	public void setRightButtonVisibility(int visiility)
-	{
-		if(this.getNavigationBar()!=null){
-			this.getNavigationBar().setRightButtonVisibility(visiility);
+		if (mUINavigationBar!=null){
+			mUINavigationBar.setLeftButtonVisibility(visible);
 		}
+
 	}
-	
+
 	/**
-	 * ಼ʾ״̬
-	 * @param visiility ʾ״̬
+	 * 设置NavigationBar右侧按钮是否可见
+	 * @param visible 设置可见性
 	 * **/
-	public void setLeftButtonVisibility(int visiility)
+	public void setUINavigationBarRightButtonVisibility(int visible)
 	{
 		if(this.getNavigationBar()!=null){
-			this.getNavigationBar().setLeftButtonVisibility(visiility);
+			this.getNavigationBar().setRightButtonVisibility(visible);
 		}
 	}
 
 	/**
-	 * ǷʾNavigationBar
+	 * 设置NavigationBar是否可见
+	 * @param visible 设置可见性
 	 * **/
-	public void setShowNavigationbar(boolean mShowNavigationbar)
+	public void setUINavigationBarVisibility(int visible)
 	{
-		this.mShowNavigationbar = mShowNavigationbar;
-	}
-
-	/**
-	 * NavigationBar
-	 * **/
-	public Boolean getShowNavigationbar()
-	{
-		return mShowNavigationbar;
-	}
-	
-	/**
-
-	 * @param color ֵ
-	 * **/
-	public void setStatusBackgroundColor(int color)
-	{
-		StatusBarUtil.setTranslucent(this.getActivity());
-
-		StatusBarUtil.setColorNoTranslucent(this.getActivity(), color);
+		if(this.getNavigationBar()!=null){
+			this.getNavigationBar().setVisibility(visible);
+		}
 	}
 	
 	/**
@@ -320,8 +289,8 @@ public class Fragment extends android.support.v4.app.Fragment implements IUINavi
 	}
 	
 	/**
-	 *
-	 * @param resouceid
+	 *设置左侧按钮图片
+	 * @param resouceid 图片资源
 	 * **/
 	public void setLeftButtonImage(int resouceid)
 	{
@@ -335,8 +304,8 @@ public class Fragment extends android.support.v4.app.Fragment implements IUINavi
 	}
 	
 	/**
-	 * Ҳఴʾı
-	 * @param buttonText ı
+	 * 设置导航栏右侧按钮文本
+	 * @param buttonText 按钮文本
 	 * **/
 	public void setRightText(String buttonText)
 	{
@@ -359,6 +328,17 @@ public class Fragment extends android.support.v4.app.Fragment implements IUINavi
 	 * **/
 	public void onRightClick(){
 
+	}
+
+	/*
+	* 设置状态栏颜色，实现沉浸式状态栏
+	* @param color 颜色id
+	* */
+	public void setStatusBackgroundColor(int color)
+	{
+		StatusBarUtil.setTranslucent(this.getActivity());
+
+		StatusBarUtil.setColorNoTranslucent(this.getActivity(), color);
 	}
 	
 	/**

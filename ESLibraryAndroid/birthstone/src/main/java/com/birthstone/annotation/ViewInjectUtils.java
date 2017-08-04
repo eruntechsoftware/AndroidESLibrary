@@ -1,11 +1,11 @@
 package com.birthstone.annotation;
 
-import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
 
 import com.birthstone.base.activity.Activity;
 import com.birthstone.base.activity.Fragment;
+import com.birthstone.base.activity.FragmentActivity;
 
 import java.lang.reflect.Field;
 
@@ -19,10 +19,12 @@ public class ViewInjectUtils
 	 * **/
 	public static void inject(Activity activity)
 	{
-		Log.e("TAG", "inject");
-		injectContentView(activity);
-		injectViews(activity);
-		// injectEvents(activity);
+		if(activity!=null) {
+			injectContentView(activity);
+			injectViews(activity);
+			activity.onCreateView();
+			// injectEvents(activity);
+		}
 	}
 
 	/**
@@ -70,7 +72,7 @@ public class ViewInjectUtils
 	{
 		Class<? extends Activity> clazz = activity.getClass();
 		SetContentView contentView = clazz.getAnnotation(SetContentView.class);
-		if(contentView != null)// ����
+		if(contentView != null)
 		{
 			int contentViewLayoutId = contentView.value();
 			try
@@ -90,9 +92,11 @@ public class ViewInjectUtils
 	 * **/
 	public static void inject(FragmentActivity fragmentActivity)
 	{
-		Log.e("TAG", "inject");
-		injectContentView(fragmentActivity);
-		injectViews(fragmentActivity);
+		if (fragmentActivity!=null) {
+			injectContentView(fragmentActivity);
+			injectViews(fragmentActivity);
+			fragmentActivity.onCreateView();
+		}
 	}
 
 	/**
@@ -166,10 +170,11 @@ public class ViewInjectUtils
 	 * **/
 	public static void inject(Fragment fragment)
 	{
-		Log.e("TAG", "inject");
-		injectContentView(fragment);
-		injectViews(fragment);
-		// injectEvents(activity);
+		if (fragment!=null) {
+			injectContentView(fragment);
+			injectViews(fragment);
+			// injectEvents(activity);
+		}
 	}
 	
 	/**
