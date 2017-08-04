@@ -22,7 +22,6 @@ public class ViewInjectUtils
 		if(activity!=null) {
 			injectContentView(activity);
 			injectViews(activity);
-			activity.onCreateView();
 			// injectEvents(activity);
 		}
 	}
@@ -95,7 +94,6 @@ public class ViewInjectUtils
 		if (fragmentActivity!=null) {
 			injectContentView(fragmentActivity);
 			injectViews(fragmentActivity);
-			fragmentActivity.onCreateView();
 		}
 	}
 

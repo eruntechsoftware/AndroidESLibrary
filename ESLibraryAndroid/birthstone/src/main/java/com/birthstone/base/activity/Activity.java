@@ -74,6 +74,7 @@ public abstract class Activity extends android.app.Activity implements IUINaviga
 	@SuppressLint("NewApi")
 	protected void onCreate(Bundle savedInstanceState)
 	{
+		ViewInjectUtils.inject(this);
 		if(Build.VERSION.SDK_INT > 13)
 		{
 			StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().detectDiskReads().detectDiskWrites().detectNetwork()
@@ -158,6 +159,7 @@ public abstract class Activity extends android.app.Activity implements IUINaviga
 				this.dataParams = this.mReceiveDataParams;
 			}
 		}
+		onCreateView();
 		intent=null;
 	}
 
@@ -169,7 +171,6 @@ public abstract class Activity extends android.app.Activity implements IUINaviga
 	{
 		super.setContentView(layoutResID);
 		initalizeNavigationBar();
-		ViewInjectUtils.inject(this);
 	}
 
 	/**
