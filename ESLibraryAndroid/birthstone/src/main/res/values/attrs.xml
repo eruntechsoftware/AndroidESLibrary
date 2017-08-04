@@ -12,13 +12,9 @@
         <enum name="Binary" value="8" />
 	</attr>
 
-    <attr name="isRequired">
-        <enum name="YES" value="1" />
-        <enum name="NO" value="0" />
-    </attr>
 <declare-styleable name="eruntech">
 	<attr name="dataType"></attr>
-	<attr name="isRequired"></attr>
+	<attr name="isRequired" format="boolean"></attr>
 	<attr name="collectSign" format="string"></attr>
 	<attr name="empty2Null" format="boolean"></attr>
 	<attr name="name" format="string"></attr>
