@@ -794,7 +794,11 @@ public abstract class Activity extends android.app.Activity implements IUINaviga
 	 * 左侧按钮单击事件
 	 * **/
 	public void onLeftClick(){
-
+		try{
+			finish();
+		}catch (Exception ex){
+			Log.e("Activity",ex.getMessage());
+		}
 	}
 
 	/**
