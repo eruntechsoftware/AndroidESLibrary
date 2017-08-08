@@ -241,6 +241,17 @@ public class Fragment extends android.support.v4.app.Fragment implements IUINavi
 		return mUINavigationBar;
 	}
 
+	/*
+	* 设置导航栏背景色
+	* @param color 背景色
+	* */
+	public void setUINavigationBarBackgroundColor(int color){
+		if (mUINavigationBar!=null){
+			mUINavigationBar.setBackgroundColor(color);
+		}
+		UINavigationBar.BACKGROUND_COLOR=color;
+	}
+
 	/**
 	 * 设置NavigationBar左侧按钮是否可见
 	 * @param visible 设置可见性

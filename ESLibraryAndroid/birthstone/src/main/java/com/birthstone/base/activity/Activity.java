@@ -61,8 +61,6 @@ public abstract class Activity extends android.app.Activity implements IUINaviga
 	public static int RESULT_OK = 185324;
 	public static int RESULT_CANCEL = 185816;
 
-//	protected OnClickListener mLeftViewOnClickListener, mRightViewOnClickListener;
-
 	public OnReleaseingListener onReleaseingListener;
 	public OnReleasedListener onReleasedListener;
 
@@ -486,24 +484,23 @@ public abstract class Activity extends android.app.Activity implements IUINaviga
 		this.mParentActivity = parentActivity;
 	}
 
-	/**
-	 *
-	 * **/
+	/*
+	* 关闭当前屏幕
+	* */
 	public void finish()
 	{
 		Intent intent = new Intent();
 		intent.putExtra("isRefresh", mParentRefresh);
 		this.setResult(RESULT_OK, intent);
 		intent=null;
-		super.finish();
 		ActivityManager.pop(this);
+		super.finish();
 	}
 
-	/**
-	 *
-	 * 
-	 * @param intent
-	 * **/
+	/*
+	* 关闭当前屏幕并传递参数
+	* @param intent 参数集合
+	* */
 	public void finish(Intent intent)
 	{
 		if(intent == null)
@@ -513,8 +510,8 @@ public abstract class Activity extends android.app.Activity implements IUINaviga
 		intent.putExtra("isRefresh", mParentRefresh);
 		this.setResult(RESULT_OK, intent);
 		intent=null;
-		super.finish();
 		ActivityManager.pop(this);
+		super.finish();
 	}
 
 	@Override
@@ -713,6 +710,17 @@ public abstract class Activity extends android.app.Activity implements IUINaviga
 	public UINavigationBar getNavigationBar()
 	{
 		return mUINavigationBar;
+	}
+
+	/*
+	* 设置导航栏背景色
+	* @param color 背景色
+	* */
+	public void setUINavigationBarBackgroundColor(int color){
+		if (mUINavigationBar!=null){
+			mUINavigationBar.setBackgroundColor(color);
+		}
+		UINavigationBar.BACKGROUND_COLOR=color;
 	}
 
 	/**
