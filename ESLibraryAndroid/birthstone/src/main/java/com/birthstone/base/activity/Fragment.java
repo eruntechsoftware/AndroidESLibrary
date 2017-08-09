@@ -27,7 +27,6 @@ public class Fragment extends android.support.v4.app.Fragment implements IUINavi
 	private static Dialog mPromptDialog;
 	private Bundle mSavedInstanceState;
 	private View mView;
-	private DataCollection dataParams = new DataCollection();
 	public ArrayList<View> views = new ArrayList<View>();
 	protected ArrayList<Data> mTransferParams =   null;
 	private DataCollection releaseParams,mReceiveDataParams, mTransferDataParams;
@@ -84,7 +83,6 @@ public class Fragment extends android.support.v4.app.Fragment implements IUINavi
 						this.mReceiveDataParams = new DataCollection();
 					}
 					this.mReceiveDataParams.addAll(this.mTransferParams);
-					this.dataParams = this.mReceiveDataParams;
 				}
 			}
 		}
@@ -106,57 +104,37 @@ public class Fragment extends android.support.v4.app.Fragment implements IUINavi
 				mUINavigationBar.setRightText(mRightButtonText);
 			}
 			
-			/****/
+			/**设置标题文本**/
 			if(mTitle != null)
 			{
 				mUINavigationBar.setTitle(mTitle);
 			}
 			
-			/**ఴͼƬԴ**/
+			/**设置左侧按钮**/
 			mUINavigationBar.setLeftButtonImage(LEFT_IMAGE_RESOURCE_ID);
 			
 		}
 	}
 	
 	/**
-	 * ǰView
+	 * 获取根视图
 	 * **/
 	public View getRootView()
 	{
 		return mView;
 	}
 	
-	/***
-	 * ǰ
-	 * 
-	 * @return
-	 */
+	/**
+	 * 获取当前类名
+	 * @return 类名
+	 * */
 	public String getName()
 	{
 		return this.getClass().getName();
 	}
 
 	/**
-	 * յĲ
-	 * **/
-	@Deprecated 
-	public DataCollection getDataParams()
-	{
-		return dataParams;
-	}
-
-	/**
-	 * õǰҪݵĲ
-	 * dataParams
-	 * **/
-	@Deprecated 
-	public void setDataParams(DataCollection dataParams)
-	{
-		this.dataParams = dataParams;
-	}
-	
-	/**
-	 * յĲ
+	 *获取当前Activity接收父级屏幕传递的参数集
 	 * **/
 	public DataCollection getReceiveDataParams()
 	{
@@ -164,69 +142,27 @@ public class Fragment extends android.support.v4.app.Fragment implements IUINavi
 	}
 
 	/**
-	 * õǰҪյĲ
-	 * dataParams
+	 *设置当前Activity接收父级屏幕传递的参数集
+	 * @param receiveDataParams 接收参数集合
 	 * **/
 	public void setReceiveDataParams(DataCollection receiveDataParams)
 	{
 		this.mReceiveDataParams = receiveDataParams;
 	}
-	
-	
+
 	/**
-	 * ݵһĲ
+	 * 获取当前Activity向下级屏幕传递的参数集
 	 * **/
 	public DataCollection getTransferDataParams()
 	{
 		return mTransferDataParams;
 	}
-	
-	/**
-	 *
-	 * @param transferDataParams
-	 * **/
-	public void setTransferDataParams(DataCollection transferDataParams)
-	{
-		this.mTransferDataParams = transferDataParams;
-	}
-	
-	
-	/**
-	 * @  ҳִзǰ
-	 */
-	public OnReleaseingListener getOnReleaseingListener()
-	{
-		return onReleaseingListener;
-	}
-
-	/**
-	 * @  ҳִзǰ
-	 */
-	public void setOnReleaseingListener(OnReleaseingListener onReleaseingListener)
-	{
-		this.onReleaseingListener = onReleaseingListener;
-	}
-
-	/**
-	 * @  ҳִз󼤷
-	 */
-	public OnReleasedListener getOnReleasedListener()
-	{
-		return onReleasedListener;
-	}
-
-	/**
-	 * @  ҳִз󼤷
-	 */
-	public void setOnReleasedListener(OnReleasedListener onReleasedListener)
-	{
-		this.onReleasedListener = onReleasedListener;
-	}
 
 
-	
+
 	/**
-	 * Ƿת򿪵ǰҳ
+	 * 获取是否根屏幕
+	 * @return 是否根屏幕
 	 * **/
 	public Boolean getIsParentStart()
 	{
@@ -235,6 +171,7 @@ public class Fragment extends android.support.v4.app.Fragment implements IUINavi
 
 	/**
 	 *获取导航栏
+	 * @return 导航栏
 	 */
 	public UINavigationBar getNavigationBar()
 	{
@@ -305,10 +242,10 @@ public class Fragment extends android.support.v4.app.Fragment implements IUINavi
 			this.getNavigationBar().setVisibility(visible);
 		}
 	}
-	
+
 	/**
-	 *
-	 * @param title
+	 *设置导航栏标题文本
+	 * @param title 标题文本
 	 * **/
 	public void setTitleText(String title)
 	{
@@ -371,39 +308,20 @@ public class Fragment extends android.support.v4.app.Fragment implements IUINavi
 
 		StatusBarUtil.setColorNoTranslucent(this.getActivity(), color);
 	}
-	
+
 	/**
-	 * öбΪʱʾ
-	 * @param promptDialog ʾ
-	 * **/
-	public static void  setPromptDialog(Dialog promptDialog)
-	{
-		mPromptDialog = promptDialog;
-	}
-	
-	/**
-	 * бΪʱʾ
-	 * **/
-	public static Dialog  getPromptDialog()
-	{
-		return mPromptDialog;
-	}
-	
-	/**
-	 * øҳǷִˢonRefresh
-	 * 
-	 * @param mParentRefresh Ƿ
+	 * 设置父级页面是否执行刷新方法
+	 * @param mParentRefresh 是否刷新
 	 * **/
 	public void setParentRefresh(boolean mParentRefresh)
 	{
 		this.mParentRefresh = mParentRefresh;
 	}
-	
+
 	/**
-	 * ͼ
-	 * @param targetViewController ͼ
-	 * @param params ͼĲ
-	 * @param navigationbar ǷĬ
+	 * 跳转到目标屏幕
+	 * @param targetViewController 目标屏幕
+	 * @param navigationbar 是否显示导航栏
 	 * **/
 	public void pushViewController(String targetViewController, DataCollection params, Boolean navigationbar)
 	{
@@ -422,12 +340,7 @@ public class Fragment extends android.support.v4.app.Fragment implements IUINavi
 		}
 	}
 	
-	/**
-	 * еActivityķֵ requestCode:
-	 * ʾһActivityʱȥrequestCodeֵ
-	 * resultCodeʾActivityشֵʱresultCodeֵ
-	 * dataʾActivityشIntent
-	 */
+
 	public void onActivityResult(int requestCode, int resultCode, Intent data)
 	{
 		super.onActivityResult(requestCode, resultCode, data);
@@ -443,25 +356,14 @@ public class Fragment extends android.support.v4.app.Fragment implements IUINavi
 					break;
 		}
 	}
-	
+
 	/**
-	 * ҳ淵غԶˢ´
-	 *  @param data ݵĲ
+	 *Activity关闭时，通知父级Activity调用此方法，用于页面刷新
+	 * @param data Intent参数集
 	 * **/
 	public void onRefresh(Intent data)
 	{
 		
-	}
-	
-	/**
-	 * ʾ󵯳
-	 * **/
-	public void showDialog()
-	{
-		if(mPromptDialog != null)
-		{
-			mPromptDialog.show();
-		}
 	}
 	
 	@Override
@@ -498,23 +400,6 @@ public class Fragment extends android.support.v4.app.Fragment implements IUINavi
         	mTransferDataParams =   null;
         }
 
-//        if(mLeftViewOnClickListener!=null){
-//        	mLeftViewOnClickListener=null;
-//        }
-//
-//        if(mRightViewOnClickListener!=null){
-//        	mRightViewOnClickListener=null;
-//        }
-
-    	
-        if(onReleaseingListener!=null){
-        	onReleaseingListener=null;
-        }
-    	
-        if(onReleasedListener!=null){
-        	onReleasedListener=null;
-        }
-        
         if(mUINavigationBar!=null){
         	mUINavigationBar.setRightViewClickListener(null);
         	mUINavigationBar.setLeftViewClickListener(null);

@@ -71,7 +71,7 @@ public class FunctionProtected implements IControlSearcherHandler
 				str = funcStr[i];
 				if(str != null)
 				{
-					result = Activity.getFunction().contains(str.trim().toLowerCase());
+					result = Activity.getFunctionList().contains(str.trim().toLowerCase());
 					if(result)
 					{
 						break;

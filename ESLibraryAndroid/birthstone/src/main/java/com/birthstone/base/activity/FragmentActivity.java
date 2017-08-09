@@ -42,7 +42,6 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
 	protected Context mParentContext;
 	
 	protected ArrayList<View> views = new ArrayList<View>();
-	public DataCollection dataParams = new DataCollection();
 	protected ArrayList<Data> mTransferParams =   null;
 	private DataCollection releaseParams,mReceiveDataParams, mTransferDataParams;
 	protected String mTitle, mRightButtonText;
@@ -108,7 +107,6 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
 						this.mReceiveDataParams = new DataCollection();
 					}
 					this.mReceiveDataParams.addAll(this.mTransferParams);
-					this.dataParams = this.mReceiveDataParams;
 				}
 			}
 			
@@ -126,7 +124,6 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
 						this.mReceiveDataParams = new DataCollection();
 					}
 					this.mReceiveDataParams.addAll(this.mTransferParams);
-					this.dataParams = this.mReceiveDataParams;
 				}
 			}
 			
@@ -145,7 +142,6 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
 						this.mReceiveDataParams = new DataCollection();
 					}
 					this.mReceiveDataParams.addAll(this.mTransferParams);
-					this.dataParams = this.mReceiveDataParams;
 				}
 			}
 			
@@ -156,7 +152,6 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
 					this.mReceiveDataParams = new DataCollection();
 				}
 				this.mReceiveDataParams.addAll(this.mTransferParams);
-				this.dataParams = this.mReceiveDataParams;
 			}
 		}
 		initView();
@@ -279,9 +274,9 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
 				onReleaseingListener.onReleaseing();
 			}
 			
-			if(dataParams != null && dataParams.size() > 0)
+			if(mReceiveDataParams != null && mReceiveDataParams.size() > 0)
 			{
-				releaseHelper = new ReleaseHelper(dataParams, this);
+				releaseHelper = new ReleaseHelper(mReceiveDataParams, this);
 				releaseHelper.release(null);
 			}
 
@@ -546,25 +541,6 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
 	{
 		this.views = views;
 	}
-
-	/**
-	 * յĲ
-	 * **/
-	@Deprecated
-	public DataCollection getDataParams()
-	{
-		return dataParams;
-	}
-
-	/**
-	 * õǰҪݵĲ
-	 * dataParams
-	 * **/
-	@Deprecated 
-	public void setDataParams(DataCollection dataParams)
-	{
-		this.dataParams = dataParams;
-	}
 	
 	/**
 	 * յĲ
@@ -575,8 +551,8 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
 	}
 
 	/**
-	 * õǰҪյĲ
-	 * dataParams
+	 *设置当前Activity接收父级屏幕传递的参数集
+	 * @param receiveDataParams 接收参数集合
 	 * **/
 	public void setReceiveDataParams(DataCollection receiveDataParams)
 	{

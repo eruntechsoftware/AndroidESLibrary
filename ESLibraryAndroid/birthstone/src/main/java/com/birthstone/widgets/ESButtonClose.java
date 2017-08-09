@@ -105,8 +105,7 @@ public class ESButtonClose extends ESButton implements IDataInitialize, IFunctio
 				DataCollection dataCollection = collectForm.collect();
 				if(mActivity.getParentActivity() != null)
 				{
-					mActivity.getParentActivity().setDataParams(dataCollection);
-					mActivity.getParentActivity().release();
+					mActivity.getParentActivity().release(dataCollection);
 					return true;
 				}
 				return false;

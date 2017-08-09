@@ -259,7 +259,7 @@ public abstract class Activity extends android.app.Activity implements IUINaviga
 	/**
 	*发布数据集到当前屏幕
 	* */
-	private void release()
+	public void release()
 	{
 		ReleaseHelper releaseHelper;
 		try
@@ -491,6 +491,43 @@ public abstract class Activity extends android.app.Activity implements IUINaviga
 
 	}
 
+	/**
+	 * 数据发布前处理方法
+	 */
+	public void releaseing()
+	{
+
+	}
+
+	/**
+	 * 数据发布后处理方法
+	 */
+	public void released()
+	{
+	}
+
+	/**
+	 *设备像素转换为标准像素
+	 * @param context 上下文
+	 * @param dip 设备像素
+	 * **/
+	public static int dip2px(Context context, int dip)
+	{
+		float scale = context.getResources().getDisplayMetrics().density;
+		return (int) (dip * scale + 0.5f * (dip >= 0 ? 1 : -1));
+	}
+
+	/**
+	 * 标准像素转换为设备像素
+	 * @param context 上下文
+	 * @param px 标准像素
+	 * **/
+	public static int px2dip(Context context, int px)
+	{
+		float scale = context.getResources().getDisplayMetrics().density;
+		return (int) (px / scale + 0.5f * (px >= 0 ? 1 : -1));
+	}
+
 	public ArrayList<View> getViews()
 	{
 		return views;
@@ -507,6 +544,15 @@ public abstract class Activity extends android.app.Activity implements IUINaviga
 	public DataCollection getReceiveDataParams()
 	{
 		return mReceiveDataParams;
+	}
+
+	/**
+	 *设置当前Activity接收父级屏幕传递的参数集
+	 * @param receiveDataParams 接收参数集合
+	 * **/
+	public void setReceiveDataParams(DataCollection receiveDataParams)
+	{
+		this.mReceiveDataParams = receiveDataParams;
 	}
 
 
@@ -604,43 +650,6 @@ public abstract class Activity extends android.app.Activity implements IUINaviga
 	public static void setDensity(float DENSITY)
 	{
 		Activity.DENSITY = DENSITY;
-	}
-
-	/**
-	 * 数据发布前处理方法
-	 */
-	public void releaseing()
-	{
-
-	}
-
-	/**
-	 * 数据发布后处理方法
-	 */
-	public void released()
-	{
-	}
-
-	/**
-	 *设备像素转换为标准像素
-	 * @param context 上下文
-	 * @param dip 设备像素
-	 * **/
-	public static int dip2px(Context context, int dip)
-	{
-		float scale = context.getResources().getDisplayMetrics().density;
-		return (int) (dip * scale + 0.5f * (dip >= 0 ? 1 : -1));
-	}
-
-	/**
-	 * 标准像素转换为设备像素
-	 * @param context 上下文
-	 * @param px 标准像素
-	 * **/
-	public static int px2dip(Context context, int px)
-	{
-		float scale = context.getResources().getDisplayMetrics().density;
-		return (int) (px / scale + 0.5f * (px >= 0 ? 1 : -1));
 	}
 
 	/**
@@ -797,9 +806,9 @@ public abstract class Activity extends android.app.Activity implements IUINaviga
 	}
 
 	/**
-	 * 
-	 * @param targetViewController
-	 * @param navigationbar
+	 * 跳转到目标屏幕
+	 * @param targetViewController 目标屏幕
+	 * @param navigationbar 是否显示导航栏
 	 * **/
 	public void pushViewController(String targetViewController, Boolean navigationbar)
 	{
@@ -815,10 +824,10 @@ public abstract class Activity extends android.app.Activity implements IUINaviga
 	}
 
 	/**
-	 *
-	 * @param targetViewController
-	 * @param params
-	 * @param navigationbar
+	 *跳转到目标屏幕并传递参数
+	 * @param targetViewController 目标屏幕
+	 * @param params 参数集合
+	 * @param navigationbar 是否显示导航栏
 	 * **/
 	public void pushViewController(String targetViewController, DataCollection params, Boolean navigationbar)
 	{
@@ -866,14 +875,6 @@ public abstract class Activity extends android.app.Activity implements IUINaviga
         	mTransferDataParams.clear();
         	mTransferDataParams =   null;
         }
-        
-//        if(mLeftViewOnClickListener!=null){
-//        	mLeftViewOnClickListener=null;
-//        }
-//
-//        if(mRightViewOnClickListener!=null){
-//        	mRightViewOnClickListener=null;
-//        }
         
         if(mUINavigationBar!=null){
         	mUINavigationBar.setRightViewClickListener(null);
