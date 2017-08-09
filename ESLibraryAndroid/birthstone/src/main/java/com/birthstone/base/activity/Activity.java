@@ -721,6 +721,26 @@ public abstract class Activity extends android.app.Activity implements IUINaviga
 			mUINavigationBar.setBackgroundColor(color);
 		}
 		UINavigationBar.BACKGROUND_COLOR=color;
+		StatusBarUtil.setTranslucent(this);
+		//设置状态栏和标题栏颜色一致，实现沉浸式状态栏
+		StatusBarUtil.setColorNoTranslucent(this, color);
+	}
+
+	/*
+	* 设置导航栏背景色
+	* @param color 背景色
+	* @param isTranslucent 是否半透明状态栏
+	* */
+	public void setUINavigationBarBackgroundColor(int color, boolean isTranslucent){
+		if (mUINavigationBar!=null){
+			mUINavigationBar.setBackgroundColor(color);
+		}
+		UINavigationBar.BACKGROUND_COLOR=color;
+		if (isTranslucent) {
+			StatusBarUtil.setTranslucent(this);
+			//设置状态栏和标题栏颜色一致，实现沉浸式状态栏
+			StatusBarUtil.setColorNoTranslucent(this, color);
+		}
 	}
 
 	/**
