@@ -14,8 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.birthstone.annotation.ViewInjectUtils;
-import com.birthstone.base.event.OnReleasedListener;
-import com.birthstone.base.event.OnReleaseingListener;
 import com.birthstone.base.helper.ActivityManager;
 import com.birthstone.base.helper.FormHelper;
 import com.birthstone.base.helper.FragmentActivityManager;
@@ -47,7 +45,6 @@ public abstract class Activity extends android.app.Activity implements IUINaviga
 
 	protected ArrayList<View> views = new ArrayList<View>();
 	protected ArrayList<Data> mTransferParams = null;
-	public DataCollection dataParams = new DataCollection();
 	private DataCollection releaseParams, mReceiveDataParams, mTransferDataParams;
 	protected String mTitle, mRightButtonText;
 	private Boolean mParentRefresh = false, mIsParentStart=false;
@@ -60,9 +57,6 @@ public abstract class Activity extends android.app.Activity implements IUINaviga
 	private static float DENSITY;
 	public static int RESULT_OK = 185324;
 	public static int RESULT_CANCEL = 185816;
-
-	public OnReleaseingListener onReleaseingListener;
-	public OnReleasedListener onReleasedListener;
 
 	public Activity( )
 	{
@@ -108,7 +102,6 @@ public abstract class Activity extends android.app.Activity implements IUINaviga
 						this.mReceiveDataParams = new DataCollection();
 					}
 					this.mReceiveDataParams.addAll(this.mTransferParams);
-					this.dataParams = this.mReceiveDataParams;
 				}
 			}
 
@@ -126,7 +119,6 @@ public abstract class Activity extends android.app.Activity implements IUINaviga
 						this.mReceiveDataParams = new DataCollection();
 					}
 					this.mReceiveDataParams.addAll(this.mTransferParams);
-					this.dataParams = this.mReceiveDataParams;
 				}
 			}
 
@@ -144,7 +136,6 @@ public abstract class Activity extends android.app.Activity implements IUINaviga
 						this.mReceiveDataParams = new DataCollection();
 					}
 					this.mReceiveDataParams.addAll(this.mTransferParams);
-					this.dataParams = this.mReceiveDataParams;
 				}
 			}
 
@@ -155,10 +146,9 @@ public abstract class Activity extends android.app.Activity implements IUINaviga
 					this.mReceiveDataParams = new DataCollection();
 				}
 				this.mReceiveDataParams.addAll(this.mTransferParams);
-				this.dataParams = this.mReceiveDataParams;
 			}
 		}
-		onCreateView();
+		initView();
 		intent=null;
 	}
 
@@ -172,9 +162,9 @@ public abstract class Activity extends android.app.Activity implements IUINaviga
 	}
 
 	/**
-	 *
+	 *初始化UIView参数
 	 * **/
-	public void onCreateView()
+	public void initView()
 	{
 		try
 		{
@@ -191,7 +181,7 @@ public abstract class Activity extends android.app.Activity implements IUINaviga
 	}
 
 	/**
-	 * ?
+	 * 初始化NavigationBar
 	 * **/
 	public void initalizeNavigationBar()
 	{
@@ -221,6 +211,9 @@ public abstract class Activity extends android.app.Activity implements IUINaviga
 		}
 	}
 
+	/**
+	* 是否完成初始化
+	* */
 	public Boolean getInitialize()
 	{
 		try
@@ -246,6 +239,9 @@ public abstract class Activity extends android.app.Activity implements IUINaviga
 		return view;
 	}
 
+	/**
+	* 初始化Activity
+	* */
 	public void initializeActivity()
 	{
 		try
@@ -260,26 +256,25 @@ public abstract class Activity extends android.app.Activity implements IUINaviga
 		}
 	}
 
-	public void release()
+	/**
+	*发布数据集到当前屏幕
+	* */
+	private void release()
 	{
 		ReleaseHelper releaseHelper;
 		try
 		{
-			if(onReleaseingListener != null)
-			{
-				onReleaseingListener.onReleaseing();
-			}
+			//调用数据发布前处理方法
+			releaseing();
 
-			if(dataParams != null && dataParams.size() > 0)
+			if(mReceiveDataParams != null && mReceiveDataParams.size() > 0)
 			{
-				releaseHelper = new ReleaseHelper(dataParams, this);
+				releaseHelper = new ReleaseHelper(mReceiveDataParams, this);
 				releaseHelper.release(null);
 			}
 
-			if(onReleasedListener != null)
-			{
-				onReleasedListener.onReleased();
-			}
+			//数据发布完成后处理方法
+			released();
 		}
 		catch(Exception ex)
 		{
@@ -288,8 +283,9 @@ public abstract class Activity extends android.app.Activity implements IUINaviga
 	}
 
 	/**
-	 * ?Activity params:?
-	 * **/
+	*发布数据集到当前屏幕
+	* @param params 数据集
+	* */
 	public void release(DataCollection params)
 	{
 		releaseParams = (DataCollection) params.clone();
@@ -298,16 +294,15 @@ public abstract class Activity extends android.app.Activity implements IUINaviga
 			ReleaseHelper releaseHelper;
 			try
 			{
-				if(onReleaseingListener != null)
-				{
-					onReleaseingListener.onReleaseing();
-				}
+				//数据发布前处理方法
+				releaseing();
+
 				releaseHelper = new ReleaseHelper(releaseParams, this);
 				releaseHelper.release(null);
-				if(onReleasedListener != null)
-				{
-					onReleasedListener.onReleased();
-				}
+
+				//数据发布完成后处理方法
+				released();
+
 				releaseParams.clear();
 			}
 			catch(Exception ex)
@@ -318,8 +313,10 @@ public abstract class Activity extends android.app.Activity implements IUINaviga
 	}
 
 	/**
-	 * ?Activity
-	 * **/
+	* 收集当前Activity数据，并指定收集标签
+	* @param collectSign 收集标签
+	* @return DataCollection数据集
+	* */
 	public DataCollection collect(String collectSign)
 	{
 		CollectForm collecter = new CollectForm(this, collectSign);
@@ -327,9 +324,9 @@ public abstract class Activity extends android.app.Activity implements IUINaviga
 	}
 
 	/**
-	 *
-	 */
-	public void setFunctionProtected()
+	* 设置权限状态
+	* */
+	private void setFunctionProtected()
 	{
 		try
 		{
@@ -343,9 +340,9 @@ public abstract class Activity extends android.app.Activity implements IUINaviga
 	}
 
 	/**
-	 *
+	 *执行查询相关接口
 	 */
-	public void query() throws Exception
+	private void query() throws Exception
 	{
 		DataQueryForm DataQueryForm;
 		try
@@ -363,10 +360,9 @@ public abstract class Activity extends android.app.Activity implements IUINaviga
 	}
 
 	/**
-	 *
-	 * 
-	 * @return
-	 */
+	* 校验Activity相关UIView是否合法
+	* @return 是否合法输入
+	* */
 	public Boolean validator()
 	{
 		ValidatorForm validatorForm = new ValidatorForm(this);
@@ -382,7 +378,8 @@ public abstract class Activity extends android.app.Activity implements IUINaviga
 	}
 
 	/**
-	 *
+	 *设置权限代码
+	 * @param funStr
 	 */
 	@SuppressLint("DefaultLocale")
 	public static void setFunction(String funStr)
@@ -411,81 +408,16 @@ public abstract class Activity extends android.app.Activity implements IUINaviga
 		}
 	}
 
-	/*
-	 *
-	 */
-	public static List<String> getFunction()
-	{
-		return FUNCTION_LIST;
-	}
-
+	/**
+	* 设置UIView状态
+	* */
 	public void setStateControl()
 	{
 		ControlStateProtector.createControlStateProtector().setStateControl(this);
 	}
 
-	/**
-	 * Fragment
-	 * 
-	 * @return Fragment
-	 */
-	public Fragment getFragment()
-	{
-		return mFragment;
-	}
-
-	/**
-	 * Fragment
-	 * 
-	 * @fragment
-	 */
-	public void setFragment(Fragment fragment)
-	{
-		this.mFragment = fragment;
-	}
-
-	/**
-	 * ?Activity
-	 * 
-	 * @return Activity
-	 */
-	public Activity getParentActivity()
-	{
-		return mParentActivity;
-	}
-
-	/**
-	 * ?Fragment
-	 * 
-	 * @return Fragment
-	 */
-	public Fragment getParentFragment()
-	{
-		return mFragment;
-	}
-
-	/**
-	 * ?FragmentActivity
-	 * 
-	 * @return FragmentActivity
-	 */
-	public FragmentActivity getParentFragmentActivity()
-	{
-		return mFragmentActivity;
-	}
-
-	/**
-	 * ?
-	 * 
-	 * @parentForm
-	 */
-	public void setParentActivity(Activity parentActivity)
-	{
-		this.mParentActivity = parentActivity;
-	}
-
 	/*
-	* 关闭当前屏幕
+	* 关闭当前Activity
 	* */
 	public void finish()
 	{
@@ -498,7 +430,7 @@ public abstract class Activity extends android.app.Activity implements IUINaviga
 	}
 
 	/*
-	* 关闭当前屏幕并传递参数
+	* 关闭当前Activity并传递参数
 	* @param intent 参数集合
 	* */
 	public void finish(Intent intent)
@@ -532,9 +464,8 @@ public abstract class Activity extends android.app.Activity implements IUINaviga
 	}
 
 	/**
-	 *
-	 * 
-	 * @param data
+	 *Activity关闭时，通知父级Activity调用此方法，用于页面刷新
+	 * @param data Intent参数集
 	 * **/
 	public void onRefresh(Intent data)
 	{
@@ -571,41 +502,16 @@ public abstract class Activity extends android.app.Activity implements IUINaviga
 	}
 
 	/**
-	 * ?
-	 * **/
-	@Deprecated
-	public DataCollection getDataParams()
-	{
-		return dataParams;
-	}
-
-	/**
-	 * ? dataParams
-	 * **/
-	@Deprecated
-	public void setDataParams(DataCollection dataParams)
-	{
-		this.dataParams = dataParams;
-	}
-
-	/**
-	 * ?
+	 *获取当前Activity接收父级屏幕传递的参数集
 	 * **/
 	public DataCollection getReceiveDataParams()
 	{
 		return mReceiveDataParams;
 	}
 
-	/**
-	 * ? dataParams
-	 * **/
-	public void setReceiveDataParams(DataCollection receiveDataParams)
-	{
-		this.mReceiveDataParams = receiveDataParams;
-	}
 
 	/**
-	 * ?
+	 * 获取当前Activity向下级屏幕传递的参数集
 	 * **/
 	public DataCollection getTransferDataParams()
 	{
@@ -613,37 +519,79 @@ public abstract class Activity extends android.app.Activity implements IUINaviga
 	}
 
 	/**
-	 * ?
-	 * 
-	 * @param transferDataParams ?
-	 * **/
-	public void setTransferDataParams(DataCollection transferDataParams)
+	 * 获取当前屏幕Fragment
+	 * @return Fragment
+	 */
+	public Fragment getFragment()
 	{
-		this.mTransferDataParams = transferDataParams;
+		return mFragment;
 	}
 
-	public int getIndex()
+	/**
+	 * 设置当前Activity的Fragment
+	 * @param fragment
+	 */
+	public void setFragment(Fragment fragment)
 	{
-		return index;
+		this.mFragment = fragment;
 	}
 
-	public void setIndex(int index)
+	/**
+	 * 获取当前Activity的父级Activity
+	 * @return Activity
+	 */
+	public Activity getParentActivity()
 	{
-		this.index = index;
+		return mParentActivity;
 	}
 
+	/**
+	 * 获取当前Activity的Fragment
+	 * @return Fragment
+	 */
+	public Fragment getParentFragment()
+	{
+		return mFragment;
+	}
+
+	/**
+	 * 获取当前Activity的FragmentActivity
+	 * @return FragmentActivity
+	 */
+	public FragmentActivity getParentFragmentActivity()
+	{
+		return mFragmentActivity;
+	}
+
+	/**
+	 *设置当前Activity的父级Activity
+	 * @param parentActivity 父级Activity
+	 */
+	public void setParentActivity(Activity parentActivity)
+	{
+		this.mParentActivity = parentActivity;
+	}
+
+	/**
+	 *获取权限代码列表
+	 * @return 权限代码列表
+	 */
 	public static List<String> getFunctionList()
 	{
 		return FUNCTION_LIST;
 	}
 
+	/**
+	 *设置权限代码列表
+	 * @param functionList 权限代码列表
+	 * **/
 	public static void setFunctionList(List<String> functionList)
 	{
 		Activity.FUNCTION_LIST = functionList;
 	}
 
 	/**
-	 *
+	 *获取屏幕像素密度
 	 * **/
 	public static float getDensity()
 	{
@@ -651,7 +599,7 @@ public abstract class Activity extends android.app.Activity implements IUINaviga
 	}
 
 	/**
-	 *
+	 *设置屏幕像素密度
 	 * **/
 	public static void setDensity(float DENSITY)
 	{
@@ -659,60 +607,52 @@ public abstract class Activity extends android.app.Activity implements IUINaviga
 	}
 
 	/**
-
+	 * 数据发布前处理方法
 	 */
-	public OnReleaseingListener getOnReleaseingListener()
+	public void releaseing()
 	{
-		return onReleaseingListener;
+
 	}
 
 	/**
-	 * @
+	 * 数据发布后处理方法
 	 */
-	public void setOnReleaseingListener(OnReleaseingListener onReleaseingListener)
+	public void released()
 	{
-		this.onReleaseingListener = onReleaseingListener;
 	}
 
 	/**
-
-	 */
-	public OnReleasedListener getOnReleasedListener()
-	{
-		return onReleasedListener;
-	}
-
-	// ?dip?px
-	public static int convertDIP2PX(Context context, int dip)
+	 *设备像素转换为标准像素
+	 * @param context 上下文
+	 * @param dip 设备像素
+	 * **/
+	public static int dip2px(Context context, int dip)
 	{
 		float scale = context.getResources().getDisplayMetrics().density;
 		return (int) (dip * scale + 0.5f * (dip >= 0 ? 1 : -1));
 	}
 
-	// ?px?dip
-	public static int convertPX2DIP(Context context, int px)
+	/**
+	 * 标准像素转换为设备像素
+	 * @param context 上下文
+	 * @param px 标准像素
+	 * **/
+	public static int px2dip(Context context, int px)
 	{
 		float scale = context.getResources().getDisplayMetrics().density;
 		return (int) (px / scale + 0.5f * (px >= 0 ? 1 : -1));
 	}
 
 	/**
-	 * @
-	 */
-	public void setOnReleasedListener(OnReleasedListener onReleasedListener)
-	{
-		this.onReleasedListener = onReleasedListener;
-	}
-
-	/**
 	 *获取导航栏
+	 * @return UINavigationBar
 	 */
 	public UINavigationBar getNavigationBar()
 	{
 		return mUINavigationBar;
 	}
 
-	/*
+	/**
 	* 设置导航栏背景色
 	* @param color 背景色
 	* */
@@ -726,7 +666,7 @@ public abstract class Activity extends android.app.Activity implements IUINaviga
 		StatusBarUtil.setColorNoTranslucent(this, color);
 	}
 
-	/*
+	/**
 	* 设置导航栏背景色
 	* @param color 背景色
 	* @param isTranslucent 是否半透明状态栏
@@ -778,8 +718,8 @@ public abstract class Activity extends android.app.Activity implements IUINaviga
 	}
 
 	/**
-	 *
-	 * @param title
+	 *设置导航栏标题文本
+	 * @param title 标题文本
 	 * **/
 	public void setTitleText(String title)
 	{
@@ -837,7 +777,7 @@ public abstract class Activity extends android.app.Activity implements IUINaviga
 	}
 
 
-	/*
+	/**
 	* 设置状态栏颜色，实现沉浸式状态栏
 	* @param color 颜色id
 	* */
@@ -848,9 +788,8 @@ public abstract class Activity extends android.app.Activity implements IUINaviga
 	}
 
 	/**
-	 * ?onRefresh
-	 *
-	 * @param mParentRefresh ?
+	 * 设置父级页面是否执行刷新方法
+	 * @param mParentRefresh 是否刷新
 	 * **/
 	public void setParentRefresh(boolean mParentRefresh)
 	{
@@ -858,7 +797,6 @@ public abstract class Activity extends android.app.Activity implements IUINaviga
 	}
 
 	/**
-	 *
 	 * 
 	 * @param targetViewController
 	 * @param navigationbar
@@ -878,9 +816,8 @@ public abstract class Activity extends android.app.Activity implements IUINaviga
 
 	/**
 	 *
-	 * 
 	 * @param targetViewController
-	 * @param params ?
+	 * @param params
 	 * @param navigationbar
 	 * **/
 	public void pushViewController(String targetViewController, DataCollection params, Boolean navigationbar)
@@ -937,14 +874,6 @@ public abstract class Activity extends android.app.Activity implements IUINaviga
 //        if(mRightViewOnClickListener!=null){
 //        	mRightViewOnClickListener=null;
 //        }
-
-        if(onReleaseingListener!=null){
-        	onReleaseingListener=null;
-        }
-    	
-        if(onReleasedListener!=null){
-        	onReleasedListener=null;
-        }
         
         if(mUINavigationBar!=null){
         	mUINavigationBar.setRightViewClickListener(null);
@@ -957,8 +886,4 @@ public abstract class Activity extends android.app.Activity implements IUINaviga
     	mParentContext=null;
     	
     }
-
-	public void setBarTintColor(int color){
-		mUINavigationBar.setTitleBarBackground(color);
-	}
 }

@@ -89,9 +89,9 @@ public class Fragment extends android.support.v4.app.Fragment implements IUINavi
 			}
 		}
 	}
-	
+
 	/**
-	 *
+	 * 初始化NavigationBar
 	 * **/
 	public void initalizeNavigationBar()
 	{

@@ -159,7 +159,7 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
 				this.dataParams = this.mReceiveDataParams;
 			}
 		}
-		onCreateView();
+		initView();
 	}
 	
 	/**
@@ -172,9 +172,9 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
 	}
 
 	/**
-	 * ͼ
+	 *初始化UIView参数
 	 * **/
-	public void onCreateView()
+	public void initView()
 	{
 		try
 		{
@@ -189,9 +189,9 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
 			Log.e("getInitialize", ex.getMessage());
 		}
 	}
-	
+
 	/**
-	 *
+	 * 初始化NavigationBar
 	 * **/
 	public void initalizeNavigationBar()
 	{
@@ -222,6 +222,9 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
 		}
 	}
 
+	/*
+	* 是否完成初始化
+	* */
 	public Boolean getInitialize()
 	{
 		try
@@ -247,6 +250,9 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
 		return view;
 	}
 
+	/*
+	* 初始化Activity
+	* */
 	public void initializeActivity()
 	{
 		try
@@ -260,7 +266,10 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
 		}
 	}
 
-	public void release()
+	/*
+	* 发布数据集到当前屏幕
+	* */
+	private void release()
 	{
 		ReleaseHelper releaseHelper;
 		try
@@ -287,10 +296,10 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
 		}
 	}
 
-	/**
-	 * ݵActivity
-	 * params:ݼ
-	 * **/
+	/*
+	*发布数据集到当前屏幕
+	* @param params 数据集
+	* */
 	public void release(DataCollection params)
 	{
 		mReleaseCount=1;
