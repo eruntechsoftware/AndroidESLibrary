@@ -20,6 +20,7 @@ import java.util.ArrayList;
 
 public class Fragment extends android.support.v4.app.Fragment implements IUINavigationBar
 {
+	/**变量声明**/
 	protected UINavigationBar mUINavigationBar;
 	private Fragment mFragment;
 	private LayoutInflater mInflater;

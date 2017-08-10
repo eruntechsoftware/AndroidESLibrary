@@ -34,9 +34,9 @@ import java.util.List;
 
 
 @SuppressLint({"DefaultLocale", "HandlerLeak"})
-public abstract class Activity extends android.app.Activity implements IUINavigationBar
+public class Activity extends android.app.Activity implements IUINavigationBar
 {
-	/**  **/
+	/**变量声明**/
 	protected UINavigationBar mUINavigationBar;
 	protected FragmentActivity mFragmentActivity;
 	protected Fragment mFragment;
@@ -313,6 +313,21 @@ public abstract class Activity extends android.app.Activity implements IUINaviga
 	}
 
 	/**
+	 * 数据发布前处理方法
+	 */
+	public void releaseing()
+	{
+
+	}
+
+	/**
+	 * 数据发布后处理方法
+	 */
+	public void released()
+	{
+	}
+
+	/**
 	* 收集当前Activity数据，并指定收集标签
 	* @param collectSign 收集标签
 	* @return DataCollection数据集
@@ -342,20 +357,20 @@ public abstract class Activity extends android.app.Activity implements IUINaviga
 	/**
 	 *执行查询相关接口
 	 */
-	private void query() throws Exception
+	public void query()
 	{
 		DataQueryForm DataQueryForm;
 		try
 		{
 			if(this != null)
 			{
-				DataQueryForm = new DataQueryForm(this);
+				DataQueryForm = new DataQueryForm((Activity) this.getBaseContext());
 				DataQueryForm.query();
 			}
 		}
 		catch(Exception ex)
 		{
-			throw ex;
+			Log.e("query", ex.getMessage());
 		}
 	}
 
@@ -379,7 +394,7 @@ public abstract class Activity extends android.app.Activity implements IUINaviga
 
 	/**
 	 *设置权限代码
-	 * @param funStr
+	 * @param funStr 权限代码，以逗号分隔
 	 */
 	@SuppressLint("DefaultLocale")
 	public static void setFunction(String funStr)
@@ -492,21 +507,6 @@ public abstract class Activity extends android.app.Activity implements IUINaviga
 	}
 
 	/**
-	 * 数据发布前处理方法
-	 */
-	public void releaseing()
-	{
-
-	}
-
-	/**
-	 * 数据发布后处理方法
-	 */
-	public void released()
-	{
-	}
-
-	/**
 	 *设备像素转换为标准像素
 	 * @param context 上下文
 	 * @param dip 设备像素
@@ -540,6 +540,7 @@ public abstract class Activity extends android.app.Activity implements IUINaviga
 
 	/**
 	 *获取当前Activity接收父级屏幕传递的参数集
+	 * @return DataCollection类型数据集合
 	 * **/
 	public DataCollection getReceiveDataParams()
 	{
@@ -558,6 +559,7 @@ public abstract class Activity extends android.app.Activity implements IUINaviga
 
 	/**
 	 * 获取当前Activity向下级屏幕传递的参数集
+	 * @return DataCollection类型数据集合
 	 * **/
 	public DataCollection getTransferDataParams()
 	{

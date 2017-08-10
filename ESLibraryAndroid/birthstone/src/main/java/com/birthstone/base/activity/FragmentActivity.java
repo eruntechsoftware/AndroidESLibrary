@@ -12,8 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.birthstone.annotation.ViewInjectUtils;
-import com.birthstone.base.event.OnReleasedListener;
-import com.birthstone.base.event.OnReleaseingListener;
 import com.birthstone.base.helper.ActivityManager;
 import com.birthstone.base.helper.FormHelper;
 import com.birthstone.base.helper.FragmentActivityManager;
@@ -34,7 +32,7 @@ import java.util.List;
 
 public class FragmentActivity extends android.support.v4.app.FragmentActivity implements IUINavigationBar
 {
-	/****/
+	/**变量声明**/
 	protected UINavigationBar mUINavigationBar;
 	protected FragmentActivity mFragmentActivity;
 	protected Fragment mFragment;
@@ -46,7 +44,6 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
 	private DataCollection releaseParams,mReceiveDataParams, mTransferDataParams;
 	protected String mTitle, mRightButtonText;
 	protected Boolean mParentRefresh=false, mIsParentStart=false;
-	protected int index = 0;
 	protected int mReleaseCount = 0;
 	
 	private static List<String> FUNCTION_LIST  = new ArrayList<String>();
@@ -54,12 +51,6 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
 	private static float DENSITY;
 	public static int RESULT_OK = 185324;
 	public static int RESULT_CANCEL = 185816;
-	
-//	protected OnClickListener mLeftViewOnClickListener, mRightViewOnClickListener;
-	
-	
-	public OnReleaseingListener onReleaseingListener;
-	public OnReleasedListener onReleasedListener;
 
 	public FragmentActivity( )
 	{
@@ -82,8 +73,9 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
 		}
 		super.onCreate(savedInstanceState);
 		ViewInjectUtils.inject(this);
+
 		initalizeNavigationBar();
-		//ܶ
+
 		DisplayMetrics metric = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metric);
         DENSITY = metric.density;
@@ -269,26 +261,34 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
 		ReleaseHelper releaseHelper;
 		try
 		{
-			if(onReleaseingListener != null)
-			{
-				onReleaseingListener.onReleaseing();
-			}
-			
-			if(mReceiveDataParams != null && mReceiveDataParams.size() > 0)
-			{
-				releaseHelper = new ReleaseHelper(mReceiveDataParams, this);
-				releaseHelper.release(null);
-			}
+			//数据发布前处理方法
+			releaseing();
 
-			if(onReleasedListener != null)
-			{
-				onReleasedListener.onReleased();
-			}
+			releaseHelper = new ReleaseHelper(mReceiveDataParams, this);
+			releaseHelper.release(null);
+
+			//数据发布完成后处理方法
+			released();
 		}
 		catch(Exception ex)
 		{
-			Log.e("ݴݴ", ex.getMessage());
+			Log.e("release", ex.getMessage());
 		}
+	}
+
+	/**
+	 * 数据发布前处理方法
+	 */
+	public void releaseing()
+	{
+
+	}
+
+	/**
+	 * 数据发布后处理方法
+	 */
+	public void released()
+	{
 	}
 
 	/*
@@ -304,28 +304,29 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
 			ReleaseHelper releaseHelper;
 			try
 			{
-				if(onReleaseingListener != null)
-				{
-					onReleaseingListener.onReleaseing();
-				}
+				//数据发布前处理方法
+				releaseing();
+
 				releaseHelper = new ReleaseHelper(releaseParams, this);
 				releaseHelper.release(null);
-				if(onReleasedListener != null)
-				{
-					onReleasedListener.onReleased();
-				}
+
+				//数据发布完成后处理方法
+				released();
+
 				releaseParams.clear();
 			}
 			catch(Exception ex)
 			{
-				Log.e("ݴݴ", ex.getMessage());
+				Log.e("release", ex.getMessage());
 			}
 		}
 	}
-	
+
 	/**
-	 * ռָǵActivity
-	 * **/
+	 * 收集当前Activity数据，并指定收集标签
+	 * @param collectSign 收集标签
+	 * @return DataCollection数据集
+	 * */
 	public DataCollection collect(String collectSign)
 	{
 		CollectForm collecter = new CollectForm((Activity) this.getBaseContext(), collectSign);
@@ -333,8 +334,8 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
 	}
 
 	/**
-	 * öȨ
-	 */
+	 * 设置权限状态
+	 * */
 	public void setFunctionProtected()
 	{
 		try
@@ -344,14 +345,14 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
 		}
 		catch(Exception ex)
 		{
-			Log.e("Ȩ޿", ex.getMessage());
+			Log.e("function", ex.getMessage());
 		}
 	}
 
 	/**
-	 *
+	 *执行查询相关接口
 	 */
-	public void query() throws Exception
+	public void query()
 	{
 		DataQueryForm DataQueryForm;
 		try
@@ -364,15 +365,14 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
 		}
 		catch(Exception ex)
 		{
-			throw ex;
+			Log.e("query", ex.getMessage());
 		}
 	}
 
 	/**
-	 * У鵱ǰǷϱʽ
-	 * 
-	 * @return ɹʧ
-	 */
+	 * 校验Activity相关UIView是否合法
+	 * @return 是否合法输入
+	 * */
 	public Boolean validator()
 	{
 		ValidatorForm validatorForm = new ValidatorForm((Activity) this.getBaseContext());
@@ -388,7 +388,8 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
 	}
 
 	/**
-	 * Ȩַ
+	 *设置权限代码
+	 * @param funStr 权限代码，以逗号分隔
 	 */
 	@SuppressLint("DefaultLocale")
 	public static void setFunction(String funStr)
@@ -413,25 +414,21 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
 		}
 		catch(Exception ex)
 		{
-			Log.e("Ȩ޴", ex.getMessage());
+			Log.e("function", ex.getMessage());
 		}
 	}
 
 	/**
-	 * Ȩб
-	 */
-	public static List<String> getFunction()
-	{
-		return FUNCTION_LIST;
-	}
-
+	 * 设置UIView状态
+	 * */
 	public void setStateControl()
 	{
 		ControlStateProtector.createControlStateProtector().setStateControl(this);
 	}
-	
+
 	/**
-	 * Ƿת򿪵ǰҳ
+	 * 获取是否根屏幕
+	 * @return 是否根屏幕
 	 * **/
 	public Boolean getIsParentStart()
 	{
@@ -439,9 +436,8 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
 	}
 
 	/**
-	 * ø
-	 * 
-	 * @parentForm
+	 *设置当前Activity的父级Activity
+	 * @param parentActivity 父级Activity
 	 */
 	public void setParentActivity(Activity parentActivity)
 	{
@@ -478,13 +474,7 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
 		super.finish();
 	}
 
-	
-	/**
-     * еActivityķֵ
-     * requestCode:    ʾһActivityʱȥrequestCodeֵ
-     * resultCodeʾActivityشֵʱresultCodeֵ
-     * dataʾActivityشIntent
-     */
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
@@ -501,10 +491,10 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
 					break;
 		}
     }
-    
+
 	/**
-	 * ҳ淵غԶˢ´
-	 * @param data ݵĲ
+	 *Activity关闭时，通知父级Activity调用此方法，用于页面刷新
+	 * @param data Intent参数集
 	 * **/
 	public void onRefresh(Intent data)
 	{
@@ -531,19 +521,27 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
 
 	}
 
-
+	/**
+	 *获取当前Activity的View集合
+	 * @return ArrayList<View>集合
+	 * **/
 	public ArrayList<View> getViews()
 	{
 		return views;
 	}
 
+	/**
+	 * 设置当前Activity的View集合
+	 * @param views ArrayList<View>集合
+	 * */
 	public void setViews(ArrayList<View> views)
 	{
 		this.views = views;
 	}
-	
+
 	/**
-	 * յĲ
+	 *获取当前Activity接收父级屏幕传递的参数集
+	 * @return DataCollection类型数据集合
 	 * **/
 	public DataCollection getReceiveDataParams()
 	{
@@ -558,47 +556,37 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
 	{
 		this.mReceiveDataParams = receiveDataParams;
 	}
-	
-	
+
+
 	/**
-	 * ݵһĲ
+	 * 获取当前Activity向下级屏幕传递的参数集
+	 * @return DataCollection类型数据集合
 	 * **/
 	public DataCollection getTransferDataParams()
 	{
 		return mTransferDataParams;
 	}
-	
+
 	/**
-	 * ôݵһĲ
-	 * @param transferDataParams ݲ
-	 * **/
-	public void setTransferDataParams(DataCollection transferDataParams)
-	{
-		this.mTransferDataParams = transferDataParams;
-	}
-
-	public int getIndex()
-	{
-		return index;
-	}
-
-	public void setIndex(int index)
-	{
-		this.index = index;
-	}
-
+	 *获取权限代码列表
+	 * @return 权限代码列表
+	 */
 	public static List<String> getFunctionList()
 	{
 		return FUNCTION_LIST;
 	}
 
+	/**
+	 *设置权限代码列表
+	 * @param functionList 权限代码列表
+	 * **/
 	public static void setFunctionList(List<String> functionList)
 	{
 		FragmentActivity.FUNCTION_LIST = functionList;
 	}
 
 	/**
-	 * ǰʾ豸ܶ
+	 *获取屏幕像素密度
 	 * **/
 	public static float getDensity()
 	{
@@ -606,57 +594,11 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
 	}
 
 	/**
-	 * ǰʾ豸ܶ
+	 *设置屏幕像素密度
 	 * **/
 	public static void setDensity(float DENSITY)
 	{
 		FragmentActivity.DENSITY = DENSITY;
-	}
-
-	/**
-	 * @  ҳִзǰ
-	 */
-	public OnReleaseingListener getOnReleaseingListener()
-	{
-		return onReleaseingListener;
-	}
-
-	/**
-	 * @  ҳִзǰ
-	 */
-	public void setOnReleaseingListener(OnReleaseingListener onReleaseingListener)
-	{
-		this.onReleaseingListener = onReleaseingListener;
-	}
-
-	/**
-	 * @  ҳִз󼤷
-	 */
-	public OnReleasedListener getOnReleasedListener()
-	{
-		return onReleasedListener;
-	}
-	
-	//תdipΪpx
-	public static int convertDIP2PX(Context context, int dip) 
-	{ 
-	    float scale = context.getResources().getDisplayMetrics().density; 
-	    return (int)(dip*scale + 0.5f*(dip>=0?1:-1)); 
-	} 
-	 
-	//תpxΪdip
-	public static int convertPX2DIP(Context context, int px) 
-	{ 
-	    float scale = context.getResources().getDisplayMetrics().density; 
-	    return (int)(px/scale + 0.5f*(px>=0?1:-1)); 
-	}
-
-	/**
-	 * @  ҳִз󼤷
-	 */
-	public void setOnReleasedListener(OnReleasedListener onReleasedListener)
-	{
-		this.onReleasedListener = onReleasedListener;
 	}
 
 	/**
@@ -733,8 +675,8 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
 	}
 
 	/**
-	 *
-	 * @param title
+	 *设置导航栏标题文本
+	 * @param title 标题文本
 	 * **/
 	public void setTitleText(String title)
 	{
@@ -797,21 +739,21 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
 
 		StatusBarUtil.setColorNoTranslucent(this, color);
 	}
-	
+
 	/**
-	 * onRefresh
-	 * 
-	 * @param mParentRefresh
+	 * 设置父级页面是否执行刷新方法
+	 * @param mParentRefresh 是否刷新
 	 * **/
 	public void setParentRefresh(boolean mParentRefresh)
 	{
 		this.mParentRefresh = mParentRefresh;
 	}
-	
+
 	/**
-	 * ͼ
-	 * @param targetViewController ͼ
-	 * @param navigationbar
+	 *跳转到目标屏幕并传递参数
+	 * @param targetViewController 目标屏幕
+	 * @param params 参数集合
+	 * @param navigationbar 是否显示导航栏
 	 * **/
 	public void pushViewController(String targetViewController, DataCollection params, Boolean navigationbar)
 	{
@@ -857,22 +799,6 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
         if(mTransferDataParams!=null){
         	mTransferDataParams.clear();
         	mTransferDataParams =   null;
-        }
-        
-//        if(mLeftViewOnClickListener!=null){
-//        	mLeftViewOnClickListener=null;
-//        }
-//
-//        if(mRightViewOnClickListener!=null){
-//        	mRightViewOnClickListener=null;
-//        }
-
-        if(onReleaseingListener!=null){
-        	onReleaseingListener=null;
-        }
-    	
-        if(onReleasedListener!=null){
-        	onReleasedListener=null;
         }
         
         if(mUINavigationBar!=null){
