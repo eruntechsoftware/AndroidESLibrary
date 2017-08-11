@@ -142,7 +142,6 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 			{
 				if(this != null)
 				{
-					Log.v("changeEvent", "true");
 					if(mIsRequired)
 					{
 						dataValidator();

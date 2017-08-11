@@ -148,9 +148,6 @@ public class ESButtonOpen extends ESButton implements IDataInitialize, IFunction
 		}.start();
 	}
 
-	/*
-	 *
-	 */
 	public String[] getFuncSigns()
 	{
 		return StringToArray.stringConvertArray(this.mFuncSign);

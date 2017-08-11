@@ -23,16 +23,22 @@ import java.util.LinkedList;
 
 
 @SuppressLint("DefaultLocale")
+/**
+ * @author 杜明悦
+ * Button基类，包含常用属性方法
+ * */
 public class ESButton extends android.widget.Button implements IFunctionProtected, IReleasable, IStateProtected, IDataInitialize {
 
     public String mFuncSign;
     protected String mSign;
-    public String mStateHiddenId;
-    public String mWantedStateValue;
-    public String mName;
-    public Activity mActivity;
-    public Boolean mCancel = false;
+    protected String mStateHiddenId;
+    protected String mWantedStateValue;
+    protected String mName;
+    protected Activity mActivity;
+    protected Boolean mCancel = false;
+    /**单击事件执行前执行事件，并返回是否终止单击事件的执行参数**/
     public OnClickingListener onClickingListener;
+    /**单击事件执行完成后执行的事件**/
     public OnClickedListener onClickedListener;
     public String mNameSpace = "http://schemas.android.com/res/com.birthStone.widgets";
 

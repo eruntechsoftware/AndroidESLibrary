@@ -24,7 +24,10 @@ import com.birthstone.core.interfaces.IDataQuery;
 import com.birthstone.core.interfaces.IReleaser;
 import com.birthstone.core.parse.DataTable;
 
-
+/**
+ * @author 杜明悦
+ * SQL查询组件，用于显示详细信息
+ * */
 public class ESActionLoadPage extends TextView implements IDataInitialize, IDataQuery, IReleaser
 {
 	private SQLiteDatabase mSqlDb;
@@ -81,11 +84,8 @@ public class ESActionLoadPage extends TextView implements IDataInitialize, IData
 	}
 
 	/**
-	 *@:   2012-5-22
-	 *@޸:
-	 *@޸ʱ䣺
-	 *@ܣִз
-	 */
+	 * 执行SQL查询
+	 * */
 	public void execute()
 	{
 		try
@@ -95,13 +95,13 @@ public class ESActionLoadPage extends TextView implements IDataInitialize, IData
 		}
 		catch(Exception ex)
 		{
-			Log.e("", ex.getMessage());
+			Log.e("ActionLoadPage", ex.getMessage());
 		}
 	}
 
 	/**
-	 * ̶߳
-	 */
+	 * 使用多线程执行sql查询，并将接收的数据集发布到当前的Activity
+	 * */
 	Thread mThread = new Thread(new Runnable()
 	{
 		public void run()
@@ -125,6 +125,9 @@ public class ESActionLoadPage extends TextView implements IDataInitialize, IData
 		}
 	});
 
+	/**
+	 * 处理数据集，并将数据集发布到Activity
+	 * */
 	Handler handler = new Handler()
 	{
 		@Override
@@ -133,7 +136,6 @@ public class ESActionLoadPage extends TextView implements IDataInitialize, IData
 
 			try
 			{
-				// ͨжmsg.whatжĸ""Ҫд
 				switch(msg.what)
 				{
 				case 1:
@@ -150,57 +152,46 @@ public class ESActionLoadPage extends TextView implements IDataInitialize, IData
 	};
 
 	/**
-	 *@:   2012-5-22
-	 *@޸:
-	 *@޸ʱ䣺
-	 *@ܣִз
-	 * @param ds Դ
-	 * @param form ǰ
-	 */
-	public void execute(DataTable ds, Activity form)
+	 * 发布数据集到Activity
+	 * @param ds 数据集
+	 * @param activity  屏幕
+	 * */
+	public void execute(DataTable ds, Activity activity)
 	{
 		try
 		{
-			mSqlDb = new SQLiteDatabase(form);
-			mSqlDb.getReleasers().add(new ReleaseForm(form));
+			mSqlDb = new SQLiteDatabase(activity);
+			mSqlDb.getReleasers().add(new ReleaseForm(activity));
 			mSqlDb.execute(ds);
 			mSqlDb.close();
 		}
 		catch(Exception ex)
 		{
-			Log.e("", ex.getMessage());
+			Log.e("ActionLoadPage", ex.getMessage());
 		}
 	}
 
 	/**
-	 *@:   2012-5-22
-	 *@޸:
-	 *@޸ʱ䣺
-	 *@ܣִֶвѯ
-	 * @param Collector
-	 * @param form ǰ
-	 */
-	public void collector(ICollector Collector, Activity form)
+	 * Activity采集器方法
+	 * */
+	public void collector(ICollector Collector, Activity activity)
 	{
 		try
 		{
 			mSqlDb.getCollectors().add(Collector);
-			mSqlDb.getReleasers().add(new ReleaseForm(form));
+			mSqlDb.getReleasers().add(new ReleaseForm(activity));
 			mSqlDb.setSql(mSql);
 			mSqlDb.executeTable();
 			mSqlDb.close();
 		}
 		catch(Exception ex)
 		{
-			Log.e("ռ", ex.getMessage());
+			Log.e("ActionLoadPage", ex.getMessage());
 		}
 	}
 
 	/**
-	 *@:   2012-5-22
-	 *@޸:
-	 *@޸ʱ䣺
-	 *@ܣִݷ
+	 * 数据发布到Activity
 	 */
 	public void release()
 	{
@@ -210,16 +201,13 @@ public class ESActionLoadPage extends TextView implements IDataInitialize, IData
 		}
 		catch(Exception ex)
 		{
-			Log.v("ݴ", ex.getMessage());
+			Log.e("ActionLoadPage", ex.getMessage());
 		}
 	}
 
 	/**
-	 *@:   2012-5-22
-	 *@޸:
-	 *@޸ʱ䣺
-	 *@ܣ
-	 */
+	 * 初始化View的ID,并设置name
+	 * */
 	public void dataInitialize()
 	{
 		String classnameString = mActivity.getPackageName() + ".R$id";
@@ -228,10 +216,7 @@ public class ESActionLoadPage extends TextView implements IDataInitialize, IData
 	}
 
 	/**
-	 **@:   2012-5-22
-	 *@޸:
-	 *@޸ʱ䣺
-	 *@ܣִֶݷ
+	 * 执行sql查询
 	 */
 	public void query()
 	{
@@ -244,7 +229,7 @@ public class ESActionLoadPage extends TextView implements IDataInitialize, IData
 		}
 		catch(Exception ex)
 		{
-			Log.v("ݷ", ex.getMessage());
+			Log.e("ActionLoadPage", ex.getMessage());
 		}
 	}
 	
