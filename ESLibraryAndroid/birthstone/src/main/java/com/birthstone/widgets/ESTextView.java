@@ -35,12 +35,12 @@ public class ESTextView extends android.widget.TextView implements ICollectible,
 		super(context, attrs);
 		try
 		{
-			TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.eruntech);
-			mCollectSign = a.getString(R.styleable.eruntech_collectSign);
-			mEmpty2Null = a.getBoolean(R.styleable.eruntech_empty2Null,true);
+			TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.birthstone);
+			mCollectSign = a.getString(R.styleable.birthstone_collectSign);
+			mEmpty2Null = a.getBoolean(R.styleable.birthstone_empty2Null,true);
 			try
 			{
-				String dataType = a.getString(R.styleable.eruntech_dataType);
+				String dataType = a.getString(R.styleable.birthstone_dataType);
 				if(dataType != null && dataType.length() > 0)
 				{
 					this.mDataType = DataTypeHelper.valueOf(dataType);

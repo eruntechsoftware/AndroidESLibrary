@@ -12,7 +12,7 @@
         <enum name="Binary" value="8" />
 	</attr>
 
-<declare-styleable name="eruntech">
+<declare-styleable name="birthstone">
 	<!--数据类型-->
 	<attr name="dataType"></attr>
 	<!--是否必填项-->

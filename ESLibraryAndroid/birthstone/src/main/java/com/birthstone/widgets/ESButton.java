@@ -46,11 +46,11 @@ public class ESButton extends android.widget.Button implements IFunctionProtecte
         super(context, attrs);
         try {
             setOnClickListener(clickListener);
-            TypedArray a = context.obtainStyledAttributes(attrs,R.styleable.eruntech);
-            mFuncSign = a.getString(R.styleable.eruntech_funcSign);
-            mSign = a.getString(R.styleable.eruntech_sign);
-            mStateHiddenId = a.getString(R.styleable.eruntech_stateHiddenId);
-            mWantedStateValue = a.getString(R.styleable.eruntech_wantedStateValue);
+            TypedArray a = context.obtainStyledAttributes(attrs,R.styleable.birthstone);
+            mFuncSign = a.getString(R.styleable.birthstone_funcSign);
+            mSign = a.getString(R.styleable.birthstone_sign);
+            mStateHiddenId = a.getString(R.styleable.birthstone_stateHiddenId);
+            mWantedStateValue = a.getString(R.styleable.birthstone_wantedStateValue);
             a.recycle();
         }catch (Exception ex){
             Log.e(ESButton.this.toString(),ex.getMessage());

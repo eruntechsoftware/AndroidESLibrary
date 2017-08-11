@@ -46,15 +46,15 @@ public class ESActionLoadPage extends TextView implements IDataInitialize, IData
 			this.setVisibility(View.GONE);
 			try
 			{
-				TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.eruntech);
-				String dataType = a.getString(R.styleable.eruntech_dataType);
+				TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.birthstone);
+				String dataType = a.getString(R.styleable.birthstone_dataType);
 				if(dataType != null && dataType.length() > 0)
 				{
 					this.mDataType = DataTypeHelper.valueOf(dataType);
 				}
-				this.mSign = a.getString(R.styleable.eruntech_sign);
-				this.mSql = a.getString(R.styleable.eruntech_sql);
-				this.mAutoLoad = a.getBoolean(R.styleable.eruntech_autoLoad,true);
+				this.mSign = a.getString(R.styleable.birthstone_sign);
+				this.mSql = a.getString(R.styleable.birthstone_sql);
+				this.mAutoLoad = a.getBoolean(R.styleable.birthstone_autoLoad,true);
 				a.recycle();
 			}
 			catch(Exception ex)
