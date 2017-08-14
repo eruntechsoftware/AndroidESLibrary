@@ -60,4 +60,8 @@
 	<!--正则表达式校验错误提示-->
 	<attr name="regularTooltip" format="string"></attr>
 </declare-styleable>
+
+	<declare-styleable name="Themes">
+		<attr name="birthstoneStyle" format="reference"/>
+	</declare-styleable>
 </resources>
