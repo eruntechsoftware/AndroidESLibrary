@@ -1,1 +1,1 @@
-include ':app', ':birthstone'
+include ':birthstone'

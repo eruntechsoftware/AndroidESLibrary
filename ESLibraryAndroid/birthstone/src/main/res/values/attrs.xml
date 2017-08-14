@@ -54,7 +54,7 @@
 
 	<!--ESTextBox专用属性-->
 	<!--必填项错误提示-->
-	<attr name="ESTextBox_isRequiredTooltip" format="string"></attr>
+	<attr name="isRequiredTooltip" format="string"></attr>
 	<!--正则表达式-->
 	<attr name="regularExpression" format="string"></attr>
 	<!--正则表达式校验错误提示-->
