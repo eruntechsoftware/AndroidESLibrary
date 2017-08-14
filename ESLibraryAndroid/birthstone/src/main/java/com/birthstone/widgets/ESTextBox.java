@@ -57,7 +57,7 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 		try
 		{
 			TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.birthstone);
-			mIsRequiredTooltip = a.getString(R.styleable.birthstone_isRequiredTooltip);
+			mIsRequiredTooltip = a.getString(R.styleable.birthstone_ESTextBox_isRequiredTooltip);
 			mRegularExpression = a.getString(R.styleable.birthstone_regularExpression);
 			mRegularTooltip = a.getString(R.styleable.birthstone_regularTooltip);
 			mIsRequired = a.getBoolean(R.styleable.birthstone_isRequired,false);

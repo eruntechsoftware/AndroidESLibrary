@@ -50,13 +50,11 @@
 	<attr name="isEmpty" format="boolean"></attr>
 	<!--文本字体值-->
 	<attr name="textSize" format="dimension"></attr>
-	<!--文本颜色-->
-	<attr name="textColor" format="color"></attr>
 	<attr name="clickedColor" format="color"></attr>
 
 	<!--ESTextBox专用属性-->
 	<!--必填项错误提示-->
-	<attr name="isRequiredTooltip" format="string"></attr>
+	<attr name="ESTextBox_isRequiredTooltip" format="string"></attr>
 	<!--正则表达式-->
 	<attr name="regularExpression" format="string"></attr>
 	<!--正则表达式校验错误提示-->
