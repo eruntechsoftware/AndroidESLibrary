@@ -45,9 +45,9 @@ public class ESTimePicker extends android.widget.TimePicker implements ICollecti
 		try
 		{
 			TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ESTimePicker);
-			mIsRequired = a.getBoolean(R.styleable.ESTimePicker_isRequired,false);
+			mIsRequired = a.getBoolean(R.styleable.View_isRequired,false);
 			mCollectSign = a.getString(R.styleable.View_collectSign);
-			mEmpty2Null = a.getBoolean(R.styleable.ESTimePicker_empty2Null,true);
+			mEmpty2Null = a.getBoolean(R.styleable.View_empty2Null,true);
 			mDataType = DataType.DateTime;
 			setIs24HourView(true);
 		}

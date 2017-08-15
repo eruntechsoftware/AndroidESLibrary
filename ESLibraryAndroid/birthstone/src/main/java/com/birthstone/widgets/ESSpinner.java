@@ -75,17 +75,17 @@ public class ESSpinner extends android.widget.Spinner implements ICollectible, I
 			mDisplayValue = a.getString(R.styleable.ESSpinner_displayValue);
 
 			mBindValue = a.getString(R.styleable.ESSpinner_bindValue);
-			mSql = a.getString(R.styleable.ESSpinner_sql);
-			mIsRequired = a.getBoolean(R.styleable.ESSpinner_isRequired,false);
+			mSql = a.getString(R.styleable.View_sql);
+			mIsRequired = a.getBoolean(R.styleable.View_isRequired,false);
 			mCollectSign = a.getString(R.styleable.View_collectSign);
 			mSign = a.getString(R.styleable.View_sign);
 			if(mSign == null)
 			{
 				mSign = "";
 			}
-			mEmpty2Null = a.getBoolean(R.styleable.ESSpinner_empty2Null, true);
+			mEmpty2Null = a.getBoolean(R.styleable.View_empty2Null, true);
 			mIsEmpty = a.getBoolean(R.styleable.ESSpinner_isEmpty, true);
-			mAutomatic = a.getBoolean(R.styleable.ESSpinner_automatic, true);
+			mAutomatic = a.getBoolean(R.styleable.View_automatic, true);
 			mDataType = DataType.String;
 			this.setOnItemSelectedListener(onItemSelected);
 			a.recycle();

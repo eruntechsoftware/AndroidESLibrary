@@ -60,14 +60,14 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 			mIsRequiredTooltip = a.getString(R.styleable.ESTextBox_isRequiredTooltip);
 			mRegularExpression = a.getString(R.styleable.ESTextBox_regularExpression);
 			mRegularTooltip = a.getString(R.styleable.ESTextBox_regularTooltip);
-			mIsRequired = a.getBoolean(R.styleable.ESTextBox_isRequired,false);
+			mIsRequired = a.getBoolean(R.styleable.View_isRequired,false);
 			mCollectSign = a.getString(R.styleable.View_collectSign);
-			mEmpty2Null = a.getBoolean(R.styleable.ESTextBox_empty2Null,true);
+			mEmpty2Null = a.getBoolean(R.styleable.View_empty2Null,true);
 			this.addTextChangedListener(textOnchange);
 			
 			try
 			{
-				String dataType = a.getString(R.styleable.ESTextBox_dataType);
+				String dataType = a.getString(R.styleable.View_dataType);
 				if(dataType != null && dataType.length() > 0)
 				{
 					this.mDataType = DataTypeHelper.valueOf(dataType);
