@@ -56,7 +56,7 @@ public class ESActionLoadPage extends TextView implements IDataInitialize, IData
 				{
 					this.mDataType = com.birthstone.core.helper.DataType.String;
 				}
-				this.mSign = a.getString(R.styleable.ESActionLoadPage_sign);
+				this.mSign = a.getString(R.styleable.View_sign);
 				this.mSql = a.getString(R.styleable.ESActionLoadPage_autoSql);
 				this.mAutomatic = a.getBoolean(R.styleable.ESActionLoadPage_automatic,true);
 				a.recycle();

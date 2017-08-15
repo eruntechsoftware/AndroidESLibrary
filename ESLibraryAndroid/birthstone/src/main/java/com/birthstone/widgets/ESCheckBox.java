@@ -50,7 +50,7 @@ public class ESCheckBox extends android.widget.CheckBox implements ICollectible,
 
 			mIsRequired = a.getBoolean(R.styleable.ESCheckBox_isRequired,false);
 			mEmpty2Null = a.getBoolean(R.styleable.ESCheckBox_empty2Null, true);
-			mCollectSign = a.getString(R.styleable.ESCheckBox_collectSign);
+			mCollectSign = a.getString(R.styleable.View_collectSign);
 			a.recycle();
 		}
 		catch(Exception ex)

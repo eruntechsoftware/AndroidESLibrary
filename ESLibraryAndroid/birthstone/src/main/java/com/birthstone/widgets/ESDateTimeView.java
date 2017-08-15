@@ -36,7 +36,7 @@ public class ESDateTimeView extends EditText implements ICollectible, IDataIniti
 		{
 			TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ESDateTimeView);
 			mEmpty2Null = a.getBoolean(R.styleable.ESDateTimeView_empty2Null, true);
-			mCollectSign = a.getString(R.styleable.ESDateTimeView_collectSign);
+			mCollectSign = a.getString(R.styleable.View_collectSign);
 			this.setEnabled(false);
 			this.setText("");
 			this.mDataType = DataType.String;

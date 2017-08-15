@@ -77,8 +77,8 @@ public class ESSpinner extends android.widget.Spinner implements ICollectible, I
 			mBindValue = a.getString(R.styleable.ESSpinner_bindValue);
 			mSql = a.getString(R.styleable.ESSpinner_sql);
 			mIsRequired = a.getBoolean(R.styleable.ESSpinner_isRequired,false);
-			mCollectSign = a.getString(R.styleable.ESSpinner_collectSign);
-			mSign = a.getString(R.styleable.ESSpinner_sign);
+			mCollectSign = a.getString(R.styleable.View_collectSign);
+			mSign = a.getString(R.styleable.View_sign);
 			if(mSign == null)
 			{
 				mSign = "";

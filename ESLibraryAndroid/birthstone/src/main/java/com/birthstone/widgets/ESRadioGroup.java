@@ -59,7 +59,7 @@ public class ESRadioGroup extends android.widget.RadioGroup implements ICollecti
 			}
 			mIsRequired = a.getBoolean(R.styleable.ESRadioGroup_isRequired,false);
 			mEmpty2Null = a.getBoolean(R.styleable.ESRadioGroup_empty2Null, true);
-			mCollectSign = a.getString(R.styleable.ESRadioGroup_collectSign);
+			mCollectSign = a.getString(R.styleable.View_collectSign);
 			this.setOnCheckedChangeListener(onCheckedChangeListener);
 			a.recycle();
 		}
