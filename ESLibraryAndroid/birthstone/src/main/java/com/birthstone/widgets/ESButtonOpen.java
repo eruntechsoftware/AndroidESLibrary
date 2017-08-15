@@ -32,9 +32,9 @@ public class ESButtonOpen extends ESButton implements IDataInitialize, IFunction
 		super(context, attrs);
 		try
 		{
-			TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.birthstone);
-			mOpen = a.getString(R.styleable.birthstone_open);
-			mIsClosed = a.getBoolean(R.styleable.birthstone_isClosed,false);
+			TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.View);
+			mOpen = a.getString(R.styleable.View_open);
+			mIsClosed = a.getBoolean(R.styleable.View_isClosed,false);
 			a.recycle();
 		}
 		catch(Exception ex)

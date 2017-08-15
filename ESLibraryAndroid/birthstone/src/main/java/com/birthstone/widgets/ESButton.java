@@ -35,7 +35,6 @@ public class ESButton extends android.widget.Button implements IFunctionProtecte
     protected String mWantedStateValue;
     protected String mName;
     protected Activity mActivity;
-    protected Boolean mCancel = false;
     /**单击事件执行前执行事件，并返回是否终止单击事件的执行参数**/
     public OnClickingListener onClickingListener;
     /**单击事件执行完成后执行的事件**/
@@ -46,11 +45,11 @@ public class ESButton extends android.widget.Button implements IFunctionProtecte
         super(context, attrs);
         try {
             setOnClickListener(clickListener);
-            TypedArray a = context.obtainStyledAttributes(attrs,R.styleable.birthstone);
-            mFuncSign = a.getString(R.styleable.birthstone_funcSign);
-            mSign = a.getString(R.styleable.birthstone_sign);
-            mStateHiddenId = a.getString(R.styleable.birthstone_stateHiddenId);
-            mWantedStateValue = a.getString(R.styleable.birthstone_wantedStateValue);
+            TypedArray a = context.obtainStyledAttributes(attrs,R.styleable.View);
+            mFuncSign = a.getString(R.styleable.View_funcSign);
+            mSign = a.getString(R.styleable.View_sign);
+            mStateHiddenId = a.getString(R.styleable.View_stateHiddenId);
+            mWantedStateValue = a.getString(R.styleable.View_wantedStateValue);
             a.recycle();
         }catch (Exception ex){
             Log.e(ESButton.this.toString(),ex.getMessage());
@@ -129,14 +128,6 @@ public class ESButton extends android.widget.Button implements IFunctionProtecte
         if (arg0 instanceof Activity) {
             mActivity = (Activity) arg0;
         }
-    }
-
-    public Boolean getCancel() {
-        return mCancel;
-    }
-
-    public void setCancel(Boolean cancel) {
-        this.mCancel = cancel;
     }
 
     public void protectState(Boolean arg0) {

@@ -56,18 +56,18 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 		super(context, attrs);
 		try
 		{
-			TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.birthstone);
-			mIsRequiredTooltip = a.getString(R.styleable.birthstone_isRequiredTooltip);
-			mRegularExpression = a.getString(R.styleable.birthstone_regularExpression);
-			mRegularTooltip = a.getString(R.styleable.birthstone_regularTooltip);
-			mIsRequired = a.getBoolean(R.styleable.birthstone_isRequired,false);
-			mCollectSign = a.getString(R.styleable.birthstone_collectSign);
-			mEmpty2Null = a.getBoolean(R.styleable.birthstone_empty2Null,true);
+			TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.View);
+			mIsRequiredTooltip = a.getString(R.styleable.View_isRequiredTooltip);
+			mRegularExpression = a.getString(R.styleable.View_regularExpression);
+			mRegularTooltip = a.getString(R.styleable.View_regularTooltip);
+			mIsRequired = a.getBoolean(R.styleable.View_isRequired,false);
+			mCollectSign = a.getString(R.styleable.View_collectSign);
+			mEmpty2Null = a.getBoolean(R.styleable.View_empty2Null,true);
 			this.addTextChangedListener(textOnchange);
 			
 			try
 			{
-				String dataType = a.getString(R.styleable.birthstone_dataType);
+				String dataType = a.getString(R.styleable.View_dataType);
 				if(dataType != null && dataType.length() > 0)
 				{
 					this.mDataType = DataTypeHelper.valueOf(dataType);

@@ -67,25 +67,25 @@ public class ESSpinner extends android.widget.Spinner implements ICollectible, I
 		super(context, attrs);
 		try
 		{
-			TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.birthstone);
+			TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.View);
 			if(mCollectName == null)
 			{
-				mCollectName = a.getString(R.styleable.birthstone_collectName);
+				mCollectName = a.getString(R.styleable.View_collectName);
 			}
-			mDisplayValue = a.getString(R.styleable.birthstone_displayValue);
+			mDisplayValue = a.getString(R.styleable.View_displayValue);
 
-			mBindValue = a.getString(R.styleable.birthstone_bindValue);
-			mSql = a.getString(R.styleable.birthstone_sql);
-			mIsRequired = a.getBoolean(R.styleable.birthstone_isRequired,false);
-			mCollectSign = a.getString(R.styleable.birthstone_collectSign);
-			mSign = a.getString(R.styleable.birthstone_sign);
+			mBindValue = a.getString(R.styleable.View_bindValue);
+			mSql = a.getString(R.styleable.View_sql);
+			mIsRequired = a.getBoolean(R.styleable.View_isRequired,false);
+			mCollectSign = a.getString(R.styleable.View_collectSign);
+			mSign = a.getString(R.styleable.View_sign);
 			if(mSign == null)
 			{
 				mSign = "";
 			}
-			mEmpty2Null = a.getBoolean(R.styleable.birthstone_empty2Null, true);
-			mIsEmpty = a.getBoolean(R.styleable.birthstone_isEmpty, true);
-			mAutoLoad = a.getBoolean(R.styleable.birthstone_autoLoad, true);
+			mEmpty2Null = a.getBoolean(R.styleable.View_empty2Null, true);
+			mIsEmpty = a.getBoolean(R.styleable.View_isEmpty, true);
+			mAutoLoad = a.getBoolean(R.styleable.View_autoLoad, true);
 			mDataType = DataType.String;
 			this.setOnItemSelectedListener(onItemSelected);
 			a.recycle();

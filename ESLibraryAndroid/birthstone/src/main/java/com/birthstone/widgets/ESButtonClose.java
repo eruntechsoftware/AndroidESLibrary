@@ -21,11 +21,9 @@ import com.birthstone.core.parse.DataCollection;
 @SuppressLint("HandlerLeak")
 public class ESButtonClose extends ESButton implements IDataInitialize, IFunctionProtected
 {
-	protected String mFuncSign;
 	protected Activity mActivity;
 	protected OnClickingListener onClickingListener;
 	protected OnClickedListener onClickedListener;
-	protected String mSign;
 	//protected ProgressDialog alter;
 	protected String mNameSpace = "http://schemas.android.com/res/com.birthStone.widgets";
 
