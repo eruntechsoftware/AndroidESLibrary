@@ -33,6 +33,8 @@ public class ESButton extends android.widget.Button implements IFunctionProtecte
     protected String mSign;
     protected String mStateHiddenId;
     protected String mWantedStateValue;
+    protected String mOpen;
+    protected Boolean mIsClosed = false;
     protected String mName;
     protected Activity mActivity;
     /**单击事件执行前执行事件，并返回是否终止单击事件的执行参数**/
@@ -50,6 +52,8 @@ public class ESButton extends android.widget.Button implements IFunctionProtecte
             mSign = a.getString(R.styleable.View_sign);
             mStateHiddenId = a.getString(R.styleable.View_stateHiddenId);
             mWantedStateValue = a.getString(R.styleable.View_wantedStateValue);
+            mOpen = a.getString(R.styleable.View_open);
+            mIsClosed = a.getBoolean(R.styleable.View_isClosed,false);
             a.recycle();
         }catch (Exception ex){
             Log.e(ESButton.this.toString(),ex.getMessage());

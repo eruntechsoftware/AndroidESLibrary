@@ -67,25 +67,25 @@ public class ESSpinner extends android.widget.Spinner implements ICollectible, I
 		super(context, attrs);
 		try
 		{
-			TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.View);
+			TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ESSpinner);
 			if(mCollectName == null)
 			{
-				mCollectName = a.getString(R.styleable.View_collectName);
+				mCollectName = a.getString(R.styleable.ESSpinner_spinner_collectName);
 			}
-			mDisplayValue = a.getString(R.styleable.View_displayValue);
+			mDisplayValue = a.getString(R.styleable.ESSpinner_spinner_displayValue);
 
-			mBindValue = a.getString(R.styleable.View_bindValue);
-			mSql = a.getString(R.styleable.View_sql);
-			mIsRequired = a.getBoolean(R.styleable.View_isRequired,false);
-			mCollectSign = a.getString(R.styleable.View_collectSign);
-			mSign = a.getString(R.styleable.View_sign);
+			mBindValue = a.getString(R.styleable.ESSpinner_spinner_bindValue);
+			mSql = a.getString(R.styleable.ESSpinner_spinner_sql);
+			mIsRequired = a.getBoolean(R.styleable.ESSpinner_spinner_isRequired,false);
+			mCollectSign = a.getString(R.styleable.ESSpinner_spinner_collectSign);
+			mSign = a.getString(R.styleable.ESSpinner_spinner_sign);
 			if(mSign == null)
 			{
 				mSign = "";
 			}
-			mEmpty2Null = a.getBoolean(R.styleable.View_empty2Null, true);
-			mIsEmpty = a.getBoolean(R.styleable.View_isEmpty, true);
-			mAutoLoad = a.getBoolean(R.styleable.View_autoLoad, true);
+			mEmpty2Null = a.getBoolean(R.styleable.ESSpinner_spinner_empty2Null, true);
+			mIsEmpty = a.getBoolean(R.styleable.ESSpinner_spinner_isEmpty, true);
+			mAutoLoad = a.getBoolean(R.styleable.ESSpinner_spinner_autoLoad, true);
 			mDataType = DataType.String;
 			this.setOnItemSelectedListener(onItemSelected);
 			a.recycle();
