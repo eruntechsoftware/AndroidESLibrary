@@ -49,7 +49,7 @@ public class ESButton extends android.widget.Button implements IFunctionProtecte
             setOnClickListener(clickListener);
             TypedArray a = context.obtainStyledAttributes(attrs,R.styleable.ESButton);
             mFuncSign = a.getString(R.styleable.ESButton_funcSign);
-            mSign = a.getString(R.styleable.View_sign);
+            mSign = a.getString(R.styleable.ESButton_sign);
             mStateHiddenId = a.getString(R.styleable.ESButton_stateHiddenId);
             mWantedStateValue = a.getString(R.styleable.ESButton_wantedStateValue);
             mOpen = a.getString(R.styleable.ESButton_open);

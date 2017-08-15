@@ -44,9 +44,9 @@ public class ESDatePicker extends android.widget.DatePicker implements ICollecti
         super(context, attrs);
         try {
             TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ESDatePicker);
-            mIsRequired = a.getBoolean(R.styleable.View_isRequired,false);
-            mEmpty2Null = a.getBoolean(R.styleable.View_empty2Null, true);
-            mCollectSign = a.getString(R.styleable.View_collectSign);
+            mIsRequired = a.getBoolean(R.styleable.ESDatePicker_isRequired,false);
+            mEmpty2Null = a.getBoolean(R.styleable.ESDatePicker_empty2Null, true);
+            mCollectSign = a.getString(R.styleable.ESDatePicker_collectSign);
             mDataType = com.birthstone.core.helper.DataType.DateTime;
             a.recycle();
         } catch (Exception ex) {

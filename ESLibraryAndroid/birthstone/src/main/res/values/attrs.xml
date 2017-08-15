@@ -45,25 +45,44 @@
 		<!--<enum name="No" value="0" />-->
 	<!--</attr>-->
 
-	<declare-styleable name="View">
-		<attr name="dataType"></attr>
-		<!--采集标记-->
-		<attr name="collectSign" format="string"></attr>
-		<!--标记，配合collectSign使用-->
-		<attr name="sign" format="string"></attr>
-		<!--是否必填项-->
-		<attr name="isRequired" format="boolean"></attr>
-		<!--是否自动执行-->
-		<attr name="automatic" format="boolean"></attr>
-		<!--数据为空时用null代替-->
-		<attr name="empty2Null" format="boolean"></attr>
-		<!--执行的sql文件名称，书写时无后缀名.sql-->
-		<attr name="sql" format="string"></attr>
-	</declare-styleable>
+	<!--<declare-styleable name="View">-->
+		<!--<attr name="dataType"></attr>-->
+		<!--&lt;!&ndash;采集标记&ndash;&gt;-->
+		<!--<attr name="collectSign" format="string"></attr>-->
+		<!--&lt;!&ndash;标记，配合collectSign使用&ndash;&gt;-->
+		<!--<attr name="sign" format="string"></attr>-->
+		<!--&lt;!&ndash;是否必填项&ndash;&gt;-->
+		<!--<attr name="isRequired" format="boolean"></attr>-->
+		<!--&lt;!&ndash;是否自动执行&ndash;&gt;-->
+		<!--<attr name="automatic" format="boolean"></attr>-->
+		<!--&lt;!&ndash;数据为空时用null代替&ndash;&gt;-->
+		<!--<attr name="empty2Null" format="boolean"></attr>-->
+		<!--&lt;!&ndash;执行的sql文件名称，书写时无后缀名.sql&ndash;&gt;-->
+		<!--<attr name="sql" format="string"></attr>-->
+	<!--</declare-styleable>-->
+
+	<!--采集标记-->
+	<attr name="collectSign" format="string"></attr>
+	<!--标记，配合collectSign使用-->
+	<attr name="sign" format="string"></attr>
+	<!--是否必填项-->
+	<attr name="isRequired" format="boolean"></attr>
+	<!--是否自动执行-->
+	<attr name="automatic" format="boolean"></attr>
+	<!--数据为空时用null代替-->
+	<attr name="empty2Null" format="boolean"></attr>
+	<!--执行的sql文件名称，书写时无后缀名.sql-->
+	<attr name="sql" format="string"></attr>
 
 	<declare-styleable name="ESActionLoadPage">
 		<!--数据类型-->
 		<attr name="dataType"></attr>
+		<!--标记，配合collectSign使用-->
+		<attr name="sign"></attr>
+		<!--执行的sql文件名称，书写时无后缀名.sql-->
+		<attr name="sql"></attr>
+		<!--是否自动执行-->
+		<attr name="automatic"></attr>
 	</declare-styleable>
 
 	<declare-styleable name="ESButton">
@@ -73,6 +92,8 @@
 		<attr name="stateHiddenId" format="string"></attr>
 		<!--希望显示状态的值-->
 		<attr name="wantedStateValue" format="string"></attr>
+		<!--标记，配合collectSign使用-->
+		<attr name="sign"></attr>
 		<!--权限标记-->
 		<attr name="funcSign" format="string"></attr>
 		<!--目标屏幕标记-->
@@ -87,24 +108,52 @@
 	</declare-styleable>
 
 	<declare-styleable name="ESCheckBox">
+		<attr name="dataType"></attr>
+		<attr name="isRequired"></attr>
+		<attr name="empty2Null"></attr>
+		<attr name="collectSign"></attr>
 	</declare-styleable>
 
 	<declare-styleable name="ESDatePicker">
+		<attr name="isRequired"></attr>
+		<attr name="empty2Null"></attr>
+		<attr name="collectSign"></attr>
 	</declare-styleable>
 
 	<declare-styleable name="ESDateTimeView">
+		<attr name="empty2Null"></attr>
+		<attr name="collectSign"></attr>
 	</declare-styleable>
 
 	<declare-styleable name="ESTimePicker">
+		<attr name="isRequired"></attr>
+		<attr name="empty2Null"></attr>
+		<attr name="collectSign"></attr>
 	</declare-styleable>
 
 	<declare-styleable name="ESHiddenFeild">
 	</declare-styleable>
 
 	<declare-styleable name="ESRadioGroup">
+		<attr name="dataType"></attr>
+		<attr name="isRequired"></attr>
+		<attr name="empty2Null"></attr>
+		<attr name="collectSign"></attr>
 	</declare-styleable>
 
 	<declare-styleable name="ESSpinner">
+		<!--采集标记-->
+		<attr name="collectSign"></attr>
+		<!--标记，配合collectSign使用-->
+		<attr name="sign"></attr>
+		<!--是否必填项-->
+		<attr name="isRequired"></attr>
+		<!--是否自动执行-->
+		<attr name="automatic"></attr>
+		<!--数据为空时用null代替-->
+		<attr name="empty2Null"></attr>
+		<!--执行的sql文件名称，书写时无后缀名.sql-->
+		<attr name="sql"></attr>
 		<!--采集标记名称-->
 		<attr name="collectName" format="string"></attr>
 		<!--绑定的显示字段名称-->
@@ -115,7 +164,10 @@
 	</declare-styleable>
 
 	<declare-styleable name="ESTextBox">
-		<!--ESTextBox专用属性-->
+		<attr name="dataType"></attr>
+		<attr name="isRequired"></attr>
+		<attr name="empty2Null"></attr>
+		<attr name="collectSign"></attr>
 		<!--必填项错误提示-->
 		<attr name="isRequiredTooltip" format="string"></attr>
 		<!--正则表达式-->
@@ -125,6 +177,10 @@
 	</declare-styleable>
 
 	<declare-styleable name="ESTextView">
+		<attr name="dataType"></attr>
+		<attr name="isRequired"></attr>
+		<attr name="empty2Null"></attr>
+		<attr name="collectSign"></attr>
 	</declare-styleable>
 
 

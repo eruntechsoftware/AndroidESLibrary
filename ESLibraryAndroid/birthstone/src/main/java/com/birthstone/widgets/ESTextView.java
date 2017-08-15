@@ -36,11 +36,11 @@ public class ESTextView extends android.widget.TextView implements ICollectible,
 		try
 		{
 			TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ESTextView);
-			mCollectSign = a.getString(R.styleable.View_collectSign);
-			mEmpty2Null = a.getBoolean(R.styleable.View_empty2Null,true);
+			mCollectSign = a.getString(R.styleable.ESTextView_collectSign);
+			mEmpty2Null = a.getBoolean(R.styleable.ESTextView_empty2Null,true);
 			try
 			{
-				String dataType = a.getString(R.styleable.View_dataType);
+				String dataType = a.getString(R.styleable.ESTextView_dataType);
 				if(dataType != null && dataType.length() > 0)
 				{
 					this.mDataType = DataTypeHelper.valueOf(dataType);

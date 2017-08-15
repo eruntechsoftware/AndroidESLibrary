@@ -47,7 +47,7 @@ public class ESActionLoadPage extends TextView implements IDataInitialize, IData
 			try
 			{
 				TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ESActionLoadPage);
-				String dataType = a.getString(R.styleable.View_dataType);
+				String dataType = a.getString(R.styleable.ESActionLoadPage_dataType);
 				if(dataType != null && dataType.length() > 0)
 				{
 					this.mDataType = DataTypeHelper.valueOf(dataType);
@@ -56,9 +56,9 @@ public class ESActionLoadPage extends TextView implements IDataInitialize, IData
 				{
 					this.mDataType = com.birthstone.core.helper.DataType.String;
 				}
-				this.mSign = a.getString(R.styleable.View_sign);
-				this.mSql = a.getString(R.styleable.View_sql);
-				this.mAutomatic = a.getBoolean(R.styleable.View_automatic,true);
+				this.mSign = a.getString(R.styleable.ESActionLoadPage_sign);
+				this.mSql = a.getString(R.styleable.ESActionLoadPage_sql);
+				this.mAutomatic = a.getBoolean(R.styleable.ESActionLoadPage_automatic,true);
 				a.recycle();
 			}
 			catch(Exception ex)
