@@ -50,7 +50,7 @@ public class ESSpinner extends android.widget.Spinner implements ICollectible, I
 	protected String mDisplayValue;
 	protected String mBindValue;
 	protected String mSql;
-	protected Boolean mAutoLoad = true;
+	protected Boolean mAutomatic = true;
 	protected Object mSelectValue = "";
 	protected String mSelectText = "";
 	protected DataTable mDataTable;
@@ -70,22 +70,22 @@ public class ESSpinner extends android.widget.Spinner implements ICollectible, I
 			TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ESSpinner);
 			if(mCollectName == null)
 			{
-				mCollectName = a.getString(R.styleable.ESSpinner_spinner_collectName);
+				mCollectName = a.getString(R.styleable.ESSpinner_collectName);
 			}
-			mDisplayValue = a.getString(R.styleable.ESSpinner_spinner_displayValue);
+			mDisplayValue = a.getString(R.styleable.ESSpinner_displayValue);
 
-			mBindValue = a.getString(R.styleable.ESSpinner_spinner_bindValue);
-			mSql = a.getString(R.styleable.ESSpinner_spinner_sql);
-			mIsRequired = a.getBoolean(R.styleable.ESSpinner_spinner_isRequired,false);
-			mCollectSign = a.getString(R.styleable.ESSpinner_spinner_collectSign);
-			mSign = a.getString(R.styleable.ESSpinner_spinner_sign);
+			mBindValue = a.getString(R.styleable.ESSpinner_bindValue);
+			mSql = a.getString(R.styleable.ESSpinner_sql);
+			mIsRequired = a.getBoolean(R.styleable.ESSpinner_isRequired,false);
+			mCollectSign = a.getString(R.styleable.ESSpinner_collectSign);
+			mSign = a.getString(R.styleable.ESSpinner_sign);
 			if(mSign == null)
 			{
 				mSign = "";
 			}
-			mEmpty2Null = a.getBoolean(R.styleable.ESSpinner_spinner_empty2Null, true);
-			mIsEmpty = a.getBoolean(R.styleable.ESSpinner_spinner_isEmpty, true);
-			mAutoLoad = a.getBoolean(R.styleable.ESSpinner_spinner_autoLoad, true);
+			mEmpty2Null = a.getBoolean(R.styleable.ESSpinner_empty2Null, true);
+			mIsEmpty = a.getBoolean(R.styleable.ESSpinner_isEmpty, true);
+			mAutomatic = a.getBoolean(R.styleable.ESSpinner_automatic, true);
 			mDataType = DataType.String;
 			this.setOnItemSelectedListener(onItemSelected);
 			a.recycle();
@@ -119,7 +119,7 @@ public class ESSpinner extends android.widget.Spinner implements ICollectible, I
 	{
 		try
 		{
-			if(mAutoLoad)
+			if(mAutomatic)
 			{
 				new BindDataThread().start();
 			}
@@ -598,14 +598,14 @@ public class ESSpinner extends android.widget.Spinner implements ICollectible, I
 		this.mSql = sql;
 	}
 
-	public Boolean getAutoLoad()
+	public Boolean getAutomatic()
 	{
-		return mAutoLoad;
+		return mAutomatic;
 	}
 
-	public void setAutoLoad(Boolean autoLoad)
+	public void setAutomatic(Boolean Automatic)
 	{
-		this.mAutoLoad = autoLoad;
+		this.mAutomatic = Automatic;
 	}
 
 	public Object getSelectValue()

@@ -1,14 +1,12 @@
 package com.birthstone.widgets;
 
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.os.Looper;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import com.birthstone.R;
 import com.birthstone.base.activity.Activity;
 import com.birthstone.base.event.OnClickedListener;
 import com.birthstone.base.event.OnClickingListener;
@@ -23,24 +21,11 @@ import com.birthstone.core.parse.DataCollection;
 
 public class ESButtonOpen extends ESButton implements IDataInitialize, IFunctionProtected, IStateProtected
 {
-	protected String mOpen;
-	protected Boolean mIsClosed = false;
 	protected String mNameSpace = "http://schemas.android.com/res/com.birthStone.widgets";
 
 	public ESButtonOpen(Context context, AttributeSet attrs )
 	{
 		super(context, attrs);
-		try
-		{
-			TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.View);
-			mOpen = a.getString(R.styleable.View_open);
-			mIsClosed = a.getBoolean(R.styleable.View_isClosed,false);
-			a.recycle();
-		}
-		catch(Exception ex)
-		{
-			Log.e("ButtonOpen", ex.getMessage());
-		}
 	}
 
 	public ESButtonOpen(Context context, AttributeSet attrs, int defStyle)

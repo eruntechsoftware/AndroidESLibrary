@@ -47,8 +47,8 @@ public class ESRadioGroup extends android.widget.RadioGroup implements ICollecti
 		super(context, attrs);
 		try
 		{
-			TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.View);
-			String dataType = a.getString(R.styleable.View_dataType);
+			TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ESRadioGroup);
+			String dataType = a.getString(R.styleable.ESRadioGroup_dataType);
 			if(dataType != null && dataType.length() > 0)
 			{
 				this.mDataType = DataTypeHelper.valueOf(dataType);
@@ -57,9 +57,9 @@ public class ESRadioGroup extends android.widget.RadioGroup implements ICollecti
 			{
 				this.mDataType = DataType.String;
 			}
-			mIsRequired = a.getBoolean(R.styleable.View_isRequired,false);
-			mEmpty2Null = a.getBoolean(R.styleable.View_empty2Null, true);
-			mCollectSign = a.getString(R.styleable.View_collectSign);
+			mIsRequired = a.getBoolean(R.styleable.ESRadioGroup_isRequired,false);
+			mEmpty2Null = a.getBoolean(R.styleable.ESRadioGroup_empty2Null, true);
+			mCollectSign = a.getString(R.styleable.ESRadioGroup_collectSign);
 			this.setOnCheckedChangeListener(onCheckedChangeListener);
 			a.recycle();
 		}

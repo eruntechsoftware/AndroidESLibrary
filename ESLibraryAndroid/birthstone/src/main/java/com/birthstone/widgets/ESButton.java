@@ -47,13 +47,13 @@ public class ESButton extends android.widget.Button implements IFunctionProtecte
         super(context, attrs);
         try {
             setOnClickListener(clickListener);
-            TypedArray a = context.obtainStyledAttributes(attrs,R.styleable.View);
-            mFuncSign = a.getString(R.styleable.View_funcSign);
-            mSign = a.getString(R.styleable.View_sign);
-            mStateHiddenId = a.getString(R.styleable.View_stateHiddenId);
-            mWantedStateValue = a.getString(R.styleable.View_wantedStateValue);
-            mOpen = a.getString(R.styleable.View_open);
-            mIsClosed = a.getBoolean(R.styleable.View_isClosed,false);
+            TypedArray a = context.obtainStyledAttributes(attrs,R.styleable.ESButton);
+            mFuncSign = a.getString(R.styleable.ESButton_funcSign);
+            mSign = a.getString(R.styleable.ESButton_sign);
+            mStateHiddenId = a.getString(R.styleable.ESButton_stateHiddenId);
+            mWantedStateValue = a.getString(R.styleable.ESButton_wantedStateValue);
+            mOpen = a.getString(R.styleable.ESButton_open);
+            mIsClosed = a.getBoolean(R.styleable.ESButton_isClosed,false);
             a.recycle();
         }catch (Exception ex){
             Log.e(ESButton.this.toString(),ex.getMessage());

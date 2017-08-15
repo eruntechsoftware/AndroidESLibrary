@@ -32,7 +32,7 @@ public class ESActionLoadPage extends TextView implements IDataInitialize, IData
 {
 	private SQLiteDatabase mSqlDb;
 	protected Activity mActivity;
-	protected Boolean mAutoLoad = false;
+	protected Boolean mAutomatic = false;
 	protected String mSql;
 	protected String mSign = "ForQuery";
 	protected DataType mDataType;
@@ -46,15 +46,19 @@ public class ESActionLoadPage extends TextView implements IDataInitialize, IData
 			this.setVisibility(View.GONE);
 			try
 			{
-				TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.View);
-				String dataType = a.getString(R.styleable.View_dataType);
+				TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ESActionLoadPage);
+				String dataType = a.getString(R.styleable.ESCheckBox_dataType);
 				if(dataType != null && dataType.length() > 0)
 				{
 					this.mDataType = DataTypeHelper.valueOf(dataType);
 				}
-				this.mSign = a.getString(R.styleable.View_sign);
-				this.mSql = a.getString(R.styleable.View_sql);
-				this.mAutoLoad = a.getBoolean(R.styleable.View_autoLoad,true);
+				else
+				{
+					this.mDataType = com.birthstone.core.helper.DataType.String;
+				}
+				this.mSign = a.getString(R.styleable.ESActionLoadPage_sign);
+				this.mSql = a.getString(R.styleable.ESActionLoadPage_autoSql);
+				this.mAutomatic = a.getBoolean(R.styleable.ESActionLoadPage_automatic,true);
 				a.recycle();
 			}
 			catch(Exception ex)
@@ -222,7 +226,7 @@ public class ESActionLoadPage extends TextView implements IDataInitialize, IData
 	{
 		try
 		{
-			if(mAutoLoad)
+			if(mAutomatic)
 			{
 				execute();
 			}
@@ -252,14 +256,14 @@ public class ESActionLoadPage extends TextView implements IDataInitialize, IData
 		}
 	}
 
-	public Boolean getAutoLoad()
+	public Boolean getAutomatic()
 	{
-		return mAutoLoad;
+		return mAutomatic;
 	}
 
-	public void setAutoLoad(Boolean autoLoad)
+	public void setAutomatic(Boolean Automatic)
 	{
-		this.mAutoLoad = autoLoad;
+		this.mAutomatic = Automatic;
 	}
 
 	public String getSql()
