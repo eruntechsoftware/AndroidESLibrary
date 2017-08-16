@@ -127,7 +127,7 @@ public class UINavigationBar extends RelativeLayout implements View.OnClickListe
 		mIvRight = (ImageView) findViewById(R.id.iv_right);
 		mIvRight.setOnClickListener(this);
 		line = findViewById(R.id.line);
-//		mRelativeLayout.setBackgroundColor(BACKGROUND_COLOR);
+		mRelativeLayout.setBackgroundColor(BACKGROUND_COLOR);
 	}
 
 	/*

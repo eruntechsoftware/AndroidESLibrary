@@ -3,6 +3,7 @@ package com.birthstone.base.activity;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Looper;
@@ -197,6 +198,11 @@ public class Activity extends android.app.Activity implements IUINavigationBar
 			{
 				StatusBarUtil.setTranslucent(this);
 				StatusBarUtil.setColorNoTranslucent(this, UINavigationBar.BACKGROUND_COLOR);
+			}
+			if(mUINavigationBar.getVisibility() == View.GONE)
+			{
+//				StatusBarUtil.setTranslucent(this);
+				StatusBarUtil.setColorNoTranslucent(this, Color.BLACK);
 			}
 
 			if(mRightButtonText != null)
