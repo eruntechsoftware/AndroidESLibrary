@@ -314,7 +314,7 @@ public class ESSpinner extends android.widget.Spinner implements ICollectible, I
 					}
 					else
 					{
-						displaystring = "ѡ..." + displayBuffer.toString();
+						displaystring = "请选择..." + displayBuffer.toString();
 						valuestring = valueBuffer.toString();
 					}
 					displayArray = StringToArray.stringConvertArray(displaystring);
