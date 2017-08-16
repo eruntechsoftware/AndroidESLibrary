@@ -18,7 +18,7 @@ import java.util.List;
  * @
  * @ܣռForm ICollectibleʵֶ
  */
-public class CollectForm implements ICollector, IControlSearcherHandler
+public class CollectController implements ICollector, IControlSearcherHandler
 {
 	Activity mActivity;
 	DataCollection mResult;
@@ -27,7 +27,7 @@ public class CollectForm implements ICollector, IControlSearcherHandler
 	/**
 	 *
 	 */
-	public CollectForm( Activity mActivity )
+	public CollectController(Activity mActivity )
 	{
 		this.mActivity = mActivity;
 	}
@@ -36,7 +36,7 @@ public class CollectForm implements ICollector, IControlSearcherHandler
 	 *
 	 * @param sign
 	 */
-	public CollectForm( Activity mActivity, String sign )
+	public CollectController(Activity mActivity, String sign )
 	{
 		this.mActivity = mActivity;
 		this.mSign = sign;
@@ -61,7 +61,7 @@ public class CollectForm implements ICollector, IControlSearcherHandler
 		}
 		catch(Exception ex)
 		{
-			Log.v("CollectForm", ex.getMessage());
+			Log.v("CollectController", ex.getMessage());
 		}
 		return this.mResult;
 	}

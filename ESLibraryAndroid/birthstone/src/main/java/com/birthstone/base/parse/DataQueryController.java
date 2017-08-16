@@ -1,28 +1,26 @@
 package com.birthstone.base.parse;
 
+
 import android.util.Log;
 
 import com.birthstone.base.activity.Activity;
 import com.birthstone.base.security.ControlSearcher;
 import com.birthstone.core.interfaces.IControlSearcherHandler;
-import com.birthstone.core.interfaces.IValidatible;
-import com.birthstone.core.interfaces.IValidator;
+import com.birthstone.core.interfaces.IDataQuery;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ValidatorForm implements IValidator, IControlSearcherHandler
+public class DataQueryController implements IControlSearcherHandler
 {
-
 	private Activity form;
-	private Boolean result = true;
 
-	public ValidatorForm( Activity form )
+	public DataQueryController(Activity form )
 	{
 		this.form = form;
 	}
 
-	public Boolean validator()
+	public void query()
 	{
 		try
 		{
@@ -34,23 +32,27 @@ public class ValidatorForm implements IValidator, IControlSearcherHandler
 		}
 		catch(Exception ex)
 		{
-			Log.v("Validator", ex.getMessage());
+			Log.v("QueryForm", ex.getMessage());
 		}
-		return result;
 	}
 
 	public void handle(Object obj)
 	{
+
 		try
 		{
-			IValidatible Validatible = (IValidatible) obj;
-			if(!Validatible.dataValidator())
+			if(obj instanceof IDataQuery)
 			{
-				result = false;
+				IDataQuery Initidata = (IDataQuery) obj;
+				Initidata.query();
 			}
 		}
 		catch(Exception ex)
 		{
+			/*
+			 * if (ex.InnerException == null) { throw new Exception(control.Name
+			 * + ""); }
+			 */
 			Log.v("Validator", ex.getMessage());
 		}
 	}
@@ -58,7 +60,7 @@ public class ValidatorForm implements IValidator, IControlSearcherHandler
 	public Boolean isPicked(Object obj)
 	{
 
-		return obj instanceof IValidatible;
+		return obj instanceof IDataQuery;
 	}
 
 	public Activity getForm()
@@ -69,11 +71,6 @@ public class ValidatorForm implements IValidator, IControlSearcherHandler
 	public void setForm(Activity form)
 	{
 		this.form = form;
-	}
-
-	public Boolean getResult()
-	{
-		return result;
 	}
 
 }

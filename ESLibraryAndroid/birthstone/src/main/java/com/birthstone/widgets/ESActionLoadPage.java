@@ -13,8 +13,8 @@ import android.widget.TextView;
 import com.birthstone.R;
 import com.birthstone.base.activity.Activity;
 import com.birthstone.base.helper.InitializeHelper;
-import com.birthstone.base.parse.CollectForm;
-import com.birthstone.base.parse.ReleaseForm;
+import com.birthstone.base.parse.CollectController;
+import com.birthstone.base.parse.ReleaseController;
 import com.birthstone.core.Sqlite.SQLiteDatabase;
 import com.birthstone.core.helper.DataType;
 import com.birthstone.core.helper.DataTypeHelper;
@@ -81,8 +81,8 @@ public class ESActionLoadPage extends TextView implements IDataInitialize, IData
 	private Boolean onInit()
 	{
 		mSqlDb = new SQLiteDatabase(mActivity.getApplicationContext());
-		this.mSqlDb.getCollectors().add(new CollectForm(mActivity, mSign));
-		this.mSqlDb.getReleasers().add(new ReleaseForm(mActivity));
+		this.mSqlDb.getCollectors().add(new CollectController(mActivity, mSign));
+		this.mSqlDb.getReleasers().add(new ReleaseController(mActivity));
 		mSqlDb.setSql(mSql);
 		return true;
 	}
@@ -165,7 +165,7 @@ public class ESActionLoadPage extends TextView implements IDataInitialize, IData
 		try
 		{
 			mSqlDb = new SQLiteDatabase(activity);
-			mSqlDb.getReleasers().add(new ReleaseForm(activity));
+			mSqlDb.getReleasers().add(new ReleaseController(activity));
 			mSqlDb.execute(ds);
 			mSqlDb.close();
 		}
@@ -183,7 +183,7 @@ public class ESActionLoadPage extends TextView implements IDataInitialize, IData
 		try
 		{
 			mSqlDb.getCollectors().add(Collector);
-			mSqlDb.getReleasers().add(new ReleaseForm(activity));
+			mSqlDb.getReleasers().add(new ReleaseController(activity));
 			mSqlDb.setSql(mSql);
 			mSqlDb.executeTable();
 			mSqlDb.close();

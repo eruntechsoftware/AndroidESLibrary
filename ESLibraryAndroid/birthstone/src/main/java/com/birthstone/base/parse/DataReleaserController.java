@@ -6,21 +6,24 @@ import android.util.Log;
 import com.birthstone.base.activity.Activity;
 import com.birthstone.base.security.ControlSearcher;
 import com.birthstone.core.interfaces.IControlSearcherHandler;
-import com.birthstone.core.interfaces.IDataQuery;
+import com.birthstone.core.interfaces.IDataReleaser;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DataQueryForm implements IControlSearcherHandler
+public class DataReleaserController implements IControlSearcherHandler
 {
-	private Activity form;
-
-	public DataQueryForm( Activity form )
+	public DataReleaserController( )
 	{
-		this.form = form;
 	}
 
-	public void query()
+	public static DataReleaserController createDataReleaserForm()
+	{
+		DataReleaserController DataReleaserForm = new DataReleaserController();
+		return DataReleaserForm;
+	}
+
+	public void release(Activity form) throws Exception
 	{
 		try
 		{
@@ -32,45 +35,28 @@ public class DataQueryForm implements IControlSearcherHandler
 		}
 		catch(Exception ex)
 		{
-			Log.v("QueryForm", ex.getMessage());
+			throw ex;
 		}
 	}
 
 	public void handle(Object obj)
 	{
-
 		try
 		{
-			if(obj instanceof IDataQuery)
+			if(obj instanceof IDataReleaser)
 			{
-				IDataQuery Initidata = (IDataQuery) obj;
-				Initidata.query();
+				IDataReleaser DataReleaser = (IDataReleaser) obj;
+				DataReleaser.release();
 			}
 		}
 		catch(Exception ex)
 		{
-			/*
-			 * if (ex.InnerException == null) { throw new Exception(control.Name
-			 * + ""); }
-			 */
 			Log.v("Validator", ex.getMessage());
 		}
 	}
 
 	public Boolean isPicked(Object obj)
 	{
-
-		return obj instanceof IDataQuery;
+		return obj instanceof IDataReleaser;
 	}
-
-	public Activity getForm()
-	{
-		return form;
-	}
-
-	public void setForm(Activity form)
-	{
-		this.form = form;
-	}
-
 }

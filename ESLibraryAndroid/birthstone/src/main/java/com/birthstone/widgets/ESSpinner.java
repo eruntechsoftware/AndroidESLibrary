@@ -18,7 +18,7 @@ import com.birthstone.R;
 import com.birthstone.base.activity.Activity;
 import com.birthstone.base.event.OnItemSelectIndexChangeListener;
 import com.birthstone.base.helper.InitializeHelper;
-import com.birthstone.base.parse.CollectForm;
+import com.birthstone.base.parse.CollectController;
 import com.birthstone.core.Sqlite.SQLiteDatabase;
 import com.birthstone.core.helper.DataType;
 import com.birthstone.core.helper.StringToArray;
@@ -202,7 +202,7 @@ public class ESSpinner extends android.widget.Spinner implements ICollectible, I
 	public void bindAdapter()
 	{
 		SQLiteDatabase sqlDb = new SQLiteDatabase(mActivity.getApplicationContext());
-		mDataTable = sqlDb.executeTable(mSql, new CollectForm(mActivity, mSign).collect(), mCharCode);
+		mDataTable = sqlDb.executeTable(mSql, new CollectController(mActivity, mSign).collect(), mCharCode);
 		sqlDb.close();
 		tableToArray();
 		if(mIsRequired == true)

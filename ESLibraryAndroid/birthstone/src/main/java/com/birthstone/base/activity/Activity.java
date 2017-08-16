@@ -21,12 +21,12 @@ import com.birthstone.base.helper.FragmentActivityManager;
 import com.birthstone.base.helper.FragmentManager;
 import com.birthstone.base.helper.ReleaseHelper;
 import com.birthstone.base.helper.StatusBarUtil;
-import com.birthstone.base.parse.CollectForm;
+import com.birthstone.base.parse.CollectController;
 import com.birthstone.base.parse.ControlStateProtector;
-import com.birthstone.base.parse.DataQueryForm;
+import com.birthstone.base.parse.DataQueryController;
 import com.birthstone.base.parse.FunctionProtected;
-import com.birthstone.base.parse.InitializeForm;
-import com.birthstone.base.parse.ValidatorForm;
+import com.birthstone.base.parse.InitializeController;
+import com.birthstone.base.parse.ValidatorController;
 import com.birthstone.core.parse.Data;
 import com.birthstone.core.parse.DataCollection;
 
@@ -252,13 +252,13 @@ public class Activity extends android.app.Activity implements IUINavigationBar
 	{
 		try
 		{
-			InitializeForm initializeForm = new InitializeForm(this);
-			initializeForm.initialize();
-			initializeForm=null;
+			InitializeController initializeController = new InitializeController(this);
+			initializeController.initialize();
+			initializeController=null;
 		}
 		catch(Exception ex)
 		{
-			Log.v("InitializeForm", ex.getMessage());
+			Log.v("InitializeController", ex.getMessage());
 		}
 	}
 
@@ -340,7 +340,7 @@ public class Activity extends android.app.Activity implements IUINavigationBar
 	* */
 	public DataCollection collect(String collectSign)
 	{
-		CollectForm collecter = new CollectForm(this, collectSign);
+		CollectController collecter = new CollectController(this, collectSign);
 		return collecter.collect();
 	}
 
@@ -365,13 +365,13 @@ public class Activity extends android.app.Activity implements IUINavigationBar
 	 */
 	public void query()
 	{
-		DataQueryForm DataQueryForm;
+		DataQueryController dataQueryController;
 		try
 		{
 			if(this != null)
 			{
-				DataQueryForm = new DataQueryForm((Activity) this.getBaseContext());
-				DataQueryForm.query();
+				dataQueryController = new DataQueryController(this);
+				dataQueryController.query();
 			}
 		}
 		catch(Exception ex)
@@ -386,10 +386,10 @@ public class Activity extends android.app.Activity implements IUINavigationBar
 	* */
 	public Boolean validator()
 	{
-		ValidatorForm validatorForm = new ValidatorForm(this);
+		ValidatorController validatorController = new ValidatorController(this);
 		try
 		{
-			return validatorForm.validator();
+			return validatorController.validator();
 		}
 		catch(Exception ex)
 		{

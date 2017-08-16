@@ -12,16 +12,16 @@ import com.birthstone.core.interfaces.IDataBinder;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DataBindForm implements IDataBinder, IControlSearcherHandler
+public class DataBindController implements IDataBinder, IControlSearcherHandler
 {
 
-	private Activity form;
+	private Activity activity;
 	private Object source;
 	private String id;
 
-	public DataBindForm(Activity form, Object source, String id )
+	public DataBindController(Activity activity, Object source, String id )
 	{
-		this.form = form;
+		this.activity = activity;
 		this.source = source;
 		this.id = id;
 	}
@@ -30,11 +30,11 @@ public class DataBindForm implements IDataBinder, IControlSearcherHandler
 	{
 		try
 		{
-			if(form != null)
+			if(activity != null)
 			{
 				List<IControlSearcherHandler> Controllist = new ArrayList<IControlSearcherHandler>();
 				Controllist.add(this);
-				new ControlSearcher(Controllist).search(this.form);
+				new ControlSearcher(Controllist).search(this.activity);
 				Controllist.clear();
 				Controllist=null;
 			}
@@ -54,7 +54,7 @@ public class DataBindForm implements IDataBinder, IControlSearcherHandler
 		}
 		catch(Exception ex)
 		{
-			Log.v("DataBindForm", ex.getMessage());
+			Log.v("DataBindController", ex.getMessage());
 		}
 	}
 
@@ -63,9 +63,9 @@ public class DataBindForm implements IDataBinder, IControlSearcherHandler
 		return obj instanceof IDataBindble;
 	}
 
-	public Activity getForm()
+	public Activity getactivity()
 	{
-		return form;
+		return activity;
 	}
 
 	@SuppressWarnings("unused")
@@ -90,9 +90,9 @@ public class DataBindForm implements IDataBinder, IControlSearcherHandler
 		this.id = id;
 	}
 
-	public void setForm(Activity form)
+	public void setactivity(Activity activity)
 	{
-		this.form = form;
+		this.activity = activity;
 	}
 
 	public void setSource(Object source)

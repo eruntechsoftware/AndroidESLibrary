@@ -11,7 +11,7 @@ import android.view.View;
 import com.birthstone.base.activity.Activity;
 import com.birthstone.base.event.OnClickedListener;
 import com.birthstone.base.event.OnClickingListener;
-import com.birthstone.base.parse.CollectForm;
+import com.birthstone.base.parse.CollectController;
 import com.birthstone.core.helper.StringToArray;
 import com.birthstone.core.interfaces.IDataInitialize;
 import com.birthstone.core.interfaces.IFunctionProtected;
@@ -99,8 +99,8 @@ public class ESButtonClose extends ESButton implements IDataInitialize, IFunctio
 		{
 			if(mSign != null)
 			{
-				CollectForm collectForm = new CollectForm(mActivity, mSign);
-				DataCollection dataCollection = collectForm.collect();
+				CollectController collectController = new CollectController(mActivity, mSign);
+				DataCollection dataCollection = collectController.collect();
 				if(mActivity.getParentActivity() != null)
 				{
 					mActivity.getParentActivity().release(dataCollection);

@@ -14,12 +14,12 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-public class ReleaseForm implements IReleaser, IControlSearcherHandler
+public class ReleaseController implements IReleaser, IControlSearcherHandler
 {
 	private DataTable table;
 	private Activity form;
 
-	public ReleaseForm( Activity form )
+	public ReleaseController(Activity form )
 	{
 		this.form = form;
 	}

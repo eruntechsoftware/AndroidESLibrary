@@ -11,15 +11,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class RefreshForm implements IControlSearcherHandler
+public class RefreshController implements IControlSearcherHandler
 {
-	public RefreshForm( )
+	public RefreshController( )
 	{
 	}
 
-	public static RefreshForm createRefreshForm()
+	public static RefreshController createRefreshForm()
 	{
-		RefreshForm Ref = new RefreshForm();
+		RefreshController Ref = new RefreshController();
 		return Ref;
 	}
 

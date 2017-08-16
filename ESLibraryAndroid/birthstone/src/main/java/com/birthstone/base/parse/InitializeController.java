@@ -11,11 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class InitializeForm implements IControlSearcherHandler
+public class InitializeController implements IControlSearcherHandler
 {
 	private Activity mActivity;
 
-	public InitializeForm( Activity mActivity )
+	public InitializeController(Activity mActivity )
 	{
 		this.mActivity = mActivity;
 	}

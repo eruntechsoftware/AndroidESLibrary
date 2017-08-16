@@ -1,29 +1,28 @@
 package com.birthstone.base.parse;
 
-
 import android.util.Log;
 
 import com.birthstone.base.activity.Activity;
 import com.birthstone.base.security.ControlSearcher;
 import com.birthstone.core.interfaces.IControlSearcherHandler;
-import com.birthstone.core.interfaces.IDataReleaser;
+import com.birthstone.core.interfaces.IValidatible;
+import com.birthstone.core.interfaces.IValidator;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DataReleaserForm implements IControlSearcherHandler
+public class ValidatorController implements IValidator, IControlSearcherHandler
 {
-	public DataReleaserForm( )
+
+	private Activity form;
+	private Boolean result = true;
+
+	public ValidatorController(Activity form )
 	{
+		this.form = form;
 	}
 
-	public static DataReleaserForm createDataReleaserForm()
-	{
-		DataReleaserForm DataReleaserForm = new DataReleaserForm();
-		return DataReleaserForm;
-	}
-
-	public void release(Activity form) throws Exception
+	public Boolean validator()
 	{
 		try
 		{
@@ -35,18 +34,19 @@ public class DataReleaserForm implements IControlSearcherHandler
 		}
 		catch(Exception ex)
 		{
-			throw ex;
+			Log.v("Validator", ex.getMessage());
 		}
+		return result;
 	}
 
 	public void handle(Object obj)
 	{
 		try
 		{
-			if(obj instanceof IDataReleaser)
+			IValidatible Validatible = (IValidatible) obj;
+			if(!Validatible.dataValidator())
 			{
-				IDataReleaser DataReleaser = (IDataReleaser) obj;
-				DataReleaser.release();
+				result = false;
 			}
 		}
 		catch(Exception ex)
@@ -57,6 +57,23 @@ public class DataReleaserForm implements IControlSearcherHandler
 
 	public Boolean isPicked(Object obj)
 	{
-		return obj instanceof IDataReleaser;
+
+		return obj instanceof IValidatible;
 	}
+
+	public Activity getForm()
+	{
+		return form;
+	}
+
+	public void setForm(Activity form)
+	{
+		this.form = form;
+	}
+
+	public Boolean getResult()
+	{
+		return result;
+	}
+
 }

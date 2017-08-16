@@ -13,7 +13,7 @@ import android.view.View;
 import com.birthstone.base.activity.Activity;
 import com.birthstone.base.event.OnClickedListener;
 import com.birthstone.base.event.OnClickingListener;
-import com.birthstone.base.parse.CollectForm;
+import com.birthstone.base.parse.CollectController;
 import com.birthstone.core.helper.DateTimeHelper;
 import com.birthstone.core.helper.StringToArray;
 import com.birthstone.core.interfaces.IDataInitialize;
@@ -104,8 +104,8 @@ public class ESButtonOK extends ESButton implements IDataInitialize, IFunctionPr
 		{
 			if(mSign != null)
 			{
-				CollectForm collectForm = new CollectForm(mActivity, mSign);
-				DataCollection dataCollection = collectForm.collect();
+				CollectController collectController = new CollectController(mActivity, mSign);
+				DataCollection dataCollection = collectController.collect();
 				dataCollection.add(new Data("BtnQuery", 1));
 				if(mActivity.getParentActivity() != null)
 				{

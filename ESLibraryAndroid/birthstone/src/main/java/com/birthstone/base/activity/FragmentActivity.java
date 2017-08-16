@@ -18,12 +18,12 @@ import com.birthstone.base.helper.FragmentActivityManager;
 import com.birthstone.base.helper.FragmentManager;
 import com.birthstone.base.helper.ReleaseHelper;
 import com.birthstone.base.helper.StatusBarUtil;
-import com.birthstone.base.parse.CollectForm;
+import com.birthstone.base.parse.CollectController;
 import com.birthstone.base.parse.ControlStateProtector;
-import com.birthstone.base.parse.DataQueryForm;
+import com.birthstone.base.parse.DataQueryController;
 import com.birthstone.base.parse.FunctionProtected;
-import com.birthstone.base.parse.InitializeForm;
-import com.birthstone.base.parse.ValidatorForm;
+import com.birthstone.base.parse.InitializeController;
+import com.birthstone.base.parse.ValidatorController;
 import com.birthstone.core.parse.Data;
 import com.birthstone.core.parse.DataCollection;
 
@@ -244,12 +244,12 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
 	{
 		try
 		{
-			InitializeForm initializeForm = new InitializeForm((Activity) this.getBaseContext());
+			InitializeController initializeForm = new InitializeController((Activity) this.getBaseContext());
 			initializeForm.initialize();
 		}
 		catch(Exception ex)
 		{
-			Log.v("InitializeForm", ex.getMessage());
+			Log.v("InitializeController", ex.getMessage());
 		}
 	}
 
@@ -329,7 +329,7 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
 	 * */
 	public DataCollection collect(String collectSign)
 	{
-		CollectForm collecter = new CollectForm((Activity) this.getBaseContext(), collectSign);
+		CollectController collecter = new CollectController((Activity) this.getBaseContext(), collectSign);
 		return collecter.collect();
 	}
 
@@ -354,13 +354,13 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
 	 */
 	public void query()
 	{
-		DataQueryForm DataQueryForm;
+		DataQueryController dataQueryController;
 		try
 		{
 			if(this != null)
 			{
-				DataQueryForm = new DataQueryForm((Activity) this.getBaseContext());
-				DataQueryForm.query();
+				dataQueryController = new DataQueryController((Activity) this.getBaseContext());
+				dataQueryController.query();
 			}
 		}
 		catch(Exception ex)
@@ -375,7 +375,7 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
 	 * */
 	public Boolean validator()
 	{
-		ValidatorForm validatorForm = new ValidatorForm((Activity) this.getBaseContext());
+		ValidatorController validatorForm = new ValidatorController((Activity) this.getBaseContext());
 		try
 		{
 			return validatorForm.validator();
