@@ -4,12 +4,12 @@
 		<enum name="String" value="0" />
         <enum name="Integer" value="1" />
         <enum name="Numeric" value="2" />
-        <enum name="Money" value="3" />
-        <enum name="Date" value="4" />
-        <enum name="DateTime" value="5" />
-        <enum name="Guid" value="6" />
-        <enum name="Boolean" value="7" />
-        <enum name="Binary" value="8" />
+        <enum name="Date" value="3" />
+        <enum name="DateTime" value="4" />
+		<enum name="EMail" value="5" />
+		<enum name="URL" value="6" />
+		<enum name="Password" value="7" />
+		<enum name="Phone" value="8" />
 	</attr>
 
 	<!--<attr name="sign">-->

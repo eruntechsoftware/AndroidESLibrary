@@ -112,7 +112,7 @@ public class SqlParserToos {
 
                     if(data != null) {
                         if(data.getValue() != null && !data.getValue().toString().trim().equals("")) {
-                            if(data.getDataType() != null && (data.getDataType().equals(DataType.Integer) || data.getDataType().equals(DataType.Money) || data.getDataType().equals(DataType.Numeric))) {
+                            if(data.getDataType() != null && (data.getDataType().equals(DataType.Integer) || data.getDataType().equals(DataType.Numeric))) {
                                 m.appendReplacement(result, data.getValue().toString().replace("\'", "\'\'"));
                             } else {
                                 m.appendReplacement(result, "\'" + data.getValue().toString().replace("\'", "\'\'").replaceAll("\\n", "\\\\n").replaceAll("\\r", "\\\\r") + "\'");

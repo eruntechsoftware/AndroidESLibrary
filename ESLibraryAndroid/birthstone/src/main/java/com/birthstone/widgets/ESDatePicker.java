@@ -118,12 +118,12 @@ public class ESDatePicker extends android.widget.DatePicker implements ICollecti
      **/
     public Boolean dataValidator() {
         try {
-            mTipText = ValidatorHelper.createDataTypeValidator(mDataType, mTime);
+            mTipText = ValidatorHelper.dataTypeValidator(mDataType, mTime);
             Log.v("DataTypeValidator", mTipText);
-            if (mIsRequired) {
-                Log.v("IsRequiredValidator", mTipText);
-                mTipText = ValidatorHelper.createRequiredValidator(mTime);
-            }
+//            if (mIsRequired) {
+//                Log.v("IsRequiredValidator", mTipText);
+//                mTipText = ValidatorHelper.requiredValidator(mTime);
+//            }
             invalidate();
             if (mTipText.length() != 0) {
                 return false;

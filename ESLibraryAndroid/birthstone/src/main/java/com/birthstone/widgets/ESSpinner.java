@@ -381,13 +381,13 @@ public class ESSpinner extends android.widget.Spinner implements ICollectible, I
 	{
 		try
 		{
-			mTipText = ValidatorHelper.createDataTypeValidator(mDataType, mSelectValue.toString());
+			mTipText = ValidatorHelper.dataTypeValidator(mDataType, mSelectValue.toString());
 			Log.v("DataTypeValidator", mTipText);
-			if(mIsRequired)
-			{
-				Log.v("IsRequiredValidator", mTipText);
-				mTipText = ValidatorHelper.createRequiredValidator(mSelectValue.toString().trim());
-			}
+//			if(mIsRequired)
+//			{
+//				Log.v("IsRequiredValidator", mTipText);
+//				mTipText = ValidatorHelper.createRequiredValidator(mSelectValue.toString().trim());
+//			}
 			invalidate();
 			if(mTipText.length() != 0) { return false; }
 		}

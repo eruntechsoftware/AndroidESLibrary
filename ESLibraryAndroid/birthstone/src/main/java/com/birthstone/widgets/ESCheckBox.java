@@ -38,15 +38,8 @@ public class ESCheckBox extends android.widget.CheckBox implements ICollectible,
 		try
 		{
 			TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ESCheckBox);
-			String dataType = a.getString(R.styleable.ESCheckBox_dataType);
-			if(dataType != null && dataType.length() > 0)
-			{
-				this.mDataType = DataTypeHelper.valueOf(dataType);
-			}
-			else
-			{
-				this.mDataType = com.birthstone.core.helper.DataType.String;
-			}
+			int value = a.getInt(R.styleable.ESCheckBox_dataType,1);
+			this.mDataType = DataTypeHelper.valueOf(value);
 
 			mIsRequired = a.getBoolean(R.styleable.ESCheckBox_isRequired,false);
 			mEmpty2Null = a.getBoolean(R.styleable.ESCheckBox_empty2Null, true);

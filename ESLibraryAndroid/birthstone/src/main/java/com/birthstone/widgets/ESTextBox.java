@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -64,18 +65,36 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 			mCollectSign = a.getString(R.styleable.ESTextBox_collectSign);
 			mEmpty2Null = a.getBoolean(R.styleable.ESTextBox_empty2Null,true);
 			this.addTextChangedListener(textOnchange);
-			
-			try
-			{
-				String dataType = a.getString(R.styleable.ESTextBox_dataType);
-				if(dataType != null && dataType.length() > 0)
-				{
-					this.mDataType = DataTypeHelper.valueOf(dataType);
-				}
-			}
-			catch(Exception ex)
-			{
-				this.mDataType = DataType.String;
+			int value = a.getInt(R.styleable.ESTextBox_dataType,0);
+			this.mDataType = DataTypeHelper.valueOf(value);
+			switch (value){
+				case 0:
+					ESTextBox.this.setInputType(InputType.TYPE_CLASS_TEXT);
+					break;
+				case 1:
+					ESTextBox.this.setInputType(InputType.TYPE_CLASS_NUMBER);
+					break;
+				case 2:
+					ESTextBox.this.setInputType(InputType.TYPE_CLASS_NUMBER);
+					break;
+				case 3:
+					ESTextBox.this.setInputType(InputType.TYPE_CLASS_DATETIME);
+					break;
+				case 4:
+					ESTextBox.this.setInputType(InputType.TYPE_CLASS_DATETIME);
+					break;
+				case 5:
+					ESTextBox.this.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+					break;
+				case 6:
+					ESTextBox.this.setInputType(InputType.TYPE_TEXT_VARIATION_URI);
+					break;
+				case 7:
+					ESTextBox.this.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+					break;
+				case 8:
+					ESTextBox.this.setInputType(InputType.TYPE_CLASS_PHONE);
+					break;
 			}
 			a.recycle();
 		}
@@ -112,16 +131,12 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 	{
 		try
 		{
-			mIsRequiredTooltip = ValidatorHelper.createDataTypeValidator(mDataType, getText().toString());
+			mIsRequiredTooltip = ValidatorHelper.dataTypeValidator(mDataType, getText().toString());
 			if(mIsRequired)
 			{
 				if(mRegularExpression !=null && !"".equals(mRegularExpression))
 				{
 					mIsRequiredTooltip = mRegularExpression;
-				}
-				else
-				{
-					mIsRequiredTooltip = ValidatorHelper.createRequiredValidator(getText().toString().trim());
 				}
 			}
 			invalidate();

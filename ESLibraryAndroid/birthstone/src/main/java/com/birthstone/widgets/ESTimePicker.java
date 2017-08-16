@@ -139,13 +139,13 @@ public class ESTimePicker extends android.widget.TimePicker implements ICollecti
 	{
 		try
 		{
-			mTipText = ValidatorHelper.createDataTypeValidator(mDataType, mTime);
+			mTipText = ValidatorHelper.dataTypeValidator(mDataType, mTime);
 			Log.v("DataTypeValidator", mTipText);
-			if(mIsRequired)
-			{
-				Log.v("IsRequiredValidator", mTipText);
-				mTipText = ValidatorHelper.createRequiredValidator(mTime);
-			}
+//			if(mIsRequired)
+//			{
+//				Log.v("IsRequiredValidator", mTipText);
+//				mTipText = ValidatorHelper.createRequiredValidator(mTime);
+//			}
 			invalidate();
 			if(mTipText.length() != 0) { return false; }
 		}

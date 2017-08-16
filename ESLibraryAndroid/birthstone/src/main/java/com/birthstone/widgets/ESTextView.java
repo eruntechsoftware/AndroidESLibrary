@@ -38,18 +38,7 @@ public class ESTextView extends android.widget.TextView implements ICollectible,
 			TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ESTextView);
 			mCollectSign = a.getString(R.styleable.ESTextView_collectSign);
 			mEmpty2Null = a.getBoolean(R.styleable.ESTextView_empty2Null,true);
-			try
-			{
-				String dataType = a.getString(R.styleable.ESTextView_dataType);
-				if(dataType != null && dataType.length() > 0)
-				{
-					this.mDataType = DataTypeHelper.valueOf(dataType);
-				}
-			}
-			catch(Exception ex)
-			{
-				this.mDataType = DataType.String;
-			}
+			this.mDataType = DataTypeHelper.valueOf(a.getInt(R.styleable.ESTextView_dataType,0));
 			a.recycle();
 		}
 		catch(Exception e)
