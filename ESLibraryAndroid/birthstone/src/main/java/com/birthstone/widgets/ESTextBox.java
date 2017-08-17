@@ -106,8 +106,7 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 			}
 			a.recycle();
 
-//			errorDrawable = this.getResources().getDrawable(R.mipmap.error);
-//			setCompoundDrawables(null, null, errorDrawable, null);
+			errorDrawable = this.getResources().getDrawable(R.mipmap.error);
 		}
 		catch(Exception ex)
 		{
@@ -155,10 +154,10 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 			{
 				if(mRegularExpression !=null && !"".equals(mRegularExpression))
 				{
-					mIsRequiredTooltip = mRegularExpression;
+					invalidate();
 				}
 			}
-			invalidate();
+
 			if(mIsRequiredTooltip.length() != 0) { return false; }
 		}
 		catch(Exception ex)
@@ -179,20 +178,9 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 		{
 			try
 			{
-				if(this != null)
+				if(onTextBoxChangedListener != null)
 				{
-					if(mIsRequired)
-					{
-						dataValidator();
-					}
-					if(!getText().equals(null))
-					{
-						dataValidator();
-					}
-					if(onTextBoxChangedListener != null)
-					{
-						onTextBoxChangedListener.onTextBoxChanged(getText().toString());
-					}
+					onTextBoxChangedListener.onTextBoxChanged(getText().toString());
 				}
 			}
 			catch(Exception ex)
@@ -203,12 +191,12 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 
 		public void beforeTextChanged(CharSequence s, int start, int count, int after)
 		{
-
+			setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
 		}
 
 		public void afterTextChanged(Editable s)
 		{
-
+			dataValidator();
 		}
 	};
 
