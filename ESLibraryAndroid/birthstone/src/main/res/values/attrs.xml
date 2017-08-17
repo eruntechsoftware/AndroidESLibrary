@@ -11,6 +11,7 @@
 		<enum name="URL" value="6" />
 		<enum name="Password" value="7" />
 		<enum name="Phone" value="8" />
+		<enum name="Mobile" value="9" />
 	</attr>
 
 	<!--<attr name="sign">-->
@@ -60,6 +61,12 @@
 	<attr name="empty2Null" format="boolean"></attr>
 	<!--执行的sql文件名称，书写时无后缀名.sql-->
 	<attr name="sql" format="string"></attr>
+	<!--必填项错误提示-->
+	<attr name="isRequiredTooltip" format="string"></attr>
+	<!--正则表达式-->
+	<attr name="regularExpression" format="string"></attr>
+	<!--正则表达式校验错误提示-->
+	<attr name="regularTooltip" format="string"></attr>
 
 	<declare-styleable name="ESActionLoadPage">
 		<!--数据类型-->
@@ -156,12 +163,25 @@
 		<attr name="empty2Null"></attr>
 		<attr name="collectSign"></attr>
 		<!--必填项错误提示-->
-		<attr name="isRequiredTooltip" format="string"></attr>
+		<attr name="isRequiredTooltip"></attr>
 		<!--正则表达式-->
-		<attr name="regularExpression" format="string"></attr>
+		<attr name="regularExpression"></attr>
 		<!--正则表达式校验错误提示-->
-		<attr name="regularTooltip" format="string"></attr>
+		<attr name="regularTooltip"></attr>
 	</declare-styleable>
+
+	<!--<declare-styleable name="ESTextBoxMobile">-->
+		<!--<attr name="dataType"></attr>-->
+		<!--<attr name="isRequired"></attr>-->
+		<!--<attr name="empty2Null"></attr>-->
+		<!--<attr name="collectSign"></attr>-->
+		<!--&lt;!&ndash;必填项错误提示&ndash;&gt;-->
+		<!--<attr name="isRequiredTooltip"></attr>-->
+		<!--&lt;!&ndash;正则表达式&ndash;&gt;-->
+		<!--<attr name="regularExpression"></attr>-->
+		<!--&lt;!&ndash;正则表达式校验错误提示&ndash;&gt;-->
+		<!--<attr name="regularTooltip"></attr>-->
+	<!--</declare-styleable>-->
 
 	<declare-styleable name="ESTextView">
 		<attr name="dataType"></attr>

@@ -100,6 +100,9 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 				case 8:
 					ESTextBox.this.setInputType(InputType.TYPE_CLASS_PHONE);
 					break;
+				case 9:
+					ESTextBox.this.setInputType(InputType.TYPE_CLASS_PHONE);
+					break;
 			}
 			a.recycle();
 
