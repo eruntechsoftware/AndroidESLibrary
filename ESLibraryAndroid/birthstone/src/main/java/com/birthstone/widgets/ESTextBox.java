@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
@@ -46,6 +47,8 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 	protected String mRegularTooltip = "";
 	protected String mNameSpace = "http://schemas.android.com/res/com.birthstone.widgets";
 	private OnTextBoxChangedListener onTextBoxChangedListener;
+
+	private Drawable errorDrawable = null;
 
 	public ESTextBox(Context context)
 	{
@@ -97,6 +100,9 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 					break;
 			}
 			a.recycle();
+
+			errorDrawable = this.getResources().getDrawable(R.drawable.error);
+			setCompoundDrawablesWithIntrinsicBounds(null, null, errorDrawable, null);
 		}
 		catch(Exception ex)
 		{
@@ -131,7 +137,11 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 	{
 		try
 		{
-			mIsRequiredTooltip = ValidatorHelper.dataTypeValidator(mDataType, getText().toString());
+			Boolean isMached = ValidatorHelper.isMached(mRegularExpression, getText().toString());
+			if (!isMached)
+			{
+				setCompoundDrawablesWithIntrinsicBounds(null, null, errorDrawable, null);
+			}
 			if(mIsRequired)
 			{
 				if(mRegularExpression !=null && !"".equals(mRegularExpression))

@@ -11,11 +11,6 @@ public class ValidatorHelper
 	static String expression = "";
 	static String err = "";
 
-	public static ValidatorHelper createValidatorHelper()
-	{
-		return new ValidatorHelper();
-	}
-
 	/**
 	 * 输入值的数据类型校验
 	 * @param datatype 数据类型
