@@ -102,8 +102,8 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 			a.recycle();
 
 			errorDrawable = this.getResources().getDrawable(R.drawable.error);
-			Rect bounds = errorDrawable.getBounds();
-			errorDrawable.setBounds(bounds.left,bounds.top,bounds.right-40,bounds.bottom);
+//			Rect bounds = errorDrawable.getBounds();
+//			errorDrawable.setBounds(bounds.left,bounds.top,bounds.right-40,bounds.bottom);
 			setCompoundDrawablesWithIntrinsicBounds(null, null, errorDrawable, null);
 		}
 		catch(Exception ex)
