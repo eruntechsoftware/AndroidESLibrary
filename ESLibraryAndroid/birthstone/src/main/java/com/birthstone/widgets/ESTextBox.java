@@ -19,6 +19,7 @@ import android.widget.EditText;
 
 import com.birthstone.R;
 import com.birthstone.base.activity.Activity;
+import com.birthstone.base.event.OnTextBoxChangedListener;
 import com.birthstone.base.helper.InitializeHelper;
 import com.birthstone.core.helper.DataType;
 import com.birthstone.core.helper.DataTypeHelper;
@@ -49,6 +50,7 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 	protected String mRegularTooltip = "";
 	protected String mNameSpace = "http://schemas.android.com/res/com.birthstone.widgets";
 
+	private OnTextBoxChangedListener onTextBoxChangedListener;
 	private Drawable errorDrawable = null;
 
 	public ESTextBox(Context context)
@@ -148,6 +150,11 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 		if(!ValidatorHelper.isMached(mRegularExpression, getText().toString()))
 		{
 			setCompoundDrawablesWithIntrinsicBounds(null, null, errorDrawable, null);
+		}
+
+		if(onTextBoxChangedListener!=null)
+		{
+			onTextBoxChangedListener.onTextBoxChanged(getText().toString());
 		}
 	}
 
@@ -338,5 +345,15 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 	public String getName()
 	{
 		return mName;
+	}
+
+	public OnTextBoxChangedListener getOnTextBoxChangedListener()
+	{
+		return onTextBoxChangedListener;
+	}
+
+	public void setOnTextBoxChangedListener(OnTextBoxChangedListener onTextBoxChangedListener)
+	{
+		this.onTextBoxChangedListener = onTextBoxChangedListener;
 	}
 }
