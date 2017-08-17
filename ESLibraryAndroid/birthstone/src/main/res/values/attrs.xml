@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<!--声明的数据类型枚举-->
 	<attr name="dataType">
 		<enum name="String" value="0" />
         <enum name="Integer" value="1" />
@@ -35,6 +36,7 @@
 		<!--<enum name="No" value="0" />-->
 	<!--</attr>-->
 
+	<!--声明的枚举，暂时不用了-->
 	<!--<attr name="empty2Null">-->
 		<!--<enum name="Yes" value="1" />-->
 		<!--<enum name="No" value="0" />-->
@@ -45,22 +47,7 @@
 		<!--<enum name="No" value="0" />-->
 	<!--</attr>-->
 
-	<!--<declare-styleable name="View">-->
-		<!--<attr name="dataType"></attr>-->
-		<!--&lt;!&ndash;采集标记&ndash;&gt;-->
-		<!--<attr name="collectSign" format="string"></attr>-->
-		<!--&lt;!&ndash;标记，配合collectSign使用&ndash;&gt;-->
-		<!--<attr name="sign" format="string"></attr>-->
-		<!--&lt;!&ndash;是否必填项&ndash;&gt;-->
-		<!--<attr name="isRequired" format="boolean"></attr>-->
-		<!--&lt;!&ndash;是否自动执行&ndash;&gt;-->
-		<!--<attr name="automatic" format="boolean"></attr>-->
-		<!--&lt;!&ndash;数据为空时用null代替&ndash;&gt;-->
-		<!--<attr name="empty2Null" format="boolean"></attr>-->
-		<!--&lt;!&ndash;执行的sql文件名称，书写时无后缀名.sql&ndash;&gt;-->
-		<!--<attr name="sql" format="string"></attr>-->
-	<!--</declare-styleable>-->
-
+	<!--声明属性，在类中引用-->
 	<!--采集标记-->
 	<attr name="collectSign" format="string"></attr>
 	<!--标记，配合collectSign使用-->
@@ -182,59 +169,4 @@
 		<attr name="empty2Null"></attr>
 		<attr name="collectSign"></attr>
 	</declare-styleable>
-
-
-
-<!--<declare-styleable name="View">-->
-	<!--&lt;!&ndash;数据类型&ndash;&gt;-->
-	<!--<attr name="dataType"></attr>-->
-	<!--&lt;!&ndash;是否必填项&ndash;&gt;-->
-	<!--<attr name="isRequired" format="boolean"></attr>-->
-	<!--&lt;!&ndash;采集标记&ndash;&gt;-->
-	<!--<attr name="collectSign" format="string"></attr>-->
-	<!--&lt;!&ndash;数据为空时用null代替&ndash;&gt;-->
-	<!--<attr name="empty2Null" format="boolean"></attr>-->
-	<!--&lt;!&ndash;采集标记名称&ndash;&gt;-->
-	<!--<attr name="collectName" format="string"></attr>-->
-	<!--&lt;!&ndash;标记，配合collectSign使用&ndash;&gt;-->
-	<!--<attr name="sign" format="string"></attr>-->
-	<!--&lt;!&ndash;执行的sql文件名称，书写时无后缀名.sql&ndash;&gt;-->
-	<!--<attr name="sql" format="string"></attr>-->
-	<!--&lt;!&ndash;是否自动关闭当前Activity&ndash;&gt;-->
-	<!--<attr name="isClosed" format="boolean"></attr>-->
-	<!--&lt;!&ndash;是否自动执行&ndash;&gt;-->
-	<!--<attr name="autoLoad" format="boolean"></attr>-->
-	<!--&lt;!&ndash;弹出的消息提示&ndash;&gt;-->
-	<!--<attr name="message" format="string"></attr>-->
-	<!--&lt;!&ndash;状态ViewID&ndash;&gt;-->
-	<!--<attr name="stateHiddenId" format="string"></attr>-->
-	<!--&lt;!&ndash;希望显示状态的值&ndash;&gt;-->
-	<!--<attr name="wantedStateValue" format="string"></attr>-->
-	<!--&lt;!&ndash;权限标记&ndash;&gt;-->
-	<!--<attr name="funcSign" format="string"></attr>-->
-	<!--&lt;!&ndash;目标屏幕路径&ndash;&gt;-->
-	<!--<attr name="open" format="string"></attr>-->
-	<!--&lt;!&ndash;绑定的显示字段名称&ndash;&gt;-->
-	<!--<attr name="displayValue" format="string"></attr>-->
-	<!--&lt;!&ndash;绑定的值字段名&ndash;&gt;-->
-	<!--<attr name="bindValue" format="string"></attr>-->
-	<!--<attr name="layoutID" format="string"></attr>-->
-	<!--<attr name="bindID" format="string"></attr>-->
-	<!--<attr name="isEmpty" format="boolean"></attr>-->
-	<!--&lt;!&ndash;文本字体值&ndash;&gt;-->
-	<!--<attr name="textSize" format="dimension"></attr>-->
-	<!--<attr name="clickedColor" format="color"></attr>-->
-
-	<!--&lt;!&ndash;ESTextBox专用属性&ndash;&gt;-->
-	<!--&lt;!&ndash;必填项错误提示&ndash;&gt;-->
-	<!--<attr name="isRequiredTooltip" format="string"></attr>-->
-	<!--&lt;!&ndash;正则表达式&ndash;&gt;-->
-	<!--<attr name="regularExpression" format="string"></attr>-->
-	<!--&lt;!&ndash;正则表达式校验错误提示&ndash;&gt;-->
-	<!--<attr name="regularTooltip" format="string"></attr>-->
-<!--</declare-styleable>-->
-
-	<!--<declare-styleable name="Themes">-->
-		<!--<attr name="birthstoneStyle" format="reference"/>-->
-	<!--</declare-styleable>-->
 </resources>

@@ -12,6 +12,8 @@ import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 
 import com.birthstone.R;
@@ -101,10 +103,8 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 			}
 			a.recycle();
 
-			errorDrawable = this.getResources().getDrawable(R.drawable.error);
-			Rect bounds = errorDrawable.getBounds();
-			errorDrawable.setBounds(bounds.left,bounds.top-5,bounds.right-40,bounds.bottom-5);
-			setCompoundDrawablesWithIntrinsicBounds(null, null, errorDrawable, null);
+//			errorDrawable = this.getResources().getDrawable(R.mipmap.error);
+//			setCompoundDrawables(null, null, errorDrawable, null);
 		}
 		catch(Exception ex)
 		{
@@ -130,7 +130,6 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 			mPaint.setFlags(Paint.ANTI_ALIAS_FLAG);
 			Rect rect = new Rect();
 			mPaint.getTextBounds(mIsRequiredTooltip, 0, mIsRequiredTooltip.length(), rect);
-			
 			canvas.drawText(mIsRequiredTooltip, this.getPaddingLeft()+8, this.getHeight() / 2 + rect.height()/2, mPaint);
 		}
 	}
@@ -143,6 +142,11 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 			if (!isMached)
 			{
 				setCompoundDrawablesWithIntrinsicBounds(null, null, errorDrawable, null);
+				shakeAnimation();
+			}
+			else
+			{
+				setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
 			}
 			if(mIsRequired)
 			{
@@ -159,6 +163,11 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 			Log.e("Validator", ex.getMessage());
 		}
 		return true;
+	}
+
+	private void shakeAnimation(){
+		Animation shake = AnimationUtils.loadAnimation(this.getContext(), R.anim.shake);
+		this.startAnimation(shake);
 	}
 
 	private TextWatcher textOnchange = new TextWatcher()
