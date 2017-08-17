@@ -12,13 +12,13 @@ import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 
 import com.birthstone.R;
 import com.birthstone.base.activity.Activity;
-import com.birthstone.base.event.OnTextBoxChangedListener;
 import com.birthstone.base.helper.InitializeHelper;
 import com.birthstone.core.helper.DataType;
 import com.birthstone.core.helper.DataTypeHelper;
@@ -36,7 +36,7 @@ import com.birthstone.core.parse.DataCollection;
 import java.util.LinkedList;
 
 
-public class ESTextBox extends EditText implements ICollectible, IValidatible, IReleasable, ICellTitleStyleRequire, IDataInitialize
+public class ESTextBox extends EditText implements ICollectible, IValidatible, IReleasable, ICellTitleStyleRequire, IDataInitialize,View.OnFocusChangeListener,TextWatcher
 {
 	protected DataType mDataType;
 	protected Boolean mIsRequired;
@@ -48,7 +48,6 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 	protected String mRegularExpression = "";
 	protected String mRegularTooltip = "";
 	protected String mNameSpace = "http://schemas.android.com/res/com.birthstone.widgets";
-	private OnTextBoxChangedListener onTextBoxChangedListener;
 
 	private Drawable errorDrawable = null;
 
@@ -69,7 +68,8 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 			mIsRequired = a.getBoolean(R.styleable.ESTextBox_isRequired,false);
 			mCollectSign = a.getString(R.styleable.ESTextBox_collectSign);
 			mEmpty2Null = a.getBoolean(R.styleable.ESTextBox_empty2Null,true);
-			this.addTextChangedListener(textOnchange);
+			this.addTextChangedListener(this);
+			this.setOnFocusChangeListener(this);
 			int value = a.getInt(R.styleable.ESTextBox_dataType,0);
 			this.mDataType = DataTypeHelper.valueOf(value);
 			switch (value){
@@ -136,6 +136,31 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 		}
 	}
 
+	@Override
+	public void onFocusChange(View view, boolean hasFocus) {
+		if (!hasFocus){
+			dataValidator();
+		}
+	}
+
+	public void onTextChanged(CharSequence s, int start, int before, int count)
+	{
+		if(!ValidatorHelper.isMached(mRegularExpression, getText().toString()))
+		{
+			setCompoundDrawablesWithIntrinsicBounds(null, null, errorDrawable, null);
+		}
+	}
+
+	public void beforeTextChanged(CharSequence s, int start, int count, int after)
+	{
+		setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
+	}
+
+	public void afterTextChanged(Editable s)
+	{
+
+	}
+
 	public Boolean dataValidator()
 	{
 		try
@@ -143,7 +168,6 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 			Boolean isMached = ValidatorHelper.isMached(mRegularExpression, getText().toString());
 			if (!isMached)
 			{
-				setCompoundDrawablesWithIntrinsicBounds(null, null, errorDrawable, null);
 				shakeAnimation();
 			}
 			else
@@ -172,33 +196,6 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 		this.startAnimation(shake);
 	}
 
-	private TextWatcher textOnchange = new TextWatcher()
-	{
-		public void onTextChanged(CharSequence s, int start, int before, int count)
-		{
-			try
-			{
-				if(onTextBoxChangedListener != null)
-				{
-					onTextBoxChangedListener.onTextBoxChanged(getText().toString());
-				}
-			}
-			catch(Exception ex)
-			{
-				Log.v("ValidatorError", ex.getMessage());
-			}
-		}
-
-		public void beforeTextChanged(CharSequence s, int start, int count, int after)
-		{
-			setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
-		}
-
-		public void afterTextChanged(Editable s)
-		{
-			dataValidator();
-		}
-	};
 
 	public DataType getDataType()
 	{
@@ -328,16 +325,6 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 		this.mNameSpace = nameSpace;
 	}
 
-	public TextWatcher getTextOnchange()
-	{
-		return textOnchange;
-	}
-
-	public void setTextOnchange(TextWatcher textOnchange)
-	{
-		this.textOnchange = textOnchange;
-	}
-
 	public void setName(String name)
 	{
 		this.mName = name;
@@ -351,15 +338,5 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 	public String getName()
 	{
 		return mName;
-	}
-
-	public OnTextBoxChangedListener getOnTextBoxChangedListener()
-	{
-		return onTextBoxChangedListener;
-	}
-
-	public void setOnTextBoxChangedListener(OnTextBoxChangedListener onTextBoxChangedListener)
-	{
-		this.onTextBoxChangedListener = onTextBoxChangedListener;
 	}
 }
