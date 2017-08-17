@@ -141,11 +141,24 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 	@Override
 	public void onFocusChange(View view, boolean hasFocus) {
 		if (!hasFocus){
-			dataValidator();
+			if(!ValidatorHelper.isMached(mRegularExpression, getText().toString()))
+			{
+				shakeAnimation();
+			}
 		}
 	}
 
 	public void onTextChanged(CharSequence s, int start, int before, int count)
+	{
+
+	}
+
+	public void beforeTextChanged(CharSequence s, int start, int count, int after)
+	{
+		setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
+	}
+
+	public void afterTextChanged(Editable s)
 	{
 		if(!ValidatorHelper.isMached(mRegularExpression, getText().toString()))
 		{
@@ -158,16 +171,6 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 		}
 	}
 
-	public void beforeTextChanged(CharSequence s, int start, int count, int after)
-	{
-		setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
-	}
-
-	public void afterTextChanged(Editable s)
-	{
-
-	}
-
 	public Boolean dataValidator()
 	{
 		try
@@ -175,7 +178,7 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 			Boolean isMached = ValidatorHelper.isMached(mRegularExpression, getText().toString());
 			if (!isMached)
 			{
-				shakeAnimation();
+				setCompoundDrawablesWithIntrinsicBounds(null, null, errorDrawable, null);
 			}
 			else
 			{
