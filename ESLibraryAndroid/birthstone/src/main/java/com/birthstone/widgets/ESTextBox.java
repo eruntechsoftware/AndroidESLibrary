@@ -61,7 +61,7 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 		try
 		{
 			TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ESTextBox);
-			mIsRequiredTooltip = a.getString(R.styleable.ESTextBox_isRequiredTooltip);
+//			mIsRequiredTooltip = a.getString(R.styleable.ESTextBox_isRequiredTooltip);
 			mRegularExpression = a.getString(R.styleable.ESTextBox_regularExpression);
 			mRegularTooltip = a.getString(R.styleable.ESTextBox_regularTooltip);
 			mIsRequired = a.getBoolean(R.styleable.ESTextBox_isRequired,false);
@@ -71,38 +71,7 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 			this.setOnFocusChangeListener(this);
 			int value = a.getInt(R.styleable.ESTextBox_dataType,0);
 			this.mDataType = DataTypeHelper.valueOf(value);
-			switch (value){
-				case 0:
-					ESTextBox.this.setInputType(InputType.TYPE_CLASS_TEXT);
-					break;
-				case 1:
-					ESTextBox.this.setInputType(InputType.TYPE_CLASS_NUMBER);
-					break;
-				case 2:
-					ESTextBox.this.setInputType(InputType.TYPE_CLASS_NUMBER);
-					break;
-				case 3:
-					ESTextBox.this.setInputType(InputType.TYPE_CLASS_DATETIME);
-					break;
-				case 4:
-					ESTextBox.this.setInputType(InputType.TYPE_CLASS_DATETIME);
-					break;
-				case 5:
-					ESTextBox.this.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
-					break;
-				case 6:
-					ESTextBox.this.setInputType(InputType.TYPE_TEXT_VARIATION_URI);
-					break;
-				case 7:
-					ESTextBox.this.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
-					break;
-				case 8:
-					ESTextBox.this.setInputType(InputType.TYPE_CLASS_PHONE);
-					break;
-				case 9:
-					ESTextBox.this.setInputType(InputType.TYPE_CLASS_PHONE);
-					break;
-			}
+			setInputTypeWithDataType(value);
 			a.recycle();
 
 			errorDrawable = this.getResources().getDrawable(R.mipmap.error);
@@ -118,6 +87,46 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 	public ESTextBox(Context context, AttributeSet attrs, int defStyle)
 	{
 		super(context, attrs, defStyle);
+	}
+
+	/**
+	 * 根据数据类型设置键盘类型
+	 * @param value 数据类型枚举
+	 * */
+	public void setInputTypeWithDataType(int value)
+	{
+		switch (value){
+			case 0:
+				ESTextBox.this.setInputType(InputType.TYPE_CLASS_TEXT);
+				break;
+			case 1:
+				ESTextBox.this.setInputType(InputType.TYPE_CLASS_NUMBER);
+				break;
+			case 2:
+				ESTextBox.this.setInputType(InputType.TYPE_CLASS_NUMBER);
+				break;
+			case 3:
+				ESTextBox.this.setInputType(InputType.TYPE_CLASS_DATETIME);
+				break;
+			case 4:
+				ESTextBox.this.setInputType(InputType.TYPE_CLASS_DATETIME);
+				break;
+			case 5:
+				ESTextBox.this.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+				break;
+			case 6:
+				ESTextBox.this.setInputType(InputType.TYPE_TEXT_VARIATION_URI);
+				break;
+			case 7:
+				ESTextBox.this.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+				break;
+			case 8:
+				ESTextBox.this.setInputType(InputType.TYPE_CLASS_PHONE);
+				break;
+			case 9:
+				ESTextBox.this.setInputType(InputType.TYPE_CLASS_PHONE);
+				break;
+		}
 	}
 
 	protected void onDraw(Canvas canvas)
