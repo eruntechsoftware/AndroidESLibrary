@@ -43,11 +43,7 @@ public class ValidatorController implements IValidator, IControlSearcherHandler
 	{
 		try
 		{
-			IValidatible Validatible = (IValidatible) obj;
-			if(!Validatible.dataValidator())
-			{
-				result = false;
-			}
+
 		}
 		catch(Exception ex)
 		{
@@ -57,8 +53,13 @@ public class ValidatorController implements IValidator, IControlSearcherHandler
 
 	public Boolean isPicked(Object obj)
 	{
-
-		return obj instanceof IValidatible;
+		result = false;
+		if (obj instanceof IValidatible)
+		{
+			IValidatible Validatible = (IValidatible) obj;
+			result = Validatible.dataValidator();
+		}
+		return result;
 	}
 
 	public Activity getForm()

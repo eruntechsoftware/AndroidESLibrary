@@ -182,13 +182,9 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 			{
 				setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
 			}
-			if(mIsRequired)
+			if(mIsRequired && getText().toString().trim().equals(""))
 			{
 				setCompoundDrawablesWithIntrinsicBounds(null, null, requiredDrawable, null);
-//				if(mRegularExpression !=null && !"".equals(mRegularExpression))
-//				{
-//					invalidate();
-//				}
 			}
 
 			if(mIsRequiredTooltip.length() != 0) { return false; }
