@@ -3,9 +3,6 @@ package com.birthstone.widgets;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.text.Editable;
 import android.text.InputType;
@@ -51,7 +48,7 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 	protected String mNameSpace = "http://schemas.android.com/res/com.birthstone.widgets";
 
 	private OnTextBoxChangedListener onTextBoxChangedListener;
-	private Drawable errorDrawable = null;
+	private Drawable errorDrawable, requiredDrawable;
 
 	public ESTextBox(Context context)
 	{
@@ -109,6 +106,7 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 			a.recycle();
 
 			errorDrawable = this.getResources().getDrawable(R.mipmap.error);
+			requiredDrawable = this.getResources().getDrawable(R.mipmap.required);
 		}
 		catch(Exception ex)
 		{
@@ -125,17 +123,17 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 	protected void onDraw(Canvas canvas)
 	{
 		super.onDraw(canvas);
-		String value =  this.getText().toString().trim();
-		if(mIsRequiredTooltip!=null && !"".equals(mIsRequiredTooltip) && mIsRequired==true && value.length()==0)
-		{
-			Paint mPaint = new Paint();
-			mPaint.setColor(Color.RED);
-			mPaint.setTextSize(this.getTextSize());
-			mPaint.setFlags(Paint.ANTI_ALIAS_FLAG);
-			Rect rect = new Rect();
-			mPaint.getTextBounds(mIsRequiredTooltip, 0, mIsRequiredTooltip.length(), rect);
-			canvas.drawText(mIsRequiredTooltip, this.getPaddingLeft()+8, this.getHeight() / 2 + rect.height()/2, mPaint);
-		}
+//		String value =  this.getText().toString().trim();
+//		if(mIsRequiredTooltip!=null && !"".equals(mIsRequiredTooltip) && mIsRequired==true && value.length()==0)
+//		{
+//			Paint mPaint = new Paint();
+//			mPaint.setColor(Color.RED);
+//			mPaint.setTextSize(this.getTextSize());
+//			mPaint.setFlags(Paint.ANTI_ALIAS_FLAG);
+//			Rect rect = new Rect();
+//			mPaint.getTextBounds(mIsRequiredTooltip, 0, mIsRequiredTooltip.length(), rect);
+//			canvas.drawText(mIsRequiredTooltip, this.getPaddingLeft()+8, this.getHeight() / 2 + rect.height()/2, mPaint);
+//		}
 	}
 
 	@Override
@@ -186,10 +184,11 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 			}
 			if(mIsRequired)
 			{
-				if(mRegularExpression !=null && !"".equals(mRegularExpression))
-				{
-					invalidate();
-				}
+				setCompoundDrawablesWithIntrinsicBounds(null, null, requiredDrawable, null);
+//				if(mRegularExpression !=null && !"".equals(mRegularExpression))
+//				{
+//					invalidate();
+//				}
 			}
 
 			if(mIsRequiredTooltip.length() != 0) { return false; }
