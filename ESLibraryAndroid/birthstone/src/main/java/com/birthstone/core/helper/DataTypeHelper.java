@@ -28,7 +28,7 @@ public class DataTypeHelper {
 				dataType=DataType.URL;
 				break;
 			case 7:
-				dataType=DataType.Password;
+				dataType=DataType.IDCard;
 				break;
 			case 8:
 				dataType=DataType.Phone;
