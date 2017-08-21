@@ -118,7 +118,7 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 				ESTextBox.this.setInputType(InputType.TYPE_TEXT_VARIATION_URI);
 				break;
 			case 7:
-				ESTextBox.this.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+//				ESTextBox.this.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
 				break;
 			case 8:
 				ESTextBox.this.setInputType(InputType.TYPE_CLASS_PHONE);
