@@ -9,7 +9,7 @@
         <enum name="DateTime" value="4" />
 		<enum name="EMail" value="5" />
 		<enum name="URL" value="6" />
-		<enum name="Password" value="7" />
+		<enum name="IDCard" value="7" />
 		<enum name="Phone" value="8" />
 		<enum name="Mobile" value="9" />
 	</attr>
