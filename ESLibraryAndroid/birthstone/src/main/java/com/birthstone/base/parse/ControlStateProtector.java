@@ -14,7 +14,7 @@ import java.util.List;
 
 public class ControlStateProtector implements IControlSearcherHandler
 {
-	private Activity form;
+	private Activity activity;
 
 	public ControlStateProtector( )
 	{
@@ -26,14 +26,14 @@ public class ControlStateProtector implements IControlSearcherHandler
 		return ControlStateProtector;
 	}
 
-	public void setStateControl(Object form)
+	public void setStateControl(Object activity)
 	{
 		try
 		{
-			this.form = (Activity) form;
+			this.activity = (Activity) activity;
 			List<IControlSearcherHandler> Controllist = new ArrayList<IControlSearcherHandler>();
 			Controllist.add(this);
-			new ControlSearcher(Controllist).search(form);
+			new ControlSearcher(Controllist).search(activity);
 			Controllist.clear();
 			Controllist=null;
 		}
@@ -47,11 +47,11 @@ public class ControlStateProtector implements IControlSearcherHandler
 	{
 		try
 		{
-			if(form == null)
+			if(activity == null)
 			{
 				if(obj instanceof Activity)
 				{
-					form = (Activity) obj;
+					activity = (Activity) obj;
 				}
 			}
 			if(obj instanceof IStateProtected)
@@ -64,15 +64,15 @@ public class ControlStateProtector implements IControlSearcherHandler
 					{
 						ESHiddenFeild hidden = null;
 						IReleasable release;
-						int size = form.getViews().size();
+						int size = activity.getViews().size();
 						for(int i = 0; i < size; i++)
 						{
-							if(form.getViews().get(i) instanceof IReleasable)
+							if(activity.getViews().get(i) instanceof IReleasable)
 							{
-								release = (IReleasable) form.getViews().get(i);
+								release = (IReleasable) activity.getViews().get(i);
 								if(release.getName().equals(aprotected.getStateHiddenId()))
 								{
-									hidden = (ESHiddenFeild) form.getViews().get(i);
+									hidden = (ESHiddenFeild) activity.getViews().get(i);
 								}
 							}
 						}
@@ -110,16 +110,6 @@ public class ControlStateProtector implements IControlSearcherHandler
 			}
 		}
 		return result;
-	}
-
-	public Activity getForm()
-	{
-		return form;
-	}
-
-	public void setForm(Activity form)
-	{
-		this.form = form;
 	}
 
 }

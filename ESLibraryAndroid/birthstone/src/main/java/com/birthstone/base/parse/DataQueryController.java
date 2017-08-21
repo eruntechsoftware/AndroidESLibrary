@@ -13,11 +13,11 @@ import java.util.List;
 
 public class DataQueryController implements IControlSearcherHandler
 {
-	private Activity form;
+	private Activity activity;
 
-	public DataQueryController(Activity form )
+	public DataQueryController(Activity activity )
 	{
-		this.form = form;
+		this.activity = activity;
 	}
 
 	public void query()
@@ -26,13 +26,13 @@ public class DataQueryController implements IControlSearcherHandler
 		{
 			List<IControlSearcherHandler> Controllist = new ArrayList<IControlSearcherHandler>();
 			Controllist.add(this);
-			new ControlSearcher(Controllist).search(form);
+			new ControlSearcher(Controllist).search(activity);
 			Controllist.clear();
 			Controllist=null;
 		}
 		catch(Exception ex)
 		{
-			Log.v("QueryForm", ex.getMessage());
+			Log.v("IDataQuery", ex.getMessage());
 		}
 	}
 
@@ -49,10 +49,6 @@ public class DataQueryController implements IControlSearcherHandler
 		}
 		catch(Exception ex)
 		{
-			/*
-			 * if (ex.InnerException == null) { throw new Exception(control.Name
-			 * + ""); }
-			 */
 			Log.v("Validator", ex.getMessage());
 		}
 	}
@@ -61,16 +57,6 @@ public class DataQueryController implements IControlSearcherHandler
 	{
 
 		return obj instanceof IDataQuery;
-	}
-
-	public Activity getForm()
-	{
-		return form;
-	}
-
-	public void setForm(Activity form)
-	{
-		this.form = form;
 	}
 
 }

@@ -17,19 +17,19 @@ public class RefreshController implements IControlSearcherHandler
 	{
 	}
 
-	public static RefreshController createRefreshForm()
+	public static RefreshController createRefreshController()
 	{
 		RefreshController Ref = new RefreshController();
 		return Ref;
 	}
 
-	public void refresh(Activity form) throws Exception
+	public void refresh(Activity activity) throws Exception
 	{
 		try
 		{
 			List<IControlSearcherHandler> Controllist = new ArrayList<IControlSearcherHandler>();
 			Controllist.add(this);
-			new ControlSearcher(Controllist).search(form);
+			new ControlSearcher(Controllist).search(activity);
 			Controllist.clear();
 			Controllist=null;
 		}
@@ -51,10 +51,7 @@ public class RefreshController implements IControlSearcherHandler
 		}
 		catch(Exception ex)
 		{
-			Log.v("Validator", ex.getMessage());// new
-												// ApplicationException(control.Name
-												// + " ִRefreshData()ԭ"
-												// + ex.Message);
+			Log.v("IRefresh", ex.getMessage());
 		}
 	}
 

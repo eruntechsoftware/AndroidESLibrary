@@ -17,19 +17,19 @@ public class DataReleaserController implements IControlSearcherHandler
 	{
 	}
 
-	public static DataReleaserController createDataReleaserForm()
+	public static DataReleaserController createDataReleaserController()
 	{
-		DataReleaserController DataReleaserForm = new DataReleaserController();
-		return DataReleaserForm;
+		DataReleaserController dataReleaserController = new DataReleaserController();
+		return dataReleaserController;
 	}
 
-	public void release(Activity form) throws Exception
+	public void release(Activity activity) throws Exception
 	{
 		try
 		{
 			List<IControlSearcherHandler> Controllist = new ArrayList<IControlSearcherHandler>();
 			Controllist.add(this);
-			new ControlSearcher(Controllist).search(form);
+			new ControlSearcher(Controllist).search(activity);
 			Controllist.clear();
 			Controllist=null;
 		}
@@ -51,7 +51,7 @@ public class DataReleaserController implements IControlSearcherHandler
 		}
 		catch(Exception ex)
 		{
-			Log.v("Validator", ex.getMessage());
+			Log.v("IDataReleaser", ex.getMessage());
 		}
 	}
 

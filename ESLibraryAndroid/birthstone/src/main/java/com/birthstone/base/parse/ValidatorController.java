@@ -14,12 +14,12 @@ import java.util.List;
 public class ValidatorController implements IValidator, IControlSearcherHandler
 {
 
-	private Activity form;
+	private Activity activity;
 	private Boolean result = true;
 
-	public ValidatorController(Activity form )
+	public ValidatorController(Activity activity )
 	{
-		this.form = form;
+		this.activity = activity;
 	}
 
 	public Boolean validator()
@@ -28,7 +28,7 @@ public class ValidatorController implements IValidator, IControlSearcherHandler
 		{
 			List<IControlSearcherHandler> Controllist = new ArrayList<IControlSearcherHandler>();
 			Controllist.add(this);
-			new ControlSearcher(Controllist).search(form);
+			new ControlSearcher(Controllist).search(activity);
 			Controllist.clear();
 			Controllist=null;
 		}
@@ -43,7 +43,8 @@ public class ValidatorController implements IValidator, IControlSearcherHandler
 	{
 		try
 		{
-
+			IValidatible Validatible = (IValidatible) obj;
+			result = Validatible.dataValidator();
 		}
 		catch(Exception ex)
 		{
@@ -53,28 +54,7 @@ public class ValidatorController implements IValidator, IControlSearcherHandler
 
 	public Boolean isPicked(Object obj)
 	{
-		result = false;
-		if (obj instanceof IValidatible)
-		{
-			IValidatible Validatible = (IValidatible) obj;
-			result = Validatible.dataValidator();
-		}
-		return result;
-	}
-
-	public Activity getForm()
-	{
-		return form;
-	}
-
-	public void setForm(Activity form)
-	{
-		this.form = form;
-	}
-
-	public Boolean getResult()
-	{
-		return result;
+		return obj instanceof IValidatible;
 	}
 
 }

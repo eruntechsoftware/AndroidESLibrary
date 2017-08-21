@@ -63,41 +63,4 @@ public class DataBindController implements IDataBinder, IControlSearcherHandler
 		return obj instanceof IDataBindble;
 	}
 
-	public Activity getactivity()
-	{
-		return activity;
-	}
-
-	@SuppressWarnings("unused")
-	private Object getSource()
-	{
-		return source;
-	}
-
-	@SuppressWarnings("unused")
-	private String getID()
-	{
-		return id;
-	}
-
-	public String getId()
-	{
-		return id;
-	}
-
-	public void setId(String id)
-	{
-		this.id = id;
-	}
-
-	public void setactivity(Activity activity)
-	{
-		this.activity = activity;
-	}
-
-	public void setSource(Object source)
-	{
-		this.source = source;
-	}
-
 }

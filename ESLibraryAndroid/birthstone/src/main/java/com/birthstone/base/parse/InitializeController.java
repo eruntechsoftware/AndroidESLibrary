@@ -49,27 +49,13 @@ public class InitializeController implements IControlSearcherHandler
 		}
 		catch(Exception ex)
 		{
-			/*
-			 * if (ex.InnerException == null) { throw new Exception(control.Name
-			 * + ""); }
-			 */
-			Log.v("Validator", ex.getMessage());
+			Log.v("IDataInitialize", ex.getMessage());
 		}
 	}
 
 	public Boolean isPicked(Object obj)
 	{
 		return obj instanceof IDataInitialize;
-	}
-
-	public Activity getActivity()
-	{
-		return mActivity;
-	}
-
-	public void setActivity(Activity mActivity)
-	{
-		this.mActivity = mActivity;
 	}
 
 }

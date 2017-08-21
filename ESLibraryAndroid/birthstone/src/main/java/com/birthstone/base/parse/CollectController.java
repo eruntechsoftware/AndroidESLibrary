@@ -15,8 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @
- * @ܣռForm ICollectibleʵֶ
+ * 数据收集器
  */
 public class CollectController implements ICollector, IControlSearcherHandler
 {
@@ -25,7 +24,8 @@ public class CollectController implements ICollector, IControlSearcherHandler
 	String mSign;
 
 	/**
-	 *
+	 * 数据收集器
+	 * @param mActivity 屏幕
 	 */
 	public CollectController(Activity mActivity )
 	{
@@ -33,8 +33,9 @@ public class CollectController implements ICollector, IControlSearcherHandler
 	}
 
 	/**
-	 *
-	 * @param sign
+	 * 数据收集器
+	 * @param mActivity 屏幕
+	 * @param sign 收集标记
 	 */
 	public CollectController(Activity mActivity, String sign )
 	{
@@ -66,11 +67,7 @@ public class CollectController implements ICollector, IControlSearcherHandler
 		return this.mResult;
 	}
 
-	/**
-	 * ѭռ
-	 * 
-	 * @param obj ҪռĶ
-	 */
+
 	public void handle(Object obj)
 	{
 		try
@@ -92,7 +89,7 @@ public class CollectController implements ICollector, IControlSearcherHandler
 	}
 
 	/**
-	 * ȷ϶ǷICollectibleʵ
+	 * 是否匹配收集接口
 	 */
 	public Boolean isPicked(Object obj)
 	{
@@ -111,15 +108,6 @@ public class CollectController implements ICollector, IControlSearcherHandler
 		return false;
 	}
 
-	/**
-	 * @:  2012-5-23
-	 * @޸:
-	 * @޸ʱ䣺
-	 * @ܣƥǣȷǷռ
-	 * @param target
-	 * @param strings Ǽ
-	 * @return
-	 */
 	private Boolean matchSign(String target, String[] strings)
 	{
 		int size = strings.length;
@@ -128,31 +116,6 @@ public class CollectController implements ICollector, IControlSearcherHandler
 			if(strings[i] != null && strings[i].equals(target)) { return true; }
 		}
 		return false;
-	}
-
-	public Activity getActivity()
-	{
-		return mActivity;
-	}
-
-	public void setActivity(Activity mActivity)
-	{
-		this.mActivity = mActivity;
-	}
-
-	public DataCollection getDataCollection()
-	{
-		return mResult;
-	}
-
-	public String getSign()
-	{
-		return mSign;
-	}
-
-	public void setSign(String sign)
-	{
-		this.mSign = sign;
 	}
 
 }

@@ -17,23 +17,23 @@ import java.util.List;
 public class ReleaseController implements IReleaser, IControlSearcherHandler
 {
 	private DataTable table;
-	private Activity form;
+	private Activity activity;
 
-	public ReleaseController(Activity form )
+	public ReleaseController(Activity activity )
 	{
-		this.form = form;
+		this.activity = activity;
 	}
 
 	public void release(Object data)
 	{
 		try
 		{
-			if((data != null) && (this.form != null))
+			if((data != null) && (this.activity != null))
 			{
 				table = (DataTable) data;
 				List<IControlSearcherHandler> Controllist = new ArrayList<IControlSearcherHandler>();
 				Controllist.add(this);
-				new ControlSearcher(Controllist).search(form);
+				new ControlSearcher(Controllist).search(activity);
 				Controllist.clear();
 				Controllist=null;
 			}
@@ -67,7 +67,7 @@ public class ReleaseController implements IReleaser, IControlSearcherHandler
 		}
 		catch(Exception ex)
 		{
-			Log.v("Validator", ex.getMessage());
+			Log.v("IReleasable", ex.getMessage());
 		}
 	}
 
@@ -76,13 +76,4 @@ public class ReleaseController implements IReleaser, IControlSearcherHandler
 		return obj instanceof IReleasable;
 	}
 
-	public Activity getForm()
-	{
-		return form;
-	}
-
-	public void setForm(Activity form)
-	{
-		this.form = form;
-	}
 }
