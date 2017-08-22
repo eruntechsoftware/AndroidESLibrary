@@ -449,9 +449,34 @@ public class ESSpinner extends android.widget.Spinner implements ICollectible, I
 		}
 	}
 
+	/**
+	 * 设置选中下标
+	 * */
 	public void setSelection(int position)
 	{
 		startSwap(0, position);
+	}
+
+	/**
+	 * 获取选中值
+	 * @return 选中值
+	 * */
+	public String getSelectValue()
+	{
+		if(mSelectValue!=null)
+		{
+			return mSelectValue.toString();
+		}
+		return "";
+	}
+
+	/**
+	 * 获取选中文本
+	 * @return 选中文本
+	 * */
+	public String getSelectText()
+	{
+		return mSelectText;
 	}
 
 	public void setDefaultValue(String value)
