@@ -490,9 +490,9 @@ public class ESSpinner extends android.widget.Spinner implements ICollectible, I
 
 	/**
 	 * 设置选中文本
-	 * @param mSelectText 选中文本
+	 * @param selectText 选中文本
 	 * */
-	public void setSelectText(String mSelectText)
+	public void setSelectText(Object selectText)
 	{
 		this.mSelectText = mSelectText;
 	}
