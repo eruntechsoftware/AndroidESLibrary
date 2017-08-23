@@ -1,7 +1,7 @@
 package com.birthstone.base.activity;
 
 
-import com.birthstone.base.helper.FormHelper;
+import com.birthstone.base.helper.ActivityHelper;
 import com.birthstone.core.parse.DataCollection;
 
 public abstract class Context extends android.content.Context
@@ -18,7 +18,7 @@ public abstract class Context extends android.content.Context
 	{
 		try
 		{
-			FormHelper open = new FormHelper();
+			ActivityHelper open = new ActivityHelper();
 			open.open(context, targetViewController, params, true, navigationbar);
 		}
 		catch(Exception ex)

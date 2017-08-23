@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import com.birthstone.annotation.ViewInjectUtils;
 import com.birthstone.base.event.OnReleasedListener;
 import com.birthstone.base.event.OnReleaseingListener;
-import com.birthstone.base.helper.FormHelper;
+import com.birthstone.base.helper.ActivityHelper;
 import com.birthstone.base.helper.FragmentManager;
 import com.birthstone.base.helper.StatusBarUtil;
 import com.birthstone.core.parse.Data;
@@ -328,7 +328,7 @@ public class Fragment extends android.support.v4.app.Fragment implements IUINavi
 	{
 		try
 		{
-			FormHelper open = new FormHelper();
+			ActivityHelper open = new ActivityHelper();
 			if(params  == null)
 			{
 				params = new DataCollection();

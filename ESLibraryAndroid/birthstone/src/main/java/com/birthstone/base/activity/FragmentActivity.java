@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 
 import com.birthstone.annotation.ViewInjectUtils;
 import com.birthstone.base.helper.ActivityManager;
-import com.birthstone.base.helper.FormHelper;
+import com.birthstone.base.helper.ActivityHelper;
 import com.birthstone.base.helper.FragmentActivityManager;
 import com.birthstone.base.helper.FragmentManager;
 import com.birthstone.base.helper.ReleaseHelper;
@@ -759,7 +759,7 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
 	{
 		try
 		{
-			FormHelper open = new FormHelper();
+			ActivityHelper open = new ActivityHelper();
 			open.open(this, targetViewController, params, true, navigationbar);
 		}
 		catch(Exception ex)

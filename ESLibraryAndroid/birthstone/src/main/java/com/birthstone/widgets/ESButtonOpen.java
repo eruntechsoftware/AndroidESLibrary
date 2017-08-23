@@ -10,7 +10,7 @@ import android.widget.Toast;
 import com.birthstone.base.activity.Activity;
 import com.birthstone.base.event.OnClickedListener;
 import com.birthstone.base.event.OnClickingListener;
-import com.birthstone.base.helper.FormHelper;
+import com.birthstone.base.helper.ActivityHelper;
 import com.birthstone.base.parse.CollectController;
 import com.birthstone.core.helper.StringToArray;
 import com.birthstone.core.interfaces.IDataInitialize;
@@ -84,7 +84,7 @@ public class ESButtonOpen extends ESButton implements IDataInitialize, IFunction
 				try
 				{
 
-					FormHelper formHelper = new FormHelper();
+					ActivityHelper formHelper = new ActivityHelper();
 					if(mSign != null)
 					{
 						CollectController collectController = new CollectController(mActivity, mSign);

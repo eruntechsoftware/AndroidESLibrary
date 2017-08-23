@@ -7,18 +7,18 @@ import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+import android.view.WindowManager;
 
 import com.birthstone.core.helper.Reflection;
 import com.birthstone.core.parse.DataCollection;
 
-public class FormHelper
+public class ActivityHelper
 {
-	//Activityתƿ
+	//Activity
 	/**
-	 * ActivityתActivity
-	 * 
-	 * @param parentActivity ǰ
-	 * @param targetViewController ָռ
+	 * Activity跳转到目标activity
+	 * @param parent 上下文Activity 上层屏幕对象
+	 * @param targetViewController 目标屏幕路径
 	 */
 	@SuppressLint("NewApi")
 	public void open(Activity parentActivity, String targetViewController)
@@ -27,10 +27,10 @@ public class FormHelper
 	}
 	
 	/**
-	 * ActivityתActivity
-	 * @param parentActivity ǰ
-	 * @param targetViewController ָռ
-	 * @param params
+	 * Activity跳转到目标activity
+	 * @param parent 上下文Activity 上层屏幕对象 
+	 * @param targetViewController 目标屏幕路径
+	 * @param params 参数集
 	 */
 	@SuppressLint("NewApi")
 	public void open(Activity parentActivity, String targetViewController, DataCollection params)
@@ -39,13 +39,13 @@ public class FormHelper
 	}
 
 	/**
-	 * ActivityתActivityǷص
+	 * Activity跳转到目标activity
 	 * 
-	 * @param parentActivity ǰ
-	 * @param targetViewController ָռ
-	 * @param params
-	 * @param showBtnBack
-	 * @param navigationbar ǷĬ
+	 * @param parent 上下文Activity 上层屏幕对象
+	 * @param targetViewController 目标屏幕路径
+	 * @param params 参数集
+	 * @param showBtnBack 是否显示返回按钮
+	 * @param navigationbar 是否显示导航栏
 	 */
 	@SuppressLint("NewApi")
 	public void open(Activity parentActivity, String targetViewController, DataCollection params, Boolean showBtnBack, Boolean navigationbar)
@@ -77,13 +77,12 @@ public class FormHelper
 	}
 
 	
-	//Fragmentתƿ
+	//Fragment
 	/**
-	 * FragmentתActivityǷص
-	 * 
-	 * @param parentFragment ǰ
-	 * @param targetViewController ָռ
-	 * @param params
+	 * Fragment跳转到目标activity
+	 * @param parent 上下文Fragment 上层屏幕
+	 * @param targetViewController 目标屏幕路径
+	 * @param params 参数集
 	 */
 	@Deprecated
 	public void open(Fragment parentFragment, String targetViewController, DataCollection params)
@@ -92,13 +91,12 @@ public class FormHelper
 	}
 	
 	/**
-	 * FragmentתǷص
-	 * 
-	 * @param parentFragment ǰ
-	 * @param targetViewController ָռ
-	 * @param params
-	 * @param showBtnBack
-	 * @param navigationbar ǷĬ
+	 * Fragment跳转到目标activity
+	 * @param parent 上下文Fragment 上层屏幕
+	 * @param targetViewController 目标屏幕路径
+	 * @param params 参数集
+	 * @param showBtnBack 是否显示返回按钮
+	 * @param navigationbar 是否显示导航栏
 	 */
 	@Deprecated
 	public void open(Fragment parentFragment, String targetViewController, DataCollection params, Boolean showBtnBack, Boolean navigationbar)
@@ -131,11 +129,12 @@ public class FormHelper
 	
 	//FragmentActivityתƿ
 	/**
-	 * FragmentActivityת
-	 * 
-	 * @param parentFragment ǰFragment
-	 * @param targetFragment ָռ
-	 * @param params
+	 * FragmentActivity跳转到目标屏幕
+	 * @param parent 上下文Fragment 上层屏幕 
+	 * @param targetFragment 目标屏幕路径
+	 * @param params 参数集
+	 * @param showBtnBack 是否显示返回按钮
+	 * @param navigationbar 是否显示导航栏
 	 */
 	@SuppressLint("NewApi")
 	public void open(FragmentActivity parentFragment, String targetFragment, DataCollection params, Boolean showBtnBack, Boolean navigationbar )
@@ -170,13 +169,12 @@ public class FormHelper
 	
 	/**Context**/
 	/**
-	 * ContextתǷص
-	 * 
-	 * @param parent ǰcontext
-	 * @param targetViewController ָռ
-	 * @param params
-	 * @param showBtnBack
-	 * @param navigationbar ǷĬ
+	 * Context跳转到目标屏幕
+	 * @param parent 上下文
+	 * @param targetViewController 目标屏幕路径
+	 * @param params 参数集
+	 * @param showBtnBack 是否显示返回按钮
+	 * @param navigationbar 是否显示导航栏
 	 */
 	@SuppressLint("NewApi")
 	public void open(Context parent, String targetViewController, DataCollection params, Boolean showBtnBack, Boolean navigationbar)
@@ -206,6 +204,26 @@ public class FormHelper
 		{
 			Log.e("targetViewController", ex.getMessage());
 		}
+	}
+
+	/**
+	 * 获取屏幕宽度
+	 * @param context 上下文
+	 * @return 屏幕宽度
+	 * */
+	public static int getActivityWidth(Context context){
+		WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+		return wm.getDefaultDisplay().getWidth();
+	}
+
+	/**
+	 * 获取屏幕高度
+	 * @param context 上下文
+	 * @return 屏幕高度
+	 * */
+	public static int getActivityHeight(Context context){
+		WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+		return wm.getDefaultDisplay().getHeight();
 	}
 	
 }

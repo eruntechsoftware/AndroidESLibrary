@@ -16,7 +16,7 @@ import android.view.ViewGroup;
 
 import com.birthstone.annotation.ViewInjectUtils;
 import com.birthstone.base.helper.ActivityManager;
-import com.birthstone.base.helper.FormHelper;
+import com.birthstone.base.helper.ActivityHelper;
 import com.birthstone.base.helper.FragmentActivityManager;
 import com.birthstone.base.helper.FragmentManager;
 import com.birthstone.base.helper.ReleaseHelper;
@@ -822,7 +822,7 @@ public class Activity extends android.app.Activity implements IUINavigationBar
 	{
 		try
 		{
-			FormHelper open = new FormHelper();
+			ActivityHelper open = new ActivityHelper();
 			open.open(this, targetViewController, new DataCollection(), true, navigationbar);
 		}
 		catch(Exception ex)
@@ -841,7 +841,7 @@ public class Activity extends android.app.Activity implements IUINavigationBar
 	{
 		try
 		{
-			FormHelper open = new FormHelper();
+			ActivityHelper open = new ActivityHelper();
 			open.open(this, targetViewController, params, true, navigationbar);
 		}
 		catch(Exception ex)
