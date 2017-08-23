@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="es_colorPrimary">#3F51B5</color>
+    <color name="es_colorPrimaryDark">#303F9F</color>
+    <color name="es_colorAccent">#FF4081</color>
 
-    <color name="color1">#40c3ff</color>
+    <!--<color name="color1">#40c3ff</color>-->
+    <color name="es_transparent">#00000000</color>
+    <color name="es_red">#FF4081</color>
 </resources>

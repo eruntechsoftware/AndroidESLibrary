@@ -5,7 +5,7 @@
 
 
     <RelativeLayout
-        android:background="@color/colorPrimary"
+        android:background="@color/es_colorPrimary"
         android:id="@+id/relay_background"
         android:layout_width="match_parent"
         android:layout_height="48dp"
@@ -20,7 +20,7 @@
           android:layout_centerVertical="true"
           android:padding="16dp"
           android:tint="#fff"
-          android:src="@drawable/icon_back"
+          android:src="@drawable/es_icon_back"
           android:visibility="gone"/>
 
         <TextView

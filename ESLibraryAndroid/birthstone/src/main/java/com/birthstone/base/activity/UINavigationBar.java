@@ -115,7 +115,7 @@ public class UINavigationBar extends RelativeLayout implements View.OnClickListe
 
 	private void initView(Context context) {
 		/**加载布局文件*/
-		View.inflate(context, R.layout.actionbar, this);
+		View.inflate(context, R.layout.es_actionbar, this);
 		mRelativeLayout = (RelativeLayout) findViewById(R.id.relay_background);
 		mIvLeft = (ImageView) findViewById(R.id.iv_left);
 		mIvLeft.setOnClickListener(this);

@@ -24,7 +24,7 @@ public class ESButtonClose extends ESButton implements IDataInitialize, IFunctio
 	protected Activity mActivity;
 	protected OnClickingListener onClickingListener;
 	protected OnClickedListener onClickedListener;
-	//protected ProgressDialog alter;
+	//protected ESProgressDialog alter;
 	protected String mNameSpace = "http://schemas.android.com/res/com.birthStone.widgets";
 
 	public ESButtonClose(Context context, AttributeSet attrs )

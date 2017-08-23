@@ -49,6 +49,7 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 
 	private OnTextBoxChangedListener onTextBoxChangedListener;
 	private Drawable errorDrawable, requiredDrawable;
+	private Drawable[] drawables;
 
 	public ESTextBox(Context context)
 	{
@@ -74,8 +75,9 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 			setInputTypeWithDataType(value);
 			a.recycle();
 
-			errorDrawable = this.getResources().getDrawable(R.mipmap.error);
-			requiredDrawable = this.getResources().getDrawable(R.mipmap.required);
+			errorDrawable = this.getResources().getDrawable(R.mipmap.es_error);
+			requiredDrawable = this.getResources().getDrawable(R.mipmap.es_required);
+			drawables = getCompoundDrawables();
 		}
 		catch(Exception ex)
 		{
@@ -186,15 +188,15 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 			Boolean isMached = ValidatorHelper.isMached(mRegularExpression, getText().toString());
 			if (!isMached)
 			{
-				setCompoundDrawablesWithIntrinsicBounds(null, null, errorDrawable, null);
+				setCompoundDrawablesWithIntrinsicBounds(drawables[0], drawables[1], errorDrawable, drawables[3]);
 			}
 			else
 			{
-				setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
+				setCompoundDrawablesWithIntrinsicBounds(drawables[0], drawables[1], null, drawables[3]);
 			}
 			if(mIsRequired && getText().toString().trim().equals(""))
 			{
-				setCompoundDrawablesWithIntrinsicBounds(null, null, requiredDrawable, null);
+				setCompoundDrawablesWithIntrinsicBounds(drawables[0], drawables[1], requiredDrawable, drawables[3]);
 			}
 
 			if(mIsRequiredTooltip.length() != 0) { return false; }
@@ -207,7 +209,7 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 	}
 
 	private void shakeAnimation(){
-		Animation shake = AnimationUtils.loadAnimation(this.getContext(), R.anim.shake);
+		Animation shake = AnimationUtils.loadAnimation(this.getContext(), R.anim.es_shake);
 		this.startAnimation(shake);
 	}
 
