@@ -7,4 +7,10 @@
     <!--<color name="color1">#40c3ff</color>-->
     <color name="es_transparent">#00000000</color>
     <color name="es_red">#FF4081</color>
+
+    <color name="es_text_blank">#4b4b4b</color>
+    <color name="es_text_gray">#7e7d7d</color>
+    <color name="es_divider_bar">#F5F5F5</color>
+    <color name="es_divider_line">#cfcfcf</color>
+    <color name="es_background_light_grey">#F5F5F5</color>
 </resources>
