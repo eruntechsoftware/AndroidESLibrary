@@ -21,7 +21,7 @@ public class DataTypeExpression {
 
     /**
      返回Money类型正则表达式
-     @return 货币表达式
+     @return 货币正则表达式
      */
     public static String money(){
         return "^[0-9]+(.[0-9]{2})?$";
@@ -29,7 +29,7 @@ public class DataTypeExpression {
 
     /**
      返回Date类型正则表达式
-     @return 日期表达式
+     @return 日期正则表达式
      */
     public static String date(){
         return "^(?:(?!0000)[0-9]{4}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[0-9]{2}(?:0[48]|[2468][048]|[13579][26])|(?:0[48]|[2468][048]|[13579][26])00)-02-29)$";
@@ -52,7 +52,7 @@ public class DataTypeExpression {
 
     /**
      返回Mobile类型正则表达式
-     @return 手机号码表达式
+     @return 手机号码正则表达式
      */
     public static String mobile(){
         return "^((13[0-9])|(14[^4,\\D])|(15[^4,\\D])|(18[0-9]))\\d{8}$|^1(7[0-9])\\d{8}$";
@@ -60,7 +60,7 @@ public class DataTypeExpression {
 
     /**
      返回phone类型正则表达式
-     @return 电话号码表达式
+     @return 电话号码正则表达式
      */
     public static String phone(){
         return "((\\d{11})|^((\\d{7,8})|(\\d{4}|\\d{3})-(\\d{7,8})|(\\d{4}|\\d{3})-(\\d{7,8})-(\\d{4}|\\d{3}|\\d{2}|\\d{1})|(\\d{7,8})-(\\d{4}|\\d{3}|\\d{2}|\\d{1}))$)";
@@ -69,9 +69,26 @@ public class DataTypeExpression {
 
     /**
      身份证号正则表达式
-     @return 身份证号表达式
+     @return 身份证号正则表达式
      */
     public static  String idCard(){
         return "/^[1-9]\\d{7}((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])\\d{3}$|^[1-9]\\d{5}[1-9]\\d{3}((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])\\d{3}([0-9]|X)$/";
     }
+
+    /**
+     URL正则表达式
+     @return URL正则表达式
+     */
+    public static String URL(){
+        return "/^((ht|f)tps?):\\/\\/[\\w\\-]+(\\.[\\w\\-]+)+([\\w\\-\\.,@?^=%&:\\/~\\+#]*[\\w\\-\\@?^=%&\\/~\\+#])?$/";
+    }
+
+    /**
+     filePath正则表达式
+     @return filePath正则表达式
+     */
+    public static String filePath (){
+        return "([^\\.]*)\\.([^\\.]*)";
+    }
+
 }

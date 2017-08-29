@@ -3,7 +3,7 @@
     android:id="@+id/dialog_rootView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_transparent" >
+    android:background="@drawable/es_actionpopup_background_transparent" >
 
     <LinearLayout
         android:id="@+id/viewGroup"
@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_marginRight="80dp"
         android:layout_centerInParent="true"
-        android:background="@drawable/background_alert"
+        android:background="@drawable/es_actionsheet_background"
         android:orientation="vertical" >
 
         <Eruntech.BirthStone.UI.Controls.TextView
@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="弹出标题"
-            android:textColor="@color/orange"
+            android:textColor="@color/es_orange"
             android:textSize="16sp"
             android:gravity="center_horizontal"
             android:layout_marginTop="15dp"
@@ -28,7 +28,7 @@
             android:id="@+id/divider"
             android:layout_width="match_parent"
             android:layout_height="1px"
-            android:background="@color/orange"/>
+            android:background="@color/es_orange"/>
 
     </LinearLayout>
 
