@@ -27,7 +27,7 @@ public class File {
 
 	
 	/**
-	 * 获取SDCard路径
+	 * 获取SDCard路径,路径不带//
 	 * @return SDCard路径
 	 * **/
 	public static String getSDCardPath()

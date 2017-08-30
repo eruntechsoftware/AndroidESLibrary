@@ -198,6 +198,6 @@
 	</declare-styleable>
 
 	<declare-styleable name="ESPhotoAddView">
-		<attr name="buttonAddImage" format="reference"></attr>
+		<attr name="bitmapCachePath" format="string"></attr>
 	</declare-styleable>
 </resources>

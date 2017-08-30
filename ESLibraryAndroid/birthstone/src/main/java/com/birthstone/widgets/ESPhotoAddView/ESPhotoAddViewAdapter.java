@@ -31,15 +31,12 @@ public class ESPhotoAddViewAdapter extends BaseAdapter {
 
     // 视图容器
     private LayoutInflater inflater;
-    // 选中的位置
-    private int selectedPosition = -1;
-    private int counts;
+    public int counts=9;
 
     public ProgressBar[] progressBarArray;
 
-    public ESPhotoAddViewAdapter(Context context, int counts) {
+    public ESPhotoAddViewAdapter(Context context) {
         inflater = LayoutInflater.from(context);
-        this.counts = counts;
     }
 
     public int getCount() {
@@ -55,13 +52,12 @@ public class ESPhotoAddViewAdapter extends BaseAdapter {
         return 0;
     }
 
-    //ListView Item设置
     public View getView(int position, View convertView, ViewGroup parent) {
         final int coord = position;
         ViewHolder holder = null;
         if (convertView == null) {
 
-            convertView = inflater.inflate(R.layout.esphotoaddview_item, parent, false);
+            convertView = inflater.inflate(R.layout.es_photoaddview_item, parent, false);
             holder = new ViewHolder();
             holder.image = (ESImageView) convertView.findViewById(R.id.item_grida_image);
             holder.progressBar = (ProgressBar)convertView.findViewById(R.id.progressBar);
@@ -116,7 +112,7 @@ public class ESPhotoAddViewAdapter extends BaseAdapter {
     };
 
     //加载图片
-    public void loading() {
+    public void bind() {
         this.notifyDataSetChanged();
     }
 
