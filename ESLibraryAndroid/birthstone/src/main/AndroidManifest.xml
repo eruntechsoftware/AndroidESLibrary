@@ -1,4 +1,11 @@
 <!--<manifest package="com.github.eruntechsoftware.androidESLibrary">-->
-<manifest package="com.birthstone">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.birthstone">
 
+    <application>
+        <activity android:name=".widgets.photoView.ESPhotoView" /><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
+     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+    </application>
 </manifest>

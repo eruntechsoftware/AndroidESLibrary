@@ -17,7 +17,7 @@ public class ActivityHelper
 	//Activity
 	/**
 	 * Activity跳转到目标activity
-	 * @param parent 上下文Activity 上层屏幕对象
+	 * @param parentActivity 上下文Activity 上层屏幕对象
 	 * @param targetViewController 目标屏幕路径
 	 */
 	@SuppressLint("NewApi")
@@ -28,7 +28,7 @@ public class ActivityHelper
 	
 	/**
 	 * Activity跳转到目标activity
-	 * @param parent 上下文Activity 上层屏幕对象 
+	 * @param parentActivity 上下文Activity 上层屏幕对象
 	 * @param targetViewController 目标屏幕路径
 	 * @param params 参数集
 	 */
@@ -41,7 +41,7 @@ public class ActivityHelper
 	/**
 	 * Activity跳转到目标activity
 	 * 
-	 * @param parent 上下文Activity 上层屏幕对象
+	 * @param parentActivity 上下文Activity 上层屏幕对象
 	 * @param targetViewController 目标屏幕路径
 	 * @param params 参数集
 	 * @param showBtnBack 是否显示返回按钮
@@ -80,7 +80,7 @@ public class ActivityHelper
 	//Fragment
 	/**
 	 * Fragment跳转到目标activity
-	 * @param parent 上下文Fragment 上层屏幕
+	 * @param parentFragment 上下文Fragment 上层屏幕
 	 * @param targetViewController 目标屏幕路径
 	 * @param params 参数集
 	 */
@@ -92,7 +92,7 @@ public class ActivityHelper
 	
 	/**
 	 * Fragment跳转到目标activity
-	 * @param parent 上下文Fragment 上层屏幕
+	 * @param parentFragment 上下文Fragment 上层屏幕
 	 * @param targetViewController 目标屏幕路径
 	 * @param params 参数集
 	 * @param showBtnBack 是否显示返回按钮
@@ -130,7 +130,7 @@ public class ActivityHelper
 	//FragmentActivityתƿ
 	/**
 	 * FragmentActivity跳转到目标屏幕
-	 * @param parent 上下文Fragment 上层屏幕 
+	 * @param parentFragment 上下文Fragment 上层屏幕
 	 * @param targetFragment 目标屏幕路径
 	 * @param params 参数集
 	 * @param showBtnBack 是否显示返回按钮

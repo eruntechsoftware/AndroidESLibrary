@@ -1,4 +1,4 @@
-package com.birthstone.widgets.ESPhotoAddView;
+package com.birthstone.widgets.photoAddView;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
