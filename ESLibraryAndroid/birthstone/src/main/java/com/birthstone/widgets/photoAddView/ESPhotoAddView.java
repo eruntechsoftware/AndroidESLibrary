@@ -58,7 +58,6 @@ public class ESPhotoAddView extends ESGridView implements AdapterView.OnItemClic
 
     public void setAdapter(ESPhotoAddViewAdapter adapter){
         super.setAdapter(adapter);
-        this.adapter = adapter;
     }
 
     @Override
