@@ -23,10 +23,6 @@ import com.birthstone.widgets.photoView.BitmapCollection;
 import com.birthstone.widgets.photoView.ESPhotoView;
 import com.linchaolong.android.imagepicker.ImagePicker;
 
-import java.io.File;
-import java.util.LinkedList;
-import java.util.List;
-
 /**
  * 图片上传组件
  */
@@ -40,13 +36,8 @@ public class ESPhotoAddView extends ESGridView implements AdapterView.OnItemClic
     private String bitmapCachePath;
     private ESPhotoAddViewAdapter adapter;
     private ImagePicker imagePicker;
-    //照相机拍照得到的照片
-    private File mCurrentPhotoFile;
     /**上传文件的列表**/
     public BitmapCollection bitmapCollection;
-
-    /**图片路径容器，之存储图片路径**/
-    public static List<String> IMAGE_PATH_LIST = new LinkedList<String>();
 
     //声明常量权限
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
@@ -62,6 +53,7 @@ public class ESPhotoAddView extends ESGridView implements AdapterView.OnItemClic
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ESPhotoAddView);
         bitmapCachePath = a.getString(R.styleable.ESPhotoAddView_bitmapCachePath);
         bitmapCollection = new BitmapCollection();
+        adapter = new ESPhotoAddViewAdapter(context,bitmapCollection);
     }
 
     public void setAdapter(ESPhotoAddViewAdapter adapter){
@@ -79,7 +71,7 @@ public class ESPhotoAddView extends ESGridView implements AdapterView.OnItemClic
             inputmanger.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
 
-        if(position == IMAGE_PATH_LIST.size()){
+        if(position == bitmapCollection.getFilePahtList().size()){
             //设计显示底部弹出框
             String [] btnItems = {"拍照", "相册选择", "取消"};
             actionSheetPhoto = new ESActionSheet(activity, this, btnItems);
@@ -108,6 +100,9 @@ public class ESPhotoAddView extends ESGridView implements AdapterView.OnItemClic
 
     @Override
     public void dataInitialize() {
+
+        setAdapter(adapter);
+
         //初始化imagePicker
         imagePicker = new ImagePicker();
         imagePicker.setTitle("选择图片");

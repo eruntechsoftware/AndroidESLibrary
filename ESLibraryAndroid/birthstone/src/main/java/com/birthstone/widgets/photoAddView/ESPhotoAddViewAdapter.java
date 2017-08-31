@@ -15,6 +15,7 @@ import com.birthstone.R;
 import com.birthstone.core.helper.DataTypeExpression;
 import com.birthstone.core.helper.ValidatorHelper;
 import com.birthstone.widgets.ESImageView;
+import com.birthstone.widgets.photoView.BitmapCollection;
 
 import java.io.File;
 
@@ -31,17 +32,19 @@ public class ESPhotoAddViewAdapter extends BaseAdapter {
 
     // 视图容器
     private LayoutInflater inflater;
+    public BitmapCollection bitmapCollection;
     public int counts=9;
 
     public ProgressBar[] progressBarArray;
 
-    public ESPhotoAddViewAdapter(Context context) {
+    public ESPhotoAddViewAdapter(Context context,BitmapCollection bitmapCollection) {
         inflater = LayoutInflater.from(context);
+        this.bitmapCollection = bitmapCollection;
     }
 
     public int getCount() {
-        progressBarArray=new ProgressBar[ESPhotoAddView.IMAGE_PATH_LIST.size()+1];
-        return (ESPhotoAddView.IMAGE_PATH_LIST.size() + 1);
+        progressBarArray=new ProgressBar[bitmapCollection.getFilePahtList().size()+1];
+        return (bitmapCollection.getFilePahtList().size() + 1);
     }
 
     public Object getItem(int arg0) {
@@ -68,13 +71,13 @@ public class ESPhotoAddViewAdapter extends BaseAdapter {
 
         progressBarArray[position] = holder.progressBar;
 
-        if(position == ESPhotoAddView.IMAGE_PATH_LIST.size()){
+        if(position == bitmapCollection.getFilePahtList().size()){
             holder.progressBar.setVisibility(View.GONE);
         }else{
             holder.progressBar.setVisibility(View.VISIBLE);
         }
 
-        if (position == ESPhotoAddView.IMAGE_PATH_LIST.size()) {
+        if (position == bitmapCollection.getFilePahtList().size()) {
             holder.image.setImageResource(R.mipmap.es_addpic_unfocused);
             if (position == counts) {
                 holder.image.setVisibility(View.GONE);
@@ -82,7 +85,7 @@ public class ESPhotoAddViewAdapter extends BaseAdapter {
         }
         else {
             //.matches("(http[s]{0,1}|ftp)://[a-zA-Z0-9\\\\.\\\\-]+\\\\.([a-zA-Z]{2,4})(:\\\\d+)?(/[a-zA-Z0-9\\\\.\\\\-~!@#$%^&*+?:_/=<>]*)?")
-            String url = ESPhotoAddView.IMAGE_PATH_LIST.get(position);
+            String url = bitmapCollection.getFilePahtList().get(position);
             //判断是否为本地文件
             if(ValidatorHelper.isMached(DataTypeExpression.filePath(),url)){
                 holder.image.setImageURI(Uri.fromFile(new File(url)));
