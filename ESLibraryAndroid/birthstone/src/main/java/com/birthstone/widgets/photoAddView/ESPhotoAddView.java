@@ -54,6 +54,7 @@ public class ESPhotoAddView extends ESGridView implements AdapterView.OnItemClic
         bitmapCachePath = a.getString(R.styleable.ESPhotoAddView_bitmapCachePath);
         bitmapCollection = new BitmapCollection();
         adapter = new ESPhotoAddViewAdapter(context,bitmapCollection);
+        this.setOnItemClickListener(this);
     }
 
     public void setAdapter(ESPhotoAddViewAdapter adapter){
