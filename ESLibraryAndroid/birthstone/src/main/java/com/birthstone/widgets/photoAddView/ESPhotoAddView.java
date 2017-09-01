@@ -155,6 +155,19 @@ public class ESPhotoAddView extends ESGridView implements AdapterView.OnItemClic
         switch (view.getId()){
             case 0:
                 //从相册中选取图片
+                imagePicker.startCamera(activity,new ImagePicker.Callback(){
+                    /**
+                     * 图片选择回调
+                     * @param imageUri
+                     */
+                    public void onPickImage(Uri imageUri){
+                        bitmapCollection.add(imageUri);
+                        adapter.bind();
+                    }
+                });
+                break;
+            case 1:
+                //从相册中选取图片
                 imagePicker.startGallery(activity,new ImagePicker.Callback(){
                     /**
                      * 图片选择回调
@@ -162,11 +175,9 @@ public class ESPhotoAddView extends ESGridView implements AdapterView.OnItemClic
                      */
                     public void onPickImage(Uri imageUri){
                         bitmapCollection.add(imageUri);
+                        adapter.bind();
                     }
                 });
-                break;
-            case 1:
-//                imagePicker.startCamera();
                 break;
         }
     }
