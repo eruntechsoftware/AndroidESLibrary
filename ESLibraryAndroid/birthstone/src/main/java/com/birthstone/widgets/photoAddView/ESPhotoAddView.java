@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.TypedArray;
-import android.net.Uri;
 import android.support.v4.app.ActivityCompat;
 import android.util.AttributeSet;
 import android.view.View;
@@ -21,7 +20,8 @@ import com.birthstone.widgets.ESActionSheet;
 import com.birthstone.widgets.ESGridView;
 import com.birthstone.widgets.photoView.BitmapCollection;
 import com.birthstone.widgets.photoView.ESPhotoView;
-import com.linchaolong.android.imagepicker.ImagePicker;
+
+import me.iwf.photopicker.PhotoPicker;
 
 /**
  * 图片上传组件
@@ -35,7 +35,6 @@ public class ESPhotoAddView extends ESGridView implements AdapterView.OnItemClic
     private ESActionSheet actionSheetPhoto;
     private String bitmapCachePath;
     private ESPhotoAddViewAdapter adapter;
-    private ImagePicker imagePicker;
     /**上传文件的列表**/
     public BitmapCollection bitmapCollection;
 
@@ -100,12 +99,7 @@ public class ESPhotoAddView extends ESGridView implements AdapterView.OnItemClic
 
     @Override
     public void dataInitialize() {
-
         setAdapter(adapter);
-
-        //初始化imagePicker
-        imagePicker = new ImagePicker();
-        imagePicker.setTitle("选择图片");
 
         if (bitmapCachePath==null || "".equals(bitmapCachePath)){
             if(!com.birthstone.core.helper.File.getSDCardPath().equals("")){
@@ -154,30 +148,33 @@ public class ESPhotoAddView extends ESGridView implements AdapterView.OnItemClic
         requestPermission();
         switch (view.getId()){
             case 0:
-                //从相册中选取图片
-                imagePicker.startCamera(activity,new ImagePicker.Callback(){
-                    /**
-                     * 图片选择回调
-                     * @param imageUri
-                     */
-                    public void onPickImage(Uri imageUri){
-                        bitmapCollection.add(imageUri);
-                        adapter.bind();
-                    }
-                });
+                //从相机拍照选取图片
+                PhotoPicker.builder()
+                        .setPhotoCount(1)
+                        //直接拍照
+                        .setOpenCamera(true)
+                        //拍照后裁剪
+                        .setCrop(true)
+                        //设置裁剪比例(X,Y)
+                        .setCropXY(1, 1)
+                        //设置裁剪界面标题栏颜色，设置裁剪界面状态栏颜色
+                        //.setCropColors(R.color.colorPrimary, R.color.colorPrimaryDark)
+                        .start(activity);
                 break;
             case 1:
                 //从相册中选取图片
-                imagePicker.startGallery(activity,new ImagePicker.Callback(){
-                    /**
-                     * 图片选择回调
-                     * @param imageUri
-                     */
-                    public void onPickImage(Uri imageUri){
-                        bitmapCollection.add(imageUri);
-                        adapter.bind();
-                    }
-                });
+                PhotoPicker.builder()
+                        //设置图片选择数量
+                        .setPhotoCount(9)
+                        //取消选择时点击图片浏览
+                        .setPreviewEnabled(false)
+                        //开启裁剪
+                        .setCrop(true)
+                        //设置裁剪比例(X,Y)
+                        .setCropXY(1, 1)
+                        //设置裁剪界面标题栏颜色，设置裁剪界面状态栏颜色
+                        .setCropColors(R.color.es_white, R.color.es_red)
+                        .start(activity);
                 break;
         }
     }
