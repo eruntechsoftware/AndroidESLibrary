@@ -128,17 +128,14 @@ public class ESPhotoAddView extends ESGridView implements AdapterView.OnItemClic
                 .iHandlerCallBack(iHandlerCallBack)     // 监听接口（必填）
                 .provider("com.birthstone.fileprovider")   // provider(必填)
                 .pathList(path)                         // 记录已选的图片
-                .multiSelect(false)                      // 是否多选   默认：false
-                .multiSelect(false, 9)                   // 配置是否多选的同时 配置多选数量   默认：false ， 9
+                .multiSelect(true)                      // 是否多选   默认：false
+                .multiSelect(true, 9)                   // 配置是否多选的同时 配置多选数量   默认：false ， 9
                 .maxSize(9)                             // 配置多选时 的多选数量。    默认：9
                 .crop(false)                             // 快捷开启裁剪功能，仅当单选 或直接开启相机时有效
                 .crop(false, 1, 1, 500, 500)             // 配置裁剪功能的参数，   默认裁剪比例 1:1
                 .isShowCamera(true)                     // 是否现实相机按钮  默认：false
                 .filePath("/Gallery/Pictures")          // 图片存放路径
                 .build();
-
-        //启动GalleryPick图片选择器
-        GalleryPick.getInstance().setGalleryConfig(galleryConfig).open(activity);
     }
 
     /**
@@ -183,8 +180,8 @@ public class ESPhotoAddView extends ESGridView implements AdapterView.OnItemClic
                 GalleryPick.getInstance().setGalleryConfig(galleryConfig).openCamera(activity);
                 break;
             case 1:
-                //从相册中选取图片
-                galleryConfig.getBuilder().multiSelect(true).isOpenCamera(false).build();
+                //启动GalleryPick图片选择器
+                GalleryPick.getInstance().setGalleryConfig(galleryConfig).open(activity);
                 break;
         }
     }
