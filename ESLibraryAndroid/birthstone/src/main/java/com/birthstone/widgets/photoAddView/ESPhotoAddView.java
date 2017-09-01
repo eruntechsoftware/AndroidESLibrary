@@ -124,7 +124,7 @@ public class ESPhotoAddView extends ESGridView implements AdapterView.OnItemClic
         galleryConfig = new GalleryConfig.Builder()
                 .imageLoader(new FrescoImageLoader(activity))    // ImageLoader 加载框架（必填）
                 .iHandlerCallBack(iHandlerCallBack)     // 监听接口（必填）
-                .provider("com.yancy.gallerypickdemo.fileprovider")   // provider(必填)
+                .provider("com.birthstone.fileprovider")   // provider(必填)
                 .pathList(path)                         // 记录已选的图片
                 .multiSelect(false)                      // 是否多选   默认：false
                 .multiSelect(false, 9)                   // 配置是否多选的同时 配置多选数量   默认：false ， 9
@@ -184,7 +184,7 @@ public class ESPhotoAddView extends ESGridView implements AdapterView.OnItemClic
                 break;
             case 1:
                 //从相册中选取图片
-                galleryConfig.getBuilder().multiSelect(true).build();
+                galleryConfig.getBuilder().multiSelect(true).isOpenCamera(false).build();
                 break;
         }
     }
