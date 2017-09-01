@@ -121,6 +121,8 @@ public class ESPhotoAddView extends ESGridView implements AdapterView.OnItemClic
             }
         }
 
+        initHandlerCallBack();
+
         galleryConfig = new GalleryConfig.Builder()
                 .imageLoader(new FrescoImageLoader(activity))    // ImageLoader 加载框架（必填）
                 .iHandlerCallBack(iHandlerCallBack)     // 监听接口（必填）
@@ -169,8 +171,6 @@ public class ESPhotoAddView extends ESGridView implements AdapterView.OnItemClic
                     PERMISSIONS_STORAGE,
                     REQUEST_EXTERNAL_STORAGE
             );
-        }else{
-            ToastHelper.toastShow(activity, "请在 设置-应用管理 中开启此应用的储存授权!");
         }
     }
 
@@ -192,7 +192,7 @@ public class ESPhotoAddView extends ESGridView implements AdapterView.OnItemClic
     /**
      * 绑定选择的图片
      * **/
-    private void bindGallery() {
+    private void initHandlerCallBack() {
         iHandlerCallBack = new IHandlerCallBack() {
             @Override
             public void onStart() {
