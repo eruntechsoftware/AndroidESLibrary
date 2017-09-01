@@ -470,18 +470,18 @@ public class Activity extends android.app.Activity implements IUINavigationBar
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data)
 	{
-		super.onActivityResult(requestCode, resultCode, data);
 		switch(resultCode)
 		{
-		case 185324:
-			if(data.getBooleanExtra("isRefresh", false))
-			{
-				onRefresh(data);
-			}
-			break;
-		default:
-			break;
+			case 185324:
+				if(data.getBooleanExtra("isRefresh", false))
+				{
+					onRefresh(data);
+				}
+				break;
+			default:
+				break;
 		}
+		super.onActivityResult(requestCode, resultCode, data);
 	}
 
 	/**
