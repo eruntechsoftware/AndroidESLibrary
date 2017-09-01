@@ -43,8 +43,8 @@ public class ESPhotoAddViewAdapter extends BaseAdapter {
     }
 
     public int getCount() {
-        progressBarArray=new ProgressBar[bitmapCollection.getFilePahtList().size()+1];
-        return (bitmapCollection.getFilePahtList().size() + 1);
+        progressBarArray=new ProgressBar[bitmapCollection.getFilePahtList().size()+4];
+        return (bitmapCollection.getFilePahtList().size() + 4);
     }
 
     public Object getItem(int arg0) {
@@ -85,7 +85,7 @@ public class ESPhotoAddViewAdapter extends BaseAdapter {
         }
         else {
             //.matches("(http[s]{0,1}|ftp)://[a-zA-Z0-9\\\\.\\\\-]+\\\\.([a-zA-Z]{2,4})(:\\\\d+)?(/[a-zA-Z0-9\\\\.\\\\-~!@#$%^&*+?:_/=<>]*)?")
-            String url = bitmapCollection.getFilePahtList().get(position);
+            String url = "https://goss1.vcg.com/creative/vcg/800/version23/VCG21gic13465240.jpg";//bitmapCollection.getFilePahtList().get(position);
             //判断是否为本地文件
             if(ValidatorHelper.isMached(DataTypeExpression.filePath(),url)){
                 holder.image.setImageURI(Uri.fromFile(new File(url)));
