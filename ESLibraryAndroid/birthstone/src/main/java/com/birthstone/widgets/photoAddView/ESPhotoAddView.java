@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.content.res.TypedArray;
 import android.support.v4.app.ActivityCompat;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
@@ -20,8 +21,14 @@ import com.birthstone.widgets.ESActionSheet;
 import com.birthstone.widgets.ESGridView;
 import com.birthstone.widgets.photoView.BitmapCollection;
 import com.birthstone.widgets.photoView.ESPhotoView;
+import com.birthstone.widgets.photoView.FrescoImageLoader;
+import com.yancy.gallerypick.config.GalleryConfig;
+import com.yancy.gallerypick.config.GalleryPick;
+import com.yancy.gallerypick.inter.IHandlerCallBack;
 
-import me.iwf.photopicker.PhotoPicker;
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * 图片上传组件
@@ -38,13 +45,18 @@ public class ESPhotoAddView extends ESGridView implements AdapterView.OnItemClic
     /**上传文件的列表**/
     public BitmapCollection bitmapCollection;
 
+    /**记录已选择的图片**/
+    private List<String> path = new ArrayList<>();
+    private GalleryConfig galleryConfig;
+    private IHandlerCallBack iHandlerCallBack;
+
     //声明常量权限
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
     private static String[] PERMISSIONS_STORAGE = {
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE
     };
-    private static final int TAKE_PICTURE = 0;
+    private String TAG="ESPhotoAddView";
 
 
     public ESPhotoAddView(Context context, AttributeSet attrs) {
@@ -108,6 +120,23 @@ public class ESPhotoAddView extends ESGridView implements AdapterView.OnItemClic
                 ToastHelper.toastShow(activity,R.string.sd_card);
             }
         }
+
+        galleryConfig = new GalleryConfig.Builder()
+                .imageLoader(new FrescoImageLoader(activity))    // ImageLoader 加载框架（必填）
+                .iHandlerCallBack(iHandlerCallBack)     // 监听接口（必填）
+                .provider("com.yancy.gallerypickdemo.fileprovider")   // provider(必填)
+                .pathList(path)                         // 记录已选的图片
+                .multiSelect(false)                      // 是否多选   默认：false
+                .multiSelect(false, 9)                   // 配置是否多选的同时 配置多选数量   默认：false ， 9
+                .maxSize(9)                             // 配置多选时 的多选数量。    默认：9
+                .crop(false)                             // 快捷开启裁剪功能，仅当单选 或直接开启相机时有效
+                .crop(false, 1, 1, 500, 500)             // 配置裁剪功能的参数，   默认裁剪比例 1:1
+                .isShowCamera(true)                     // 是否现实相机按钮  默认：false
+                .filePath("/Gallery/Pictures")          // 图片存放路径
+                .build();
+
+        //启动GalleryPick图片选择器
+        GalleryPick.getInstance().setGalleryConfig(galleryConfig).open(activity);
     }
 
     /**
@@ -140,6 +169,8 @@ public class ESPhotoAddView extends ESGridView implements AdapterView.OnItemClic
                     PERMISSIONS_STORAGE,
                     REQUEST_EXTERNAL_STORAGE
             );
+        }else{
+            ToastHelper.toastShow(activity, "请在 设置-应用管理 中开启此应用的储存授权!");
         }
     }
 
@@ -149,35 +180,49 @@ public class ESPhotoAddView extends ESGridView implements AdapterView.OnItemClic
         switch (view.getId()){
             case 0:
                 //从相机拍照选取图片
-                PhotoPicker.builder()
-                        .setPhotoCount(1)
-                        //直接拍照
-                        .setOpenCamera(true)
-                        //拍照后裁剪
-                        .setCrop(true)
-                        //设置裁剪比例(X,Y)
-                        .setCropXY(1, 1)
-                        //设置裁剪界面标题栏颜色，设置裁剪界面状态栏颜色
-                        //.setCropColors(R.color.colorPrimary, R.color.colorPrimaryDark)
-                        .start(activity);
+                GalleryPick.getInstance().setGalleryConfig(galleryConfig).openCamera(activity);
                 break;
             case 1:
                 //从相册中选取图片
-                PhotoPicker.builder()
-                        //设置图片选择数量
-                        .setPhotoCount(9)
-                        //取消选择时点击图片浏览
-                        .setPreviewEnabled(false)
-                        //开启裁剪
-                        .setCrop(true)
-                        //设置裁剪比例(X,Y)
-                        .setCropXY(1, 1)
-                        //设置裁剪界面标题栏颜色，设置裁剪界面状态栏颜色
-                        .setCropColors(R.color.es_white, R.color.es_red)
-                        .start(activity);
+                galleryConfig.getBuilder().multiSelect(true).build();
                 break;
         }
     }
 
+    /**
+     * 绑定选择的图片
+     * **/
+    private void bindGallery() {
+        iHandlerCallBack = new IHandlerCallBack() {
+            @Override
+            public void onStart() {
+                Log.i(TAG, "onStart: 开启");
+            }
 
+            @Override
+            public void onSuccess(List<String> photoList) {
+                Log.i(TAG, "onSuccess: 返回数据");
+                for (String s : photoList) {
+                    bitmapCollection.add(s);
+                }
+                adapter.bind();
+            }
+
+            @Override
+            public void onCancel() {
+                Log.i(TAG, "onCancel: 取消");
+            }
+
+            @Override
+            public void onFinish() {
+                Log.i(TAG, "onFinish: 结束");
+            }
+
+            @Override
+            public void onError() {
+                Log.i(TAG, "onError: 出错");
+            }
+        };
+
+    }
 }
