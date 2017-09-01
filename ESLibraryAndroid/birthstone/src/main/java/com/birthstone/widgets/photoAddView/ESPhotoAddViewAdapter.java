@@ -43,8 +43,8 @@ public class ESPhotoAddViewAdapter extends BaseAdapter {
     }
 
     public int getCount() {
-        progressBarArray=new ProgressBar[bitmapCollection.getFilePahtList().size()+4];
-        return (bitmapCollection.getFilePahtList().size() + 4);
+        progressBarArray=new ProgressBar[bitmapCollection.getFilePahtList().size()+1];
+        return (bitmapCollection.getFilePahtList().size() + 1);
     }
 
     public Object getItem(int arg0) {
