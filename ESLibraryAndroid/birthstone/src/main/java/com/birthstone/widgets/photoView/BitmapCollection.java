@@ -7,13 +7,14 @@ import com.birthstone.core.helper.ValidatorHelper;
 
 import java.io.File;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 /**
  * bitmap容器类，用于处理选中图片
  */
-public class BitmapCollection implements Serializable {
+public class BitmapCollection extends ArrayList<String> implements Serializable {
 
     /**存储UIR对象文件**/
     private List<Uri> fileURIList;
@@ -39,31 +40,34 @@ public class BitmapCollection implements Serializable {
      * 添加文件到文件容器对象
      * @param filePath 文件路径
      * **/
-    public void add(String filePath){
+    public boolean add(String filePath){
         fileURIList.add(Uri.parse(filePath));
         filePahtList.add(filePath);
+        return true;
     }
 
     /**
      * 移除指定索引对象
      * @param index 索引
      * **/
-    public void remove(int index){
+    public String remove(int index){
         if(filePahtList!=null && filePahtList.size()>index){
             filePahtList.remove(index);
             fileURIList.remove(index);
         }
+        return "";
     }
 
     /**
      * 移除指定对象
      * @param object 对象
      * **/
-    public void remove(Object object){
+    public boolean remove(Object object){
         if(filePahtList!=null && filePahtList.size()>0){
             filePahtList.remove(object);
             fileURIList.remove(object);
         }
+        return true;
     }
 
     /**
