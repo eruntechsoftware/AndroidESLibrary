@@ -40,7 +40,7 @@ public class ESPhotoAddView extends ESGridView implements AdapterView.OnItemClic
 
     private Activity activity;
     private ESActionSheet actionSheetPhoto;
-    private String bitmapCachePath;
+    private String bitmapCachePath,authorities;
     private ESPhotoAddViewAdapter adapter;
     /**上传文件的列表**/
     public BitmapCollection bitmapCollection;
@@ -63,6 +63,10 @@ public class ESPhotoAddView extends ESGridView implements AdapterView.OnItemClic
         super(context, attrs);
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ESPhotoAddView);
         bitmapCachePath = a.getString(R.styleable.ESPhotoAddView_bitmapCachePath);
+        authorities = a.getString(R.styleable.ESPhotoAddView_authorities);
+        if (authorities==null || "".equals(authorities)){
+            ToastHelper.toastShow(context,"必须配置在Manifests配置provider，并在布局中指定authorities属性");
+        }
         bitmapCollection = new BitmapCollection();
         adapter = new ESPhotoAddViewAdapter(context,bitmapCollection);
         this.setOnItemClickListener(this);
@@ -126,7 +130,7 @@ public class ESPhotoAddView extends ESGridView implements AdapterView.OnItemClic
         galleryConfig = new GalleryConfig.Builder()
                 .imageLoader(new FrescoImageLoader(activity))    // ImageLoader 加载框架（必填）
                 .iHandlerCallBack(iHandlerCallBack)     // 监听接口（必填）
-                .provider("com.birthstone.fileprovider")   // provider(必填)
+                .provider(authorities)   // provider(必填)
                 .pathList(path)                         // 记录已选的图片
                 .multiSelect(true)                      // 是否多选   默认：false
                 .multiSelect(true, 9)                   // 配置是否多选的同时 配置多选数量   默认：false ， 9
