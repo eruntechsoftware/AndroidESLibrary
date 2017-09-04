@@ -6,12 +6,14 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.TypedArray;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.birthstone.R;
 import com.birthstone.base.activity.Activity;
@@ -51,6 +53,7 @@ public class ESPhotoAddView extends ESGridView implements AdapterView.OnItemClic
     private IHandlerCallBack iHandlerCallBack;
 
     //声明常量权限
+    private final int PERMISSIONS_REQUEST_READ_CONTACTS = 8;
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
     private static String[] PERMISSIONS_STORAGE = {
             Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -162,16 +165,18 @@ public class ESPhotoAddView extends ESGridView implements AdapterView.OnItemClic
      * 权限注册
      * */
     private void requestPermission(){
-        // 是否添加权限
-        int mPermisson = ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-
-        if (mPermisson != PackageManager.PERMISSION_GRANTED) {
-
-            ActivityCompat.requestPermissions(
-                    activity,
-                    PERMISSIONS_STORAGE,
-                    REQUEST_EXTERNAL_STORAGE
-            );
+        if (ContextCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            Log.i(TAG, "需要授权 ");
+            if (ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                Log.i(TAG, "拒绝过了");
+                Toast.makeText(activity, "请在 设置-应用管理 中开启此应用的储存授权。", Toast.LENGTH_SHORT).show();
+            } else {
+                Log.i(TAG, "进行授权");
+                ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSIONS_REQUEST_READ_CONTACTS);
+            }
+        } else {
+            Log.i(TAG, "不需要授权 ");
+            GalleryPick.getInstance().setGalleryConfig(galleryConfig).open(activity);
         }
     }
 

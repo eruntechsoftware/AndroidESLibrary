@@ -3,7 +3,6 @@
 
     <application>
         <activity android:name=".widgets.photoView.ESPhotoView" />
-        <activity android:name="com.yancy.gallerypick.activity.GalleryPickActivity"/>
     </application>
 
     <uses-permission android:name="android.permission.CAMERA" />
