@@ -16,6 +16,7 @@ import java.util.List;
  */
 public class BitmapCollection extends ArrayList<String> implements Serializable {
 
+    private static final long serialVersionUID = 5187321951128257808L;
     /**存储UIR对象文件**/
     private List<Uri> fileURIList;
 
