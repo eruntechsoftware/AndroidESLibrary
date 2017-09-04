@@ -31,6 +31,35 @@ import com.yancy.gallerypick.inter.IHandlerCallBack;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 1.AndroidManifest.xml的Application节点添加
+ <provider
+ android:name="android.support.v4.content.FileProvider"
+ android:authorities="com.yancy.gallerypickdemo.fileprovider"
+ android:exported="false"
+ android:grantUriPermissions="true">
+ <meta-data
+ android:name="android.support.FILE_PROVIDER_PATHS"
+ android:resource="@xml/filepaths" />
+ </provider>
+ * 2.values下边添加名为xml的文件夹，新建文件名为filepaths.xml
+ * 内容
+ <?xml version="1.0" encoding="utf-8"?>
+ <resources>
+ <paths>
+ <external-path
+ name="external"
+ path="" />
+ <files-path
+ name="files"
+ path="" />
+ <cache-path
+ name="cache"
+ path="" />
+ </paths>
+ </resources>
+ *
+ * **/
 
 /**
  * 图片上传组件
@@ -174,9 +203,6 @@ public class ESPhotoAddView extends ESGridView implements AdapterView.OnItemClic
                 Log.i(TAG, "进行授权");
                 ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSIONS_REQUEST_READ_CONTACTS);
             }
-        } else {
-            Log.i(TAG, "不需要授权 ");
-            GalleryPick.getInstance().setGalleryConfig(galleryConfig).open(activity);
         }
     }
 
