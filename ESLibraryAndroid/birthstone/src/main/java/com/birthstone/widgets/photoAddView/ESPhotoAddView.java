@@ -73,8 +73,6 @@ public class ESPhotoAddView extends ESGridView implements AdapterView.OnItemClic
     private ESActionSheet actionSheetPhoto;
     private String bitmapCachePath,authorities;
     private ESPhotoAddViewAdapter adapter;
-    /**上传文件的列表**/
-    public BitmapCollection bitmapCollection;
 
     /**记录已选择的图片**/
     private List<String> path = new ArrayList<>();
@@ -99,8 +97,8 @@ public class ESPhotoAddView extends ESGridView implements AdapterView.OnItemClic
         if (authorities==null || "".equals(authorities)){
             ToastHelper.toastShow(context,"必须配置在Manifests配置provider，并在布局中指定authorities属性");
         }
-        bitmapCollection = new BitmapCollection();
-        adapter = new ESPhotoAddViewAdapter(context,bitmapCollection);
+
+        adapter = new ESPhotoAddViewAdapter(context);
         this.setOnItemClickListener(this);
     }
 
@@ -118,7 +116,7 @@ public class ESPhotoAddView extends ESGridView implements AdapterView.OnItemClic
             inputmanger.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
 
-        if(position == bitmapCollection.getFilePahtList().size()){
+        if(position == BitmapCollection.getFilePahtList().size()){
             //设计显示底部弹出框
             String [] btnItems = {"拍照", "相册选择", "取消"};
             actionSheetPhoto = new ESActionSheet(activity, this, btnItems);
@@ -127,7 +125,6 @@ public class ESPhotoAddView extends ESGridView implements AdapterView.OnItemClic
         }else{
             Intent intent = new Intent();
             intent.putExtra("index",position);
-            intent.putExtra("bitmapList",bitmapCollection);
             intent.setClass(activity,ESPhotoView.class);
             activity.startActivity(intent);
         }
@@ -178,7 +175,7 @@ public class ESPhotoAddView extends ESGridView implements AdapterView.OnItemClic
      * 获取每个adapter的进度条
      * **/
     public ProgressBar[] getProgressBarArray(){
-        int size = bitmapCollection.getFileList().length;
+        int size = BitmapCollection.getFileList().length;
         ProgressBar[] newProgressbars = new ProgressBar[size];
 
         for(int p = 0;p<size; p++){
@@ -235,7 +232,7 @@ public class ESPhotoAddView extends ESGridView implements AdapterView.OnItemClic
             public void onSuccess(List<String> photoList) {
                 Log.i(TAG, "onSuccess: 返回数据");
                 for (String s : photoList) {
-                    bitmapCollection.add(s);
+                    BitmapCollection.add(s);
                 }
                 adapter.bind();
             }

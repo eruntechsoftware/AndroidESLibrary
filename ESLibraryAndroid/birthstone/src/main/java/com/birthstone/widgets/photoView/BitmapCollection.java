@@ -6,31 +6,25 @@ import com.birthstone.core.helper.DataTypeExpression;
 import com.birthstone.core.helper.ValidatorHelper;
 
 import java.io.File;
-import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
 /**
  * bitmap容器类，用于处理选中图片
  */
-public class BitmapCollection extends LinkedList<String> implements Serializable {
+public class BitmapCollection{
 
     /**存储UIR对象文件**/
-    private List<Uri> fileURIList;
+    public static List<Uri> fileURIList = new LinkedList<Uri>();
 
     /**存储String路径文件**/
-    private List<String> filePahtList;
-
-    public BitmapCollection(){
-        fileURIList = new LinkedList<Uri>();
-        filePahtList = new LinkedList<String>();
-    }
+    public static List<String> filePahtList = new LinkedList<String>();
 
     /**
      * 添加文件到文件容器对象
      * @param uriFile uri文件
      * **/
-    public void add(Uri uriFile){
+    public static void add(Uri uriFile){
         fileURIList.add(uriFile);
         filePahtList.add(uriFile.getPath());
     }
@@ -39,7 +33,7 @@ public class BitmapCollection extends LinkedList<String> implements Serializable
      * 添加文件到文件容器对象
      * @param filePath 文件路径
      * **/
-    public boolean add(String filePath){
+    public static boolean add(String filePath){
         fileURIList.add(Uri.parse(filePath));
         filePahtList.add(filePath);
         return true;
@@ -49,7 +43,7 @@ public class BitmapCollection extends LinkedList<String> implements Serializable
      * 移除指定索引对象
      * @param index 索引
      * **/
-    public String remove(int index){
+    public static String remove(int index){
         if(filePahtList!=null && filePahtList.size()>index){
             filePahtList.remove(index);
             fileURIList.remove(index);
@@ -61,7 +55,7 @@ public class BitmapCollection extends LinkedList<String> implements Serializable
      * 移除指定对象
      * @param object 对象
      * **/
-    public boolean remove(Object object){
+    public static boolean remove(Object object){
         if(filePahtList!=null && filePahtList.size()>0){
             filePahtList.remove(object);
             fileURIList.remove(object);
@@ -72,14 +66,14 @@ public class BitmapCollection extends LinkedList<String> implements Serializable
     /**
      * 从文件容器中获取所有文件的列表
      * **/
-    public List<String> getFilePahtList(){
+    public static List<String> getFilePahtList(){
         return filePahtList;
     }
 
     /**
      * 从文件容器中获取本地文件的列表
      * **/
-    public File[] getFileList(){
+    public static File[] getFileList(){
         List<File> updateFileList = new LinkedList<File>();
         //循环检查本地图片数量并统计web图片数
         for (String path:filePahtList){
@@ -93,7 +87,7 @@ public class BitmapCollection extends LinkedList<String> implements Serializable
     /**
      * 从文件容器中获取web文件的列表
      * **/
-    public String[] getWebFileList(){
+    public static String[] getWebFileList(){
         List<File> webFileList = new LinkedList<File>();
         //循环检查本地图片数量并统计web图片数
         for (String path:filePahtList){

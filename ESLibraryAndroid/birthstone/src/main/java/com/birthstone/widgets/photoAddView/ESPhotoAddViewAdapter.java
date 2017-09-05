@@ -32,19 +32,17 @@ public class ESPhotoAddViewAdapter extends BaseAdapter {
 
     // 视图容器
     private LayoutInflater inflater;
-    public BitmapCollection bitmapCollection;
     public int counts=9;
 
     public ProgressBar[] progressBarArray;
 
-    public ESPhotoAddViewAdapter(Context context,BitmapCollection bitmapCollection) {
+    public ESPhotoAddViewAdapter(Context context) {
         inflater = LayoutInflater.from(context);
-        this.bitmapCollection = bitmapCollection;
     }
 
     public int getCount() {
-        progressBarArray=new ProgressBar[bitmapCollection.getFilePahtList().size()+1];
-        return (bitmapCollection.getFilePahtList().size() + 1);
+        progressBarArray=new ProgressBar[BitmapCollection.getFilePahtList().size()+1];
+        return (BitmapCollection.getFilePahtList().size() + 1);
     }
 
     public Object getItem(int arg0) {
@@ -71,13 +69,13 @@ public class ESPhotoAddViewAdapter extends BaseAdapter {
 
         progressBarArray[position] = holder.progressBar;
 
-        if(position == bitmapCollection.getFilePahtList().size()){
+        if(position == BitmapCollection.getFilePahtList().size()){
             holder.progressBar.setVisibility(View.GONE);
         }else{
             holder.progressBar.setVisibility(View.VISIBLE);
         }
 
-        if (position == bitmapCollection.getFilePahtList().size()) {
+        if (position == BitmapCollection.getFilePahtList().size()) {
             holder.image.setImageResource(R.mipmap.es_addpic_unfocused);
             if (position == counts) {
                 holder.image.setVisibility(View.GONE);
@@ -85,7 +83,7 @@ public class ESPhotoAddViewAdapter extends BaseAdapter {
         }
         else {
             //.matches("(http[s]{0,1}|ftp)://[a-zA-Z0-9\\\\.\\\\-]+\\\\.([a-zA-Z]{2,4})(:\\\\d+)?(/[a-zA-Z0-9\\\\.\\\\-~!@#$%^&*+?:_/=<>]*)?")
-            String url = bitmapCollection.getFilePahtList().get(position);
+            String url = BitmapCollection.getFilePahtList().get(position);
             //判断是否为本地文件
             if(ValidatorHelper.isMached(DataTypeExpression.filePath(),url)){
                 holder.image.setImageURI(Uri.fromFile(new File(url)));

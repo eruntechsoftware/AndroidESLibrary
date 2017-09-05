@@ -41,7 +41,6 @@ public class ESPhotoView extends Activity implements View.OnClickListener,OnPage
 	 **/
 	private ArrayList<View> listViews = null;
 	private ESPhotoViewAdapter adapter;
-	private BitmapCollection bitmapCollection;
 	private int index;
 
 	public void onCreate(Bundle savedInstanceState) {
@@ -55,10 +54,9 @@ public class ESPhotoView extends Activity implements View.OnClickListener,OnPage
 		pager.setOnPageChangeListener(this);
 
 		Intent intent = getIntent();
-		bitmapCollection = (BitmapCollection)intent.getSerializableExtra("bitmapList");
 		index = intent.getIntExtra("index",0);
-		for (int i = 0; i < bitmapCollection.getFilePahtList().size(); i++) {
-			initListViews(bitmapCollection.getFilePahtList().get(i));
+		for (int i = 0; i < BitmapCollection.getFilePahtList().size(); i++) {
+			initListViews(BitmapCollection.getFilePahtList().get(i));
 		}
 
 		// 构造adapter并设置
@@ -129,10 +127,10 @@ public class ESPhotoView extends Activity implements View.OnClickListener,OnPage
 		if (i == R.id.btndelete) {
 			try {
 				if (listViews.size() == 1) {
-					bitmapCollection.remove(0);
+					BitmapCollection.remove(0);
 					finish();
 				} else {
-					bitmapCollection.remove(index);
+					BitmapCollection.remove(index);
 					pager.removeAllViews();
 					listViews.remove(index);
 					adapter.setListViews(listViews);

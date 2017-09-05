@@ -69,6 +69,7 @@ public class ActivityHelper
 					intent.setClass(parentActivity.getApplicationContext(), obj.getClass());
 					parentActivity.startActivityForResult(intent, 0);
 				}
+			obj = null;
 		}
 		catch(Exception ex)
 		{
