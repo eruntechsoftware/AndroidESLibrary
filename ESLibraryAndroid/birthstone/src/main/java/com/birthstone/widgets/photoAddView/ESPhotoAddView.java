@@ -71,8 +71,9 @@ public class ESPhotoAddView extends ESGridView implements AdapterView.OnItemClic
 
     private Activity activity;
     private ESActionSheet actionSheetPhoto;
-    private String bitmapCachePath,authorities;
+    private String bitmapCachePath;
     private ESPhotoAddViewAdapter adapter;
+    private int imageMaxCount,imageHeight, imageWidth;
 
     /**记录已选择的图片**/
     private List<String> path = new ArrayList<>();
@@ -92,15 +93,17 @@ public class ESPhotoAddView extends ESGridView implements AdapterView.OnItemClic
     public ESPhotoAddView(Context context, AttributeSet attrs) {
         super(context, attrs);
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ESPhotoAddView);
+        imageMaxCount = a.getInteger(R.styleable.ESPhotoAddView_imageMaxCount,9);
+        imageHeight = a.getLayoutDimension(R.styleable.ESPhotoAddView_imageHeight,Activity.dip2px(context,70));
+        imageWidth = a.getLayoutDimension(R.styleable.ESPhotoAddView_imageWidth,Activity.dip2px(context,70));
         bitmapCachePath = a.getString(R.styleable.ESPhotoAddView_bitmapCachePath);
-        authorities = a.getString(R.styleable.ESPhotoAddView_authorities);
-        if (authorities==null || "".equals(authorities)){
-            ToastHelper.toastShow(context,"必须配置在Manifests配置provider，并在布局中指定authorities属性");
-        }
+
         BitmapCollection.delegate = this;
         BitmapCollection.clear();
 
         adapter = new ESPhotoAddViewAdapter(context);
+        adapter.imageHeight = imageHeight;
+        adapter.imageWidth = imageWidth;
         this.setOnItemClickListener(this);
     }
 
@@ -161,11 +164,11 @@ public class ESPhotoAddView extends ESGridView implements AdapterView.OnItemClic
         galleryConfig = new GalleryConfig.Builder()
                 .imageLoader(new FrescoImageLoader(activity))    // ImageLoader 加载框架（必填）
                 .iHandlerCallBack(iHandlerCallBack)     // 监听接口（必填）
-                .provider(authorities)   // provider(必填)
+                .provider("com.yancy.gallerypickdemo.fileprovider")   // provider(必填)
                 .pathList(path)                         // 记录已选的图片
                 .multiSelect(true)                      // 是否多选   默认：false
                 .multiSelect(true, 9)                   // 配置是否多选的同时 配置多选数量   默认：false ， 9
-                .maxSize(9)                             // 配置多选时 的多选数量。    默认：9
+                .maxSize(imageMaxCount)                             // 配置多选时 的多选数量。    默认：9
                 .crop(false)                             // 快捷开启裁剪功能，仅当单选 或直接开启相机时有效
                 .crop(false, 1, 1, 500, 500)             // 配置裁剪功能的参数，   默认裁剪比例 1:1
                 .isShowCamera(true)                     // 是否现实相机按钮  默认：false

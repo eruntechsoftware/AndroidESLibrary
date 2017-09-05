@@ -32,9 +32,10 @@ public class ESPhotoAddViewAdapter extends BaseAdapter {
 
     // 视图容器
     private LayoutInflater inflater;
-    public int counts=9;
+    public int maxcount=9, imageHeight, imageWidth;
 
     public ProgressBar[] progressBarArray;
+    private ViewGroup.LayoutParams layoutParams;
 
     public ESPhotoAddViewAdapter(Context context) {
         inflater = LayoutInflater.from(context);
@@ -61,6 +62,8 @@ public class ESPhotoAddViewAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.es_photoaddview_item, parent, false);
             holder = new ViewHolder();
             holder.image = (ESImageView) convertView.findViewById(R.id.item_grida_image);
+            layoutParams = new ViewGroup.LayoutParams(imageWidth,imageHeight);
+            holder.image.setLayoutParams(layoutParams);
             holder.progressBar = (ProgressBar)convertView.findViewById(R.id.progressBar);
             convertView.setTag(holder);
         } else {
@@ -77,7 +80,7 @@ public class ESPhotoAddViewAdapter extends BaseAdapter {
 
         if (position == BitmapCollection.getFilePahtList().size()) {
             holder.image.setImageResource(R.mipmap.es_addpic_unfocused);
-            if (position == counts) {
+            if (position == maxcount-1) {
                 holder.image.setVisibility(View.GONE);
             }
         }

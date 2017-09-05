@@ -198,7 +198,9 @@
 	</declare-styleable>
 
 	<declare-styleable name="ESPhotoAddView">
-		<attr name="authorities" format="string"></attr>
+		<attr name="imageMaxCount" format="integer"></attr>
+		<attr name="imageHeight" format="dimension"></attr>
+		<attr name="imageWidth" format="dimension"></attr>
 		<attr name="bitmapCachePath" format="string"></attr>
 	</declare-styleable>
 </resources>
