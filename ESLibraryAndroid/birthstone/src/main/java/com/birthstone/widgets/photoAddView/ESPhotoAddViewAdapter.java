@@ -32,7 +32,7 @@ public class ESPhotoAddViewAdapter extends BaseAdapter {
 
     // 视图容器
     private LayoutInflater inflater;
-    public int maxcount=9, imageHeight, imageWidth;
+    public int imageMaxCount=9, imageHeight, imageWidth;
 
     public ProgressBar[] progressBarArray;
     private ViewGroup.LayoutParams layoutParams;
@@ -80,7 +80,7 @@ public class ESPhotoAddViewAdapter extends BaseAdapter {
 
         if (position == BitmapCollection.getFilePahtList().size()) {
             holder.image.setImageResource(R.mipmap.es_addpic_unfocused);
-            if (position == maxcount-1) {
+            if (position == imageMaxCount-1) {
                 holder.image.setVisibility(View.GONE);
             }
         }

@@ -94,8 +94,8 @@ public class ESPhotoAddView extends ESGridView implements AdapterView.OnItemClic
         super(context, attrs);
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ESPhotoAddView);
         imageMaxCount = a.getInteger(R.styleable.ESPhotoAddView_imageMaxCount,9);
-        imageHeight = a.getLayoutDimension(R.styleable.ESPhotoAddView_imageHeight,Activity.dip2px(context,70));
-        imageWidth = a.getLayoutDimension(R.styleable.ESPhotoAddView_imageWidth,Activity.dip2px(context,70));
+        imageHeight = a.getLayoutDimension(R.styleable.ESPhotoAddView_imageHeight,70);
+        imageWidth = a.getLayoutDimension(R.styleable.ESPhotoAddView_imageWidth,70);
         bitmapCachePath = a.getString(R.styleable.ESPhotoAddView_bitmapCachePath);
 
         BitmapCollection.delegate = this;
@@ -104,6 +104,7 @@ public class ESPhotoAddView extends ESGridView implements AdapterView.OnItemClic
         adapter = new ESPhotoAddViewAdapter(context);
         adapter.imageHeight = imageHeight;
         adapter.imageWidth = imageWidth;
+        adapter.imageMaxCount = imageMaxCount;
         this.setOnItemClickListener(this);
     }
 
