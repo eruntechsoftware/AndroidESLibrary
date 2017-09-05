@@ -7,16 +7,14 @@ import com.birthstone.core.helper.ValidatorHelper;
 
 import java.io.File;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 /**
  * bitmap容器类，用于处理选中图片
  */
-public class BitmapCollection extends ArrayList<String> implements Serializable {
+public class BitmapCollection extends LinkedList<String> implements Serializable {
 
-    private static final long serialVersionUID = 5187321951128257808L;
     /**存储UIR对象文件**/
     private List<Uri> fileURIList;
 
