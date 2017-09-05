@@ -64,7 +64,7 @@ import java.util.List;
 /**
  * 图片上传组件
  */
-public class ESPhotoAddView extends ESGridView implements AdapterView.OnItemClickListener, IDataInitialize, ESActionSheet.OnActionSheetClickListener{
+public class ESPhotoAddView extends ESGridView implements AdapterView.OnItemClickListener, IDataInitialize, ESActionSheet.OnActionSheetClickListener,BitmapCollection.BitmapCollectionDelegate {
 
     /**Web图片计数**/
     private static int WEB_IMAGE_COUNT;
@@ -97,6 +97,8 @@ public class ESPhotoAddView extends ESGridView implements AdapterView.OnItemClic
         if (authorities==null || "".equals(authorities)){
             ToastHelper.toastShow(context,"必须配置在Manifests配置provider，并在布局中指定authorities属性");
         }
+        BitmapCollection.delegate = this;
+        BitmapCollection.clear();
 
         adapter = new ESPhotoAddViewAdapter(context);
         this.setOnItemClickListener(this);
@@ -185,7 +187,14 @@ public class ESPhotoAddView extends ESGridView implements AdapterView.OnItemClic
         return newProgressbars;
     }
 
-
+    /**
+     * BitmapCollection数据发生改标后触发此方法
+     * **/
+    public void changed(){
+        if(adapter!=null) {
+            adapter.notifyDataSetChanged();
+        }
+    }
 
     /**
      * 权限注册

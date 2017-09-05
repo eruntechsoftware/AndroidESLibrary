@@ -20,6 +20,9 @@ public class BitmapCollection{
     /**存储String路径文件**/
     public static List<String> filePahtList = new LinkedList<String>();
 
+    /**bitmap数据接口，供外部删除图片时使用**/
+    public static BitmapCollectionDelegate delegate;
+
     /**
      * 添加文件到文件容器对象
      * @param uriFile uri文件
@@ -33,34 +36,37 @@ public class BitmapCollection{
      * 添加文件到文件容器对象
      * @param filePath 文件路径
      * **/
-    public static boolean add(String filePath){
+    public static void add(String filePath){
         fileURIList.add(Uri.parse(filePath));
         filePahtList.add(filePath);
-        return true;
     }
 
     /**
      * 移除指定索引对象
      * @param index 索引
      * **/
-    public static String remove(int index){
+    public static void remove(int index){
         if(filePahtList!=null && filePahtList.size()>index){
             filePahtList.remove(index);
             fileURIList.remove(index);
+            if (delegate!=null){
+                delegate.changed();
+            }
         }
-        return "";
     }
 
     /**
      * 移除指定对象
      * @param object 对象
      * **/
-    public static boolean remove(Object object){
+    public static void remove(Object object){
         if(filePahtList!=null && filePahtList.size()>0){
             filePahtList.remove(object);
             fileURIList.remove(object);
+            if (delegate!=null){
+                delegate.changed();
+            }
         }
-        return true;
     }
 
     /**
@@ -96,5 +102,18 @@ public class BitmapCollection{
             }
         }
         return (String[]) webFileList.toArray();
+    }
+
+    /**
+     * 清空数据
+     * **/
+    public static void clear(){
+        fileURIList.clear();
+        filePahtList.clear();
+    }
+
+    /**图片数据操作委托**/
+    public interface BitmapCollectionDelegate{
+        public void changed();
     }
 }
