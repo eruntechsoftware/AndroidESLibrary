@@ -17,8 +17,6 @@ import android.widget.Toast;
 
 import com.birthstone.R;
 import com.birthstone.base.activity.Activity;
-import com.birthstone.base.switchlayout.SwichLayoutInterFace;
-import com.birthstone.base.switchlayout.SwitchLayout;
 import com.birthstone.core.helper.ToastHelper;
 import com.birthstone.core.interfaces.IDataInitialize;
 import com.birthstone.widgets.ESActionSheet;
@@ -66,7 +64,7 @@ import java.util.List;
 /**
  * 图片上传组件
  */
-public class ESPhotoAddView extends ESGridView implements AdapterView.OnItemClickListener, IDataInitialize, ESActionSheet.OnActionSheetClickListener,BitmapCollection.BitmapCollectionDelegate, SwichLayoutInterFace {
+public class ESPhotoAddView extends ESGridView implements AdapterView.OnItemClickListener, IDataInitialize, ESActionSheet.OnActionSheetClickListener,BitmapCollection.BitmapCollectionDelegate {
 
     /**Web图片计数**/
     private static int WEB_IMAGE_COUNT;
@@ -84,12 +82,8 @@ public class ESPhotoAddView extends ESGridView implements AdapterView.OnItemClic
 
     //声明常量权限
     private final int PERMISSIONS_REQUEST_READ_CONTACTS = 8;
-    private static final int REQUEST_EXTERNAL_STORAGE = 1;
-    private static String[] PERMISSIONS_STORAGE = {
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE
-    };
-    private String TAG="ESPhotoAddView";
+
+    private final String TAG="ESPhotoAddView";
 
 
     public ESPhotoAddView(Context context, AttributeSet attrs) {
@@ -269,15 +263,4 @@ public class ESPhotoAddView extends ESGridView implements AdapterView.OnItemClic
         };
 
     }
-
-    @Override
-    public void setEnterSwichLayout() {
-        SwitchLayout.getFadingIn(this);
-    }
-
-    @Override
-    public void setExitSwichLayout() {
-        SwitchLayout.getFadingOut(this, true);
-    }
-
 }
