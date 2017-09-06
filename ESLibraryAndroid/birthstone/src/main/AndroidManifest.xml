@@ -3,6 +3,7 @@
 
     <application>
         <activity android:name=".widgets.photoView.ESPhotoView"
-            android:theme="@android:style/Theme.Translucent"/>
+            android:launchMode="singleTask"
+            android:theme="@style/AppThemeTranslucent"/>
     </application>
 </manifest>
