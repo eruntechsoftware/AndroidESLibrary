@@ -1,4 +1,4 @@
-package com.birthstone.widgets.switchlayout;
+package com.birthstone.animation.switchlayout;
 
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AccelerateInterpolator;

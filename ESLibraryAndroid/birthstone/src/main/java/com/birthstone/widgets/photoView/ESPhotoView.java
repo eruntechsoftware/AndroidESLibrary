@@ -16,8 +16,8 @@ import android.widget.RelativeLayout;
 import com.birthstone.R;
 import com.github.chrisbanes.photoview.PhotoView;
 import com.github.chrisbanes.photoview.PhotoViewAttacher;
-import com.tandong.switchlayout.SwichLayoutInterFace;
-import com.tandong.switchlayout.SwitchLayout;
+import com.birthstone.animation.switchlayout.SwichLayoutInterFace;
+import com.birthstone.animation.switchlayout.SwitchLayout;
 
 import java.util.ArrayList;
 

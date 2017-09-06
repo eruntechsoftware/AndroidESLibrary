@@ -1,4 +1,4 @@
-package com.birthstone.widgets.switchlayout;
+package com.birthstone.animation.switchlayout;
 
 /**
  * QQ 85204173

@@ -1,4 +1,4 @@
-package com.birthstone.widgets.switchlayout;
+package com.birthstone.animation.switchlayout;
 
 import android.graphics.Camera;
 import android.graphics.Matrix;

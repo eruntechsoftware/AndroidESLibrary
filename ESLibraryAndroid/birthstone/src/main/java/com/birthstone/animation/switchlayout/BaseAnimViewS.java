@@ -1,4 +1,4 @@
-package com.birthstone.widgets.switchlayout;
+package com.birthstone.animation.switchlayout;
 
 import android.animation.ObjectAnimator;
 import android.view.animation.AlphaAnimation;
@@ -324,7 +324,7 @@ public class BaseAnimViewS {
 		if (inter != null) {
 			transAnim.setInterpolator(inter);
 		} else {
-			transAnim.setInterpolator(com.tandong.switchlayout.BaseEffects.getBounceEffect());
+			transAnim.setInterpolator(com.birthstone.animation.switchlayout.BaseEffects.getBounceEffect());
 		}
 		return transAnim;
 	}

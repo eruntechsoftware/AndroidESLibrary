@@ -1,4 +1,4 @@
-package com.birthstone.widgets.switchlayout;
+package com.birthstone.animation.switchlayout;
 
 import android.animation.Animator;
 import android.animation.Animator.AnimatorListener;
@@ -11,9 +11,6 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.Interpolator;
-
-import com.tandong.switchlayout.BaseAnimViewS;
-import com.tandong.switchlayout.FlipAnimation;
 
 /**
  * QQ 85204173
