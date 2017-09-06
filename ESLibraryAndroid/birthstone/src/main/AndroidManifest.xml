@@ -2,7 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.birthstone">
 
     <application>
-        <activity android:name=".widgets.photoView.ESPhotoView" />
+        <activity android:name=".widgets.photoView.ESPhotoView"
+            android:theme="@android:style/Theme.Translucent"/>
     </application>
 
     <uses-permission android:name="permission.INTERACT_ACROSS_USERS_FULL" />
