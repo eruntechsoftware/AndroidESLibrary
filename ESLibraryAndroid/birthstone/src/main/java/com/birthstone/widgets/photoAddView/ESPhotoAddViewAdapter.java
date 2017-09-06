@@ -62,8 +62,8 @@ public class ESPhotoAddViewAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.es_photoaddview_item, parent, false);
             holder = new ViewHolder();
             holder.image = (ESImageView) convertView.findViewById(R.id.item_grida_image);
-            layoutParams = new ViewGroup.LayoutParams(imageWidth,imageHeight);
-            holder.image.setLayoutParams(layoutParams);
+//            layoutParams = new ViewGroup.LayoutParams(imageWidth,imageHeight);
+//            holder.image.setLayoutParams(layoutParams);
             holder.progressBar = (ProgressBar)convertView.findViewById(R.id.progressBar);
             convertView.setTag(holder);
         } else {
