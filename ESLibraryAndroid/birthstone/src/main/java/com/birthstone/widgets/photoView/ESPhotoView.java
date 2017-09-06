@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
@@ -75,6 +76,8 @@ public class ESPhotoView extends AppCompatActivity implements View.OnClickListen
 
 		//删除按钮
 		btnDelete.setOnClickListener(this);
+
+		setEnterSwichLayout();
 	}
 
 	/**
@@ -155,5 +158,14 @@ public class ESPhotoView extends AppCompatActivity implements View.OnClickListen
 
 	public void setExitSwichLayout() {
 		SwitchLayout.getFadingOut(this, true);
+	}
+
+	public boolean onKeyDown(int keyCode, KeyEvent event) {// 按返回键时退出Activity的Activity特效动画
+
+		if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+			setExitSwichLayout();
+			return true;
+		}
+		return super.onKeyDown(keyCode, event);
 	}
 }
