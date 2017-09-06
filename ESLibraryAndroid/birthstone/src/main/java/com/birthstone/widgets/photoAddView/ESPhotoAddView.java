@@ -82,12 +82,8 @@ public class ESPhotoAddView extends ESGridView implements AdapterView.OnItemClic
 
     //声明常量权限
     private final int PERMISSIONS_REQUEST_READ_CONTACTS = 8;
-    private static final int REQUEST_EXTERNAL_STORAGE = 1;
-    private static String[] PERMISSIONS_STORAGE = {
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE
-    };
-    private String TAG="ESPhotoAddView";
+
+    private final String TAG="ESPhotoAddView";
 
 
     public ESPhotoAddView(Context context, AttributeSet attrs) {

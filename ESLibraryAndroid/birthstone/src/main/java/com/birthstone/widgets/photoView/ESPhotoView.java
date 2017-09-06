@@ -16,6 +16,8 @@ import android.widget.RelativeLayout;
 import com.birthstone.R;
 import com.github.chrisbanes.photoview.PhotoView;
 import com.github.chrisbanes.photoview.PhotoViewAttacher;
+import com.tandong.switchlayout.SwichLayoutInterFace;
+import com.tandong.switchlayout.SwitchLayout;
 
 import java.util.ArrayList;
 
@@ -27,7 +29,7 @@ import java.util.ArrayList;
  * 参数类型：BitmapCollection类
  * index：点击图片索引
  */
-public class ESPhotoView extends Activity implements View.OnClickListener,OnPageChangeListener {
+public class ESPhotoView extends Activity implements View.OnClickListener,OnPageChangeListener, SwichLayoutInterFace {
 
 	/**
 	 * 声明控件
@@ -140,5 +142,15 @@ public class ESPhotoView extends Activity implements View.OnClickListener,OnPage
 				Log.e("deleteOnClick", ex.getMessage());
 			}
 		}
+	}
+
+	@Override
+	public void setEnterSwichLayout() {
+		SwitchLayout.getFadingIn(this);
+	}
+
+	@Override
+	public void setExitSwichLayout() {
+		SwitchLayout.getFadingOut(this, true);
 	}
 }

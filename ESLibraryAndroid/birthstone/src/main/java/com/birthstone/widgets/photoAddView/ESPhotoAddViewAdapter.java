@@ -3,8 +3,6 @@ package com.birthstone.widgets.photoAddView;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.Uri;
-import android.os.Handler;
-import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,7 +54,6 @@ public class ESPhotoAddViewAdapter extends BaseAdapter {
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
-        final int coord = position;
         ViewHolder holder = null;
         if (convertView == null) {
 
@@ -104,17 +101,6 @@ public class ESPhotoAddViewAdapter extends BaseAdapter {
         public ESImageView image;
         public ProgressBar progressBar;
     }
-
-    Handler handler = new Handler() {
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case 1:
-                    ESPhotoAddViewAdapter.this.notifyDataSetChanged();
-                    break;
-            }
-            super.handleMessage(msg);
-        }
-    };
 
     //加载图片
     public void bind() {
