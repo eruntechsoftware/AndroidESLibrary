@@ -1,15 +1,16 @@
 package com.birthstone.widgets.photoView;
 
 
-import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 
@@ -32,7 +33,7 @@ import java.util.ArrayList;
  * 参数类型：BitmapCollection类
  * index：点击图片索引
  */
-public class ESPhotoView extends Activity implements View.OnClickListener,OnPageChangeListener,SwichLayoutInterFace {
+public class ESPhotoView extends AppCompatActivity implements View.OnClickListener,OnPageChangeListener,SwichLayoutInterFace {
 
 	/**
 	 * 声明控件
@@ -50,6 +51,7 @@ public class ESPhotoView extends Activity implements View.OnClickListener,OnPage
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.es_photoview);
 		pager = (ViewPager) findViewById(R.id.viewpager);
 		btnDelete = (Button) findViewById(R.id.btndelete);
