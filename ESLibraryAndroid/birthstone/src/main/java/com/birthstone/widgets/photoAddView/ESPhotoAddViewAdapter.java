@@ -9,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.LinearLayout;
+import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 
 import com.birthstone.R;
@@ -36,7 +36,7 @@ public class ESPhotoAddViewAdapter extends BaseAdapter {
     public int imageMaxCount=9, imageHeight, imageWidth;
 
     public ProgressBar[] progressBarArray;
-    private LinearLayout.LayoutParams layoutParams;
+    private FrameLayout.LayoutParams layoutParams;
 
     public ESPhotoAddViewAdapter(Context context) {
         inflater = LayoutInflater.from(context);
@@ -63,7 +63,7 @@ public class ESPhotoAddViewAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.es_photoaddview_item, parent, false);
             holder = new ViewHolder();
             holder.image = (ESImageView) convertView.findViewById(R.id.item_grida_image);
-            layoutParams = new LinearLayout.LayoutParams(imageWidth,imageHeight);
+            layoutParams = new FrameLayout.LayoutParams(imageWidth,imageHeight);
             holder.image.setLayoutParams(layoutParams);
             holder.progressBar = (ProgressBar)convertView.findViewById(R.id.progressBar);
             convertView.setTag(holder);
