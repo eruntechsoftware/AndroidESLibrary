@@ -63,9 +63,8 @@ public class ESPhotoView extends AppCompatActivity implements View.OnClickListen
 
 		Intent intent = getIntent();
 		index = intent.getIntExtra("index",0);
-		for (int i = 0; i < BitmapCollection.getFilePahtList().size(); i++) {
-			initListViews(BitmapCollection.getFilePahtList().get(i));
-		}
+		initListViews();
+
 
 		// 构造adapter并设置
 		adapter = new ESPhotoViewAdapter(listViews);
@@ -82,30 +81,34 @@ public class ESPhotoView extends AppCompatActivity implements View.OnClickListen
 
 	/**
 	 * 初始化图片预览列表视图
-	 * @param path 图片路径
 	 * **/
-	private void initListViews(String path) {
+	private void initListViews() {
+		int size = BitmapCollection.getFilePahtList().size();
+		String path = "";
 		if (listViews == null) {
 			listViews = new ArrayList<View>();
 		}
-		//构造textView对象
-		PhotoView img = new PhotoView(this);
-		img.setBackgroundColor(0xff000000);
-		img.setImageURI(Uri.parse(path));
-		img.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
-				LayoutParams.FILL_PARENT));
+		for (int i = 0; i < size; i++) {
 
-		PhotoViewAttacher mAttacher = new PhotoViewAttacher(img);
-		//添加view
-		listViews.add(img);
+			path = BitmapCollection.getFilePahtList().get(i);
 
-		//在每个img上添加点击事件，点击图片时结束当前的activity返回主页面
-		img.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				finish();
-			}
-		});
+			//构造textView对象
+			PhotoView img = new PhotoView(this);
+			img.setBackgroundColor(0xff000000);
+			img.setImageURI(Uri.parse(path));
+			img.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
+					LayoutParams.FILL_PARENT));
+
+			PhotoViewAttacher mAttacher = new PhotoViewAttacher(img);
+			//添加view
+			listViews.add(img);
+			mAttacher.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					setExitSwichLayout();
+				}
+			});
+		}
 	}
 
 	// 页面选择响应函数
@@ -153,8 +156,8 @@ public class ESPhotoView extends AppCompatActivity implements View.OnClickListen
 		SwitchLayout.getFadingOut(this, true);
 	}
 
-	public boolean onKeyDown(int keyCode, KeyEvent event) {// 按返回键时退出Activity的Activity特效动画
-
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		// 按返回键时退出Activity的Activity特效动画
 		if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
 			setExitSwichLayout();
 			return true;
