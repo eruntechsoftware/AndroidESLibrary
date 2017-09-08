@@ -240,6 +240,7 @@ public class ESPhotoAddView extends ESGridView implements AdapterView.OnItemClic
             @Override
             public void onSuccess(List<String> photoList) {
                 Log.i(TAG, "onSuccess: 返回数据");
+                BitmapCollection.clear();
                 for (String s : photoList) {
                     BitmapCollection.add(s);
                 }

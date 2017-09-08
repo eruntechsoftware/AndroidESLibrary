@@ -51,20 +51,23 @@ public class ESPhotoView extends AppCompatActivity implements View.OnClickListen
 	private int index;
 
 	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		setContentView(R.layout.es_photoview);
-		pager = (ViewPager) findViewById(R.id.viewpager);
-		btnDelete = (Button) findViewById(R.id.btndelete);
-		photo_relativeLayout = (RelativeLayout) findViewById(R.id.photo_relativeLayout);
-		photo_relativeLayout.setBackgroundColor(0x70000000);
+		try {
+			super.onCreate(savedInstanceState);
+			requestWindowFeature(Window.FEATURE_NO_TITLE);
+			setContentView(R.layout.es_photoview);
+			pager = (ViewPager) findViewById(R.id.viewpager);
+			btnDelete = (Button) findViewById(R.id.btndelete);
+			photo_relativeLayout = (RelativeLayout) findViewById(R.id.photo_relativeLayout);
+			photo_relativeLayout.setBackgroundColor(0x70000000);
 
-		pager.setOnPageChangeListener(this);
+			pager.setOnPageChangeListener(this);
 
-		Intent intent = getIntent();
-		index = intent.getIntExtra("index",0);
-		initListViews();
-
+			Intent intent = getIntent();
+			index = intent.getIntExtra("index", 0);
+			initListViews();
+		}catch (Exception ex){
+			Log.e("初始化",ex.getMessage());
+		}
 
 		// 构造adapter并设置
 		adapter = new ESPhotoViewAdapter(listViews);
