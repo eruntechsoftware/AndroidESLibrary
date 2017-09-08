@@ -100,20 +100,13 @@ public class ESPhotoView extends AppCompatActivity implements View.OnClickListen
 		listViews.add(img);
 
 		//在每个img上添加点击事件，点击图片时结束当前的activity返回主页面
-		img.setOnClickListener(onClickListener);
+		img.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				finish();
+			}
+		});
 	}
-
-	/**
-	 * 修改时间：2015年09月07日
-	 * 作者：张景瑞
-	 * 功能：大图点击事件处理
-	 */
-	private View.OnClickListener onClickListener = new View.OnClickListener() {
-		@Override
-		public void onClick(View v) {
-			finish();
-		}
-	};
 
 	// 页面选择响应函数
 	public void onPageSelected(int arg0) {
