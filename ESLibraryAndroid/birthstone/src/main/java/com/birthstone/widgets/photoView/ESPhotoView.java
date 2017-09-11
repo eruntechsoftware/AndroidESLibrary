@@ -125,6 +125,8 @@ public class ESPhotoView extends AppCompatActivity implements View.OnClickListen
 	public void onPageScrollStateChanged(int arg0) {
 		String path = BitmapCollection.getFilePahtList().get(arg0);
 		listViews.get(arg0).setImageURI(Uri.parse(path));
+		adapter.notifyDataSetChanged();
+		pager.setCurrentItem(index);
 	}
 
 
