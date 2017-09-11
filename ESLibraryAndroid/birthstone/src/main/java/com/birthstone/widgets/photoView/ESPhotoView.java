@@ -46,7 +46,7 @@ public class ESPhotoView extends AppCompatActivity implements View.OnClickListen
 	/**
 	 * 声明变量
 	 **/
-	private ArrayList<View> listViews = null;
+	private ArrayList<PhotoView> listViews = null;
 	private ESPhotoViewAdapter adapter;
 	private int index;
 
@@ -89,16 +89,13 @@ public class ESPhotoView extends AppCompatActivity implements View.OnClickListen
 		int size = BitmapCollection.getFilePahtList().size();
 		String path = "";
 		if (listViews == null) {
-			listViews = new ArrayList<View>();
+			listViews = new ArrayList<PhotoView>();
 		}
 		for (int i = 0; i < size; i++) {
-
-			path = BitmapCollection.getFilePahtList().get(i);
 
 			//构造textView对象
 			PhotoView img = new PhotoView(this);
 			img.setBackgroundColor(0xff000000);
-			img.setImageURI(Uri.parse(path));
 			img.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
 					LayoutParams.FILL_PARENT));
 
@@ -126,7 +123,8 @@ public class ESPhotoView extends AppCompatActivity implements View.OnClickListen
 
 	// 滑动状态改变
 	public void onPageScrollStateChanged(int arg0) {
-
+		String path = BitmapCollection.getFilePahtList().get(arg0);
+		listViews.get(arg0).setImageURI(Uri.parse(path));
 	}
 
 

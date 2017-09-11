@@ -5,6 +5,8 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
+import com.github.chrisbanes.photoview.PhotoView;
+
 import java.util.ArrayList;
 
 /**
@@ -15,20 +17,20 @@ import java.util.ArrayList;
  * 功能：viewpager显示图片适配器
  */
 public class ESPhotoViewAdapter extends PagerAdapter {
-    private ArrayList<View> listViews;// content
+    private ArrayList<PhotoView> listViews;// content
 
     // 页数
     private int size;
 
     // 构造函数
-    public ESPhotoViewAdapter(ArrayList<View> listViews) {
+    public ESPhotoViewAdapter(ArrayList<PhotoView> listViews) {
 
         // 初始化viewpager的时候给的一个页面
         this.listViews = listViews;
     }
 
     // 添加数据方法
-    public void setListViews(ArrayList<View> listViews) {
+    public void setListViews(ArrayList<PhotoView> listViews) {
         this.listViews = listViews;
         size = listViews == null ? 0 : listViews.size();
     }
