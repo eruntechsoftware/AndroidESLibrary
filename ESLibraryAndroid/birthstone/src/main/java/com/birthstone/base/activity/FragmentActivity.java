@@ -24,13 +24,14 @@ import com.birthstone.base.parse.DataQueryController;
 import com.birthstone.base.parse.FunctionProtected;
 import com.birthstone.base.parse.InitializeController;
 import com.birthstone.base.parse.ValidatorController;
+import com.birthstone.core.interfaces.IChildView;
 import com.birthstone.core.parse.Data;
 import com.birthstone.core.parse.DataCollection;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class FragmentActivity extends android.support.v4.app.FragmentActivity implements IUINavigationBar
+public class FragmentActivity extends android.support.v4.app.FragmentActivity implements IUINavigationBar, IChildView
 {
 	/**变量声明**/
 	protected UINavigationBar mUINavigationBar;

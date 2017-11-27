@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.birthstone.base.activity.Activity;
 import com.birthstone.base.security.ControlSearcher;
+import com.birthstone.core.interfaces.IChildView;
 import com.birthstone.core.interfaces.IControlSearcherHandler;
 import com.birthstone.core.interfaces.IReleasable;
 import com.birthstone.core.interfaces.IStateProtected;
@@ -14,7 +15,7 @@ import java.util.List;
 
 public class ControlStateProtector implements IControlSearcherHandler
 {
-	private Activity activity;
+	private IChildView childView;
 
 	public ControlStateProtector( )
 	{
@@ -30,7 +31,7 @@ public class ControlStateProtector implements IControlSearcherHandler
 	{
 		try
 		{
-			this.activity = (Activity) activity;
+			this.childView = (IChildView) activity;
 			List<IControlSearcherHandler> Controllist = new ArrayList<IControlSearcherHandler>();
 			Controllist.add(this);
 			new ControlSearcher(Controllist).search(activity);
@@ -47,11 +48,11 @@ public class ControlStateProtector implements IControlSearcherHandler
 	{
 		try
 		{
-			if(activity == null)
+			if(childView == null)
 			{
-				if(obj instanceof Activity)
+				if(obj instanceof IChildView)
 				{
-					activity = (Activity) obj;
+					childView = (IChildView) obj;
 				}
 			}
 			if(obj instanceof IStateProtected)
@@ -64,15 +65,15 @@ public class ControlStateProtector implements IControlSearcherHandler
 					{
 						ESHiddenFeild hidden = null;
 						IReleasable release;
-						int size = activity.getViews().size();
+						int size = childView.getViews().size();
 						for(int i = 0; i < size; i++)
 						{
-							if(activity.getViews().get(i) instanceof IReleasable)
+							if(childView.getViews().get(i) instanceof IReleasable)
 							{
-								release = (IReleasable) activity.getViews().get(i);
+								release = (IReleasable) childView.getViews().get(i);
 								if(release.getName().equals(aprotected.getStateHiddenId()))
 								{
-									hidden = (ESHiddenFeild) activity.getViews().get(i);
+									hidden = (ESHiddenFeild) childView.getViews().get(i);
 								}
 							}
 						}

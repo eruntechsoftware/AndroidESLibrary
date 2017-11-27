@@ -1,10 +1,9 @@
 package com.birthstone.base.helper;
 
-import android.app.Activity;
 import android.util.Log;
 
-
 import com.birthstone.base.security.ControlSearcher;
+import com.birthstone.core.interfaces.IChildView;
 import com.birthstone.core.interfaces.IControlSearcherHandler;
 import com.birthstone.core.interfaces.IReleasable;
 import com.birthstone.core.interfaces.IReleaser;
@@ -17,12 +16,12 @@ import java.util.List;
 public class ReleaseHelper implements IReleaser, IControlSearcherHandler
 {
 	private DataCollection dataCollection;
-	private Activity form = null;
+	private IChildView childView = null;
 
-	public ReleaseHelper( DataCollection datas, Activity form )
+	public ReleaseHelper( DataCollection datas, IChildView childView )
 	{
 		this.dataCollection = datas;
-		this.form = form;
+		this.childView = childView;
 	}
 
 	public void release(Object data)
@@ -31,7 +30,7 @@ public class ReleaseHelper implements IReleaser, IControlSearcherHandler
 		{
 			List<IControlSearcherHandler> Controllist = new ArrayList<IControlSearcherHandler>();
 			Controllist.add(this);
-			new ControlSearcher(Controllist).search(form);
+			new ControlSearcher(Controllist).search(childView);
 		}
 		catch(Exception ex)
 		{
@@ -74,14 +73,14 @@ public class ReleaseHelper implements IReleaser, IControlSearcherHandler
 		this.dataCollection = dataCollection;
 	}
 
-	public Activity getForm()
+	public IChildView getForm()
 	{
-		return form;
+		return childView;
 	}
 
-	public void setForm(Activity form)
+	public void setForm(IChildView childView)
 	{
-		this.form = form;
+		this.childView = childView;
 	}
 
 }

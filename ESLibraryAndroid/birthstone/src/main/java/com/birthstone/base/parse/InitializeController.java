@@ -2,8 +2,8 @@ package com.birthstone.base.parse;
 
 import android.util.Log;
 
-import com.birthstone.base.activity.Activity;
 import com.birthstone.base.security.ControlSearcher;
+import com.birthstone.core.interfaces.IChildView;
 import com.birthstone.core.interfaces.IControlSearcherHandler;
 import com.birthstone.core.interfaces.IDataInitialize;
 
@@ -13,11 +13,11 @@ import java.util.List;
 
 public class InitializeController implements IControlSearcherHandler
 {
-	private Activity mActivity;
+	private IChildView childView;
 
-	public InitializeController(Activity mActivity )
+	public InitializeController(IChildView childView )
 	{
-		this.mActivity = mActivity;
+		this.childView = childView;
 	}
 
 	public void initialize() throws Exception
@@ -26,7 +26,7 @@ public class InitializeController implements IControlSearcherHandler
 		{
 			List<IControlSearcherHandler> Controllist = new ArrayList<IControlSearcherHandler>();
 			Controllist.add(this);
-			new ControlSearcher(Controllist).search(mActivity);
+			new ControlSearcher(Controllist).search(childView);
 			Controllist.clear();
 			Controllist=null;
 		}
@@ -43,7 +43,7 @@ public class InitializeController implements IControlSearcherHandler
 			if(obj instanceof IDataInitialize)
 			{
 				IDataInitialize Initidata = (IDataInitialize) obj;
-				Initidata.setActivity(mActivity);
+				Initidata.setActivity(childView);
 				Initidata.dataInitialize();
 			}
 		}

@@ -27,7 +27,7 @@ import com.birthstone.base.helper.FrameAnimationController;
  *
  * 功能：ESSwitchButton选择按钮
  */
-public class ESSwitchButton extends ESCheckBox {
+public class ESSwitchButton extends ESCheckBox{
 	/** 画笔 */
 	private Paint mPaint;
 	private ViewParent mParent;

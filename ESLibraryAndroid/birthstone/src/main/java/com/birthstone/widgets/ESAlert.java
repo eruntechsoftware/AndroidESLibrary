@@ -15,7 +15,7 @@ import android.widget.RelativeLayout;
 
 import com.birthstone.R;
 
-public class ESAlert extends android.app.Dialog
+public class ESAlert extends ESDialog
 {
 
 	private Context context;
@@ -96,9 +96,11 @@ public class ESAlert extends android.app.Dialog
 
 		this.titleTextView = (ESTextView) findViewById(R.id.title);
 		setTitle(title);
+		this.addView(titleTextView);
 
 		this.messageTextView = (ESTextView) findViewById(R.id.message);
 		setMessage(message);
+		this.addView(messageTextView);
 
 		this.buttonAccept = (ESButton) findViewById(R.id.button_accept);
 		if(buttonAcceptText!=null && !buttonAcceptText.equals(""))

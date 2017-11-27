@@ -1,11 +1,10 @@
 package com.birthstone.base.parse;
 
 
-
 import android.util.Log;
 
-import com.birthstone.base.activity.Activity;
 import com.birthstone.base.security.ControlSearcher;
+import com.birthstone.core.interfaces.IChildView;
 import com.birthstone.core.interfaces.ICollectible;
 import com.birthstone.core.interfaces.ICollector;
 import com.birthstone.core.interfaces.IControlSearcherHandler;
@@ -19,27 +18,27 @@ import java.util.List;
  */
 public class CollectController implements ICollector, IControlSearcherHandler
 {
-	Activity mActivity;
+	IChildView childView;
 	DataCollection mResult;
 	String mSign;
 
 	/**
 	 * 数据收集器
-	 * @param mActivity 屏幕
+	 * @param childView 屏幕
 	 */
-	public CollectController(Activity mActivity )
+	public CollectController(IChildView childView )
 	{
-		this.mActivity = mActivity;
+		this.childView = childView;
 	}
 
 	/**
 	 * 数据收集器
-	 * @param mActivity 屏幕
+	 * @param childView 屏幕
 	 * @param sign 收集标记
 	 */
-	public CollectController(Activity mActivity, String sign )
+	public CollectController(IChildView childView, String sign )
 	{
-		this.mActivity = mActivity;
+		this.childView = childView;
 		this.mSign = sign;
 	}
 
@@ -51,11 +50,11 @@ public class CollectController implements ICollector, IControlSearcherHandler
 		this.mResult = new DataCollection();
 		try
 		{
-			if(mActivity != null)
+			if(childView != null)
 			{
 				List<IControlSearcherHandler> Controllist = new ArrayList<IControlSearcherHandler>();
 				Controllist.add(this);
-				new ControlSearcher(Controllist).search(this.mActivity);
+				new ControlSearcher(Controllist).search(this.childView);
 				Controllist.clear();
 				Controllist=null;
 			}

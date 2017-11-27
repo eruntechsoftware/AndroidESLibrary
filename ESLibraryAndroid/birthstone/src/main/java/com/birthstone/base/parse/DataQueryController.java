@@ -3,8 +3,8 @@ package com.birthstone.base.parse;
 
 import android.util.Log;
 
-import com.birthstone.base.activity.Activity;
 import com.birthstone.base.security.ControlSearcher;
+import com.birthstone.core.interfaces.IChildView;
 import com.birthstone.core.interfaces.IControlSearcherHandler;
 import com.birthstone.core.interfaces.IDataQuery;
 
@@ -13,11 +13,11 @@ import java.util.List;
 
 public class DataQueryController implements IControlSearcherHandler
 {
-	private Activity activity;
+	private IChildView childView;
 
-	public DataQueryController(Activity activity )
+	public DataQueryController(IChildView childView )
 	{
-		this.activity = activity;
+		this.childView = childView;
 	}
 
 	public void query()
@@ -26,7 +26,7 @@ public class DataQueryController implements IControlSearcherHandler
 		{
 			List<IControlSearcherHandler> Controllist = new ArrayList<IControlSearcherHandler>();
 			Controllist.add(this);
-			new ControlSearcher(Controllist).search(activity);
+			new ControlSearcher(Controllist).search(childView);
 			Controllist.clear();
 			Controllist=null;
 		}

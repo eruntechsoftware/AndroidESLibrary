@@ -2,8 +2,8 @@ package com.birthstone.base.parse;
 
 import android.util.Log;
 
-import com.birthstone.base.activity.Activity;
 import com.birthstone.base.security.ControlSearcher;
+import com.birthstone.core.interfaces.IChildView;
 import com.birthstone.core.interfaces.IControlSearcherHandler;
 import com.birthstone.core.interfaces.IRefresh;
 
@@ -23,13 +23,13 @@ public class RefreshController implements IControlSearcherHandler
 		return Ref;
 	}
 
-	public void refresh(Activity activity) throws Exception
+	public void refresh(IChildView childView) throws Exception
 	{
 		try
 		{
 			List<IControlSearcherHandler> Controllist = new ArrayList<IControlSearcherHandler>();
 			Controllist.add(this);
-			new ControlSearcher(Controllist).search(activity);
+			new ControlSearcher(Controllist).search(childView);
 			Controllist.clear();
 			Controllist=null;
 		}

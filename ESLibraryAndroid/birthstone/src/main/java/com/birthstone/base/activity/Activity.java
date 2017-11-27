@@ -15,8 +15,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.birthstone.annotation.ViewInjectUtils;
-import com.birthstone.base.helper.ActivityManager;
 import com.birthstone.base.helper.ActivityHelper;
+import com.birthstone.base.helper.ActivityManager;
 import com.birthstone.base.helper.FragmentActivityManager;
 import com.birthstone.base.helper.FragmentManager;
 import com.birthstone.base.helper.ReleaseHelper;
@@ -27,6 +27,7 @@ import com.birthstone.base.parse.DataQueryController;
 import com.birthstone.base.parse.FunctionProtected;
 import com.birthstone.base.parse.InitializeController;
 import com.birthstone.base.parse.ValidatorController;
+import com.birthstone.core.interfaces.IChildView;
 import com.birthstone.core.parse.Data;
 import com.birthstone.core.parse.DataCollection;
 
@@ -35,7 +36,7 @@ import java.util.List;
 
 
 @SuppressLint({"DefaultLocale", "HandlerLeak"})
-public class Activity extends android.app.Activity implements IUINavigationBar
+public class Activity extends android.app.Activity implements IUINavigationBar,IChildView
 {
 	/**变量声明**/
 	protected UINavigationBar mUINavigationBar;

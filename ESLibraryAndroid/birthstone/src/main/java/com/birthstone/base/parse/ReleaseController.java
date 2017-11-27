@@ -2,8 +2,8 @@ package com.birthstone.base.parse;
 
 import android.util.Log;
 
-import com.birthstone.base.activity.Activity;
 import com.birthstone.base.security.ControlSearcher;
+import com.birthstone.core.interfaces.IChildView;
 import com.birthstone.core.interfaces.IControlSearcherHandler;
 import com.birthstone.core.interfaces.IReleasable;
 import com.birthstone.core.interfaces.IReleaser;
@@ -17,23 +17,23 @@ import java.util.List;
 public class ReleaseController implements IReleaser, IControlSearcherHandler
 {
 	private DataTable table;
-	private Activity activity;
+	private IChildView childView;
 
-	public ReleaseController(Activity activity )
+	public ReleaseController(IChildView childView )
 	{
-		this.activity = activity;
+		this.childView = childView;
 	}
 
 	public void release(Object data)
 	{
 		try
 		{
-			if((data != null) && (this.activity != null))
+			if((data != null) && (this.childView != null))
 			{
 				table = (DataTable) data;
 				List<IControlSearcherHandler> Controllist = new ArrayList<IControlSearcherHandler>();
 				Controllist.add(this);
-				new ControlSearcher(Controllist).search(activity);
+				new ControlSearcher(Controllist).search(childView);
 				Controllist.clear();
 				Controllist=null;
 			}

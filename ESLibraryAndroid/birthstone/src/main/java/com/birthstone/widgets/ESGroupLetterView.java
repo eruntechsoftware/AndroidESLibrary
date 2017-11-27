@@ -15,54 +15,62 @@ import com.birthstone.R;
 
 /**
  * 时间：2015年09月25日
- *
+ * <p>
  * 作者：张景瑞
- *
+ * <p>
  * 功能：群成员查看右侧快速滚动栏
  */
-public class ESGroupLetterView extends View {
+public class ESGroupLetterView extends View
+{
     // 触摸事件
     private OnTouchingLetterChangedListener onTouchingLetterChangedListener;
     // 26个字母
-    public static String[] b = { "A", "B", "C", "D", "E", "F", "G", "H", "I",
-            "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V",
-            "W", "X", "Y", "Z", "#" };
+    public static String[] b = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "#"};
     private int choose = -1;// 选中
     private Paint paint = new Paint();
 
     private TextView mTextDialog;
 
-    public void setTextView(TextView mTextDialog) {
+    public void setTextView (TextView mTextDialog)
+    {
         this.mTextDialog = mTextDialog;
     }
 
-    public ESGroupLetterView(Context context, AttributeSet attrs, int defStyle) {
+    public ESGroupLetterView (Context context, AttributeSet attrs, int defStyle)
+    {
         super(context, attrs, defStyle);
     }
 
-    public ESGroupLetterView(Context context, AttributeSet attrs) {
+    public ESGroupLetterView (Context context, AttributeSet attrs)
+    {
         super(context, attrs);
     }
 
-    public ESGroupLetterView(Context context) {
+    public ESGroupLetterView (Context context)
+    {
         super(context);
     }
 
-    /**重写这个方法**/
-    protected void onDraw(Canvas canvas) {
+    /**
+     * 重写这个方法
+     **/
+    protected void onDraw (Canvas canvas)
+    {
         super.onDraw(canvas);
         // 获取焦点改变背景颜色.
         int height = getHeight();// 获取对应高度
         int width = getWidth(); // 获取对应宽度
         int singleHeight = height / b.length;// 获取每一个字母的高度
 
-        for (int i = 0; i < b.length; i++) {
+        for (int i = 0; i < b.length; i++)
+        {
             paint.setColor(getResources().getColor(R.color.es_text_normal));
             paint.setTypeface(Typeface.DEFAULT_BOLD);
             paint.setAntiAlias(true);
             paint.setTextSize(28);
             // 选中的状态
-            if (i == choose) {
+            if (i == choose)
+            {
                 paint.setColor(Color.parseColor("#3399ff"));
                 paint.setTextSize(32);
                 paint.setFakeBoldText(true);
@@ -77,19 +85,22 @@ public class ESGroupLetterView extends View {
     }
 
     @Override
-    public boolean dispatchTouchEvent(MotionEvent event) {
+    public boolean dispatchTouchEvent (MotionEvent event)
+    {
         final int action = event.getAction();
         final float y = event.getY();// 点击y坐标
         final int oldChoose = choose;
         final OnTouchingLetterChangedListener listener = onTouchingLetterChangedListener;
         final int c = (int) (y / getHeight() * b.length);// 点击y坐标所占总高度的比例*b数组的长度就等于点击b中的个数.
 
-        switch (action) {
+        switch (action)
+        {
             case MotionEvent.ACTION_UP:
                 setBackgroundDrawable(new ColorDrawable(0x00000000));
                 choose = -1;//
                 invalidate();
-                if (mTextDialog != null) {
+                if (mTextDialog != null)
+                {
                     mTextDialog.setVisibility(View.INVISIBLE);
                 }
                 break;
@@ -97,12 +108,16 @@ public class ESGroupLetterView extends View {
             default:
                 //设置右侧字母列表[A,B,C,D,E....]的背景颜色
                 setBackgroundResource(R.drawable.es_sortlistview_sidebar_background);
-                if (oldChoose != c) {
-                    if (c >= 0 && c < b.length) {
-                        if (listener != null) {
+                if (oldChoose != c)
+                {
+                    if (c >= 0 && c < b.length)
+                    {
+                        if (listener != null)
+                        {
                             listener.onTouchingLetterChanged(b[c]);
                         }
-                        if (mTextDialog != null) {
+                        if (mTextDialog != null)
+                        {
                             mTextDialog.setText(b[c]);
                             mTextDialog.setVisibility(View.VISIBLE);
                         }
@@ -122,15 +137,18 @@ public class ESGroupLetterView extends View {
      *
      * @param onTouchingLetterChangedListener
      */
-    public void setOnTouchingLetterChangedListener(
-            OnTouchingLetterChangedListener onTouchingLetterChangedListener) {
+    public void setOnTouchingLetterChangedListener (OnTouchingLetterChangedListener onTouchingLetterChangedListener)
+    {
         this.onTouchingLetterChangedListener = onTouchingLetterChangedListener;
     }
 
 
-    /**接口**/
-    public interface OnTouchingLetterChangedListener {
-        public void onTouchingLetterChanged(String s);
+    /**
+     * 接口
+     **/
+    public interface OnTouchingLetterChangedListener
+    {
+        public void onTouchingLetterChanged (String s);
     }
 
 }
