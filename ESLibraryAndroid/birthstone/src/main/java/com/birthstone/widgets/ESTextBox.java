@@ -2,6 +2,10 @@ package com.birthstone.widgets;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.text.Editable;
 import android.text.InputType;
@@ -49,6 +53,7 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 	private OnTextBoxChangedListener onTextBoxChangedListener;
 	private Drawable errorDrawable, requiredDrawable;
 	private Drawable[] drawables;
+	private Canvas canvas;
 
 	public ESTextBox(Context context)
 	{
@@ -61,7 +66,7 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 		try
 		{
 			TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ESTextBox);
-//			mIsRequiredTooltip = a.getString(R.styleable.ESTextBox_isRequiredTooltip);
+			mIsRequiredTooltip = a.getString(R.styleable.ESTextBox_isRequiredTooltip);
 			mRegularExpression = a.getString(R.styleable.ESTextBox_regularExpression);
 			mRegularTooltip = a.getString(R.styleable.ESTextBox_regularTooltip);
 			mIsRequired = a.getBoolean(R.styleable.ESTextBox_isRequired,false);
@@ -135,7 +140,8 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 		if (!hasFocus){
 			if(!ValidatorHelper.isMached(mRegularExpression, getText().toString()))
 			{
-				shakeAnimation();
+				drawError();
+//				shakeAnimation();
 			}
 		}
 	}
@@ -154,7 +160,7 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 	{
 		if(!ValidatorHelper.isMached(mRegularExpression, getText().toString()))
 		{
-			setCompoundDrawablesWithIntrinsicBounds(null, null, errorDrawable, null);
+//			setCompoundDrawablesWithIntrinsicBounds(null, null, errorDrawable, null);
 		}
 
 		if(onTextBoxChangedListener!=null)
@@ -291,6 +297,30 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 		}
 		return datas;
 	}
+
+	protected void onDraw(Canvas canvas)
+	{
+		this.canvas = canvas;
+		super.onDraw(canvas);
+		String value =  this.getText().toString().trim();
+		if(mIsRequiredTooltip!=null && !"".equals(mIsRequiredTooltip) && mIsRequired==true && value.length()==0)
+		{
+			Paint mPaint = new Paint();
+			mPaint.setColor(Color.RED);
+			mPaint.setTextSize(this.getTextSize());
+			mPaint.setFlags(Paint.ANTI_ALIAS_FLAG);
+			Rect rect = new Rect();
+			mPaint.getTextBounds(mIsRequiredTooltip, 0, mIsRequiredTooltip.length(), rect);
+			canvas.drawText(mIsRequiredTooltip, this.getPaddingLeft()+8, this.getHeight() / 2 + rect.height()/2, mPaint);
+		}
+	}
+
+	public void drawError()
+	{
+		errorDrawable.setBounds(this.getWidth()-8,this.getHeight() / 2,this.getWidth(),this.getHeight());
+		errorDrawable.draw(canvas);
+	}
+
 
 	public String[] getCollectSign()
 	{
