@@ -178,25 +178,17 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 	{
 		try
 		{
-//			if(drawables==null)
-//			{
-//				drawables = getCompoundDrawables();
-//			}
+			if(mIsRequired && getText().toString().trim().equals(""))
+			{
+				drawRequired();
+				return false;
+			}
 			Boolean isMached = ValidatorHelper.isMached(mRegularExpression, getText().toString());
 			if (!isMached)
 			{
 				drawRegularExpression();
 			}
-			else
-			{
-
-			}
-			if(mIsRequired && getText().toString().trim().equals(""))
-			{
-				drawRequired();
-			}
-
-			if(mIsRequiredTooltip.length() != 0) { return false; }
+			return isMached;
 		}
 		catch(Exception ex)
 		{
