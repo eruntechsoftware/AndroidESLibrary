@@ -324,7 +324,7 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 
     public void drawError (Canvas canvas)
     {
-        int width = 48;
+        int width = 36;
         int height = 48;
         int textWidth = this.getWidth();
         int textHeight = this.getHeight();
@@ -334,7 +334,7 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 
     public void drawRequired (Canvas canvas)
     {
-        int width = 48;
+        int width = 36;
         int height = 48;
         int textWidth = this.getWidth();
         int textHeight = this.getHeight();
