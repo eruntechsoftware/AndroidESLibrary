@@ -303,16 +303,11 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 		return datas;
 	}
 
-	protected void onDraw(Canvas canvas)
-	{
-		this.canvas = canvas;
-		super.onDraw(canvas);
-	}
-
 	public void drawRegularExpression()
 	{
 		if(mRegularExpression!=null && !"".equals(mRegularExpression))
 		{
+			canvas = new Canvas();
 			Paint mPaint = new Paint();
 			mPaint.setColor(Color.RED);
 			mPaint.setTextSize(13);
@@ -327,12 +322,14 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 
 	public void drawError()
 	{
+		canvas = new Canvas();
 		errorDrawable.setBounds(this.getWidth()-8,this.getHeight() / 2,this.getWidth(),this.getHeight());
 		errorDrawable.draw(canvas);
 	}
 
 	public void drawRequired()
 	{
+		canvas = new Canvas();
 		requiredDrawable.setBounds(this.getWidth()-8,this.getHeight() / 2,this.getWidth(),this.getHeight());
 		requiredDrawable.draw(canvas);
 	}
