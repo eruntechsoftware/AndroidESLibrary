@@ -315,10 +315,12 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 		{
 			Paint mPaint = new Paint();
 			mPaint.setColor(Color.RED);
-			mPaint.setTextSize(this.getTextSize());
+			mPaint.setTextSize(13);
 			mPaint.setFlags(Paint.ANTI_ALIAS_FLAG);
+			mPaint.setStyle(Paint.Style.FILL);
 			Rect rect = new Rect();
 			mPaint.getTextBounds(mRegularExpression, 0, mRegularExpression.length(), rect);
+			canvas.drawText(mRegularExpression, 8, this.getHeight() / 2 + rect.height()/2, mPaint);
 			canvas.drawText(mRegularExpression, this.getWidth()-rect.width()-8, this.getHeight() / 2 + rect.height()/2, mPaint);
 		}
 	}
