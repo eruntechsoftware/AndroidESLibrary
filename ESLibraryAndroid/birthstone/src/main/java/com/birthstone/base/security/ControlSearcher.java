@@ -1,7 +1,5 @@
 package com.birthstone.base.security;
 
-import android.view.ViewGroup;
-
 import com.birthstone.base.activity.Activity;
 import com.birthstone.core.interfaces.IChildView;
 import com.birthstone.core.interfaces.IControlSearcherHandler;
@@ -40,15 +38,6 @@ public class ControlSearcher
                     {
                         search(((Activity) view).getViews().get(i));
                     }
-                }
-            }
-            if (view instanceof ViewGroup)
-            {
-                ViewGroup vp = (ViewGroup) view;
-                int viewGroupsize = vp.getChildCount();
-                for (int i = 0; i < viewGroupsize; i++)
-                {
-                    search(vp.getChildAt(i));
                 }
             }
             else
