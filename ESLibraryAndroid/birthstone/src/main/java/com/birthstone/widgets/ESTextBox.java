@@ -318,8 +318,8 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 			mPaint.setTextSize(this.getTextSize());
 			mPaint.setFlags(Paint.ANTI_ALIAS_FLAG);
 			Rect rect = new Rect();
-			mPaint.getTextBounds(mIsRequiredTooltip, 0, mIsRequiredTooltip.length(), rect);
-			canvas.drawText(mIsRequiredTooltip, this.getPaddingLeft()+8, this.getHeight() / 2 + rect.height()/2, mPaint);
+			mPaint.getTextBounds(mRegularExpression, 0, mRegularExpression.length(), rect);
+			canvas.drawText(mRegularExpression, this.getPaddingLeft()+8, this.getHeight() / 2 + rect.height()/2, mPaint);
 		}
 	}
 
