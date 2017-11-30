@@ -324,22 +324,22 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 
     public void drawError (Canvas canvas)
     {
-        int width = 24;
-        int height = 24;
+        int width = 48;
+        int height = 48;
         int textWidth = this.getWidth();
         int textHeight = this.getHeight();
-        errorDrawable.setBounds(textWidth - width-8, textHeight/2-width/2, textWidth, textHeight/2 + width/2);
+        errorDrawable.setBounds(textWidth - width*2, textHeight/2-width/2, textWidth, textHeight/2 + width/2);
         errorDrawable.draw(canvas);
     }
 
     public void drawRequired (Canvas canvas)
     {
-        int width = 24;
-        int height = 24;
+        int width = 48;
+        int height = 48;
         int textWidth = this.getWidth();
         int textHeight = this.getHeight();
 //        requiredDrawable.setBounds(textWidth - width-8, textHeight / 2, textWidth, textHeight/2 + height/2);
-        requiredDrawable.setBounds(textWidth - width-8, textHeight/2-width/2, textWidth, textHeight/2 + width/2);
+        requiredDrawable.setBounds(textWidth - width*2, textHeight/2-width/2, textWidth, textHeight/2 + width/2);
         requiredDrawable.draw(canvas);
     }
 
