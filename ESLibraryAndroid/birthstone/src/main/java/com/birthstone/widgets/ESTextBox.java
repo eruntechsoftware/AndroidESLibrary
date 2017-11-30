@@ -328,7 +328,7 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
         int height = 48;
         int textWidth = this.getWidth();
         int textHeight = this.getHeight();
-        errorDrawable.setBounds(textWidth - width*2, textHeight/2-width/2, textWidth, textHeight/2 + width/2);
+        errorDrawable.setBounds(textWidth - width*3, textHeight/2-height/2, textWidth, textHeight/2 + height/2);
         errorDrawable.draw(canvas);
     }
 
@@ -339,7 +339,7 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
         int textWidth = this.getWidth();
         int textHeight = this.getHeight();
 //        requiredDrawable.setBounds(textWidth - width-8, textHeight / 2, textWidth, textHeight/2 + height/2);
-        requiredDrawable.setBounds(textWidth - width*2, textHeight/2-width/2, textWidth, textHeight/2 + width/2);
+        requiredDrawable.setBounds(textWidth - width*3, textHeight/2-height/2, textWidth, textHeight/2 + height/2);
         requiredDrawable.draw(canvas);
     }
 
