@@ -326,7 +326,9 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
     {
         int width = errorDrawable.getBounds().width();
         int height = errorDrawable.getBounds().height();
-        errorDrawable.setBounds(this.getWidth() - width-8, this.getHeight() / 2, this.getWidth(), this.getHeight()/2+height/2);
+        int textWidth = this.getWidth();
+        int textHeight = this.getHeight();
+        errorDrawable.setBounds(textWidth - width-8, textHeight / 2, textWidth, textHeight/2 + height/2);
         errorDrawable.draw(canvas);
     }
 
@@ -334,7 +336,9 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
     {
         int width = requiredDrawable.getBounds().width();
         int height = requiredDrawable.getBounds().height();
-        requiredDrawable.setBounds(this.getWidth() - width-8, this.getHeight() / 2, this.getWidth(), this.getHeight()/2+height/2);
+        int textWidth = this.getWidth();
+        int textHeight = this.getHeight();
+        requiredDrawable.setBounds(0, 0, 50, textHeight/2 + height/2);
         requiredDrawable.draw(canvas);
     }
 
