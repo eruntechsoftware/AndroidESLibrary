@@ -44,7 +44,7 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
     protected String mCollectSign;
     protected Boolean mEmpty2Null = true;
     protected Boolean mached = true;
-    protected Boolean required = false;
+    protected Boolean isEmpty = true;
     protected Activity mActivity;
     protected String mName;
     protected String mIsRequiredTooltip = "";
@@ -71,7 +71,7 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
             mRegularExpression = a.getString(R.styleable.ESTextBox_regularExpression);
             if (mRegularExpression == null || "".equals(mRegularExpression))
             {
-                mRegularExpression = "输入的格式错误";
+                mRegularExpression = "*";
             }
             mRegularTooltip = a.getString(R.styleable.ESTextBox_regularTooltip);
             mIsRequired = a.getBoolean(R.styleable.ESTextBox_isRequired, false);
@@ -177,7 +177,7 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
         {
             if (mIsRequired && getText().toString().trim().equals(""))
             {
-                required = true;
+                isEmpty = true;
                 return false;
             }
             mached = ValidatorHelper.isMached(mRegularExpression, getText().toString());
@@ -296,13 +296,13 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
     protected void onDraw (Canvas canvas)
     {
         super.onDraw(canvas);
-        if (required)
+        if (isEmpty && mIsRequired)
         {
             drawRequired(canvas);
         }
-        else if (required!=true &&!mached)
+        else if (!isEmpty && !mached)
         {
-            drawRegularExpression(canvas);
+            drawError(canvas);
         }
     }
 
