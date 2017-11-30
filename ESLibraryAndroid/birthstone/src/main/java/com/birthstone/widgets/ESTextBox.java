@@ -43,6 +43,7 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 	protected Boolean mIsRequired;
 	protected String mCollectSign;
 	protected Boolean mEmpty2Null = true;
+	protected Boolean isMached = true;
 	protected Activity mActivity;
 	protected String mName;
 	protected String mIsRequiredTooltip = "";
@@ -53,7 +54,6 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 	private OnTextBoxChangedListener onTextBoxChangedListener;
 	private Drawable errorDrawable, requiredDrawable;
 //	private Drawable[] drawables;
-	private Canvas canvas;
 
 	public ESTextBox(Context context)
 	{
@@ -162,10 +162,10 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 
 	public void afterTextChanged(Editable s)
 	{
-		if(!ValidatorHelper.isMached(mRegularExpression, getText().toString()))
+		isMached = ValidatorHelper.isMached(mRegularExpression, getText().toString());
+		if(!isMached)
 		{
-			drawRegularExpression();
-//			setCompoundDrawablesWithIntrinsicBounds(null, null, errorDrawable, null);
+			invalidate();
 		}
 
 		if(onTextBoxChangedListener!=null)
@@ -180,13 +180,13 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 		{
 			if(mIsRequired && getText().toString().trim().equals(""))
 			{
-				drawRequired();
+				invalidate();
 				return false;
 			}
-			Boolean isMached = ValidatorHelper.isMached(mRegularExpression, getText().toString());
+			isMached = ValidatorHelper.isMached(mRegularExpression, getText().toString());
 			if (!isMached)
 			{
-				drawRegularExpression();
+				invalidate();
 			}
 			return isMached;
 		}
@@ -295,11 +295,23 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 		return datas;
 	}
 
-	public void drawRegularExpression()
+	protected void onDraw(Canvas canvas)
+	{
+		super.onDraw(canvas);
+		if(mIsRequired)
+		{
+			drawRequired(canvas);
+		}
+		if (!isMached)
+		{
+			drawRegularExpression(canvas);
+		}
+	}
+
+	public void drawRegularExpression(Canvas canvas)
 	{
 		if(mRegularExpression!=null && !"".equals(mRegularExpression))
 		{
-			canvas = new Canvas();
 			Paint mPaint = new Paint();
 			mPaint.setColor(Color.RED);
 			mPaint.setTextSize(13);
@@ -312,14 +324,14 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 		}
 	}
 
-	public void drawError()
+	public void drawError(Canvas canvas)
 	{
 		canvas = new Canvas();
 		errorDrawable.setBounds(this.getWidth()-8,this.getHeight() / 2,this.getWidth(),this.getHeight());
 		errorDrawable.draw(canvas);
 	}
 
-	public void drawRequired()
+	public void drawRequired(Canvas canvas)
 	{
 		canvas = new Canvas();
 		requiredDrawable.setBounds(this.getWidth()-8,this.getHeight() / 2,this.getWidth(),this.getHeight());
