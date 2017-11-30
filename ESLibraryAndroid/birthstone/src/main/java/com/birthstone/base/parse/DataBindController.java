@@ -49,8 +49,11 @@ public class DataBindController implements IDataBinder, IControlSearcherHandler
 	{
 		try
 		{
-			IDataBindble dataBind = (IDataBindble) obj;
-			dataBind.dataBind(id, source);
+			if(obj instanceof IDataBindble)
+			{
+				IDataBindble dataBind = (IDataBindble) obj;
+				dataBind.dataBind(id, source);
+			}
 		}
 		catch(Exception ex)
 		{

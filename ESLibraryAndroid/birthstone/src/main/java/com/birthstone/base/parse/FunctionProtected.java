@@ -36,12 +36,15 @@ public class FunctionProtected implements IControlSearcherHandler
 
 	public void handle(Object obj)
 	{
-		IFunctionProtected function = (IFunctionProtected) obj;
-		Boolean visibled = stateIsMatched(function.getFuncSign());
-		function.setVisible(visibled);
-		if(visibled)
+		if(obj instanceof IFunctionProtected)
 		{
-			setControlState(obj);
+			IFunctionProtected function = (IFunctionProtected) obj;
+			Boolean visibled = stateIsMatched(function.getFuncSign());
+			function.setVisible(visibled);
+			if (visibled)
+			{
+				setControlState(obj);
+			}
 		}
 	}
 

@@ -43,8 +43,11 @@ public class ValidatorController implements IValidator, IControlSearcherHandler
 	{
 		try
 		{
-			IValidatible Validatible = (IValidatible) obj;
-			result = Validatible.dataValidator();
+			if(obj instanceof IValidatible)
+			{
+				IValidatible Validatible = (IValidatible) obj;
+				result = Validatible.dataValidator();
+			}
 		}
 		catch(Exception ex)
 		{

@@ -163,7 +163,7 @@
 		<attr name="empty2Null"></attr>
 		<attr name="collectSign"></attr>
 		<!--必填项错误提示-->
-		<!--<attr name="isRequiredTooltip"></attr>-->
+		<attr name="isRequiredTooltip"></attr>
 		<!--正则表达式-->
 		<attr name="regularExpression"></attr>
 		<!--正则表达式校验错误提示-->
