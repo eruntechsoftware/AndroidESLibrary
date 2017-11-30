@@ -43,7 +43,8 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
     protected Boolean mIsRequired;
     protected String mCollectSign;
     protected Boolean mEmpty2Null = true;
-    protected Boolean isMached = true;
+    protected Boolean mached = true;
+    protected Boolean required = false;
     protected Activity mActivity;
     protected String mName;
     protected String mIsRequiredTooltip = "";
@@ -146,12 +147,7 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
     {
         if (!hasFocus)
         {
-            isMached = !ValidatorHelper.isMached(mRegularExpression, getText().toString());
-            if (!isMached)
-            {
-                invalidate();
-//				shakeAnimation();
-            }
+            mached = !ValidatorHelper.isMached(mRegularExpression, getText().toString());
         }
     }
 
@@ -167,11 +163,7 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 
     public void afterTextChanged (Editable s)
     {
-        isMached = ValidatorHelper.isMached(mRegularExpression, getText().toString());
-        if (!isMached)
-        {
-            invalidate();
-        }
+        mached = ValidatorHelper.isMached(mRegularExpression, getText().toString());
 
         if (onTextBoxChangedListener != null)
         {
@@ -185,15 +177,15 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
         {
             if (mIsRequired && getText().toString().trim().equals(""))
             {
-                invalidate();
+                required = true;
                 return false;
             }
-            isMached = ValidatorHelper.isMached(mRegularExpression, getText().toString());
-            if (!isMached)
+            mached = ValidatorHelper.isMached(mRegularExpression, getText().toString());
+            if (!mached)
             {
                 invalidate();
             }
-            return isMached;
+            return mached;
         }
         catch (Exception ex)
         {
@@ -304,11 +296,11 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
     protected void onDraw (Canvas canvas)
     {
         super.onDraw(canvas);
-        if (mIsRequired)
+        if (required)
         {
             drawRequired(canvas);
         }
-        if (!isMached)
+        else if (required!=true &&!mached)
         {
             drawRegularExpression(canvas);
         }
@@ -320,12 +312,11 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
         {
             Paint mPaint = new Paint();
             mPaint.setColor(Color.RED);
-            mPaint.setTextSize(13);
+            mPaint.setTextSize(this.getTextSize());
             mPaint.setFlags(Paint.ANTI_ALIAS_FLAG);
             mPaint.setStyle(Paint.Style.FILL);
             Rect rect = new Rect();
             mPaint.getTextBounds(mRegularExpression, 0, mRegularExpression.length(), rect);
-            canvas.drawText(mRegularExpression, 8, this.getHeight() / 2 + rect.height() / 2, mPaint);
             canvas.drawText(mRegularExpression, this.getWidth() - rect.width() - 8, this.getHeight() / 2 + rect
                     .height() / 2, mPaint);
         }
