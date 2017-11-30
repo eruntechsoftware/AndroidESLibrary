@@ -52,7 +52,7 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 
 	private OnTextBoxChangedListener onTextBoxChangedListener;
 	private Drawable errorDrawable, requiredDrawable;
-	private Drawable[] drawables;
+//	private Drawable[] drawables;
 	private Canvas canvas;
 
 	public ESTextBox(Context context)
@@ -68,6 +68,10 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 			TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ESTextBox);
 			mIsRequiredTooltip = a.getString(R.styleable.ESTextBox_isRequiredTooltip);
 			mRegularExpression = a.getString(R.styleable.ESTextBox_regularExpression);
+			if(mRegularExpression==null || "".equals(mRegularExpression))
+			{
+				mRegularExpression = "输入的格式错误";
+			}
 			mRegularTooltip = a.getString(R.styleable.ESTextBox_regularTooltip);
 			mIsRequired = a.getBoolean(R.styleable.ESTextBox_isRequired,false);
 			mCollectSign = a.getString(R.styleable.ESTextBox_collectSign);
@@ -160,6 +164,7 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 	{
 		if(!ValidatorHelper.isMached(mRegularExpression, getText().toString()))
 		{
+			drawRegularExpression();
 //			setCompoundDrawablesWithIntrinsicBounds(null, null, errorDrawable, null);
 		}
 
@@ -173,22 +178,22 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 	{
 		try
 		{
-			if(drawables==null)
-			{
-				drawables = getCompoundDrawables();
-			}
+//			if(drawables==null)
+//			{
+//				drawables = getCompoundDrawables();
+//			}
 			Boolean isMached = ValidatorHelper.isMached(mRegularExpression, getText().toString());
 			if (!isMached)
 			{
-				setCompoundDrawablesWithIntrinsicBounds(drawables[0], drawables[1], errorDrawable, drawables[3]);
+				drawRegularExpression();
 			}
 			else
 			{
-				setCompoundDrawablesWithIntrinsicBounds(drawables[0], drawables[1], null, drawables[3]);
+
 			}
 			if(mIsRequired && getText().toString().trim().equals(""))
 			{
-				setCompoundDrawablesWithIntrinsicBounds(drawables[0], drawables[1], requiredDrawable, drawables[3]);
+				drawRequired();
 			}
 
 			if(mIsRequiredTooltip.length() != 0) { return false; }
@@ -302,8 +307,11 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 	{
 		this.canvas = canvas;
 		super.onDraw(canvas);
-		String value =  this.getText().toString().trim();
-		if(mIsRequiredTooltip!=null && !"".equals(mIsRequiredTooltip) && mIsRequired==true && value.length()==0)
+	}
+
+	public void drawRegularExpression()
+	{
+		if(mRegularExpression!=null && !"".equals(mRegularExpression))
 		{
 			Paint mPaint = new Paint();
 			mPaint.setColor(Color.RED);
@@ -321,6 +329,11 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 		errorDrawable.draw(canvas);
 	}
 
+	public void drawRequired()
+	{
+		requiredDrawable.setBounds(this.getWidth()-8,this.getHeight() / 2,this.getWidth(),this.getHeight());
+		requiredDrawable.draw(canvas);
+	}
 
 	public String[] getCollectSign()
 	{
