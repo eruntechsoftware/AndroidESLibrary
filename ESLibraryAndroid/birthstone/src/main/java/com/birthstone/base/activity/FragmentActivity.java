@@ -40,7 +40,7 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
 	protected Activity mParentActivity;
 	protected Context mParentContext;
 
-	public ArrayList<View> views = new ArrayList<View>();
+	protected ArrayList<View> views = new ArrayList<View>();
 	protected ArrayList<Data> mTransferParams =   null;
 	private DataCollection releaseParams,mReceiveDataParams, mTransferDataParams;
 	protected String mTitle, mRightButtonText;
