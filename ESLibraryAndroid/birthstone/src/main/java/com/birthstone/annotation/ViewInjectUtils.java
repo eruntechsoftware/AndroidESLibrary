@@ -127,7 +127,6 @@ public class ViewInjectUtils
                     try
                     {
                         Object resView = fragmentActivity.findViewById(viewId);
-                        fragmentActivity.views.add((View) resView);
                         field.setAccessible(true);
                         field.set(fragmentActivity, resView);
                     }
