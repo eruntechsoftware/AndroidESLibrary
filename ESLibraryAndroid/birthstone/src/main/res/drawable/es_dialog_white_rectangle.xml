@@ -118,9 +118,9 @@
             <!-- Blue button pressed -->
             <item>
                 <shape android:shape="rectangle">
-                    <stroke android:color="@color/system_color" android:width="0px"/>
+                    <stroke android:color="@color/es_qianhui" android:width="0px"/>
                     <corners android:radius="5dp"/>
-                    <solid android:color="@color/white"/>
+                    <solid android:color="@color/es_white"/>
                 </shape>
             </item>
         </layer-list>
@@ -247,9 +247,9 @@
 
             <item>
                 <shape android:shape="rectangle">
-                    <stroke android:color="@color/system_color" android:width="0px"/>
+                    <stroke android:color="@color/es_qianhui" android:width="0px"/>
                     <corners android:radius="5dp"/>
-                    <solid android:color="@color/white"/>
+                    <solid android:color="@color/es_white"/>
                 </shape>
             </item>
         </layer-list>
