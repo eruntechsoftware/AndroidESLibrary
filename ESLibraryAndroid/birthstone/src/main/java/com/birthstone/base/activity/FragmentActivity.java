@@ -170,7 +170,7 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
 			release();
 			query();
 			setFunctionProtected();
-			// setStateControl();
+			setStateControl();
 		}
 		catch(Exception ex)
 		{

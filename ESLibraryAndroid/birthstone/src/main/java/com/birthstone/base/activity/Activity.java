@@ -174,7 +174,7 @@ public class Activity extends android.app.Activity implements IUINavigationBar,I
 			release();
 			query();
 			setFunctionProtected();
-			// setStateControl();
+			setStateControl();
 		}
 		catch(Exception ex)
 		{
