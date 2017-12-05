@@ -14,12 +14,12 @@
         android:background="@drawable/es_actionsheet_background"
         android:orientation="vertical" >
 
-        <Eruntech.BirthStone.UI.Controls.TextView
+        <com.birthstone.widgets.ESTextView
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="弹出标题"
-            android:textColor="@color/es_orange"
+            android:text=""
+            android:textColor="@color/es_shenhui"
             android:textSize="16sp"
             android:gravity="center_horizontal"
             android:layout_marginTop="15dp"
