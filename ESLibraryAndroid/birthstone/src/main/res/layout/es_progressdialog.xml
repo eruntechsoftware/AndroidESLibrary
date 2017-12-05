@@ -3,7 +3,11 @@
     android:layout_width="match_parent" android:layout_height="match_parent">
 
 
-
+<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center">
        <com.github.rahatarmanahmed.cpv.CircularProgressView
            xmlns:app="http://schemas.android.com/apk/res-auto"
            android:id="@+id/progress_view"
@@ -11,23 +15,19 @@
            android:layout_width="40dp"
            android:layout_height="40dp"
            app:cpv_animAutostart="true"
-           app:cpv_color="@color/es_background_light_grey"
+           app:cpv_color="@color/es_colorPrimaryDark"
            app:cpv_indeterminate="true" />
 
 
        <TextView
-           android:visibility="gone"
-           android:id="@+id/content"
-           android:textSize="14dp"
-           android:textColor="@color/es_white"
-           android:text="正在拉取数据..."
-           android:layout_marginTop="2dp"
-           android:layout_marginBottom="15dp"
-           android:layout_marginLeft="15dp"
-           android:layout_marginRight="15dp"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content" />
+               android:id="@+id/content"
+               android:layout_marginLeft="15dp"
+               android:layout_marginRight="15dp"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:typeface="monospace"
+               android:textStyle="normal|bold"/>
 
-
+</LinearLayout>
 
 </RelativeLayout>
