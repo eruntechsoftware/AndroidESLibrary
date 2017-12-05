@@ -109,7 +109,7 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
         switch (value)
         {
             case 0:
-                ESTextBox.this.setInputType(InputType.TYPE_CLASS_TEXT);
+                ESTextBox.this.setInputType(InputType.TYPE_TEXT_FLAG_MULTI_LINE);
                 break;
             case 1:
                 ESTextBox.this.setInputType(InputType.TYPE_CLASS_NUMBER);
