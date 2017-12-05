@@ -8,33 +8,33 @@
               android:gravity="center">
 
 
-<LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:background="@drawable/es_dialog_white_rectangle">
-       <com.github.rahatarmanahmed.cpv.CircularProgressView
-           xmlns:app="http://schemas.android.com/apk/res-auto"
-           android:id="@+id/progress_view"
-           android:layout_centerInParent="true"
-           android:layout_width="40dp"
-           android:layout_height="40dp"
-           app:cpv_animAutostart="true"
-           app:cpv_color="@color/es_colorPrimaryDark"
-           app:cpv_indeterminate="true" />
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:background="@drawable/es_dialog_white_rectangle">
+
+        <com.github.rahatarmanahmed.cpv.CircularProgressView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/progress_view"
+                android:layout_centerInParent="true"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                app:cpv_animAutostart="true"
+                app:cpv_color="@color/es_colorPrimaryDark"
+                app:cpv_indeterminate="true"/>
 
 
-       <TextView
-               android:id="@+id/content"
-               android:layout_marginLeft="15dp"
-               android:layout_marginRight="15dp"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:typeface="monospace"
-               android:textStyle="normal|bold"/>
+        <TextView
+                android:id="@+id/content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:typeface="monospace"
+                android:textStyle="normal|bold"/>
 
-</LinearLayout
-        android:layout_width="match_parent">
+    </LinearLayout>
 
 </LinearLayout>
