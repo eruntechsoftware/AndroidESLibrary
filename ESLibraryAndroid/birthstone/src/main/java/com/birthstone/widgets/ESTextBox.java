@@ -22,6 +22,7 @@ import com.birthstone.base.activity.Activity;
 import com.birthstone.base.event.OnTextBoxChangedListener;
 import com.birthstone.base.helper.InitializeHelper;
 import com.birthstone.core.helper.DataType;
+import com.birthstone.core.helper.DataTypeExpression;
 import com.birthstone.core.helper.DataTypeHelper;
 import com.birthstone.core.helper.DateTimeHelper;
 import com.birthstone.core.helper.StringToArray;
@@ -80,7 +81,7 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
             this.addTextChangedListener(this);
             this.setOnFocusChangeListener(this);
             int value = a.getInt(R.styleable.ESTextBox_dataType, 0);
-            this.mDataType = DataTypeHelper.valueOf(value);
+            this.setDataType(DataTypeHelper.valueOf(value));
             setInputTypeWithDataType(value);
             a.recycle();
 
@@ -153,7 +154,7 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
         {
             isEmpty = true;
         }
-        if (!hasFocus)
+        if (!hasFocus && mDataType!=DataType.String)
         {
             mached = !ValidatorHelper.isMached(mRegularExpression, getText().toString());
         }
@@ -229,6 +230,39 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
     public void setDataType (DataType arg0)
     {
         mDataType = arg0;
+        switch (arg0)
+        {
+            case String:
+                this.mRegularExpression = "*";
+                break;
+            case Integer:
+                this.mRegularExpression = DataTypeExpression.integer();
+                break;
+            case Numeric:
+                this.mRegularExpression = DataTypeExpression.numeric();
+                break;
+            case Date:
+                this.mRegularExpression = DataTypeExpression.date();
+                break;
+            case DateTime:
+                this.mRegularExpression = DataTypeExpression.dateTime();
+                break;
+            case EMail:
+                this.mRegularExpression = DataTypeExpression.eMail();
+                break;
+            case URL:
+                this.mRegularExpression = DataTypeExpression.URL();
+                break;
+            case IDCard:
+                this.mRegularExpression = DataTypeExpression.idCard();
+                break;
+            case Phone:
+                this.mRegularExpression = DataTypeExpression.phone();
+                break;
+            case Mobile:
+                this.mRegularExpression = DataTypeExpression.mobile();
+                break;
+        }
     }
 
     public void setIsRequired (Boolean arg0)
