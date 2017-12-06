@@ -81,7 +81,7 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
             this.setOnFocusChangeListener(this);
             int value = a.getInt(R.styleable.ESTextBox_dataType, 0);
             this.mDataType = DataTypeHelper.valueOf(value);
-            setInputTypeWithDataType(value);
+//            setInputTypeWithDataType(value);
             a.recycle();
 
             errorDrawable = this.getResources().getDrawable(R.mipmap.es_error);
@@ -293,18 +293,18 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
         return datas;
     }
 
-    protected void onDraw (Canvas canvas)
-    {
-        super.onDraw(canvas);
-        if (isEmpty && mIsRequired)
-        {
-            drawRequired(canvas);
-        }
-        else if (!isEmpty && !mached)
-        {
-            drawError(canvas);
-        }
-    }
+//    protected void onDraw (Canvas canvas)
+//    {
+//        super.onDraw(canvas);
+//        if (isEmpty && mIsRequired)
+//        {
+//            drawRequired(canvas);
+//        }
+//        else if (!isEmpty && !mached)
+//        {
+//            drawError(canvas);
+//        }
+//    }
 
     public void drawRegularExpression (Canvas canvas)
     {
