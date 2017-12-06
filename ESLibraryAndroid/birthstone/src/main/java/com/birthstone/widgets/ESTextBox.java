@@ -81,7 +81,7 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
             this.setOnFocusChangeListener(this);
             int value = a.getInt(R.styleable.ESTextBox_dataType, 0);
             this.mDataType = DataTypeHelper.valueOf(value);
-//            setInputTypeWithDataType(value);
+            setInputTypeWithDataType(value);
             a.recycle();
 
             errorDrawable = this.getResources().getDrawable(R.mipmap.es_error);
@@ -145,6 +145,14 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
     @Override
     public void onFocusChange (View view, boolean hasFocus)
     {
+        if(this.getText().toString().trim().length()>0)
+        {
+            isEmpty = false;
+        }
+        else
+        {
+            isEmpty = true;
+        }
         if (!hasFocus)
         {
             mached = !ValidatorHelper.isMached(mRegularExpression, getText().toString());
@@ -153,7 +161,14 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 
     public void onTextChanged (CharSequence s, int start, int before, int count)
     {
-
+        if(this.getText().toString().trim().length()>0)
+        {
+            isEmpty = false;
+        }
+        else
+        {
+            isEmpty = true;
+        }
     }
 
     public void beforeTextChanged (CharSequence s, int start, int count, int after)
