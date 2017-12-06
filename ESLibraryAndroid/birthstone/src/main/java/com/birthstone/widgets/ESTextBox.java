@@ -293,18 +293,18 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
         return datas;
     }
 
-//    protected void onDraw (Canvas canvas)
-//    {
-//        super.onDraw(canvas);
-//        if (isEmpty && mIsRequired)
-//        {
-//            drawRequired(canvas);
-//        }
-//        else if (!isEmpty && !mached)
-//        {
-//            drawError(canvas);
-//        }
-//    }
+    protected void onDraw (Canvas canvas)
+    {
+        if (isEmpty && mIsRequired)
+        {
+            drawRequired(canvas);
+        }
+        else if (!isEmpty && !mached)
+        {
+            drawError(canvas);
+        }
+        super.onDraw(canvas);
+    }
 
     public void drawRegularExpression (Canvas canvas)
     {
