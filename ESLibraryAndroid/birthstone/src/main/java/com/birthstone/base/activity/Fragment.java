@@ -60,6 +60,26 @@ public class Fragment extends android.support.v4.app.Fragment implements IChildV
 
     }
 
+    /**
+     * 初始化Fragment
+     * @param receiveDataParams 接收的参数集
+     * **/
+    public Fragment(DataCollection receiveDataParams)
+    {
+        this.mReceiveDataParams = receiveDataParams;
+    }
+
+    /**
+     * 初始化Fragment
+     * @param frgamentActivity 根布局frgamentActivity
+     * @param receiveDataParams 接收的参数集
+     * **/
+    public Fragment(FragmentActivity frgamentActivity, DataCollection receiveDataParams)
+    {
+        this.mFragmentActivity = frgamentActivity;
+        this.mReceiveDataParams = receiveDataParams;
+    }
+
     public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         this.mInflater = inflater;
@@ -93,11 +113,11 @@ public class Fragment extends android.support.v4.app.Fragment implements IChildV
     {
         try
         {
-            initializeActivity();
+            initViewWithActivity();
             release();
-            query();
-            setFunctionProtected();
-            setStateControl();
+            initDataWithView();
+            initFunctionProtectedWithView();
+            initStateControlWithView();
         }
         catch (Exception ex)
         {
@@ -120,7 +140,7 @@ public class Fragment extends android.support.v4.app.Fragment implements IChildV
     {
         try
         {
-            initializeActivity();
+            initViewWithActivity();
             return true;
         }
         catch (Exception ex)
@@ -133,7 +153,7 @@ public class Fragment extends android.support.v4.app.Fragment implements IChildV
     /**
      * 初始化Activity
      */
-    public void initializeActivity ()
+    public void initViewWithActivity ()
     {
         try
         {
@@ -234,7 +254,7 @@ public class Fragment extends android.support.v4.app.Fragment implements IChildV
     /**
      * 设置权限状态
      */
-    private void setFunctionProtected ()
+    private void initFunctionProtectedWithView ()
     {
         try
         {
@@ -250,7 +270,7 @@ public class Fragment extends android.support.v4.app.Fragment implements IChildV
     /**
      * 执行查询相关接口
      */
-    public void query ()
+    public void initDataWithView ()
     {
         DataQueryController dataQueryController;
         try
@@ -321,7 +341,7 @@ public class Fragment extends android.support.v4.app.Fragment implements IChildV
     /**
      * 设置UIView状态
      */
-    public void setStateControl ()
+    public void initStateControlWithView ()
     {
         ControlStateProtector.createControlStateProtector().setStateControl(this);
     }

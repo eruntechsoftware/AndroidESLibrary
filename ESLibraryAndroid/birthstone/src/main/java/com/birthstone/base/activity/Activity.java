@@ -170,11 +170,12 @@ public class Activity extends android.app.Activity implements IUINavigationBar,I
 	{
 		try
 		{
-			initializeActivity();
+			initViewWithActivity();
 			release();
-			query();
-			setFunctionProtected();
-			setStateControl();
+			initDataWithView();
+			initFunctionProtectedWithView();
+			initStateControlWithView();
+
 		}
 		catch(Exception ex)
 		{
@@ -225,7 +226,7 @@ public class Activity extends android.app.Activity implements IUINavigationBar,I
 	{
 		try
 		{
-			initializeActivity();
+			initViewWithActivity();
 			return true;
 		}
 		catch(Exception ex)
@@ -249,7 +250,7 @@ public class Activity extends android.app.Activity implements IUINavigationBar,I
 	/**
 	* 初始化Activity
 	* */
-	public void initializeActivity()
+	public void initViewWithActivity()
 	{
 		try
 		{
@@ -348,7 +349,7 @@ public class Activity extends android.app.Activity implements IUINavigationBar,I
 	/**
 	* 设置权限状态
 	* */
-	private void setFunctionProtected()
+	private void initFunctionProtectedWithView()
 	{
 		try
 		{
@@ -364,7 +365,7 @@ public class Activity extends android.app.Activity implements IUINavigationBar,I
 	/**
 	 *执行查询相关接口
 	 */
-	public void query()
+	public void initDataWithView()
 	{
 		DataQueryController dataQueryController;
 		try
@@ -433,7 +434,7 @@ public class Activity extends android.app.Activity implements IUINavigationBar,I
 	/**
 	* 设置UIView状态
 	* */
-	public void setStateControl()
+	public void initStateControlWithView()
 	{
 		ControlStateProtector.createControlStateProtector().setStateControl(this);
 	}

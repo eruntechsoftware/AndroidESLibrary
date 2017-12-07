@@ -174,11 +174,11 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
     {
         try
         {
-            initializeActivity();
+            initViewWithActivity();
             release();
-            query();
-            setFunctionProtected();
-            setStateControl();
+            initDataWithView();
+            initFunctionProtectedWithView();
+            initStateControlWithView();
         }
         catch (Exception ex)
         {
@@ -226,7 +226,7 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
     {
         try
         {
-            initializeActivity();
+            initViewWithActivity();
             return true;
         }
         catch (Exception ex)
@@ -250,7 +250,7 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
     /*
     * 初始化Activity
     * */
-    public void initializeActivity ()
+    public void initViewWithActivity ()
     {
         try
         {
@@ -347,7 +347,7 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
     /**
      * 设置权限状态
      */
-    public void setFunctionProtected ()
+    public void initFunctionProtectedWithView ()
     {
         try
         {
@@ -363,7 +363,7 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
     /**
      * 执行查询相关接口
      */
-    public void query ()
+    public void initDataWithView ()
     {
         DataQueryController dataQueryController;
         try
@@ -434,7 +434,7 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
     /**
      * 设置UIView状态
      */
-    public void setStateControl ()
+    public void initStateControlWithView ()
     {
         ControlStateProtector.createControlStateProtector().setStateControl(this);
     }
