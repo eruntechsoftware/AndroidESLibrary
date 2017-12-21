@@ -75,7 +75,7 @@ public class ESActionPopup extends PopupWindow implements View.OnClickListener
      * @param context
      * @param items   ActionPopup项目
      */
-    public ESActionPopup (Context context, View parent, String[] items)
+    public ESActionPopup (Context context, View parent, Object[] items)
     {
         super(context);
         this.context = context;
