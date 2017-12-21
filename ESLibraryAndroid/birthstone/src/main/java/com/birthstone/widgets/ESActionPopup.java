@@ -44,7 +44,7 @@ public class ESActionPopup extends PopupWindow implements View.OnClickListener
     private Context context;
     private OnActionPopupClickListener onActionPopupClickListener;
     private String title = "";
-    private String[] items;
+    private Object[] items;
     private View.OnClickListener onCancelButtonClickListener;
     private int titleColor,itemColor;
     /***
@@ -55,7 +55,7 @@ public class ESActionPopup extends PopupWindow implements View.OnClickListener
      * @param items   ActionPopup项目
      * @param title 标题
      */
-    public ESActionPopup (Context context, View parent, String[] items, String title)
+    public ESActionPopup (Context context, View parent, Object[] items, String title)
     {
         super(context);
         this.context = context;
@@ -133,7 +133,7 @@ public class ESActionPopup extends PopupWindow implements View.OnClickListener
                 Button btnItem = new Button(context);
                 //设置view的ID
                 btnItem.setId(i);
-                btnItem.setText(items[i]);
+                btnItem.setText(items[i].toString());
 
                 //添加事件监听
                 btnItem.setOnClickListener(this);
