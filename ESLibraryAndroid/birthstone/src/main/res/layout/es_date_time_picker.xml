@@ -8,13 +8,15 @@
         android:id="@+id/datepicker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:calendarViewShown="false">
+        android:calendarViewShown="false"
+        android:layout_weight="1">
     </DatePicker>
 
     <TimePicker
         android:id="@+id/timepicker"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
     </TimePicker>
 
 </LinearLayout>

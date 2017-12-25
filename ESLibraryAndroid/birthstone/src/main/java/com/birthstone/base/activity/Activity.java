@@ -575,6 +575,15 @@ public class Activity extends android.app.Activity implements IUINavigationBar,I
 	}
 
 	/**
+	 * 设置当前Activity向下级屏幕传递的参数集
+	 * @param transferDataParams 数据集合
+	 * **/
+	public void setTransferDataParams(DataCollection transferDataParams)
+	{
+		this.mTransferDataParams = transferDataParams;
+	}
+
+	/**
 	 * 获取当前屏幕Fragment
 	 * @return Fragment
 	 */

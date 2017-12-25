@@ -183,4 +183,19 @@ public class ESDateTimePicker implements DatePicker.OnDateChangedListener, TimeP
         return result;
     }
 
+    /**
+     * 获取日期控件实例
+     * **/
+    public DatePicker getDatePicker ()
+    {
+        return datePicker;
+    }
+
+    /**
+     * 获取时间控件实例
+     * **/
+    public TimePicker getTimePicker ()
+    {
+        return timePicker;
+    }
 }
