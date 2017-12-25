@@ -356,7 +356,7 @@ public class Fragment extends android.support.v4.app.Fragment implements IChildV
             case 185324:
                 if (data.getBooleanExtra("isRefresh", false))
                 {
-                    onRefresh(data);
+                    onRefresh(getTransferDataParams());
                 }
                 break;
             default:
@@ -368,9 +368,9 @@ public class Fragment extends android.support.v4.app.Fragment implements IChildV
     /**
      * Activity关闭时，通知父级Activity调用此方法，用于页面刷新
      *
-     * @param data Intent参数集
+     * @param mTransferDataParams 参数集
      **/
-    public void onRefresh (Intent data)
+    public void onRefresh (DataCollection mTransferDataParams)
     {
 
     }
