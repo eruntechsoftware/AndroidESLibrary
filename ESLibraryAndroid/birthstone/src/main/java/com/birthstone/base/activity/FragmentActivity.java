@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.birthstone.R;
 import com.birthstone.annotation.ViewInjectUtils;
 import com.birthstone.base.helper.ActivityManager;
 import com.birthstone.base.helper.ActivityHelper;
@@ -197,6 +198,7 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
             ViewGroup viewGroup = (ViewGroup) rootView;
 
             mUINavigationBar = new UINavigationBar(this, true);
+            mUINavigationBar.setId(R.id.uiNavigationBar);
             mUINavigationBar.UINavigationBarDelegat = this;
             viewGroup.addView(mUINavigationBar);
 

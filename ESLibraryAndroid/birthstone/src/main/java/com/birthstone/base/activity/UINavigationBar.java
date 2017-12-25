@@ -103,6 +103,7 @@ public class UINavigationBar extends RelativeLayout implements View.OnClickListe
 
 	public UINavigationBar(Context context) {
 		super(context);
+		setId(R.id.uiNavigationBar);
 		initView(context);
 	}
 

@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.birthstone.R;
 import com.birthstone.annotation.ViewInjectUtils;
 import com.birthstone.base.helper.ActivityHelper;
 import com.birthstone.base.helper.ActivityManager;
@@ -193,6 +194,7 @@ public class Activity extends android.app.Activity implements IUINavigationBar,I
 		{
 			ViewGroup viewGroup = (ViewGroup) rootView;
 			mUINavigationBar = new UINavigationBar(this, true);
+			mUINavigationBar.setId(R.id.uiNavigationBar);
 			mUINavigationBar.UINavigationBarDelegat=this;
 			viewGroup.addView(mUINavigationBar);
 

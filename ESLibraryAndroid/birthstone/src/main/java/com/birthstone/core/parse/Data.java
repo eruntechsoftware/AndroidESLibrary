@@ -1,8 +1,10 @@
 package com.birthstone.core.parse;
 
-import java.io.Serializable;
-import com.birthstone.core.helper.DataType;
 import android.util.Log;
+
+import com.birthstone.core.helper.DataType;
+
+import java.io.Serializable;
 
 public class Data implements Cloneable, Serializable
 {
@@ -68,6 +70,10 @@ public class Data implements Cloneable, Serializable
 	public Object getValue()
 	{
 		return Value;
+	}
+
+	public String getStringValue() {
+		return this.Value.toString();
 	}
 	
 	public int getIntValue() {
