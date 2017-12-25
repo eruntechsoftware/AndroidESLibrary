@@ -40,8 +40,8 @@ public class Activity extends android.app.Activity implements IUINavigationBar,I
 {
 	/**变量声明**/
 	protected UINavigationBar mUINavigationBar;
-	protected FragmentActivity mFragmentActivity;
-	protected Fragment mFragment;
+	protected FragmentActivity mParentFragmentActivity;
+	protected Fragment mParentFragment;
 	protected Activity mParentActivity;
 	protected Context mParentContext;
 
@@ -49,7 +49,7 @@ public class Activity extends android.app.Activity implements IUINavigationBar,I
 	protected ArrayList<Data> mTransferParams = null;
 	private DataCollection releaseParams, mReceiveDataParams, mTransferDataParams;
 	protected String mTitle, mRightButtonText;
-	private Boolean mParentRefresh = false, mIsParentStart=false;
+	private Boolean mIsParentStart=false;
 	protected int index = 0;
 
 	protected int mReleaseCount = 0;
@@ -111,7 +111,7 @@ public class Activity extends android.app.Activity implements IUINavigationBar,I
 			{
 				android.support.v4.app.Fragment fragment = FragmentManager.last();
 				if(fragment instanceof Fragment){
-					this.mFragment =  (Fragment)fragment;
+					this.mParentFragment =  (Fragment)fragment;
 				}
 				this.mIsParentStart = true;
 				if(mIsParentStart)
@@ -128,7 +128,7 @@ public class Activity extends android.app.Activity implements IUINavigationBar,I
 			{
 				android.support.v4.app.FragmentActivity fragmentActivity = FragmentActivityManager.last();
 				if(fragmentActivity instanceof FragmentActivity){
-					this.mFragmentActivity =  (FragmentActivity)fragmentActivity;
+					this.mParentFragmentActivity =  (FragmentActivity)fragmentActivity;
 				}
 				this.mIsParentStart = true;
 				if(mIsParentStart)
@@ -445,7 +445,7 @@ public class Activity extends android.app.Activity implements IUINavigationBar,I
 	public void finish()
 	{
 		Intent intent = new Intent();
-		intent.putExtra("isRefresh", mParentRefresh);
+		intent.putExtra("isRefresh", true);
 		this.setResult(RESULT_OK, intent);
 		intent=null;
 		ActivityManager.pop(this);
@@ -456,16 +456,25 @@ public class Activity extends android.app.Activity implements IUINavigationBar,I
 	* 关闭当前Activity并传递参数
 	* @param intent 参数集合
 	* */
-	public void finish(Intent intent)
+	public void finishWithRefresh(DataCollection params)
 	{
-		if(intent == null)
-		{
-			intent = new Intent();
-		}
-		intent.putExtra("isRefresh", mParentRefresh);
+		Intent intent = new Intent();
+		intent.putExtra("isRefresh", true);
 		this.setResult(RESULT_OK, intent);
-		intent=null;
+		if(mParentFragmentActivity !=null)
+		{
+			mParentFragmentActivity.setTransferDataParams(params);
+		}
+		if(mParentFragment !=null)
+		{
+			mParentFragment.setTransferDataParams(params);
+		}
+		if(mParentActivity !=null)
+		{
+			mParentActivity.setTransferDataParams(params);
+		}
 		ActivityManager.pop(this);
+		intent=null;
 		super.finish();
 	}
 
@@ -477,7 +486,7 @@ public class Activity extends android.app.Activity implements IUINavigationBar,I
 			case 185324:
 				if(data.getBooleanExtra("isRefresh", false))
 				{
-					onRefresh(data);
+					onRefresh(getTransferDataParams());
 				}
 				break;
 			default:
@@ -488,9 +497,9 @@ public class Activity extends android.app.Activity implements IUINavigationBar,I
 
 	/**
 	 *Activity关闭时，通知父级Activity调用此方法，用于页面刷新
-	 * @param data Intent参数集
+	 * @param mTransferDataParams 参数集
 	 * **/
-	public void onRefresh(Intent data)
+	public void onRefresh(DataCollection mTransferDataParams)
 	{
 
 	}
@@ -589,7 +598,7 @@ public class Activity extends android.app.Activity implements IUINavigationBar,I
 	 */
 	public Fragment getFragment()
 	{
-		return mFragment;
+		return mParentFragment;
 	}
 
 	/**
@@ -598,7 +607,7 @@ public class Activity extends android.app.Activity implements IUINavigationBar,I
 	 */
 	public void setFragment(Fragment fragment)
 	{
-		this.mFragment = fragment;
+		this.mParentFragment = fragment;
 	}
 
 	/**
@@ -616,7 +625,7 @@ public class Activity extends android.app.Activity implements IUINavigationBar,I
 	 */
 	public Fragment getParentFragment()
 	{
-		return mFragment;
+		return mParentFragment;
 	}
 
 	/**
@@ -625,7 +634,7 @@ public class Activity extends android.app.Activity implements IUINavigationBar,I
 	 */
 	public FragmentActivity getParentFragmentActivity()
 	{
-		return mFragmentActivity;
+		return mParentFragmentActivity;
 	}
 
 	/**
@@ -816,15 +825,6 @@ public class Activity extends android.app.Activity implements IUINavigationBar,I
 	}
 
 	/**
-	 * 设置父级页面是否执行刷新方法
-	 * @param mParentRefresh 是否刷新
-	 * **/
-	public void setParentRefresh(boolean mParentRefresh)
-	{
-		this.mParentRefresh = mParentRefresh;
-	}
-
-	/**
 	 * 跳转到目标屏幕
 	 * @param targetViewController 目标屏幕
 	 * @param navigationbar 是否显示导航栏
@@ -900,8 +900,8 @@ public class Activity extends android.app.Activity implements IUINavigationBar,I
         	mUINavigationBar.setLeftViewClickListener(null);
         }
     	mUINavigationBar=null;
-    	mFragmentActivity=null;
-    	mFragment=null;
+    	mParentFragmentActivity =null;
+    	mParentFragment =null;
     	mParentActivity=null;
     	mParentContext=null;
     	

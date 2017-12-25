@@ -37,8 +37,8 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
      * 变量声明
      **/
     protected UINavigationBar mUINavigationBar;
-    protected FragmentActivity mFragmentActivity;
-    protected Fragment mFragment;
+    protected FragmentActivity mParentFragmentActivity;
+    protected Fragment mParentFragment;
     protected Activity mParentActivity;
     protected Context mParentContext;
 
@@ -113,7 +113,7 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
                 android.support.v4.app.Fragment fragment = FragmentManager.last();
                 if (fragment instanceof Fragment)
                 {
-                    this.mFragment = (Fragment) fragment;
+                    this.mParentFragment = (Fragment) fragment;
                 }
                 this.mIsParentStart = true;
                 if (mIsParentStart)
@@ -131,7 +131,7 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
                 android.support.v4.app.FragmentActivity fragmentActivity = FragmentActivityManager.last();
                 if (fragmentActivity instanceof FragmentActivity)
                 {
-                    this.mFragmentActivity = (FragmentActivity) fragmentActivity;
+                    this.mParentFragmentActivity = (FragmentActivity) fragmentActivity;
                 }
 
                 this.mIsParentStart = true;
@@ -460,32 +460,41 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
     }
 
     /*
-    * 关闭当前屏幕
-    * */
+* 关闭当前Activity
+* */
     public void finish ()
     {
         Intent intent = new Intent();
-        intent.putExtra("isRefresh", mParentRefresh);
+        intent.putExtra("isRefresh", true);
         this.setResult(RESULT_OK, intent);
         intent = null;
-        FragmentActivityManager.pop(this);
+        ActivityManager.pop(this);
         super.finish();
     }
 
     /*
-    * 关闭当前屏幕并传递参数
+    * 关闭当前Activity并传递参数
     * @param intent 参数集合
     * */
-    public void finish (Intent intent)
+    public void finishWithRefresh (DataCollection params)
     {
-        if (intent == null)
-        {
-            intent = new Intent();
-        }
-        intent.putExtra("isRefresh", mParentRefresh);
+        Intent intent = new Intent();
+        intent.putExtra("isRefresh", true);
         this.setResult(RESULT_OK, intent);
+        if (mParentFragmentActivity != null)
+        {
+            mParentFragmentActivity.setTransferDataParams(params);
+        }
+        if (mParentFragment != null)
+        {
+            mParentFragment.setTransferDataParams(params);
+        }
+        if (mParentActivity != null)
+        {
+            mParentActivity.setTransferDataParams(params);
+        }
+        ActivityManager.pop(this);
         intent = null;
-        FragmentActivityManager.pop(this);
         super.finish();
     }
 
@@ -499,7 +508,7 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
             case 185324:
                 if (data.getBooleanExtra("isRefresh", false))
                 {
-                    onRefresh(data);
+                    onRefresh(getTransferDataParams());
                 }
                 break;
             default:
@@ -510,9 +519,9 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
     /**
      * Activity关闭时，通知父级Activity调用此方法，用于页面刷新
      *
-     * @param data Intent参数集
+     * @param mTransferDataParams 参数集
      **/
-    public void onRefresh (Intent data)
+    public void onRefresh (DataCollection mTransferDataParams)
     {
 
     }
@@ -586,6 +595,16 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
     public DataCollection getTransferDataParams ()
     {
         return mTransferDataParams;
+    }
+
+    /**
+     * 设置当前Activity向下级屏幕传递的参数集
+     *
+     * @param transferDataParams 数据集合
+     **/
+    public void setTransferDataParams (DataCollection transferDataParams)
+    {
+        this.mTransferDataParams = transferDataParams;
     }
 
     /**
@@ -854,8 +873,8 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
             mUINavigationBar.setLeftViewClickListener(null);
         }
         mUINavigationBar = null;
-        mFragmentActivity = null;
-        mFragment = null;
+        mParentFragmentActivity = null;
+        mParentFragment = null;
         mParentActivity = null;
         mParentContext = null;
     }

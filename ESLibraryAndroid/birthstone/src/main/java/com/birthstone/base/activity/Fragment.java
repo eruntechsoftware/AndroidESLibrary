@@ -32,7 +32,7 @@ public class Fragment extends android.support.v4.app.Fragment implements IChildV
     /**
      * 变量声明
      **/
-    protected FragmentActivity mFragmentActivity;
+    protected FragmentActivity mParentFragmentActivity;
 
     private LayoutInflater mInflater;
     private ViewGroup mContainer;
@@ -76,7 +76,7 @@ public class Fragment extends android.support.v4.app.Fragment implements IChildV
      * **/
     public Fragment(FragmentActivity frgamentActivity, DataCollection receiveDataParams)
     {
-        this.mFragmentActivity = frgamentActivity;
+        this.mParentFragmentActivity = frgamentActivity;
         this.mReceiveDataParams = receiveDataParams;
     }
 
@@ -346,6 +346,8 @@ public class Fragment extends android.support.v4.app.Fragment implements IChildV
         ControlStateProtector.createControlStateProtector().setStateControl(this);
     }
 
+
+
     @Override
     public void onActivityResult (int requestCode, int resultCode, Intent data)
     {
@@ -424,7 +426,7 @@ public class Fragment extends android.support.v4.app.Fragment implements IChildV
     {
         this.mTransferDataParams = transferDataParams;
     }
-    
+
     /**
      * 获取当前Activity的FragmentActivity
      *
@@ -432,7 +434,7 @@ public class Fragment extends android.support.v4.app.Fragment implements IChildV
      */
     public FragmentActivity getParentFragmentActivity ()
     {
-        return mFragmentActivity;
+        return mParentFragmentActivity;
     }
 
     /**
@@ -442,7 +444,7 @@ public class Fragment extends android.support.v4.app.Fragment implements IChildV
      **/
     public void setFragmentActivity (FragmentActivity mFragmentActivity)
     {
-        this.mFragmentActivity = mFragmentActivity;
+        this.mParentFragmentActivity = mFragmentActivity;
     }
 
     /**
@@ -554,7 +556,7 @@ public class Fragment extends android.support.v4.app.Fragment implements IChildV
             mTransferDataParams = null;
         }
 
-        mFragmentActivity = null;
+        mParentFragmentActivity = null;
         mParentContext = null;
 
     }
