@@ -54,7 +54,7 @@ public class DateTimeHelper
 	 */
 	public static boolean compar(String date1, String date2)
 	{
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Date d1 = null;
 		Date d2 = null;
 		try
