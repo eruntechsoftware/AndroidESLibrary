@@ -5,8 +5,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-/// <summary>
-/// </summary>
+/**
+ * 时间辅助类
+ * **/
 public class DateTimeHelper
 {
 	public static final String DATE_FORMAT = "yyyy-MM-dd";
@@ -22,8 +23,7 @@ public class DateTimeHelper
 	static int MINUTE;
 
 	/**
-	 * ǰʱ
-	 * @return
+	 * 获取当前时间
 	 */
 	public static String getNow()
 	{
@@ -35,8 +35,7 @@ public class DateTimeHelper
 	}
 
 	/**
-	 * ǰ
-	 * @return
+	 * 获取当前日期
 	 */
 	public static String getToday()
 	{
@@ -48,9 +47,9 @@ public class DateTimeHelper
 	}
 
 	/***
-	 * @param date1
-	 * @param date2
-	 * @return
+	 * 比较第一个时间是否大于第二个时间串
+	 * @param date1 时间1
+	 * @param date2 时间2
 	 */
 	public static boolean compar(String date1, String date2)
 	{
@@ -73,8 +72,35 @@ public class DateTimeHelper
 		return false;
 	}
 
+	/***
+	 * 比较第一个时间是否大于第二个时间串
+	 * @param date1 时间1
+	 * @param date2 时间2
+	 * @param fromat 时间格式
+	 */
+	public static boolean compar(String date1, String date2, String fromat)
+	{
+		SimpleDateFormat format = new SimpleDateFormat(fromat);
+		Date d1 = null;
+		Date d2 = null;
+		try
+		{
+			d1 = format.parse(date1);
+			d2 = format.parse(date2);
+		}
+		catch(ParseException e)
+		{
+			e.printStackTrace();
+		}
+		if(d1.before(d2))
+		{
+			return true;
+		}
+		return false;
+	}
+
 	/**
-	 *
+	 *获取指定时间格式的字符串
 	 * @param value
 	 * @param format
 	 * @return
@@ -87,9 +113,8 @@ public class DateTimeHelper
 	}
 	
 	/***
-	 *
-	 * @param value ʱַ
-	 * @return
+	 * 获取时间串，去掉-符号
+	 * @param value 时间值
 	 */
 	public static String getLocalDateString(Object value)
 	{
@@ -98,14 +123,13 @@ public class DateTimeHelper
 	}
 	
 	/**
-	 * ʱ䣨λ죩
-	 * @param beginDate
-	 * @param endDate
-	 * @return ʱ
+	 * 获取两个日期时间相差的天数
+	 * @param beginDate 开始时间
+	 * @param endDate 结束时间
 	 */
 	public static long getDiffDays(String beginDate, String endDate)
 	{
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		try
 		{
 		    Date d1 = df.parse(beginDate);
@@ -119,11 +143,33 @@ public class DateTimeHelper
 		}
 		return -1;
 	}
+
+	/**
+	 * 获取两个日期时间相差的秒数
+	 * @param beginDate 开始时间
+	 * @param endDate 结束时间
+	 */
+	public static long getDiffSeconds(String beginDate, String endDate)
+	{
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		try
+		{
+			Date d1 = df.parse(beginDate);
+			Date d2 = df.parse(endDate);
+			long diff = d1.getTime() - d2.getTime();
+			long days = diff / (1000 * 60);
+			return days;
+		}
+		catch (Exception e)
+		{
+		}
+		return -1;
+	}
 	
 	/**
-	 * @param date
-	 * @param desc
-	 * @return
+	 * 获取对应日期的周数
+	 * @param date 日期
+	 * @param desc 周描述，如周、星期
 	 */
 	public static String getDateOfWeek(String date, String desc)
 	{
