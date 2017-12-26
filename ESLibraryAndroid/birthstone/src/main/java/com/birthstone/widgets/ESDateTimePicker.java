@@ -32,6 +32,7 @@ public class ESDateTimePicker implements DatePicker.OnDateChangedListener, TimeP
     /**
      * 声明私有变量
      **/
+    private String dateTimeFormat = "yyyy-MM-dd HH:mm";
     private String dateTime;
     private String initDateTime;
     private Activity context;
@@ -58,11 +59,11 @@ public class ESDateTimePicker implements DatePicker.OnDateChangedListener, TimeP
         else
         {
             initDateTime = c.get(Calendar.YEAR) + "年" + c.get(Calendar.MONTH) + "月" + c.get(Calendar.DAY_OF_MONTH) + "日" + c
-                    .get(Calendar.HOUR_OF_DAY) + "." + "00";
+                    .get(Calendar.HOUR_OF_DAY) + "." + c.get(Calendar.MINUTE);
         }
         datePicker.init(c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH), this);
         timePicker.setCurrentHour(c.get(Calendar.HOUR_OF_DAY));
-        timePicker.setCurrentMinute(00);
+        timePicker.setCurrentMinute(c.get(Calendar.MINUTE));
     }
 
     public AlertDialog dateTimePickDialog (final TextView inputDate)
@@ -111,9 +112,18 @@ public class ESDateTimePicker implements DatePicker.OnDateChangedListener, TimeP
         Calendar c = Calendar.getInstance();
         c.set(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth(), timePicker.getCurrentHour(), timePicker
                 .getCurrentMinute());
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 HH:mm");
+        SimpleDateFormat sdf = new SimpleDateFormat(dateTimeFormat);
         dateTime = sdf.format(c.getTime());
         alertDialog.setTitle(dateTime);
+    }
+
+    /**
+     * 设置时间格式
+     * @param dateTimeFormat 时间格式串
+     * **/
+    public void setDateTimeFormat(String dateTimeFormat)
+    {
+        this.dateTimeFormat = dateTimeFormat;
     }
 
     /**
@@ -185,7 +195,7 @@ public class ESDateTimePicker implements DatePicker.OnDateChangedListener, TimeP
 
     /**
      * 获取日期控件实例
-     * **/
+     **/
     public DatePicker getDatePicker ()
     {
         return datePicker;
@@ -193,7 +203,7 @@ public class ESDateTimePicker implements DatePicker.OnDateChangedListener, TimeP
 
     /**
      * 获取时间控件实例
-     * **/
+     **/
     public TimePicker getTimePicker ()
     {
         return timePicker;

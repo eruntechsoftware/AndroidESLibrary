@@ -74,7 +74,7 @@ public class DateTimeHelper
 	}
 
 	/**
-	 * ǰʱ
+	 *
 	 * @param value
 	 * @param format
 	 * @return
