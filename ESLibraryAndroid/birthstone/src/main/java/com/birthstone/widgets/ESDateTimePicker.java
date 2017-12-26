@@ -29,6 +29,7 @@ public class ESDateTimePicker implements DatePicker.OnDateChangedListener, TimeP
     private DatePicker datePicker;
     private TimePicker timePicker;
     private AlertDialog alertDialog;
+    private LinearLayout dateTimeLayout;
     /**
      * 声明私有变量
      **/
@@ -41,6 +42,11 @@ public class ESDateTimePicker implements DatePicker.OnDateChangedListener, TimeP
     {
         this.context = context;
         this.initDateTime = initDateTime;
+
+        dateTimeLayout = (LinearLayout) context.getLayoutInflater()
+                .inflate(R.layout.es_date_time_picker, null);
+        datePicker = (DatePicker) dateTimeLayout.findViewById(R.id.datepicker);
+        timePicker = (TimePicker) dateTimeLayout.findViewById(R.id.timepicker);
     }
 
     /**
@@ -68,10 +74,6 @@ public class ESDateTimePicker implements DatePicker.OnDateChangedListener, TimeP
 
     public AlertDialog dateTimePickDialog (final TextView inputDate)
     {
-        LinearLayout dateTimeLayout = (LinearLayout) context.getLayoutInflater()
-                .inflate(R.layout.es_date_time_picker, null);
-        datePicker = (DatePicker) dateTimeLayout.findViewById(R.id.datepicker);
-        timePicker = (TimePicker) dateTimeLayout.findViewById(R.id.timepicker);
         init(datePicker, timePicker);
         timePicker.setIs24HourView(true);
         timePicker.setOnTimeChangedListener(this);
