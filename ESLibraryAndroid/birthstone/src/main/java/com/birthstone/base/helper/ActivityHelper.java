@@ -66,7 +66,7 @@ public class ActivityHelper
 					intent.putExtra("ActivityType", "Activity");
 					intent.putExtra("Navigationbar", navigationbar);
 					intent.putExtra("ShowBtnBack", showBtnBack);
-					intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP );
+//					intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP );
 					intent.setClass(parentActivity.getApplicationContext(), obj.getClass());
 					parentActivity.startActivityForResult(intent, 0);
 				}
