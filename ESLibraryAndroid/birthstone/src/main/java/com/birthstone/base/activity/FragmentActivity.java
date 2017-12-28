@@ -483,20 +483,40 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
         Intent intent = new Intent();
         intent.putExtra("isRefresh", true);
         this.setResult(RESULT_OK, intent);
+        DataCollection transferParams = null;
         if (mParentFragmentActivity != null)
         {
-            mParentFragmentActivity.setTransferDataParams(params);
+            transferParams = mParentFragmentActivity.getTransferDataParams();
         }
         if (mParentFragment != null)
         {
-            mParentFragment.setTransferDataParams(params);
+            transferParams = mParentFragment.getTransferDataParams();
         }
         if (mParentActivity != null)
         {
-            mParentActivity.setTransferDataParams(params);
+            transferParams = mParentActivity.getTransferDataParams();
+        }
+        if(transferParams!=null)
+        {
+            transferParams.addAll(params);
+        }
+        else
+        {
+            transferParams = params;
+        }
+        if (mParentFragmentActivity != null)
+        {
+            mParentFragmentActivity.setTransferDataParams(transferParams);
+        }
+        if (mParentFragment != null)
+        {
+            mParentFragment.setTransferDataParams(transferParams);
+        }
+        if (mParentActivity != null)
+        {
+            mParentActivity.setTransferDataParams(transferParams);
         }
         ActivityManager.pop(this);
-        intent = null;
         super.finish();
     }
 
