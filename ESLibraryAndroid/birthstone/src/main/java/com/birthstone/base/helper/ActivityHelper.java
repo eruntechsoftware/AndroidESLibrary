@@ -119,7 +119,6 @@ public class ActivityHelper
 				intent.putExtra("ActivityType", "Fragment");
 				intent.putExtra("Navigationbar", navigationbar);
 				intent.putExtra("ShowBtnBack", showBtnBack);
-				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP );
 				intent.setClass(parentFragment.getActivity(), obj.getClass());
 				parentFragment.startActivityForResult(intent, 0);
 			}
@@ -159,7 +158,7 @@ public class ActivityHelper
 				intent.putExtra("ActivityType", "FragmentActivity");
 				intent.putExtra("Navigationbar", navigationbar);
 				intent.putExtra("ShowBtnBack", showBtnBack);
-				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP );
+	
 				intent.setClass(parentFragment.getBaseContext(), obj.getClass());
 				parentFragment.startActivityForResult(intent, 0);
 			}
@@ -198,7 +197,6 @@ public class ActivityHelper
 					intent.putExtra("ActivityType", "Context");
 					intent.putExtra("Navigationbar", navigationbar);
 					intent.putExtra("ShowBtnBack", showBtnBack);
-					intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP );
 					intent.setClass(parent, obj.getClass());
 					parent.startActivity(intent);
 				}
