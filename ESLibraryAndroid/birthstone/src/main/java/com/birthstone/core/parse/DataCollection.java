@@ -74,6 +74,6 @@ public class DataCollection extends LinkedList<Data> implements Serializable,Clo
 		{
 
 		}
-		return super.clone();
+		return dataCollection;
 	}
 }
