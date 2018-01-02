@@ -1,11 +1,9 @@
 package com.birthstone.core.parse;
 
-import com.birthstone.core.parse.Data;
-
 import java.io.Serializable;
 import java.util.LinkedList;
 
-public class DataCollection extends LinkedList<Data> implements Serializable
+public class DataCollection extends LinkedList<Data> implements Serializable,Cloneable
 {
 	private static final long serialVersionUID = 5187321951128267808L;
 	public Data CurrentData = null;
@@ -57,5 +55,25 @@ public class DataCollection extends LinkedList<Data> implements Serializable
 	 * **/
 	public void setChecked(boolean isChecked) {
 		this.isChecked = isChecked;
+	}
+
+	@Override
+	public Object clone ()
+	{
+		DataCollection dataCollection = null;
+		try
+		{
+			dataCollection = (DataCollection)super.clone();
+			dataCollection.clear();
+			for(Data data:this)
+			{
+				dataCollection.add((Data)data.clone());
+			}
+		}
+		catch (Exception ex)
+		{
+
+		}
+		return super.clone();
 	}
 }
