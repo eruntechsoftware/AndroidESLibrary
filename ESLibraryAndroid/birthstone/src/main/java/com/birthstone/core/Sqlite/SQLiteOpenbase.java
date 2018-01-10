@@ -18,7 +18,6 @@ public class SQLiteOpenbase extends SQLiteOpenHelper
 {
 	public static String DB_PATH;
 	public static String DB_NAME;
-	public static int DB_VERSION;
 	public Context myContext;
 	public static SQLiteDatabase Db;
 
@@ -30,7 +29,7 @@ public class SQLiteOpenbase extends SQLiteOpenHelper
 	 */
 	public SQLiteOpenbase( Context context )
 	{
-		super(context, DB_PATH + DB_NAME, null, DB_VERSION);
+		super(context, DB_PATH + DB_NAME, null, 1);
 		this.myContext = context;
 	}
 
@@ -77,7 +76,7 @@ public class SQLiteOpenbase extends SQLiteOpenHelper
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
 	{
-
+		super.onDowngrade(db, oldVersion, newVersion);
 	}
 
 	public class DatabaseHelper extends SQLiteOpenHelper
