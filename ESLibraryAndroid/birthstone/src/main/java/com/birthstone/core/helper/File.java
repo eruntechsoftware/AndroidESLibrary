@@ -329,16 +329,16 @@ public class File
 //            String[] name = filePath.split("/");
 //            String fileTargetPath = name[name.length - 1];
 //            String path = filePath.substring(0, filePath.length() - filePath.length());
-            java.io.File filedir = new java.io.File(filePath);
-            if (!filedir.exists())
-            {
-                filedir.mkdirs();
-            }
+//            java.io.File filedir = new java.io.File(filePath);
+//            if (!filedir.exists())
+//            {
+//                filedir.mkdirs();
+//            }
             java.io.File file = new java.io.File(filePath);
-            if (!file.exists())
-            {
-                file.createNewFile();
-            }
+//            if (!file.exists())
+//            {
+//                file.createNewFile();
+//            }
             file.delete();
             FileOutputStream outputStream = new FileOutputStream(file);
             outputStream.write(data);
