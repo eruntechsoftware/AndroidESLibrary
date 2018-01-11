@@ -11,6 +11,7 @@ import android.view.View;
 import com.birthstone.base.activity.Activity;
 import com.birthstone.base.event.OnClickedListener;
 import com.birthstone.base.event.OnClickingListener;
+import com.birthstone.base.helper.InitializeHelper;
 import com.birthstone.base.parse.CollectController;
 import com.birthstone.core.helper.StringToArray;
 import com.birthstone.core.interfaces.IDataInitialize;
@@ -66,7 +67,10 @@ public class ESButtonClose extends ESButton implements IDataInitialize, IFunctio
 
 	public void dataInitialize()
 	{
-
+		if (mActivity != null) {
+			String classnameString = mActivity.getPackageName() + ".R$id";
+			mName = InitializeHelper.getName(classnameString, getId());
+		}
 	}
 
 
