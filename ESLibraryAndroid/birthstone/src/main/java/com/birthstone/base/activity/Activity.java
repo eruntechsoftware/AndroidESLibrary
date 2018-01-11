@@ -488,13 +488,16 @@ public class Activity extends android.app.Activity implements IUINavigationBar, 
         {
             transferParams = mParentActivity.getTransferDataParams();
         }
-        if(transferParams!=null)
+        if(params!=null)
         {
-            transferParams.addAll((DataCollection) params.clone());
-        }
-        else
-        {
-            transferParams = (DataCollection) params.clone();
+            if (transferParams != null)
+            {
+                transferParams.addAll((DataCollection) params.clone());
+            }
+            else
+            {
+                transferParams = (DataCollection) params.clone();
+            }
         }
         if (mParentFragmentActivity != null)
         {

@@ -496,13 +496,16 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
         {
             transferParams = mParentActivity.getTransferDataParams();
         }
-        if(transferParams!=null)
+        if(params!=null)
         {
-            transferParams.addAll((DataCollection) params.clone());
-        }
-        else
-        {
-            transferParams = (DataCollection) params.clone();
+            if (transferParams != null)
+            {
+                transferParams.addAll((DataCollection) params.clone());
+            }
+            else
+            {
+                transferParams = (DataCollection) params.clone();
+            }
         }
         if (mParentFragmentActivity != null)
         {
