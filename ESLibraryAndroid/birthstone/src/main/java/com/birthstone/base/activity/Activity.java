@@ -862,6 +862,19 @@ public class Activity extends android.app.Activity implements IUINavigationBar, 
     }
 
     /**
+     * 设置右侧按钮图片
+     *
+     * @param resouceid 图片资源
+     **/
+    public void setRightButtonImage (int resouceid)
+    {
+        if (getNavigationBar() != null)
+        {
+            this.getNavigationBar().setRightButtonImage(resouceid);
+        }
+    }
+
+    /**
      * 左侧按钮单击事件
      **/
     public void onLeftClick ()
