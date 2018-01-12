@@ -459,7 +459,7 @@ public class Activity extends android.app.Activity implements IUINavigationBar, 
     public void finish ()
     {
         Intent intent = new Intent();
-        intent.putExtra("isRefresh", true);
+        intent.putExtra("isRefresh", false);
         this.setResult(RESULT_OK, intent);
         intent = null;
         ActivityManager.pop(this);

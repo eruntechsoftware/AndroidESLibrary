@@ -467,7 +467,7 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
     public void finish ()
     {
         Intent intent = new Intent();
-        intent.putExtra("isRefresh", true);
+        intent.putExtra("isRefresh", false);
         this.setResult(RESULT_OK, intent);
         intent = null;
         ActivityManager.pop(this);
