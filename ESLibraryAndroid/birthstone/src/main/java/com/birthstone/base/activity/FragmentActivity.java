@@ -475,6 +475,20 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
     }
 
     /*
+    * 关闭当前Activity
+    * @param isRefresh 是否通知父页面刷新
+    * */
+    public void finish (Boolean isRefresh)
+    {
+        Intent intent = new Intent();
+        intent.putExtra("isRefresh", isRefresh);
+        this.setResult(RESULT_OK, intent);
+        intent = null;
+        ActivityManager.pop(this);
+        super.finish();
+    }
+
+    /*
     * 关闭当前Activity并传递参数
     * @param intent 参数集合
     * */
