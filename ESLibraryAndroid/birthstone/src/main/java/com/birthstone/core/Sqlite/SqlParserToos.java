@@ -172,7 +172,7 @@ public class SqlParserToos {
     }
 
     public String getTableName() {
-        return this.tableName;
+        return this.tableName.trim();
     }
 
     public String[] getColumns() {
