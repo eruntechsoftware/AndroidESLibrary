@@ -48,13 +48,16 @@
           />
 
       <ImageView
-          android:id="@+id/iv_right"
-          android:layout_width="wrap_content"
-          android:layout_height="match_parent"
-          android:layout_alignParentRight="true"
-          android:layout_centerVertical="true"
-          android:padding="16dp"
-          android:visibility="gone" />
+              android:id="@+id/iv_right"
+              android:layout_width="wrap_content"
+              android:layout_height="match_parent"
+              android:layout_alignParentRight="true"
+              android:layout_centerVertical="true"
+              android:padding="8dp"
+              android:visibility="gone"
+              android:scaleType="fitCenter"
+              android:adjustViewBounds="true"
+              />
 
         <TextView
             android:id="@+id/tv_right"
@@ -62,10 +65,10 @@
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:text="完成"
+            android:text=""
             android:textColor="#fff"
             android:padding="16dp"
-            android:visibility="gone"/>
+            android:visibility="visible"/>
 
   </RelativeLayout>
 
