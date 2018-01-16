@@ -155,6 +155,7 @@ public class UINavigationBar extends RelativeLayout implements View.OnClickListe
 		} else {
 			mTvLeft.setVisibility(VISIBLE);
 			mTvLeft.setText(text);
+			mIvLeft.setVisibility(GONE);
 		}
 	}
 
@@ -169,6 +170,7 @@ public class UINavigationBar extends RelativeLayout implements View.OnClickListe
 		} else {
 			mTvRight.setVisibility(VISIBLE);
 			mTvRight.setText(text);
+			mIvRight.setVisibility(GONE);
 		}
 	}
 
@@ -189,9 +191,11 @@ public class UINavigationBar extends RelativeLayout implements View.OnClickListe
 	public void setLeftButtonImage(int resId) {
 		if (resId == 0) {
 			mIvLeft.setVisibility(View.GONE);
+			mTvLeft.setVisibility(View.VISIBLE);
 		} else {
 			mIvLeft.setVisibility(View.VISIBLE);
 			mIvLeft.setImageResource(resId);
+			mTvLeft.setVisibility(View.GONE);
 		}
 	}
 
@@ -203,9 +207,11 @@ public class UINavigationBar extends RelativeLayout implements View.OnClickListe
 	public void setRightButtonImage(int resId) {
 		if (resId==0) {
 			mIvRight.setVisibility(View.GONE);
+			mTvRight.setVisibility(View.VISIBLE);
 		} else {
 			mIvRight.setVisibility(View.VISIBLE);
 			mIvRight.setImageResource(resId);
+			mTvRight.setVisibility(View.GONE);
 		}
 	}
 
