@@ -232,6 +232,7 @@ public class UINavigationBar extends RelativeLayout implements View.OnClickListe
 	 */
 	public void setRightButtonVisibility(int visibility) {
 		mIvRight.setVisibility(visibility);
+		mTvRight.setVisibility(visibility);
 	}
 
 	/**
@@ -241,6 +242,7 @@ public class UINavigationBar extends RelativeLayout implements View.OnClickListe
 	 */
 	public void setLeftButtonVisibility(int visibility) {
 		mIvLeft.setVisibility(visibility);
+		mTvLeft.setVisibility(visibility);
 	}
 
 	/**
