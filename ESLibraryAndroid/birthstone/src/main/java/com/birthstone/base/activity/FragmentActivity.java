@@ -48,6 +48,7 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
     private DataCollection releaseParams, mReceiveDataParams, mTransferDataParams;
     protected String mTitle, mRightButtonText;
     protected Boolean mParentRefresh = false, mIsParentStart = false;
+    private Boolean mShowBtnBack = false;
     protected int mReleaseCount = 0;
 
     private static List<String> FUNCTION_LIST = new ArrayList<String>();
@@ -89,6 +90,12 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
         Intent intent = getIntent();
         if (intent != null)
         {
+            mShowBtnBack = intent.getBooleanExtra("ShowBtnBack",false);
+            if(mShowBtnBack)
+            {
+                mUINavigationBar.setLeftButtonVisibility(View.VISIBLE);
+            }
+
             String activityType = intent.getStringExtra("ActivityType");
             mTransferParams = (ArrayList<Data>) intent.getSerializableExtra("Parameter");
 

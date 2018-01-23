@@ -53,6 +53,7 @@ public class Activity extends android.app.Activity implements IUINavigationBar, 
     private DataCollection releaseParams, mReceiveDataParams, mTransferDataParams;
     protected String mTitle, mRightButtonText;
     private Boolean mIsParentStart = false;
+    private Boolean mShowBtnBack = false;
     protected int index = 0;
 
     protected int mReleaseCount = 0;
@@ -93,6 +94,12 @@ public class Activity extends android.app.Activity implements IUINavigationBar, 
         Intent intent = getIntent();
         if (intent != null)
         {
+            mShowBtnBack = intent.getBooleanExtra("ShowBtnBack",false);
+            if(mShowBtnBack)
+            {
+                mUINavigationBar.setLeftButtonVisibility(View.VISIBLE);
+            }
+
             String activityType = intent.getStringExtra("ActivityType");
             mTransferParams = (ArrayList<Data>) intent.getSerializableExtra("Parameter");// intent.getStringExtra("Parameter");
 
