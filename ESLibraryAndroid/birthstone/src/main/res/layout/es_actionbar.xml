@@ -6,7 +6,7 @@
 
 
     <RelativeLayout
-        android:background="@color/es_colorPrimary"
+        android:background="@color/es_white"
         android:id="@+id/relay_background"
         android:layout_width="match_parent"
         android:layout_height="48dp"
@@ -37,7 +37,7 @@
 
       <TextView
           android:textStyle="bold"
-          android:textColor="#fff"
+          android:textColor="@color/es_white"
           android:id="@+id/tv_title"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
@@ -70,7 +70,8 @@
             android:padding="16dp"
             android:visibility="visible"/>
 
-  </RelativeLayout>
+  </RelativeLayout
+        android:background="@color/es_white">
 
     <View
         android:id="@+id/line"
