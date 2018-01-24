@@ -162,6 +162,7 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
                 this.mReceiveDataParams.addAll(this.mTransferParams);
             }
         }
+        releaseParams = mReceiveDataParams;
         initView();
     }
 

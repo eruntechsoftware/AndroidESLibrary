@@ -67,6 +67,7 @@ public class Fragment extends android.support.v4.app.Fragment implements IChildV
     public Fragment(DataCollection receiveDataParams)
     {
         this.mReceiveDataParams = receiveDataParams;
+        this.releaseParams = mReceiveDataParams;
     }
 
     /**
@@ -78,6 +79,7 @@ public class Fragment extends android.support.v4.app.Fragment implements IChildV
     {
         this.mParentFragmentActivity = frgamentActivity;
         this.mReceiveDataParams = receiveDataParams;
+        this.releaseParams = mReceiveDataParams;
     }
 
     public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)

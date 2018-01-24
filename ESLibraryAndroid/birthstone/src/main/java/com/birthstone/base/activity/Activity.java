@@ -165,6 +165,7 @@ public class Activity extends android.app.Activity implements IUINavigationBar, 
                 this.mReceiveDataParams.addAll(this.mTransferParams);
             }
         }
+        releaseParams = mReceiveDataParams;
         initView();
         intent = null;
     }
