@@ -16,6 +16,7 @@ import java.util.List;
 public class ControlStateProtector implements IControlSearcherHandler
 {
 	private IChildView childView;
+	private ESHiddenFeild hidden = null;
 
 	public ControlStateProtector( )
 	{
@@ -63,21 +64,24 @@ public class ControlStateProtector implements IControlSearcherHandler
 					String getValue = aprotected.getWantedStateValue();
 					if(getValue != null)
 					{
-						ESHiddenFeild hidden = null;
 						IReleasable release;
 						int size = childView.getViews().size();
-						for(int i = 0; i < size; i++)
+						if(hidden==null)
 						{
-							if(childView.getViews().get(i) instanceof IReleasable)
+							for (int i = 0; i < size; i++)
 							{
-								release = (IReleasable) childView.getViews().get(i);
-								if(release.getName().equals(aprotected.getStateHiddenId()))
+								if (childView.getViews().get(i) instanceof IReleasable)
 								{
-									hidden = (ESHiddenFeild) childView.getViews().get(i);
+									release = (IReleasable) childView.getViews().get(i);
+									if (release.getName().equals(aprotected.getStateHiddenId()))
+									{
+										hidden = (ESHiddenFeild) childView.getViews().get(i);
+										break;
+									}
 								}
 							}
 						}
-						if(hidden == null) { throw new Exception("޷ҵΪ" + aprotected.getStateHiddenId() + "State Hidden"); }
+						if(hidden == null) { throw new Exception("没找到 " + aprotected.getStateHiddenId() + "的State Hidden"); }
 						aprotected.protectState(this.stateIsMatched(getValue, hidden.getText().toString()));
 					}
 				}
