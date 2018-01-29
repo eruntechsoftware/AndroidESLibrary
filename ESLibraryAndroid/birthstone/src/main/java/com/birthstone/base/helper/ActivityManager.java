@@ -25,7 +25,12 @@ public class ActivityManager
 
 	public static Boolean pop()
 	{
-		Activity activity = activityStack.lastElement();
+		Activity activity = null;
+		if(activityStack!=null && activityStack.size()>0)
+		{
+			activity = activityStack.lastElement();
+		}
+
 		if(activity != null)
 		{
 			activityStack.remove(activity);
@@ -50,20 +55,32 @@ public class ActivityManager
 
 	public static Activity first()
 	{
-		Activity activity = activityStack.firstElement();
-		return activity;
+		if(activityStack!=null && activityStack.size()>0)
+		{
+			Activity activity = activityStack.firstElement();
+			return activity;
+		}
+		return null;
 	}
 
 	public static Activity last()
 	{
-		Activity activity = activityStack.lastElement();
-		return activity;
+		if(activityStack!=null && activityStack.size()>0)
+		{
+			Activity activity = activityStack.lastElement();
+			return activity;
+		}
+		return null;
 	}
 
 	public static Activity current()
 	{
-		Activity activity = activityStack.lastElement();
-		return activity;
+		if(activityStack!=null && activityStack.size()>0)
+		{
+			Activity activity = activityStack.lastElement();
+			return activity;
+		}
+		return null;
 	}
 
 	public static Object getElement(int index)
