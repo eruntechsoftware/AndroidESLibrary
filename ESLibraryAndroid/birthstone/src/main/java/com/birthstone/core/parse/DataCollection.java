@@ -40,7 +40,13 @@ public class DataCollection extends LinkedList<Data> implements Serializable,Clo
 		 }
 		 return data;
 	}
-	
+
+	@Override
+	public boolean remove (Object o)
+	{
+		CurrentData=null;
+		return super.remove(o);
+	}
 
 	/**
 	 * 获取当前集合是否选中状态
