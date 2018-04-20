@@ -57,6 +57,8 @@ public class ESMaterialTabHost extends LinearLayout implements View.OnClickListe
     private int mTabTitleTextDefaultColor = Color.BLACK;
     /**标题文字选中时颜色**/
     private int mTabTitleTextActiveColor = Color.WHITE;
+    /**标题文字大小**/
+    private float mTabTitleTextSize = 13;
     /**游标颜色**/
     private int mTabCurrorColor = Color.RED;
 
@@ -77,13 +79,15 @@ public class ESMaterialTabHost extends LinearLayout implements View.OnClickListe
         mContext = context;
         TypedArray a = context.obtainStyledAttributes(attrs,R.styleable.ESMaterialTabHost);
         //标题栏背景色
-        mTabTitleBackgroundColor = a.getColor(R.styleable.ESMaterialTabHost_tabTitleBackgroundColor,Color.WHITE);
+        mTabTitleBackgroundColor = a.getColor(R.styleable.ESMaterialTabHost_tabBackgroundColor,Color.WHITE);
         //tab默认状态时的颜色
-        mTabTitleTextDefaultColor = a.getColor(R.styleable.ESMaterialTabHost_tabTitleTextDefaultColor,Color.BLUE);
+        mTabTitleTextDefaultColor = a.getColor(R.styleable.ESMaterialTabHost_titleColor,getResources().getColor(R.color.es_shenhui));
         //tab选中状态时的颜色
-        mTabTitleTextActiveColor = a.getColor(R.styleable.ESMaterialTabHost_tabTitleTextActiveColor,Color.RED);
+        mTabTitleTextActiveColor = a.getColor(R.styleable.ESMaterialTabHost_titleSelectedColor,Color.BLACK);
+
+        mTabTitleTextSize = a.getDimension(R.styleable.ESMaterialTabHost_titleSize,13);
         //游标颜色
-        mTabCurrorColor = a.getColor(R.styleable.ESMaterialTabHost_tabCurrorColor,Color.RED);
+        mTabCurrorColor = a.getColor(R.styleable.ESMaterialTabHost_currorColor,getResources().getColor(R.color.es_shenhui));
 
         fragmentList = new ArrayList<Fragment>();
         materialTabList = new ArrayList<ESMaterialTab>();
@@ -140,6 +144,7 @@ public class ESMaterialTabHost extends LinearLayout implements View.OnClickListe
         if(materialTabList != null){
             ESMaterialTab subTab = new ESMaterialTab(mContext);
             subTab.setTitleText(title);
+            subTab.setTitleSize(mTabTitleTextSize);
             materialTabList.add(subTab);
             subTab.setIndex(materialTabList.size()-1);
             subTab.setOnClickListener(this);

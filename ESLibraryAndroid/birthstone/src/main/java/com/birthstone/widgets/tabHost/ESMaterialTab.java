@@ -19,6 +19,8 @@ public class ESMaterialTab extends LinearLayout {
     /**标题**/
     private TextView mTitle;
 
+    private float mTitleSize = 13;
+
     /**声明变量**/
     private Context mContext;
     private int mIndex;
@@ -56,6 +58,18 @@ public class ESMaterialTab extends LinearLayout {
     public void setTextColor(int color){
         if(mTitle != null){
             this.mTitle.setTextColor(color);
+        }
+    }
+
+    /**
+     * 设置标题文本大小
+     * @param titleSize 文本大小
+     * **/
+    public void setTitleSize(float titleSize)
+    {
+        if(mTitle!=null)
+        {
+            this.mTitle.setTextSize(titleSize);
         }
     }
 

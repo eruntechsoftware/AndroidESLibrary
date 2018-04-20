@@ -191,10 +191,11 @@
 	</declare-styleable>
 
 	<declare-styleable name="ESMaterialTabHost">
-		<attr name="tabTitleBackgroundColor" format="color"></attr>
-		<attr name="tabTitleTextDefaultColor" format="color"></attr>
-		<attr name="tabTitleTextActiveColor" format="color"></attr>
-		<attr name="tabCurrorColor" format="color"></attr>
+		<attr name="tabBackgroundColor" format="color"></attr>
+		<attr name="titleColor" format="color"></attr>
+		<attr name="titleSelectedColor" format="color"></attr>
+		<attr name="titleSize" format="integer"></attr>
+		<attr name="currorColor" format="color"></attr>
 	</declare-styleable>
 
 	<declare-styleable name="ESPhotoAddView">
