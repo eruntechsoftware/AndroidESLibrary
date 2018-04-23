@@ -16,7 +16,7 @@ import com.birthstone.base.activity.Activity;
 import com.birthstone.base.event.OnItemSelectIndexChangeListener;
 import com.birthstone.base.helper.InitializeHelper;
 import com.birthstone.base.parse.CollectController;
-import com.birthstone.core.Sqlite.SQLiteDatabase;
+import com.birthstone.core.sqlite.SQLiteDatabase;
 import com.birthstone.core.helper.DataType;
 import com.birthstone.core.helper.StringToArray;
 import com.birthstone.core.interfaces.ICellTitleStyleRequire;

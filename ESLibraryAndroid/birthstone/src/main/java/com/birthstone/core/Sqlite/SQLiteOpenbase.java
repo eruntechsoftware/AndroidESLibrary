@@ -6,7 +6,7 @@
  * in your installation folder.                                        *
  ***********************************************************************
  */
-package com.birthstone.core.Sqlite;
+package com.birthstone.core.sqlite;
 
 import android.content.Context;
 import android.content.SharedPreferences;

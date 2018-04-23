@@ -42,7 +42,8 @@ public class ViewInjectUtils
         for (Field field : fields)
         {
             Log.e("TAG", field.getName() + "");
-            SetViewInject viewInjectAnnotation = field.getAnnotation(SetViewInject.class);
+            BindView viewInjectAnnotation = field.getAnnotation(BindView.class);
+
             if (viewInjectAnnotation != null)
             {
                 int viewId = viewInjectAnnotation.value();
@@ -117,7 +118,7 @@ public class ViewInjectUtils
         for (Field field : fields)
         {
             Log.e("TAG", field.getName() + "");
-            SetViewInject viewInjectAnnotation = field.getAnnotation(SetViewInject.class);
+            BindView viewInjectAnnotation = field.getAnnotation(BindView.class);
             if (viewInjectAnnotation != null)
             {
                 int viewId = viewInjectAnnotation.value();
@@ -199,7 +200,7 @@ public class ViewInjectUtils
         for (Field field : fields)
         {
             Log.e("TAG", field.getName() + "");
-            SetViewInject viewInjectAnnotation = field.getAnnotation(SetViewInject.class);
+            BindView viewInjectAnnotation = field.getAnnotation(BindView.class);
             if (viewInjectAnnotation != null)
             {
                 int viewId = viewInjectAnnotation.value();
@@ -278,7 +279,7 @@ public class ViewInjectUtils
 
         for (Field field : fields)
         {
-            SetViewInject viewInjectAnnotation = field.getAnnotation(SetViewInject.class);
+            BindView viewInjectAnnotation = field.getAnnotation(BindView.class);
             if (viewInjectAnnotation != null)
             {
                 int viewId = viewInjectAnnotation.value();

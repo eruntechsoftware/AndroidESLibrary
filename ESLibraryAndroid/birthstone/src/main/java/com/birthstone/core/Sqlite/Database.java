@@ -3,7 +3,7 @@
 // (powered by Fernflower decompiler)
 //
 
-package com.birthstone.core.Sqlite;
+package com.birthstone.core.sqlite;
 
 import android.database.Cursor;
 import android.database.SQLException;
