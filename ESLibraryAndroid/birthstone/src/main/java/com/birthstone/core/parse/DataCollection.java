@@ -23,7 +23,12 @@ public class DataCollection extends LinkedList<Data> implements Serializable,Clo
 //			{
 //				dataHashMap.remove(data.getName().toUpperCase());
 //			}
-			dataHashMap.put(data.getName().toUpperCase(),data);
+			try
+			{
+				dataHashMap.put(data.getName().toUpperCase(), data);
+			}
+			catch (Exception ex)
+			{}
 		}
 		return super.addAll(params);
 	}
