@@ -1,7 +1,6 @@
 package com.birthstone.core.parse;
 
 import java.io.Serializable;
-import java.util.HashMap;
 import java.util.LinkedList;
 
 public class DataCollection extends LinkedList<Data> implements Serializable, Cloneable
@@ -9,11 +8,9 @@ public class DataCollection extends LinkedList<Data> implements Serializable, Cl
     private static final long serialVersionUID = 5187321951128267808L;
     public Data currentData = null;
     private boolean isChecked;
-    private HashMap<String, Data> dataHashMap;
 
     public DataCollection ()
     {
-        dataHashMap = new HashMap<>();
     }
 
     public boolean addAll (DataCollection params)
@@ -40,25 +37,14 @@ public class DataCollection extends LinkedList<Data> implements Serializable, Cl
         }
 
         int size = this.size();
-        if(dataHashMap==null)
+        for(int i = 0; i < size; i++)
         {
-            dataHashMap = new HashMap<>();
-        }
-        if(dataHashMap.size()!= size)
-        {
-            dataHashMap.clear();
-            for (int i = 0; i < size; i++)
+            if(this.get(i).Name.toUpperCase().equals(name.toUpperCase()))
             {
-                try
-                {
-                    dataHashMap.put(this.get(i).getName().toUpperCase(), this.get(i));
-                }
-                catch (Exception ex)
-                {
-                }
+                currentData = this.get(i);
+                break;
             }
         }
-        currentData = dataHashMap.get(name.toUpperCase());
         return currentData;
     }
 
@@ -66,18 +52,12 @@ public class DataCollection extends LinkedList<Data> implements Serializable, Cl
     public boolean remove (Object o)
     {
         currentData = null;
-        Data data = (Data) o;
-        if (dataHashMap.containsKey(data.getName()))
-        {
-            dataHashMap.remove(data.getName());
-        }
         return super.remove(o);
     }
 
     @Override
     public void clear ()
     {
-        dataHashMap.clear();
         super.clear();
     }
 
