@@ -176,6 +176,7 @@ public class ESMaterialTabHost extends LinearLayout implements View.OnClickListe
         if(materialTabList != null){
             ESMaterialTab subTab = new ESMaterialTab(mContext);
             subTab.setTitleText(title);
+            subTab.setTitleSize(mTabTitleTextSize);
             materialTabList.add(subTab);
             subTab.setIndex(materialTabList.size()-1);
             subTab.setOnClickListener(this);
