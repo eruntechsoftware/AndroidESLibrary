@@ -1,12 +1,13 @@
 package com.birthstone.core.parse;
 
 import java.io.Serializable;
+import java.util.Iterator;
 import java.util.LinkedList;
 
 public class DataCollection extends LinkedList<Data> implements Serializable, Cloneable
 {
     private static final long serialVersionUID = 5187321951128267808L;
-    public Data currentData = null;
+    public Data CurrentData = null;
     private boolean isChecked;
 
     public DataCollection ()
@@ -18,84 +19,68 @@ public class DataCollection extends LinkedList<Data> implements Serializable, Cl
         return super.addAll(params);
     }
 
-    @Override
-    public boolean add (Data data)
-    {
-        return super.add(data);
-    }
-
-    /**
-     * 获取指定名称的集合
-     *
-     * @param name 名称
-     **/
     public Data get (String name)
     {
-        if (currentData != null && currentData.Name.toUpperCase().equals(name.toUpperCase()))
+        Data data = null;
+        if (this.CurrentData != null && this.CurrentData.Name.toUpperCase().equals(name.toUpperCase()))
         {
-            return currentData;
+            return this.CurrentData;
         }
+        else
+        {
+            int size = this.size();
 
-        int size = this.size();
-        for(int i = 0; i < size; i++)
-        {
-            if(this.get(i).Name.toUpperCase().equals(name.toUpperCase()))
+            for (int i = 0; i < size; ++i)
             {
-                currentData = this.get(i);
-                break;
+                if (((Data) this.get(i)).Name.toUpperCase().equals(name.toUpperCase()))
+                {
+                    data = (Data) this.get(i);
+                    this.CurrentData = data;
+                    break;
+                }
             }
+
+            return data;
         }
-        return currentData;
     }
 
-    @Override
     public boolean remove (Object o)
     {
-        currentData = null;
+        this.CurrentData = null;
         return super.remove(o);
     }
 
-    @Override
-    public void clear ()
-    {
-        super.clear();
-    }
-
-    /**
-     * 获取当前集合是否选中状态
-     **/
     public boolean isChecked ()
     {
-        return isChecked;
+        return this.isChecked;
     }
 
-    /**
-     * 设置当前集合选中状态
-     *
-     * @param isChecked 状态
-     **/
     public void setChecked (boolean isChecked)
     {
         this.isChecked = isChecked;
     }
 
-    @Override
     public Object clone ()
     {
         DataCollection dataCollection = null;
+
         try
         {
             dataCollection = (DataCollection) super.clone();
             dataCollection.clear();
-            for (Data data : this)
+            Iterator var2 = this.iterator();
+
+            while (var2.hasNext())
             {
+                Data data = (Data) var2.next();
                 dataCollection.add((Data) data.clone());
             }
         }
-        catch (Exception ex)
+        catch (Exception var4)
         {
-
+            ;
         }
+
         return dataCollection;
     }
 }
