@@ -19,10 +19,10 @@ public class DataCollection extends LinkedList<Data> implements Serializable,Clo
 	{
 		for(Data data:params)
 		{
-			if(dataHashMap.containsKey(data.getName().toUpperCase()))
-			{
-				dataHashMap.remove(data.getName().toUpperCase());
-			}
+//			if(dataHashMap.containsKey(data.getName().toUpperCase()))
+//			{
+//				dataHashMap.remove(data.getName().toUpperCase());
+//			}
 			dataHashMap.put(data.getName().toUpperCase(),data);
 		}
 		return super.addAll(params);
