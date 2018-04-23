@@ -18,36 +18,12 @@ public class DataCollection extends LinkedList<Data> implements Serializable, Cl
 
     public boolean addAll (DataCollection params)
     {
-        if(dataHashMap==null)
-        {
-            dataHashMap = new HashMap<>();
-        }
-        for(Data data:params)
-        {
-            try
-            {
-                dataHashMap.put(data.getName().toUpperCase(), data);
-            }
-            catch (Exception ex)
-            {}
-        }
-
         return super.addAll(params);
     }
 
     @Override
     public boolean add (Data data)
     {
-        if(dataHashMap==null)
-        {
-            dataHashMap = new HashMap<>();
-        }
-        if(dataHashMap.containsKey(data.getName().toUpperCase()))
-        {
-            dataHashMap.remove(data.getName().toUpperCase());
-        }
-        dataHashMap.put(data.getName().toUpperCase(),data);
-
         return super.add(data);
     }
 
@@ -63,21 +39,25 @@ public class DataCollection extends LinkedList<Data> implements Serializable, Cl
             return currentData;
         }
 
-//        int size = this.size();
-//        if(dataHashMap.size()!= size)
-//        {
-//            dataHashMap.clear();
-//            for (int i = 0; i < size; i++)
-//            {
-//                try
-//                {
-//                    dataHashMap.put(this.get(i).getName().toUpperCase(), this.get(i));
-//                }
-//                catch (Exception ex)
-//                {
-//                }
-//            }
-//        }
+        int size = this.size();
+        if(dataHashMap==null)
+        {
+            dataHashMap = new HashMap<>();
+        }
+        if(dataHashMap.size()!= size)
+        {
+            dataHashMap.clear();
+            for (int i = 0; i < size; i++)
+            {
+                try
+                {
+                    dataHashMap.put(this.get(i).getName().toUpperCase(), this.get(i));
+                }
+                catch (Exception ex)
+                {
+                }
+            }
+        }
         currentData = dataHashMap.get(name.toUpperCase());
         return currentData;
     }
