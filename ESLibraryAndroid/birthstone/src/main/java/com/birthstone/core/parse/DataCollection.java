@@ -1,13 +1,15 @@
 package com.birthstone.core.parse;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.LinkedList;
 
 public class DataCollection extends LinkedList<Data> implements Serializable,Cloneable
 {
 	private static final long serialVersionUID = 5187321951128267808L;
-	public Data CurrentData = null;
+	public Data currentData = null;
 	private boolean isChecked;
+	private HashMap<String,Data> dataHashMap = new HashMap<>();
 
 	public DataCollection( )
 	{
@@ -15,37 +17,69 @@ public class DataCollection extends LinkedList<Data> implements Serializable,Clo
 
 	public boolean addAll(DataCollection params)
 	{
+		for(Data data:params)
+		{
+			if(dataHashMap.containsKey(data.getName().toUpperCase()))
+			{
+				dataHashMap.remove(data.getName().toUpperCase());
+			}
+			dataHashMap.put(data.getName().toUpperCase(),data);
+		}
 		return super.addAll(params);
 	}
-	
+
+	@Override
+	public boolean add (Data data)
+	{
+		if(dataHashMap.containsKey(data.getName().toUpperCase()))
+		{
+			dataHashMap.remove(data.getName().toUpperCase());
+		}
+		dataHashMap.put(data.getName().toUpperCase(),data);
+		return super.add(data);
+	}
+
 	/**
 	 * 获取指定名称的集合
 	 * @param name 名称
 	 * **/
 	public Data get(String name)
 	{
-		Data data = null;
-		if(CurrentData != null && CurrentData.Name.toUpperCase().equals(name.toUpperCase())) { 
-			 return CurrentData; 
+		if(currentData != null && currentData.Name.toUpperCase().equals(name.toUpperCase())) {
+			 return currentData;
 		}
-		int size = this.size();
-		 for(int i = 0; i < size; i++)
-		 {
-			 if(this.get(i).Name.toUpperCase().equals(name.toUpperCase()))
-			 {
-				 data = this.get(i);
-				 CurrentData = data;
-				 break;
-			 }
-		 }
-		 return data;
+
+		currentData = dataHashMap.get(name.toUpperCase());
+//		int size = this.size();
+//		 for(int i = 0; i < size; i++)
+//		 {
+//			 if(this.get(i).Name.toUpperCase().equals(name.toUpperCase()))
+//			 {
+//				 data = this.get(i);
+//				 CurrentData = data;
+//				 break;
+//			 }
+//		 }
+		 return currentData;
 	}
 
 	@Override
 	public boolean remove (Object o)
 	{
-		CurrentData=null;
+		currentData=null;
+		Data data = (Data)o;
+		if(dataHashMap.containsKey(data.getName()))
+		{
+			dataHashMap.remove(data.getName());
+		}
 		return super.remove(o);
+	}
+
+	@Override
+	public void clear ()
+	{
+		dataHashMap.clear();
+		super.clear();
 	}
 
 	/**
