@@ -210,7 +210,7 @@ public class Fragment extends android.support.v4.app.Fragment implements IChildV
      **/
     public void initalizeNavigationBar ()
     {
-        View rootView = ((ViewGroup) mView.findViewById(android.R.id.content)).getChildAt(0);
+        View rootView = mView;
         if (rootView instanceof ViewGroup)
         {
             ViewGroup viewGroup = (ViewGroup) rootView;
