@@ -2,6 +2,7 @@ package com.birthstone.base.activity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -11,9 +12,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.birthstone.R;
 import com.birthstone.annotation.ViewInjectUtils;
 import com.birthstone.base.helper.ActivityHelper;
 import com.birthstone.base.helper.ReleaseHelper;
+import com.birthstone.base.helper.StatusBarUtil;
 import com.birthstone.base.parse.CollectController;
 import com.birthstone.base.parse.ControlStateProtector;
 import com.birthstone.base.parse.DataQueryController;
@@ -27,11 +30,12 @@ import com.birthstone.core.parse.DataCollection;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Fragment extends android.support.v4.app.Fragment implements IChildView
+public class Fragment extends android.support.v4.app.Fragment implements IChildView,IUINavigationBar
 {
     /**
      * 变量声明
      **/
+    protected UINavigationBar mUINavigationBar;
     protected FragmentActivity mParentFragmentActivity;
 
     private LayoutInflater mInflater;
@@ -49,6 +53,9 @@ public class Fragment extends android.support.v4.app.Fragment implements IChildV
     protected int index = 0;
     protected int mReleaseCount = 0;
 
+    protected String mTitle, mRightButtonText;
+    private Boolean mShowBtnBack = false;
+
     private static List<String> FUNCTION_LIST = new ArrayList<String>();
     public static int LEFT_IMAGE_RESOURCE_ID;
 
@@ -57,7 +64,7 @@ public class Fragment extends android.support.v4.app.Fragment implements IChildV
 
     public Fragment ()
     {
-
+        mShowBtnBack = false;
     }
 
     /**
@@ -68,6 +75,19 @@ public class Fragment extends android.support.v4.app.Fragment implements IChildV
     {
         this.mReceiveDataParams = receiveDataParams;
         this.releaseParams = mReceiveDataParams;
+        mShowBtnBack = false;
+    }
+
+    /**
+     * 初始化Fragment
+     * @param receiveDataParams 接收的参数集
+     * @param mShowBtnBack 是否显示返回按钮
+     * **/
+    public Fragment(DataCollection receiveDataParams,Boolean mShowBtnBack)
+    {
+        this.mReceiveDataParams = receiveDataParams;
+        this.releaseParams = mReceiveDataParams;
+        mShowBtnBack = this.mShowBtnBack;
     }
 
     /**
@@ -80,6 +100,21 @@ public class Fragment extends android.support.v4.app.Fragment implements IChildV
         this.mParentFragmentActivity = frgamentActivity;
         this.mReceiveDataParams = receiveDataParams;
         this.releaseParams = mReceiveDataParams;
+        mShowBtnBack = false;
+    }
+
+    /**
+     * 初始化Fragment
+     * @param frgamentActivity 根布局frgamentActivity
+     * @param receiveDataParams 接收的参数集
+     * @param mShowBtnBack 是否显示返回按钮
+     * **/
+    public Fragment(FragmentActivity frgamentActivity, DataCollection receiveDataParams,Boolean mShowBtnBack)
+    {
+        this.mParentFragmentActivity = frgamentActivity;
+        this.mReceiveDataParams = receiveDataParams;
+        this.releaseParams = mReceiveDataParams;
+        this.mShowBtnBack = mShowBtnBack;
     }
 
     public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -115,6 +150,7 @@ public class Fragment extends android.support.v4.app.Fragment implements IChildV
     {
         try
         {
+            initalizeNavigationBar ();
             initViewWithActivity();
             release();
             initDataWithView();
@@ -166,6 +202,48 @@ public class Fragment extends android.support.v4.app.Fragment implements IChildV
         catch (Exception ex)
         {
             Log.v("InitializeController", ex.getMessage());
+        }
+    }
+
+    /**
+     * 初始化NavigationBar
+     **/
+    public void initalizeNavigationBar ()
+    {
+        View rootView = ((ViewGroup) mView.findViewById(android.R.id.content)).getChildAt(0);
+        if (rootView instanceof ViewGroup)
+        {
+            ViewGroup viewGroup = (ViewGroup) rootView;
+            mUINavigationBar = new UINavigationBar(this.getActivity(), true);
+            mUINavigationBar.setId(R.id.uiNavigationBar);
+            mUINavigationBar.UINavigationBarDelegat = this;
+            viewGroup.addView(mUINavigationBar);
+
+            if (mUINavigationBar.getVisibility() == View.VISIBLE)
+            {
+                StatusBarUtil.setTranslucent(this.getActivity());
+                StatusBarUtil.setColorNoTranslucent(this.getActivity(), UINavigationBar.BACKGROUND_COLOR);
+            }
+            if (mUINavigationBar.getVisibility() == View.GONE)
+            {
+//				StatusBarUtil.setTranslucent(this);
+                StatusBarUtil.setColorNoTranslucent(this.getActivity(), Color.BLACK);
+            }
+
+            if (mRightButtonText != null)
+            {
+                mUINavigationBar.setRightText(mRightButtonText);
+            }
+
+            if (mTitle != null)
+            {
+                mUINavigationBar.setTitle(mTitle);
+            }
+
+            if(!mShowBtnBack)
+            {
+                mUINavigationBar.setLeftButtonVisibility(View.VISIBLE);
+            }
         }
     }
 
@@ -560,6 +638,163 @@ public class Fragment extends android.support.v4.app.Fragment implements IChildV
 
         mParentFragmentActivity = null;
         mParentContext = null;
+
+    }
+
+    /**
+     * 获取导航栏
+     *
+     * @return UINavigationBar
+     */
+    public UINavigationBar getNavigationBar ()
+    {
+        return mUINavigationBar;
+    }
+
+    /**
+     * 设置导航栏背景色
+     *
+     * @param color 背景色
+     */
+    public void setUINavigationBarBackgroundColor (int color)
+    {
+        if (mUINavigationBar != null)
+        {
+            mUINavigationBar.setBackgroundColor(color);
+        }
+        UINavigationBar.BACKGROUND_COLOR = color;
+        StatusBarUtil.setTranslucent(this.getActivity());
+        //设置状态栏和标题栏颜色一致，实现沉浸式状态栏
+        StatusBarUtil.setColorNoTranslucent(this.getActivity(), color);
+    }
+
+    /**
+     * 设置导航栏背景色
+     *
+     * @param color         背景色
+     * @param isTranslucent 是否半透明状态栏
+     */
+    public void setUINavigationBarBackgroundColor (int color, boolean isTranslucent)
+    {
+        if (mUINavigationBar != null)
+        {
+            mUINavigationBar.setBackgroundColor(color);
+        }
+        UINavigationBar.BACKGROUND_COLOR = color;
+        if (isTranslucent)
+        {
+            StatusBarUtil.setTranslucent(this.getActivity());
+            //设置状态栏和标题栏颜色一致，实现沉浸式状态栏
+            StatusBarUtil.setColorNoTranslucent(this.getActivity(), color);
+        }
+    }
+
+    /**
+     * 设置NavigationBar左侧按钮是否可见
+     *
+     * @param visible 设置可见性
+     **/
+    public void setUINavigationBarLeftButtonVisibility (int visible)
+    {
+        if (mUINavigationBar != null)
+        {
+            mUINavigationBar.setLeftButtonVisibility(visible);
+        }
+
+    }
+
+    /**
+     * 设置NavigationBar右侧按钮是否可见
+     *
+     * @param visible 设置可见性
+     **/
+    public void setUINavigationBarRightButtonVisibility (int visible)
+    {
+        if (this.getNavigationBar() != null)
+        {
+            this.getNavigationBar().setRightButtonVisibility(visible);
+        }
+    }
+
+    /**
+     * 设置NavigationBar是否可见
+     *
+     * @param visible 设置可见性
+     **/
+    public void setUINavigationBarVisibility (int visible)
+    {
+        if (this.getNavigationBar() != null)
+        {
+            this.getNavigationBar().setVisibility(visible);
+        }
+    }
+
+    /**
+     * 设置导航栏标题文本
+     *
+     * @param title 标题文本
+     **/
+    public void setTitleText (String title)
+    {
+        this.mTitle = title;
+        if (this.getNavigationBar() != null)
+        {
+            this.getNavigationBar().setTitle(mTitle);
+        }
+    }
+
+    /**
+     * 设置左侧按钮图片
+     *
+     * @param resouceid 图片资源
+     **/
+    public void setLeftButtonImage (int resouceid)
+    {
+        LEFT_IMAGE_RESOURCE_ID = resouceid;
+        Activity.LEFT_IMAGE_RESOURCE_ID = resouceid;
+        FragmentActivity.LEFT_IMAGE_RESOURCE_ID = resouceid;
+        if (getNavigationBar() != null)
+        {
+            this.getNavigationBar().setLeftButtonImage(LEFT_IMAGE_RESOURCE_ID);
+        }
+    }
+
+    /**
+     * 设置导航栏右侧按钮文本
+     *
+     * @param buttonText 按钮文本
+     **/
+    public void setRightText (String buttonText)
+    {
+        this.mRightButtonText = buttonText;
+        if (this.getNavigationBar() != null)
+        {
+            this.getNavigationBar().setRightText(buttonText);
+        }
+    }
+
+    /**
+     * 设置右侧按钮图片
+     *
+     * @param resouceid 图片资源
+     **/
+    public void setRightButtonImage (int resouceid)
+    {
+        if (getNavigationBar() != null)
+        {
+            this.getNavigationBar().setRightButtonImage(resouceid);
+        }
+    }
+
+    @Override
+    public void onLeftClick ()
+    {
+
+    }
+
+    @Override
+    public void onRightClick ()
+    {
 
     }
 }
