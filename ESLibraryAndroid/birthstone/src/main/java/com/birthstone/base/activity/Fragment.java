@@ -242,7 +242,7 @@ public class Fragment extends android.support.v4.app.Fragment implements IChildV
 
             if(!mShowBtnBack)
             {
-                mUINavigationBar.setLeftButtonVisibility(View.VISIBLE);
+                mUINavigationBar.setLeftButtonVisibility(View.GONE);
             }
         }
     }
