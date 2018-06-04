@@ -10,6 +10,7 @@ import android.view.WindowManager;
 import android.widget.TextView;
 import com.birthstone.R;
 import com.github.lzyzsd.circleprogress.ArcProgress;
+import com.github.lzyzsd.circleprogress.DonutProgress;
 
 
 /**
@@ -22,7 +23,7 @@ public class ESProgressValueDialog extends AlertDialog
 	private Context context;
 	private String title;
 	private TextView titleTextView;
-    private ArcProgress arcProgress;
+    private DonutProgress arcProgress;
 
 
     public ESProgressValueDialog(Context context, String title)
@@ -41,7 +42,7 @@ public class ESProgressValueDialog extends AlertDialog
         setContentView(R.layout.es_progressvaluedialog);
         titleTextView = (TextView) findViewById(R.id.content);
         titleTextView.setText(title);
-		arcProgress = (ArcProgress)findViewById(R.id.progress_view);
+		arcProgress = (DonutProgress)findViewById(R.id.progress_view);
         WindowManager windowManager = this.getWindow().getWindowManager();
 
         Display display = windowManager.getDefaultDisplay();

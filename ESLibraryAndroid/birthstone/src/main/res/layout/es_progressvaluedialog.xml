@@ -15,7 +15,7 @@
             android:gravity="center"
             android:background="@drawable/es_dialog_white_rectangle">
 
-        <com.github.lzyzsd.circleprogress.ArcProgress
+        <com.github.lzyzsd.circleprogress.DonutProgress
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/progress_view"
                 android:layout_centerInParent="true"
