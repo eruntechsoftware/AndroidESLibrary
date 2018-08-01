@@ -32,7 +32,7 @@ public class ESActionLoadPage extends TextView implements IDataInitialize, IData
 {
 	private SQLiteDatabase mSqlDb;
 	protected Activity mActivity;
-	protected Boolean mAutomatic = false;
+	protected Boolean mAutomatic = true;
 	protected String mSql;
 	protected String mSign = "ForQuery";
 	protected DataType mDataType;

@@ -46,7 +46,7 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
     protected ArrayList<View> views = new ArrayList<View>();
     protected ArrayList<Data> mTransferParams = null;
     private DataCollection releaseParams, mReceiveDataParams, mTransferDataParams;
-    protected String mTitle, mRightButtonText;
+    protected String mTitle, mRightButtonText,mLeftButtonText;
     protected Boolean mParentRefresh = false, mIsParentStart = false;
     private Boolean mShowBtnBack = false;
     protected int mReleaseCount = 0;
@@ -217,6 +217,11 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
             if (mRightButtonText != null)
             {
                 mUINavigationBar.setRightText(mRightButtonText);
+            }
+
+            if (mLeftButtonText != null)
+            {
+                mUINavigationBar.setLeftText(mRightButtonText);
             }
 
             /****/
@@ -815,6 +820,20 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
         if (this.getNavigationBar() != null)
         {
             this.getNavigationBar().setRightText(buttonText);
+        }
+    }
+
+    /**
+     * 设置导航栏左侧按钮文本
+     *
+     * @param buttonText 按钮文本
+     **/
+    public void setLeftText (String buttonText)
+    {
+        this.mLeftButtonText = buttonText;
+        if (this.getNavigationBar() != null)
+        {
+            this.getNavigationBar().setLeftText(buttonText);
         }
     }
 

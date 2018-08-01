@@ -53,7 +53,7 @@ public class Fragment extends android.support.v4.app.Fragment implements IChildV
     protected int index = 0;
     protected int mReleaseCount = 0;
 
-    protected String mTitle, mRightButtonText;
+    protected String mTitle, mRightButtonText,mLeftButtonText;
     private Boolean mShowBtnBack = false;
 
     private static List<String> FUNCTION_LIST = new ArrayList<String>();
@@ -233,6 +233,11 @@ public class Fragment extends android.support.v4.app.Fragment implements IChildV
             if (mRightButtonText != null)
             {
                 mUINavigationBar.setRightText(mRightButtonText);
+            }
+
+            if (mLeftButtonText != null)
+            {
+                mUINavigationBar.setLeftText(mRightButtonText);
             }
 
             if (mTitle != null)
@@ -770,6 +775,20 @@ public class Fragment extends android.support.v4.app.Fragment implements IChildV
         if (this.getNavigationBar() != null)
         {
             this.getNavigationBar().setRightText(buttonText);
+        }
+    }
+
+    /**
+     * 设置导航栏左侧按钮文本
+     *
+     * @param buttonText 按钮文本
+     **/
+    public void setLeftText (String buttonText)
+    {
+        this.mLeftButtonText = buttonText;
+        if (this.getNavigationBar() != null)
+        {
+            this.getNavigationBar().setLeftText(buttonText);
         }
     }
 

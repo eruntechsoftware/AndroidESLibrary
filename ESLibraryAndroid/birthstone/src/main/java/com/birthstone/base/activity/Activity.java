@@ -51,7 +51,7 @@ public class Activity extends android.app.Activity implements IUINavigationBar, 
     protected ArrayList<View> views = new ArrayList<View>();
     protected ArrayList<Data> mTransferParams = null;
     private DataCollection releaseParams, mReceiveDataParams, mTransferDataParams;
-    protected String mTitle, mRightButtonText;
+    protected String mTitle, mRightButtonText,mLeftButtonText;
     private Boolean mIsParentStart = false;
     private Boolean mShowBtnBack = false;
     protected int index = 0;
@@ -228,6 +228,11 @@ public class Activity extends android.app.Activity implements IUINavigationBar, 
             if (mRightButtonText != null)
             {
                 mUINavigationBar.setRightText(mRightButtonText);
+            }
+
+            if (mLeftButtonText != null)
+            {
+                mUINavigationBar.setLeftText(mRightButtonText);
             }
 
             if (mTitle != null)
@@ -885,6 +890,21 @@ public class Activity extends android.app.Activity implements IUINavigationBar, 
             this.getNavigationBar().setRightText(buttonText);
         }
     }
+
+    /**
+     * 设置导航栏左侧按钮文本
+     *
+     * @param buttonText 按钮文本
+     **/
+    public void setLeftText (String buttonText)
+    {
+        this.mLeftButtonText = buttonText;
+        if (this.getNavigationBar() != null)
+        {
+            this.getNavigationBar().setLeftText(buttonText);
+        }
+    }
+
 
     /**
      * 设置右侧按钮图片
