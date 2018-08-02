@@ -124,11 +124,11 @@ public class UINavigationBar extends RelativeLayout implements View.OnClickListe
 	{
 		if(BUTTON_TEXT_COLOR==0)
 		{
-			BUTTON_TEXT_COLOR = R.color.es_white;
+			BUTTON_TEXT_COLOR = getResources().getColor(R.color.es_white);
 		}
 		if(TITLE_TEXT_COLOR==0)
 		{
-			TITLE_TEXT_COLOR = R.color.es_white;
+			TITLE_TEXT_COLOR = getResources().getColor(R.color.es_white);
 		}
 		/**加载布局文件*/
 		View.inflate(context, R.layout.es_actionbar, this);
