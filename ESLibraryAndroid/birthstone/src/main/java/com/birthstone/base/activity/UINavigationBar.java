@@ -6,15 +6,14 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import com.birthstone.R;
 
 
 /**
- * @author 杜明悦
- * ?
- * */
-public class UINavigationBar extends RelativeLayout implements View.OnClickListener{
+ * @author 杜明悦 ?
+ */
+public class UINavigationBar extends RelativeLayout implements View.OnClickListener
+{
 
 	/**
 	 * 标题栏的根布局
@@ -34,9 +33,14 @@ public class UINavigationBar extends RelativeLayout implements View.OnClickListe
 	private TextView mTvLeft;
 
 	/**
+	 * 标题文字颜色
+	 */
+	public static int TITLE_TEXT_COLOR=0;
+
+	/**
 	 * 右边按钮的文字颜色
 	 */
-	private int left_button_textColor;
+	public static int BUTTON_TEXT_COLOR=0;
 	/**
 	 * 右边保存按钮的文字大小
 	 */
@@ -97,24 +101,35 @@ public class UINavigationBar extends RelativeLayout implements View.OnClickListe
 	private int left_button_imageId;
 
 	/*
-	* navigationbar事件监听接口
-	* */
+	 * navigationbar事件监听接口
+	 * */
 	public IUINavigationBar UINavigationBarDelegat;
 
-	public UINavigationBar(Context context) {
+	public UINavigationBar(Context context)
+	{
 		super(context);
 		setId(R.id.uiNavigationBar);
 		initView(context);
 	}
 
 
-	public UINavigationBar(Context context,boolean isShowBtnBack){
+	public UINavigationBar(Context context, boolean isShowBtnBack)
+	{
 		super(context);
 		initView(context);
-		mIvLeft.setVisibility(isShowBtnBack?VISIBLE:GONE);
+		mIvLeft.setVisibility(isShowBtnBack ? VISIBLE : GONE);
 	}
 
-	private void initView(Context context) {
+	private void initView(Context context)
+	{
+		if(BUTTON_TEXT_COLOR==0)
+		{
+			BUTTON_TEXT_COLOR = R.color.es_white;
+		}
+		if(TITLE_TEXT_COLOR==0)
+		{
+			TITLE_TEXT_COLOR = R.color.es_white;
+		}
 		/**加载布局文件*/
 		View.inflate(context, R.layout.es_actionbar, this);
 		mRelativeLayout = (RelativeLayout) findViewById(R.id.relay_background);
@@ -132,27 +147,86 @@ public class UINavigationBar extends RelativeLayout implements View.OnClickListe
 	}
 
 	/*
-	* 设置导航栏背景色
-	* @param color 标题栏背景色
-	* */
-	public static void setBarTintColor(int color){
+	 * 设置导航栏背景色
+	 * @param color 标题栏背景色
+	 * */
+	public static void setBarTintColor(int color)
+	{
 		BACKGROUND_COLOR = color;
 	}
 
-	public void setTitle(String tilte) {
-		if (TextUtils.isEmpty(tilte)) {
+	/**
+	 * 设置标题栏文本
+	 * @param tilte 标题文本
+	 * **/
+	public void setTitle(String tilte)
+	{
+		if (TextUtils.isEmpty(tilte))
+		{
 			mTvTilte.setVisibility(GONE);
-		} else {
+		}
+		else
+		{
+			mTvTilte.setText(tilte);
+			mTvTilte.setVisibility(VISIBLE);
+		}
+	}
+
+	/**
+	 * 设置标题栏文本
+	 * @param tilte 标题文本
+	 * @param rescolor 标题颜色，res下的资源
+	 * **/
+	public void setTitle(String tilte, int rescolor)
+	{
+		TITLE_TEXT_COLOR = getResources().getColor(rescolor);
+		mTvTilte.setTextColor(rescolor);
+		if (TextUtils.isEmpty(tilte))
+		{
+			mTvTilte.setVisibility(GONE);
+		}
+		else
+		{
 			mTvTilte.setText(tilte);
 			mTvTilte.setVisibility(VISIBLE);
 		}
 	}
 
 
-	public void setLeftText(String text) {
-		if (TextUtils.isEmpty(text)) {
+	/**
+	 * 设置左侧按钮文本
+	 * @param text 按钮文本
+	 * **/
+	public void setLeftText(String text)
+	{
+		mTvLeft.setTextColor(BUTTON_TEXT_COLOR);
+		if (TextUtils.isEmpty(text))
+		{
 			mTvLeft.setVisibility(GONE);
-		} else {
+		}
+		else
+		{
+			mTvLeft.setVisibility(VISIBLE);
+			mTvLeft.setText(text);
+			mIvLeft.setVisibility(GONE);
+		}
+	}
+
+	/**
+	 * 设置左侧按钮文本
+	 * @param text 按钮文本
+	 * @param rescolor 按钮文本，res下的资源
+	 * **/
+	public void setLeftText(String text, int rescolor)
+	{
+		BUTTON_TEXT_COLOR = rescolor;
+		mTvLeft.setTextColor(BUTTON_TEXT_COLOR);
+		if (TextUtils.isEmpty(text))
+		{
+			mTvLeft.setVisibility(GONE);
+		}
+		else
+		{
 			mTvLeft.setVisibility(VISIBLE);
 			mTvLeft.setText(text);
 			mIvLeft.setVisibility(GONE);
@@ -160,14 +234,24 @@ public class UINavigationBar extends RelativeLayout implements View.OnClickListe
 	}
 
 
-	public void setLeftTextColor(int textColor) {
+	public void setLeftTextColor(int textColor)
+	{
 		mTvLeft.setTextColor(textColor);
 	}
 
-	public void setRightText(String text) {
-		if (TextUtils.isEmpty(text)) {
+	/**
+	 * 设置右侧按钮文本
+	 * @param text 按钮文本
+	 * **/
+	public void setRightText(String text)
+	{
+		mTvRight.setTextColor(BUTTON_TEXT_COLOR);
+		if (TextUtils.isEmpty(text))
+		{
 			mTvRight.setVisibility(GONE);
-		} else {
+		}
+		else
+		{
 			mTvRight.setVisibility(VISIBLE);
 			mTvRight.setText(text);
 			mIvRight.setVisibility(GONE);
@@ -175,11 +259,32 @@ public class UINavigationBar extends RelativeLayout implements View.OnClickListe
 	}
 
 	/**
+	 * 设置右侧按钮文本
+	 * @param text 按钮文本
+	 * @param rescolor 按钮文本，res下的资源
+	 * **/
+	public void setRightText(String text, int rescolor)
+	{
+		BUTTON_TEXT_COLOR = rescolor;
+		mTvRight.setTextColor(BUTTON_TEXT_COLOR);
+		if (TextUtils.isEmpty(text))
+		{
+			mTvRight.setVisibility(GONE);
+		}
+		else
+		{
+			mTvRight.setVisibility(VISIBLE);
+			mTvRight.setText(text);
+			mIvRight.setVisibility(GONE);
+		}
+	}
+	/**
 	 * 设置右侧文字颜色
 	 *
 	 * @param textColor
 	 */
-	public void setRightTextColor(int textColor) {
+	public void setRightTextColor(int textColor)
+	{
 		mTvRight.setTextColor(textColor);
 	}
 
@@ -188,11 +293,15 @@ public class UINavigationBar extends RelativeLayout implements View.OnClickListe
 	 *
 	 * @param resId
 	 */
-	public void setLeftButtonImage(int resId) {
-		if (resId == 0) {
+	public void setLeftButtonImage(int resId)
+	{
+		if (resId == 0)
+		{
 			mIvLeft.setVisibility(View.GONE);
 			mTvLeft.setVisibility(View.VISIBLE);
-		} else {
+		}
+		else
+		{
 			mIvLeft.setVisibility(View.VISIBLE);
 			mIvLeft.setImageResource(resId);
 			mTvLeft.setVisibility(View.GONE);
@@ -204,11 +313,15 @@ public class UINavigationBar extends RelativeLayout implements View.OnClickListe
 	 *
 	 * @param resId
 	 */
-	public void setRightButtonImage(int resId) {
-		if (resId==0) {
+	public void setRightButtonImage(int resId)
+	{
+		if (resId == 0)
+		{
 			mIvRight.setVisibility(View.GONE);
 			mTvRight.setVisibility(View.VISIBLE);
-		} else {
+		}
+		else
+		{
 			mIvRight.setVisibility(View.VISIBLE);
 			mIvRight.setImageResource(resId);
 			mTvRight.setVisibility(View.GONE);
@@ -221,7 +334,8 @@ public class UINavigationBar extends RelativeLayout implements View.OnClickListe
 	 *
 	 * @param visibility
 	 */
-	public void setLineIsVisible(int visibility) {
+	public void setLineIsVisible(int visibility)
+	{
 		line.setVisibility(visibility);
 	}
 
@@ -230,7 +344,8 @@ public class UINavigationBar extends RelativeLayout implements View.OnClickListe
 	 *
 	 * @param visibility
 	 */
-	public void setRightButtonVisibility(int visibility) {
+	public void setRightButtonVisibility(int visibility)
+	{
 		mIvRight.setVisibility(visibility);
 		mTvRight.setVisibility(visibility);
 	}
@@ -240,7 +355,8 @@ public class UINavigationBar extends RelativeLayout implements View.OnClickListe
 	 *
 	 * @param visibility
 	 */
-	public void setLeftButtonVisibility(int visibility) {
+	public void setLeftButtonVisibility(int visibility)
+	{
 		mIvLeft.setVisibility(visibility);
 		mTvLeft.setVisibility(GONE);
 	}
@@ -250,14 +366,16 @@ public class UINavigationBar extends RelativeLayout implements View.OnClickListe
 	 *
 	 * @param resId
 	 */
-	public void setTitleBarBackground(int resId) {
+	public void setTitleBarBackground(int resId)
+	{
 		mRelativeLayout.setBackgroundResource(resId);
 	}
 
 	/**
 	 * 左侧点击
-	 * **/
-	public void setLeftViewClickListener(OnClickListener listener){
+	 **/
+	public void setLeftViewClickListener(OnClickListener listener)
+	{
 
 		this.mIvLeft.setOnClickListener(listener);
 		this.mTvLeft.setOnClickListener(listener);
@@ -266,8 +384,9 @@ public class UINavigationBar extends RelativeLayout implements View.OnClickListe
 
 	/**
 	 * 右侧侧点击
-	 * **/
-	public void setRightViewClickListener(OnClickListener listener){
+	 **/
+	public void setRightViewClickListener(OnClickListener listener)
+	{
 
 		this.mIvRight.setOnClickListener(listener);
 		this.mTvRight.setOnClickListener(listener);
@@ -275,15 +394,20 @@ public class UINavigationBar extends RelativeLayout implements View.OnClickListe
 	}
 
 	@Override
-	public void onClick(View view) {
-		if (view.getId()==R.id.iv_right || view.getId()==R.id.tv_right){
-			if (UINavigationBarDelegat!=null){
+	public void onClick(View view)
+	{
+		if (view.getId() == R.id.iv_right || view.getId() == R.id.tv_right)
+		{
+			if (UINavigationBarDelegat != null)
+			{
 				UINavigationBarDelegat.onRightClick();
 			}
 		}
 
-		if (view.getId()==R.id.iv_left || view.getId()==R.id.tv_left){
-			if (UINavigationBarDelegat!=null){
+		if (view.getId() == R.id.iv_left || view.getId() == R.id.tv_left)
+		{
+			if (UINavigationBarDelegat != null)
+			{
 				UINavigationBarDelegat.onLeftClick();
 			}
 		}

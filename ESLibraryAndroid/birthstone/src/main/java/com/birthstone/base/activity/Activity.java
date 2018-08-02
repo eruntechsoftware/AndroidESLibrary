@@ -861,6 +861,18 @@ public class Activity extends android.app.Activity implements IUINavigationBar, 
         }
     }
 
+    @Override
+    public void setTitle(int titleId)
+    {
+        setTitleText (getResources().getString(titleId));
+    }
+
+    @Override
+    public void setTitle(CharSequence title)
+    {
+        setTitleText (title.toString());
+    }
+
     /**
      * 设置左侧按钮图片
      *
