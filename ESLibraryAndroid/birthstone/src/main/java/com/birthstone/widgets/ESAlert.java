@@ -48,7 +48,6 @@ public class ESAlert extends ESDialog
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		this.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 		this.setCanceledOnTouchOutside(false);
-		
 		this.context = context;
 		this.message = message;
 		this.title = title;
@@ -65,9 +64,9 @@ public class ESAlert extends ESDialog
 	{
 		super(context, R.style.DialogTheme);
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-		this.getWindow().setBackgroundDrawable(new ColorDrawable(color));
+		this.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 		this.setCanceledOnTouchOutside(false);
-
+		this.view.setBackgroundColor(color);
 		this.context = context;
 		this.message = message;
 		this.title = title;

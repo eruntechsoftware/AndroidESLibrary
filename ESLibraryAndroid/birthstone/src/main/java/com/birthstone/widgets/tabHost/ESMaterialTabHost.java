@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,7 +59,7 @@ public class ESMaterialTabHost extends LinearLayout implements View.OnClickListe
 	/**
 	 * 标题布局高度
 	 **/
-	private float mLayoutTitleHeight = 120f;
+	private float mLayoutTitleHeight = 50f;
 	/**
 	 * 游标宽度
 	 **/
@@ -66,7 +67,7 @@ public class ESMaterialTabHost extends LinearLayout implements View.OnClickListe
 	/**
 	 * 游标高度
 	 **/
-	private float mIndexerHeight = 4;
+	private float mIndexerHeight = 2;
 	/**
 	 * 游标位置
 	 **/
@@ -117,7 +118,7 @@ public class ESMaterialTabHost extends LinearLayout implements View.OnClickListe
 		mContext = context;
 		TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ESMaterialTabHost);
 		//tabhost高度
-		mLayoutTitleHeight = a.getDimension(R.styleable.ESMaterialTabHost_tabHost_height, 120);
+		mLayoutTitleHeight = a.getDimension(R.styleable.ESMaterialTabHost_tabHost_height, 50);
 		//标题栏背景色
 		mTabTitleBackgroundColor = a.getColor(R.styleable.ESMaterialTabHost_tabHost_BackgroundColor, Color.WHITE);
 		//tab默认状态时的颜色
@@ -125,8 +126,9 @@ public class ESMaterialTabHost extends LinearLayout implements View.OnClickListe
 		//tab选中状态时的颜色
 		mTabTitleTextActiveColor = a.getColor(R.styleable.ESMaterialTabHost_tabHost_titleActiveColor, Color.BLUE);
 		//标题文字字号
-		mTabTitleTextSize = a.getDimension(R.styleable.ESMaterialTabHost_tabHost_titleSize, 14);
-
+		mTabTitleTextSize = a.getFloat(R.styleable.ESMaterialTabHost_tabHost_titleSize, 16);
+//		a.getDimensionPixelSize(R.styleable.ESMaterialTabHost_tabHost_titleSize,
+//								(int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 16, getResources().getDisplayMetrics()));
 		//游标高度
 		mIndexerHeight = a.getDimension(R.styleable.ESMaterialTabHost_tabHost_indexerHeight, 4);
 		//游标颜色
