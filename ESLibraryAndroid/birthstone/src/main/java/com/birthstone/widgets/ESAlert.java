@@ -21,6 +21,9 @@ public class ESAlert extends ESDialog
 	private Context context;
 
 	private int contentDialogBackgroundColor=Color.WHITE;
+	private int textColor=Color.WHITE;
+	private float textSize=16;
+
 	private View contentDialog;
 	private View backView;
 
@@ -60,15 +63,19 @@ public class ESAlert extends ESDialog
 	 * @param context 上下文
 	 * @param title 标题
 	 * @param message 消息文本
-	 * @param color 背景色 如：Color.red
+	 * @param backgrouncolor 背景色 如：Color.red
+	 * @param textColor 文本颜色
+	 * @param textSize 文本字号
 	 */
-	public ESAlert(Context context, String title, String message, int color )
+	public ESAlert(Context context, String title, String message, int backgrouncolor,int textColor, float textSize )
 	{
 		super(context, R.style.DialogTheme);
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		this.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 		this.setCanceledOnTouchOutside(false);
-		this.contentDialogBackgroundColor = color;
+		this.contentDialogBackgroundColor = backgrouncolor;
+		this.textColor = textColor;
+		this.textSize = textSize;
 		this.context = context;
 		this.message = message;
 		this.title = title;
@@ -120,6 +127,8 @@ public class ESAlert extends ESDialog
 		this.addView(titleTextView);
 
 		this.messageTextView = (ESTextView) findViewById(R.id.message);
+		this.messageTextView.setTextSize(textSize);
+		this.messageTextView.setTextColor(textColor);
 		setMessage(message);
 		this.addView(messageTextView);
 
