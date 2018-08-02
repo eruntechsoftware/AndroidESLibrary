@@ -19,7 +19,9 @@ public class ESAlert extends ESDialog
 {
 
 	private Context context;
-	private View view;
+
+	private int contentDialogBackgroundColor=Color.WHITE;
+	private View contentDialog;
 	private View backView;
 
 	private String title;
@@ -66,7 +68,7 @@ public class ESAlert extends ESDialog
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		this.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 		this.setCanceledOnTouchOutside(false);
-		this.view.setBackgroundColor(color);
+		this.contentDialogBackgroundColor = color;
 		this.context = context;
 		this.message = message;
 		this.title = title;
@@ -95,7 +97,8 @@ public class ESAlert extends ESDialog
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.es_alert);
 
-		view = (RelativeLayout) findViewById(R.id.contentDialog);
+		contentDialog = (RelativeLayout) findViewById(R.id.contentDialog);
+		contentDialog.setBackgroundColor(contentDialogBackgroundColor);
 		backView = (RelativeLayout) findViewById(R.id.dialog_rootView);
 		backView.setOnTouchListener(new OnTouchListener()
 		{
@@ -103,7 +106,7 @@ public class ESAlert extends ESDialog
 			@Override
 			public boolean onTouch(View v, MotionEvent event)
 			{
-				if(event.getX() < view.getLeft() || event.getX() > view.getRight() || event.getY() > view.getBottom() || event.getY() < view.getTop())
+				if(event.getX() < contentDialog.getLeft() || event.getX() > contentDialog.getRight() || event.getY() > contentDialog.getBottom() || event.getY() < contentDialog.getTop())
 				{
 					/**@author shenhao 修正弹出框点击边线时消失的问题*/
 					//dismiss();
@@ -159,7 +162,7 @@ public class ESAlert extends ESDialog
 	{
 		super.show();
 		// set dialog enter animations
-		view.startAnimation(AnimationUtils.loadAnimation(context, R.anim.es_dialog_main_show_amination));
+		contentDialog.startAnimation(AnimationUtils.loadAnimation(context, R.anim.es_dialog_main_show_amination));
 		backView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.es_dialog_root_show_amin));
 	}
 
@@ -265,7 +268,7 @@ public class ESAlert extends ESDialog
 			@Override
 			public void onAnimationEnd(Animation animation)
 			{
-				view.post(new Runnable()
+				contentDialog.post(new Runnable()
 				{
 					@Override
 					public void run()
@@ -276,8 +279,8 @@ public class ESAlert extends ESDialog
 
 			}
 		});
-		
-		view.startAnimation(anim);
+
+		contentDialog.startAnimation(anim);
 		
 		//屏蔽  加上后，出现闪烁两次情况
 		//Animation backAnim = AnimationUtils.loadAnimation(context, R.anim.dialog_root_hide_amin);
