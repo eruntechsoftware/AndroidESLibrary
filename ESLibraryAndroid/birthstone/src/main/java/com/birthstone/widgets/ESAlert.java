@@ -54,6 +54,25 @@ public class ESAlert extends ESDialog
 		this.title = title;
 	}
 
+	/***
+	 * 构建弹出对话框
+	 * @param context 上下文
+	 * @param title 标题
+	 * @param message 消息文本
+	 * @param color 背景色 如：Color.red
+	 */
+	public ESAlert(Context context, String title, String message, int color )
+	{
+		super(context, R.style.DialogTheme);
+		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		this.getWindow().setBackgroundDrawable(new ColorDrawable(color));
+		this.setCanceledOnTouchOutside(false);
+
+		this.context = context;
+		this.message = message;
+		this.title = title;
+	}
+
 	public void setCancelButtonText(String buttonCancelText)
 	{
 		this.buttonCancelText = buttonCancelText;
