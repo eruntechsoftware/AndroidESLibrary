@@ -29,7 +29,7 @@ public class SQLiteOpenbase extends SQLiteOpenHelper
 	 */
 	public SQLiteOpenbase( Context context )
 	{
-		super(context, DB_PATH + DB_NAME, null, 1);
+		super(context, DB_PATH + DB_NAME, null, 3);
 		this.myContext = context;
 	}
 
