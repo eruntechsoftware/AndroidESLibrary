@@ -49,7 +49,7 @@ public class ESRadioGroup extends android.widget.RadioGroup implements ICollecti
 		{
 			TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ESRadioGroup);
 			String dataType = a.getString(R.styleable.ESRadioGroup_dataType);
-			this.mDataType = DataTypeHelper.valueOf(a.getInt(R.styleable.ESRadioGroup_dataType,0));
+			this.mDataType = DataTypeHelper.valueOf(a.getString(R.styleable.ESRadioGroup_dataType));
 			mIsRequired = a.getBoolean(R.styleable.ESRadioGroup_isRequired,false);
 			mEmpty2Null = a.getBoolean(R.styleable.ESRadioGroup_empty2Null, true);
 			mCollectSign = a.getString(R.styleable.ESRadioGroup_collectSign);

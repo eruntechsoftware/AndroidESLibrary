@@ -2,35 +2,39 @@ package com.birthstone.core.helper;
 
 
 public class DataTypeHelper {
-	public static DataType valueOf(int value)
+	public static DataType valueOf(String value)
 	{
 		DataType dataType = null;
+		if(value==null || value.equals(""))
+		{
+			return dataType=DataType.String;
+		}
 		switch (value){
-			case 0:
+			case "String":
 				dataType=DataType.String;
 				break;
-			case 1:
+			case "Integer":
 				dataType=DataType.Integer;
 				break;
-			case 2:
+			case "Numeric":
 				dataType=DataType.Numeric;
 				break;
-			case 3:
+			case "Date":
 				dataType=DataType.Date;
 				break;
-			case 4:
+			case "DateTime":
 				dataType=DataType.DateTime;
 				break;
-			case 5:
+			case "EMail":
 				dataType=DataType.EMail;
 				break;
-			case 6:
+			case "URL":
 				dataType=DataType.URL;
 				break;
-			case 7:
+			case "IDCard":
 				dataType=DataType.IDCard;
 				break;
-			case 8:
+			case "Phone":
 				dataType=DataType.Phone;
 				break;
 		}

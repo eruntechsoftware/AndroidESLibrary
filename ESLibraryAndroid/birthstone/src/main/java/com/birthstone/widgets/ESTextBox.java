@@ -80,7 +80,7 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
             mEmpty2Null = a.getBoolean(R.styleable.ESTextBox_empty2Null, true);
             this.addTextChangedListener(this);
             this.setOnFocusChangeListener(this);
-            int value = a.getInt(R.styleable.ESTextBox_dataType, 0);
+            String value = a.getString(R.styleable.ESTextBox_dataType);
             this.setDataType(DataTypeHelper.valueOf(value));
             setInputTypeWithDataType(value);
             a.recycle();
@@ -105,39 +105,39 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
      *
      * @param value 数据类型枚举
      */
-    public void setInputTypeWithDataType (int value)
+    public void setInputTypeWithDataType (String value)
     {
         switch (value)
         {
-            case 0:
+            case "String":
 //                ESTextBox.this.setInputType(InputType.TYPE_TEXT_FLAG_MULTI_LINE);
                 break;
-            case 1:
+            case "Integer":
                 ESTextBox.this.setInputType(InputType.TYPE_CLASS_NUMBER);
                 break;
-            case 2:
+            case "Numeric":
                 ESTextBox.this.setInputType(InputType.TYPE_CLASS_NUMBER);
                 break;
-            case 3:
+            case "Date":
                 ESTextBox.this.setInputType(InputType.TYPE_CLASS_DATETIME);
                 break;
-            case 4:
+            case "DateTime":
                 ESTextBox.this.setInputType(InputType.TYPE_CLASS_DATETIME);
                 break;
-            case 5:
+            case "EMail":
                 ESTextBox.this.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
                 break;
-            case 6:
+            case "URL":
                 ESTextBox.this.setInputType(InputType.TYPE_TEXT_VARIATION_URI);
                 break;
-            case 7:
+            case "IDCard":
                 ESTextBox.this.setSingleLine(true);
                 ESTextBox.this.setInputType(InputType.TYPE_CLASS_TEXT);
                 break;
-            case 8:
+            case "Phone":
                 ESTextBox.this.setInputType(InputType.TYPE_CLASS_PHONE);
                 break;
-            case 9:
+            case "Mobile":
                 ESTextBox.this.setInputType(InputType.TYPE_CLASS_PHONE);
                 break;
         }

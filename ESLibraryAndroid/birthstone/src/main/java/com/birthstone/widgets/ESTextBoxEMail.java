@@ -14,7 +14,7 @@ public class ESTextBoxEMail extends ESTextBox {
         super(context, attrs);
         this.mRegularExpression = DataTypeExpression.eMail();
         this.mRegularTooltip = "请输入正确的邮箱地址";
-        this.setInputTypeWithDataType(DataType.EMail.ordinal());
+        this.setInputTypeWithDataType(DataType.EMail.name());
         this.setHint("eMail地址");
     }
 }

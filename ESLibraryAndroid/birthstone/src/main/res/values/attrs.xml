@@ -3,15 +3,26 @@
 	<!--声明的数据类型枚举-->
 	<attr name="dataType">
 		<enum name="String" value="0" />
-        <enum name="Integer" value="1" />
-        <enum name="Numeric" value="2" />
-        <enum name="Date" value="3" />
-        <enum name="DateTime" value="4" />
+		<enum name="Integer" value="1" />
+		<enum name="Numeric" value="2" />
+		<enum name="Date" value="3" />
+		<enum name="DateTime" value="4" />
 		<enum name="EMail" value="5" />
 		<enum name="URL" value="6" />
 		<enum name="IDCard" value="7" />
 		<enum name="Phone" value="8" />
 		<enum name="Mobile" value="9" />
+
+		<!--<enum name="String" value="String" />-->
+        <!--<enum name="Integer" value="Integer" />-->
+        <!--<enum name="Numeric" value="Numeric" />-->
+        <!--<enum name="Date" value="Date" />-->
+        <!--<enum name="DateTime" value="DateTime" />-->
+		<!--<enum name="EMail" value="EMail" />-->
+		<!--<enum name="URL" value="URL" />-->
+		<!--<enum name="IDCard" value="IDCard" />-->
+		<!--<enum name="Phone" value="Phone" />-->
+		<!--<enum name="Mobile" value="Mobile" />-->
 	</attr>
 
 	<!--<attr name="sign">-->
