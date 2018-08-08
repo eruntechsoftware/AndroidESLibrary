@@ -33,6 +33,9 @@ public class DataTypeHelper {
 			case 8:
 				dataType=DataType.Phone;
 				break;
+			case 9:
+				dataType=DataType.Phone;
+				break;
 		}
 		return dataType;	
 	}
