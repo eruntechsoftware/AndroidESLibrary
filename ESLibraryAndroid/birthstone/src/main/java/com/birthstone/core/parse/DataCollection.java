@@ -88,6 +88,7 @@ public class DataCollection extends LinkedList<Data> implements Serializable, Cl
                 Data data = (Data) var2.next();
                 dataCollection.add((Data) data.clone());
             }
+            dataCollection.setColumns(this.getColumns());
         }
         catch (Exception var4)
         {
@@ -100,5 +101,10 @@ public class DataCollection extends LinkedList<Data> implements Serializable, Cl
     public List<String> getColumns()
     {
         return columns;
+    }
+
+    public void setColumns(List<String> columns)
+    {
+        this.columns=columns;
     }
 }
