@@ -15,6 +15,6 @@ public class ESTextBoxNumber extends ESTextBox {
         this.mDataType = DataType.Numeric;
         this.mRegularExpression = DataTypeExpression.numeric();
         this.mRegularTooltip = "请输入正确的数字";
-        this.setInputTypeWithDataType(DataType.Numeric.name());
+        this.setInputTypeWithDataType(DataType.Numeric.ordinal());
     }
 }

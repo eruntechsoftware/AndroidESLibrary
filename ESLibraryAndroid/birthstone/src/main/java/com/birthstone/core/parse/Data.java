@@ -10,9 +10,9 @@ public class Data implements Cloneable, Serializable
 {
 
     private static final long serialVersionUID = 3158113122131617945L;
-    public String Name;
-    public DataType DataType;
-    public Object Value;
+    private String Name;
+    private DataType DataType;
+    private Object mValue;
 
     public Data ()
     {
@@ -22,14 +22,14 @@ public class Data implements Cloneable, Serializable
     {
         this.Name = name;
         this.DataType = DataType.String;
-        this.Value = value;
+        this.mValue = value;
     }
 
     public Data (String name, Object value, DataType datatype)
     {
         this.Name = name;
         this.DataType = datatype;
-        this.Value = value;
+        this.mValue = value;
     }
 
     public Data copy ()
@@ -38,7 +38,7 @@ public class Data implements Cloneable, Serializable
         try
         {
             data.setName(this.Name);
-            data.setValue(this.Value);
+            data.setValue(this.mValue);
         }
         catch (Exception ex)
         {
@@ -69,39 +69,47 @@ public class Data implements Cloneable, Serializable
 
     public Object getValue ()
     {
-        return Value;
+        if (mValue!=null)
+        {
+            return this.mValue;
+        }
+        return "";
     }
 
     public String getStringValue ()
     {
-        return this.Value.toString();
+        if (mValue!=null)
+        {
+            return this.mValue.toString();
+        }
+        return "";
     }
 
     public int getIntValue ()
     {
-        return Integer.valueOf(this.Value.toString());
+        return Integer.valueOf(this.mValue.toString());
     }
 
     public float getFloatValue ()
     {
-        return Float.valueOf(this.Value.toString());
+        return Float.valueOf(this.mValue.toString());
     }
 
     public Boolean getBooleanValue ()
     {
         Boolean result = Boolean.valueOf(false);
-        if (this.Value != null && this.Value.toString().equals("1"))
+        if (this.mValue != null && this.mValue.toString().equals("1"))
         {
             result = Boolean.valueOf(true);
         }
 
-        if (this.Value != null && this.Value.toString().equals("0"))
+        if (this.mValue != null && this.mValue.toString().equals("0"))
         {
             result = Boolean.valueOf(false);
         }
         else
         {
-            result = Boolean.valueOf(Boolean.parseBoolean(this.Value.toString()));
+            result = Boolean.valueOf(Boolean.parseBoolean(this.mValue.toString()));
         }
 
         return result;
@@ -109,7 +117,7 @@ public class Data implements Cloneable, Serializable
 
     public void setValue (Object value)
     {
-        Value = value;
+        mValue = value;
     }
 
 

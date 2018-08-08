@@ -47,7 +47,7 @@ public class ESActionLoadPage extends TextView implements IDataInitialize, IData
 			try
 			{
 				TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ESActionLoadPage);
-				this.mDataType = DataTypeHelper.valueOf(a.getString(R.styleable.ESActionLoadPage_dataType));
+				this.mDataType = DataTypeHelper.valueOf(a.getInt(R.styleable.ESActionLoadPage_dataType,0));
 				this.mSign = a.getString(R.styleable.ESActionLoadPage_sign);
 				this.mSql = a.getString(R.styleable.ESActionLoadPage_sql);
 				this.mAutomatic = a.getBoolean(R.styleable.ESActionLoadPage_automatic,true);

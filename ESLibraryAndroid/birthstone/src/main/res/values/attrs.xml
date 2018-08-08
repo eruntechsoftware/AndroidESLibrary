@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<!--声明的数据类型枚举-->
-	<attr name="dataType">
+	<attr name="dataType" format="enum">
 		<enum name="String" value="0" />
 		<enum name="Integer" value="1" />
 		<enum name="Numeric" value="2" />
@@ -14,10 +14,10 @@
 		<enum name="Mobile" value="9" />
 
 		<!--<enum name="String" value="String" />-->
-        <!--<enum name="Integer" value="Integer" />-->
-        <!--<enum name="Numeric" value="Numeric" />-->
-        <!--<enum name="Date" value="Date" />-->
-        <!--<enum name="DateTime" value="DateTime" />-->
+		<!--<enum name="Integer" value="Integer" />-->
+		<!--<enum name="Numeric" value="Numeric" />-->
+		<!--<enum name="Date" value="Date" />-->
+		<!--<enum name="DateTime" value="DateTime" />-->
 		<!--<enum name="EMail" value="EMail" />-->
 		<!--<enum name="URL" value="URL" />-->
 		<!--<enum name="IDCard" value="IDCard" />-->
@@ -26,37 +26,37 @@
 	</attr>
 
 	<!--<attr name="sign">-->
-		<!--<enum name="ForSave" value="1"/>-->
-		<!--<enum name="ForUpdate" value="2"/>-->
-		<!--<enum name="ForDel" value="3"/>-->
-		<!--<enum name="ForQuery" value="4"/>-->
-		<!--<enum name="ForQuery1" value="5"/>-->
-		<!--<enum name="ForChange" value="6"/>-->
+	<!--<enum name="ForSave" value="1"/>-->
+	<!--<enum name="ForUpdate" value="2"/>-->
+	<!--<enum name="ForDel" value="3"/>-->
+	<!--<enum name="ForQuery" value="4"/>-->
+	<!--<enum name="ForQuery1" value="5"/>-->
+	<!--<enum name="ForChange" value="6"/>-->
 	<!--</attr>-->
 
 	<!--<attr name="collectSign">-->
-		<!--<enum name="ForSave" value="1"/>-->
-		<!--<enum name="ForUpdate" value="2"/>-->
-		<!--<enum name="ForDel" value="3"/>-->
-		<!--<enum name="ForQuery" value="4"/>-->
-		<!--<enum name="ForQuery1" value="5"/>-->
-		<!--<enum name="ForChange" value="6"/>-->
+	<!--<enum name="ForSave" value="1"/>-->
+	<!--<enum name="ForUpdate" value="2"/>-->
+	<!--<enum name="ForDel" value="3"/>-->
+	<!--<enum name="ForQuery" value="4"/>-->
+	<!--<enum name="ForQuery1" value="5"/>-->
+	<!--<enum name="ForChange" value="6"/>-->
 	<!--</attr>-->
 
 	<!--<attr name="isRequired">-->
-		<!--<enum name="Yes" value="1" />-->
-		<!--<enum name="No" value="0" />-->
+	<!--<enum name="Yes" value="1" />-->
+	<!--<enum name="No" value="0" />-->
 	<!--</attr>-->
 
 	<!--声明的枚举，暂时不用了-->
 	<!--<attr name="empty2Null">-->
-		<!--<enum name="Yes" value="1" />-->
-		<!--<enum name="No" value="0" />-->
+	<!--<enum name="Yes" value="1" />-->
+	<!--<enum name="No" value="0" />-->
 	<!--</attr>-->
 
 	<!--<attr name="automatic">-->
-		<!--<enum name="Yes" value="1" />-->
-		<!--<enum name="No" value="0" />-->
+	<!--<enum name="Yes" value="1" />-->
+	<!--<enum name="No" value="0" />-->
 	<!--</attr>-->
 
 	<!--声明属性，在类中引用-->
@@ -182,16 +182,16 @@
 	</declare-styleable>
 
 	<!--<declare-styleable name="ESTextBoxMobile">-->
-		<!--<attr name="dataType"></attr>-->
-		<!--<attr name="isRequired"></attr>-->
-		<!--<attr name="empty2Null"></attr>-->
-		<!--<attr name="collectSign"></attr>-->
-		<!--&lt;!&ndash;必填项错误提示&ndash;&gt;-->
-		<!--<attr name="isRequiredTooltip"></attr>-->
-		<!--&lt;!&ndash;正则表达式&ndash;&gt;-->
-		<!--<attr name="regularExpression"></attr>-->
-		<!--&lt;!&ndash;正则表达式校验错误提示&ndash;&gt;-->
-		<!--<attr name="regularTooltip"></attr>-->
+	<!--<attr name="dataType"></attr>-->
+	<!--<attr name="isRequired"></attr>-->
+	<!--<attr name="empty2Null"></attr>-->
+	<!--<attr name="collectSign"></attr>-->
+	<!--&lt;!&ndash;必填项错误提示&ndash;&gt;-->
+	<!--<attr name="isRequiredTooltip"></attr>-->
+	<!--&lt;!&ndash;正则表达式&ndash;&gt;-->
+	<!--<attr name="regularExpression"></attr>-->
+	<!--&lt;!&ndash;正则表达式校验错误提示&ndash;&gt;-->
+	<!--<attr name="regularTooltip"></attr>-->
 	<!--</declare-styleable>-->
 
 	<declare-styleable name="ESTextView">

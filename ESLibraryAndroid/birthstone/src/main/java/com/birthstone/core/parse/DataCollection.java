@@ -3,10 +3,13 @@ package com.birthstone.core.parse;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 
 public class DataCollection extends LinkedList<Data> implements Serializable, Cloneable
 {
     private static final long serialVersionUID = 5187321951128267808L;
+
+    private List<String> columns = new LinkedList<>();
     public Data CurrentData = null;
     private boolean isChecked;
 
@@ -14,30 +17,40 @@ public class DataCollection extends LinkedList<Data> implements Serializable, Cl
     {
     }
 
-    public boolean addAll (DataCollection params)
+    @Override
+    public boolean add(Data data)
     {
+        if(!columns.contains(data.getName()))
+        {
+            columns.add(data.getName());
+        }
+        return super.add(data);
+    }
+
+    public boolean addAll(DataCollection params)
+    {
+        for(Data data:params)
+        {
+            if(!columns.contains(data.getName()))
+            {
+                columns.add(data.getName());
+            }
+        }
         return super.addAll(params);
     }
 
     public Data get (String name)
     {
         Data data = null;
-        if (this.CurrentData != null && this.CurrentData.Name.toUpperCase().equals(name.toUpperCase()))
+        if (this.CurrentData != null && this.CurrentData.getName().toUpperCase().equals(name.toUpperCase()))
         {
             return this.CurrentData;
         }
         else
         {
-            int size = this.size();
-
-            for (int i = 0; i < size; ++i)
+            if(columns.contains(name))
             {
-                if (((Data) this.get(i)).Name.toUpperCase().equals(name.toUpperCase()))
-                {
-                    data = (Data) this.get(i);
-                    this.CurrentData = data;
-                    break;
-                }
+                return this.get(columns.indexOf(name));
             }
 
             return data;
@@ -82,5 +95,10 @@ public class DataCollection extends LinkedList<Data> implements Serializable, Cl
         }
 
         return dataCollection;
+    }
+
+    public List<String> getColumns()
+    {
+        return columns;
     }
 }

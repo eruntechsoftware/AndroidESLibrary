@@ -2,18 +2,30 @@ package com.birthstone.core.parse;
 
 import java.io.Serializable;
 import java.util.LinkedList;
+import java.util.List;
 
 import android.util.Log;
 
 public class DataTable extends LinkedList<DataCollection> implements Serializable
 {
 	private static final long serialVersionUID = -7116458462588700584L;
-	int index = 0;
-	int lastRet = -1;
+	private int index = 0;
+	private int lastRet = -1;
+	private List<String> columns = new LinkedList<>();
 
 	public DataTable( )
 	{
 
+	}
+
+	@Override
+	public boolean add(DataCollection params)
+	{
+		if(params!=null)
+		{
+			columns = params.getColumns();
+		}
+		return super.add(params);
 	}
 
 	public boolean hasNext()
@@ -35,6 +47,27 @@ public class DataTable extends LinkedList<DataCollection> implements Serializabl
 			index = position;
 			lastRet = index;
 		}
+	}
+
+	/**
+	 * 获取某一列数据集合
+	 * @param columnName 列名
+	 * **/
+	public DataCollection getColumn(String columnName)
+	{
+		DataCollection params = new DataCollection();
+		try
+		{
+			for(DataCollection row:this)
+			{
+				params.add(row.get(columnName));
+			}
+		}
+		catch(Exception ex)
+		{
+
+		}
+		return params;
 	}
 
 	public DataTable getIndexData(int startIndex, int rows)
