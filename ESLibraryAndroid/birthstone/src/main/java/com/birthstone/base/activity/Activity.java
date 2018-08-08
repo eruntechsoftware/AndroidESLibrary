@@ -116,7 +116,10 @@ public class Activity extends android.app.Activity implements IUINavigationBar, 
                     {
                         this.mReceiveDataParams = new DataCollection();
                     }
-                    this.mReceiveDataParams.addAll(this.mTransferParams);
+                    for(Data data:mTransferParams)
+                    {
+                        this.mReceiveDataParams.add(data);
+                    }
                 }
             }
 
@@ -134,7 +137,10 @@ public class Activity extends android.app.Activity implements IUINavigationBar, 
                     {
                         this.mReceiveDataParams = new DataCollection();
                     }
-                    this.mReceiveDataParams.addAll(this.mTransferParams);
+                    for(Data data:mTransferParams)
+                    {
+                        this.mReceiveDataParams.add(data);
+                    }
                 }
             }
 
@@ -152,7 +158,10 @@ public class Activity extends android.app.Activity implements IUINavigationBar, 
                     {
                         this.mReceiveDataParams = new DataCollection();
                     }
-                    this.mReceiveDataParams.addAll(this.mTransferParams);
+                    for(Data data:mTransferParams)
+                    {
+                        this.mReceiveDataParams.add(data);
+                    }
                 }
             }
 
@@ -162,7 +171,10 @@ public class Activity extends android.app.Activity implements IUINavigationBar, 
                 {
                     this.mReceiveDataParams = new DataCollection();
                 }
-                this.mReceiveDataParams.addAll(this.mTransferParams);
+                for(Data data:mTransferParams)
+                {
+                    this.mReceiveDataParams.add(data);
+                }
             }
         }
         releaseParams = mReceiveDataParams;

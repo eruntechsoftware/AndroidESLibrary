@@ -112,7 +112,10 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
                     {
                         this.mReceiveDataParams = new DataCollection();
                     }
-                    this.mReceiveDataParams.addAll(this.mTransferParams);
+                    for(Data data:mTransferParams)
+                    {
+                        this.mReceiveDataParams.add(data);
+                    }
                 }
             }
 
@@ -130,7 +133,10 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
                     {
                         this.mReceiveDataParams = new DataCollection();
                     }
-                    this.mReceiveDataParams.addAll(this.mTransferParams);
+                    for(Data data:mTransferParams)
+                    {
+                        this.mReceiveDataParams.add(data);
+                    }
                 }
             }
 
@@ -149,7 +155,10 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
                     {
                         this.mReceiveDataParams = new DataCollection();
                     }
-                    this.mReceiveDataParams.addAll(this.mTransferParams);
+                    for(Data data:mTransferParams)
+                    {
+                        this.mReceiveDataParams.add(data);
+                    }
                 }
             }
 
@@ -159,7 +168,10 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
                 {
                     this.mReceiveDataParams = new DataCollection();
                 }
-                this.mReceiveDataParams.addAll(this.mTransferParams);
+                for(Data data:mTransferParams)
+                {
+                    this.mReceiveDataParams.add(data);
+                }
             }
         }
         releaseParams = mReceiveDataParams;
