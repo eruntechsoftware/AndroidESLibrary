@@ -506,6 +506,20 @@ public class Activity extends android.app.Activity implements IUINavigationBar, 
     }
 
     /*
+     * 关闭当前Activity
+     * @param isParentColosed 是否通知父页面关闭
+     * */
+    public void finishWithParent (Boolean isParentColosed)
+    {
+        Intent intent = new Intent();
+        intent.putExtra("isParentColosed", isParentColosed);
+        this.setResult(RESULT_OK, intent);
+        intent = null;
+        ActivityManager.pop(this);
+        super.finish();
+    }
+
+    /*
     * 关闭当前Activity并传递参数
     * @param intent 参数集合
     * */
@@ -560,6 +574,12 @@ public class Activity extends android.app.Activity implements IUINavigationBar, 
         switch (resultCode)
         {
             case 185324:
+
+                if (data.getBooleanExtra("isParentColosed", false))
+                {
+                    onRefresh(getTransferDataParams());
+                    finishWithParent(true);
+                }
                 if (data.getBooleanExtra("isRefresh", false))
                 {
                     onRefresh(getTransferDataParams());
