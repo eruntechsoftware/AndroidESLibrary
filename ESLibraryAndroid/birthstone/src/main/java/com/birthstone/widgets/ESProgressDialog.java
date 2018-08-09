@@ -3,6 +3,8 @@ package com.birthstone.widgets;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Display;
 import android.view.Window;
@@ -38,6 +40,7 @@ public class ESProgressDialog extends AlertDialog
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.es_progressdialog);
+        this.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         titleTextView = (TextView) findViewById(R.id.content);
         titleTextView.setText(title);
         WindowManager windowManager = this.getWindow().getWindowManager();
