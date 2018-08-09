@@ -50,17 +50,8 @@ public class ESPhotoPicker extends ESImageView implements OnClickListener, ESAct
 	public ESPhotoPicker(Context context, AttributeSet attrs)
 	{
 		super(context, attrs);
-		try
-		{
-			this.setOnClickListener(this);
-			String[] btnItems = {"拍照", "相册选择", "取消"};
-			actionSheetPhoto = new ESActionSheet((android.app.Activity) getActivity(), this, btnItems);
-			actionSheetPhoto.setOnActionSheetClickListener(this);
-		}
-		catch(Exception ex)
-		{
+		this.setOnClickListener(this);
 
-		}
 	}
 
 
@@ -70,29 +61,44 @@ public class ESPhotoPicker extends ESImageView implements OnClickListener, ESAct
 	{
 		activity = (Activity) getActivity();
 		activity.setOnActivityResultListener(this);
-		if (view.getId() == getId())
+		try
 		{
-			requestPermission();
-			if (!actionSheetPhoto.isShowing())
+			if (actionSheetPhoto == null)
 			{
-				actionSheetPhoto.show();
+				String[] btnItems = {"拍照", "相册选择", "取消"};
+				actionSheetPhoto = new ESActionSheet(activity, this, btnItems);
+				actionSheetPhoto.setOnActionSheetClickListener(this);
+			}
+
+			if (view.getId() == getId())
+			{
+				requestPermission();
+				if (!actionSheetPhoto.isShowing())
+				{
+					actionSheetPhoto.show();
+				}
+			}
+			if (view.getId() == 0)
+			{
+				//调用系统拍照功能
+				Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+				//指定调用相机拍照后照片的存储路径
+				intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(mediaStorageDir));
+				activity.startActivityForResult(intent, PHOTO_TAKEPHOTO);
+			}
+			if (view.getId() == 1)
+			{
+				//调用系统相册
+				Intent intent1 = new Intent(Intent.ACTION_PICK, null);
+				intent1.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
+				activity.startActivityForResult(intent1, PHOTO_PICKPHOTO);
 			}
 		}
-		if (view.getId() == 0)
+		catch(Exception ex)
 		{
-			//调用系统拍照功能
-			Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-			//指定调用相机拍照后照片的存储路径
-			intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(mediaStorageDir));
-			activity.startActivityForResult(intent, PHOTO_TAKEPHOTO);
+			Log.e(TAG,ex.getMessage());
 		}
-		if (view.getId() == 1)
-		{
-			//调用系统相册
-			Intent intent1 = new Intent(Intent.ACTION_PICK, null);
-			intent1.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
-			activity.startActivityForResult(intent1, PHOTO_PICKPHOTO);
-		}
+
 	}
 
 	/**
