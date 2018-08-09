@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Looper;
 import android.os.StrictMode;
+import android.preference.PreferenceManager;
 import android.support.annotation.RequiresApi;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -55,6 +56,7 @@ public class Activity extends android.app.Activity implements IUINavigationBar, 
     private Boolean mIsParentStart = false;
     private Boolean mShowBtnBack = false;
     protected int index = 0;
+    protected PreferenceManager.OnActivityResultListener onActivityResultListener;
 
     protected int mReleaseCount = 0;
 
@@ -571,6 +573,10 @@ public class Activity extends android.app.Activity implements IUINavigationBar, 
     @Override
     protected void onActivityResult (int requestCode, int resultCode, Intent data)
     {
+        if(onActivityResultListener!=null)
+        {
+            onActivityResultListener.onActivityResult(requestCode,resultCode,data);
+        }
         switch (resultCode)
         {
             case 185324:
@@ -986,6 +992,13 @@ public class Activity extends android.app.Activity implements IUINavigationBar, 
 
     }
 
+    /**
+     * 设置屏幕回调事件接口对象
+     * */
+    public void setOnActivityResultListener(PreferenceManager.OnActivityResultListener onActivityResultListener)
+    {
+        this.onActivityResultListener = onActivityResultListener;
+    }
 
     /**
      * 设置状态栏颜色，实现沉浸式状态栏
