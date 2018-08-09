@@ -53,8 +53,6 @@ public class ESPhotoPicker extends ESImageView implements OnClickListener, ESAct
 		try
 		{
 			this.setOnClickListener(this);
-			activity = (Activity) getActivity();
-			activity.setOnActivityResultListener(this);
 			String[] btnItems = {"拍照", "相册选择", "取消"};
 			actionSheetPhoto = new ESActionSheet((android.app.Activity) getActivity(), this, btnItems);
 			actionSheetPhoto.setOnActionSheetClickListener(this);
@@ -70,6 +68,8 @@ public class ESPhotoPicker extends ESImageView implements OnClickListener, ESAct
 	@Override
 	public void onClick(View view)
 	{
+		activity = (Activity) getActivity();
+		activity.setOnActivityResultListener(this);
 		if (view.getId() == getId())
 		{
 			requestPermission();
