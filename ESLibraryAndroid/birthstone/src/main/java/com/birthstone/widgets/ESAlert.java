@@ -21,7 +21,7 @@ public class ESAlert extends ESDialog
 	private Context context;
 
 	private int contentDialogBackgroundColor=Color.WHITE;
-	private int textColor=Color.WHITE;
+	private int textColor=Color.BLACK;
 	private float textSize=16;
 
 	private View contentDialog;
