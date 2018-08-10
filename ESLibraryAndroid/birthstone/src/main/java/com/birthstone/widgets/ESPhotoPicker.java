@@ -34,7 +34,7 @@ public class ESPhotoPicker extends ESImageView implements OnClickListener, ESAct
 	/**
 	 * 创建一个以当前时间为名称的文件
 	 **/
-	File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "temp//" + UUIDGenerator.generate() + ".jpg");
+	File mediaStorageDir = new File(com.birthstone.core.helper.File.getSDCardPath()+"//temp//" + UUIDGenerator.generate() + ".jpg");
 
 	private final String TAG = "ESPhotoPicker";
 	//声明常量权限

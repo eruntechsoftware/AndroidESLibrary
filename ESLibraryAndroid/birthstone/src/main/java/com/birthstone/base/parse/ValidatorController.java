@@ -16,6 +16,7 @@ public class ValidatorController implements IValidator, IControlSearcherHandler
 
 	private IChildView childView;
 	private Boolean result = true;
+	private Boolean validatorResult = true;
 
 	public ValidatorController(IChildView childView)
 	{
@@ -36,7 +37,7 @@ public class ValidatorController implements IValidator, IControlSearcherHandler
 		{
 			Log.v("Validator", ex.getMessage());
 		}
-		return result;
+		return validatorResult;
 	}
 
 	public void handle(Object obj)
@@ -45,6 +46,11 @@ public class ValidatorController implements IValidator, IControlSearcherHandler
 		{
 			IValidatible Validatible = (IValidatible) obj;
 			result = Validatible.dataValidator();
+			if(!result)
+			{
+				validatorResult=false;
+			}
+
 		}
 		catch(Exception ex)
 		{
