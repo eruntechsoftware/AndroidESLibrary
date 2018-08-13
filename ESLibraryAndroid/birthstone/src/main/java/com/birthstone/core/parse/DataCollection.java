@@ -20,9 +20,9 @@ public class DataCollection extends LinkedList<Data> implements Serializable, Cl
     @Override
     public boolean add(Data data)
     {
-        if(!columns.contains(data.getName()))
+        if(!columns.contains(data.getName().toLowerCase()))
         {
-            columns.add(data.getName());
+            columns.add(data.getName().toLowerCase());
         }
         return super.add(data);
     }
@@ -48,9 +48,10 @@ public class DataCollection extends LinkedList<Data> implements Serializable, Cl
         }
         else
         {
-            if(columns.contains(name))
+            if(columns.contains(name.toLowerCase()))
             {
-                return this.get(columns.indexOf(name));
+                int index = columns.indexOf(name.toLowerCase());
+                return this.get(index);
             }
 
             return data;

@@ -107,6 +107,11 @@
 		<attr name="isClosed" format="boolean"></attr>
 	</declare-styleable>
 
+	<declare-styleable name="ESButtonCountDown">
+		<!--弹出ESMessageBox消息提示-->
+		<attr name="message" format="string"></attr>
+	</declare-styleable>
+
 
 
 	<declare-styleable name="ESButtonOpen">
