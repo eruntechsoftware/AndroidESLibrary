@@ -71,7 +71,7 @@ public class Data implements Cloneable, Serializable
     {
         if (mValue!=null)
         {
-            return this.mValue.toString();
+            return this.mValue;
         }
         return "";
     }
