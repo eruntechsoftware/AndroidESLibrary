@@ -3,13 +3,10 @@ package com.birthstone.core.parse;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.List;
 
 public class DataCollection extends LinkedList<Data> implements Serializable, Cloneable
 {
     private static final long serialVersionUID = 5187321951128267808L;
-
-    private List<String> columns = new LinkedList<>();
     public Data CurrentData = null;
     private boolean isChecked;
 
@@ -17,25 +14,8 @@ public class DataCollection extends LinkedList<Data> implements Serializable, Cl
     {
     }
 
-    @Override
-    public boolean add(Data data)
+    public boolean addAll (DataCollection params)
     {
-        if(!columns.contains(data.getName().toLowerCase()))
-        {
-            columns.add(data.getName().toLowerCase());
-        }
-        return super.add(data);
-    }
-
-    public boolean addAll(DataCollection params)
-    {
-        for(Data data:params)
-        {
-            if(!columns.contains(data.getName()))
-            {
-                columns.add(data.getName());
-            }
-        }
         return super.addAll(params);
     }
 
@@ -48,17 +28,15 @@ public class DataCollection extends LinkedList<Data> implements Serializable, Cl
         }
         else
         {
-//            if(columns.contains(name.toLowerCase()))
-//            {
-//                int index = columns.indexOf(name.toLowerCase());
-//                return this.get(index);
-//            }
+            int size = this.size();
 
-            for(Data data1:this)
+            for (int i = 0; i < size; ++i)
             {
-                if(data1.getName().trim().toLowerCase().equals(name.toLowerCase()))
+                if (((Data) this.get(i)).getName().toUpperCase().equals(name.toUpperCase()))
                 {
-                    data=data1;
+                    data = (Data) this.get(i);
+                    this.CurrentData = data;
+                    break;
                 }
             }
 
@@ -97,7 +75,6 @@ public class DataCollection extends LinkedList<Data> implements Serializable, Cl
                 Data data = (Data) var2.next();
                 dataCollection.add((Data) data.clone());
             }
-            dataCollection.setColumns(this.getColumns());
         }
         catch (Exception var4)
         {
@@ -105,15 +82,5 @@ public class DataCollection extends LinkedList<Data> implements Serializable, Cl
         }
 
         return dataCollection;
-    }
-
-    public List<String> getColumns()
-    {
-        return columns;
-    }
-
-    public void setColumns(List<String> columns)
-    {
-        this.columns=columns;
     }
 }

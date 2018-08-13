@@ -21,10 +21,6 @@ public class DataTable extends LinkedList<DataCollection> implements Serializabl
 	@Override
 	public boolean add(DataCollection params)
 	{
-		if(params!=null)
-		{
-			columns = params.getColumns();
-		}
 		return super.add(params);
 	}
 
