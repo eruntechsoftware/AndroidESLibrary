@@ -48,10 +48,18 @@ public class DataCollection extends LinkedList<Data> implements Serializable, Cl
         }
         else
         {
-            if(columns.contains(name.toLowerCase()))
+//            if(columns.contains(name.toLowerCase()))
+//            {
+//                int index = columns.indexOf(name.toLowerCase());
+//                return this.get(index);
+//            }
+
+            for(Data data1:this)
             {
-                int index = columns.indexOf(name.toLowerCase());
-                return this.get(index);
+                if(data1.getName().trim().toLowerCase().equals(name.toLowerCase()))
+                {
+                    data=data1;
+                }
             }
 
             return data;
