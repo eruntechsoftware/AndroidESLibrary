@@ -269,14 +269,14 @@ public class ESMaterialTabHost extends LinearLayout implements View.OnClickListe
 	{
 		//先获取屏幕宽度
 		int screenW = 0;
-		if (this.mFragment != null)
-		{
-			screenW = this.getMeasuredWidth();//ActivityHelper.getActivityWidth(this.mFragment.getActivity());
-		}
-		if (this.mFragmentActivity != null)
-		{
-			screenW = this.getMeasuredWidth();//ActivityHelper.getActivityWidth(this.mFragmentActivity);
-		}
+//		if (this.mFragment != null)
+//		{
+//			screenW = ActivityHelper.getActivityWidth(this.mFragment.getActivity());
+//		}
+//		if (this.mFragmentActivity != null)
+//		{
+//			screenW = ActivityHelper.getActivityWidth(this.mFragmentActivity);
+//		}
 		//每段title的宽度
 		offset = screenW / fragmentList.size();
 
@@ -331,8 +331,12 @@ public class ESMaterialTabHost extends LinearLayout implements View.OnClickListe
 				{
 					//先设置为默认色
 					materialTabList.get(index).setTextColor(mTabTitleTextDefaultColor);
+					//设置为默认字体大小
+					materialTabList.get(index).setTitleSize(mTabTitleTextSize);
 					//设置为选中颜色
 					materialTabList.get(i).setTextColor(mTabTitleTextActiveColor);
+					//设置为选中字体大小
+					materialTabList.get(i).setTitleSize(mTabTitleTextSize+2);
 				}
 			}
 		}
