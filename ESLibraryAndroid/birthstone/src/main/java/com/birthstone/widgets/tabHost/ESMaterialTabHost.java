@@ -271,11 +271,11 @@ public class ESMaterialTabHost extends LinearLayout implements View.OnClickListe
 		int screenW = 0;
 		if (this.mFragment != null)
 		{
-			screenW = this.getWidth();//ActivityHelper.getActivityWidth(this.mFragment.getActivity());
+			screenW = this.getMeasuredWidth();//ActivityHelper.getActivityWidth(this.mFragment.getActivity());
 		}
 		if (this.mFragmentActivity != null)
 		{
-			screenW = this.getWidth();//ActivityHelper.getActivityWidth(this.mFragmentActivity);
+			screenW = this.getMeasuredWidth();//ActivityHelper.getActivityWidth(this.mFragmentActivity);
 		}
 		//每段title的宽度
 		offset = screenW / fragmentList.size();
