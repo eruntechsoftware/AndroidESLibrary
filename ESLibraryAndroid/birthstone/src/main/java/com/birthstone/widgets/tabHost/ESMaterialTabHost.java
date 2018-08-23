@@ -271,11 +271,11 @@ public class ESMaterialTabHost extends LinearLayout implements View.OnClickListe
 		int screenW = 0;
 		if (this.mFragment != null)
 		{
-			screenW = ActivityHelper.getActivityWidth(this.mFragment.getActivity());
+			screenW = this.getWidth();//ActivityHelper.getActivityWidth(this.mFragment.getActivity());
 		}
 		if (this.mFragmentActivity != null)
 		{
-			screenW = ActivityHelper.getActivityWidth(this.mFragmentActivity);
+			screenW = this.getWidth();//ActivityHelper.getActivityWidth(this.mFragmentActivity);
 		}
 		//每段title的宽度
 		offset = screenW / fragmentList.size();
@@ -399,7 +399,8 @@ public class ESMaterialTabHost extends LinearLayout implements View.OnClickListe
 	}
 
 	/**
-	 * 修改时间：2016年04月15日 作者：杜明悦 功能：设置标题文本默认色
+	 * 修改时间：2016年04月15日
+	 * 作者：杜明悦 功能：设置标题文本默认色
 	 *
 	 * @param titleTextDefaultColor 标题文本默认色
 	 */
@@ -420,7 +421,7 @@ public class ESMaterialTabHost extends LinearLayout implements View.OnClickListe
 	 *
 	 * @param titleTextActiveColor 标题栏背景色
 	 */
-	public void setTitleTextActiveColor(int titleTextActiveColor)
+	public void setTabTitleTextActiveColor(int titleTextActiveColor)
 	{
 		this.mTabTitleTextActiveColor = titleTextActiveColor;
 	}
@@ -430,7 +431,7 @@ public class ESMaterialTabHost extends LinearLayout implements View.OnClickListe
 	 *
 	 * @param currorColor 标题栏背景色
 	 */
-	public void setCurrorColor(int currorColor)
+	public void setTabIndexerColor(int currorColor)
 	{
 		this.mTabIndexerColor = currorColor;
 		if (this.cursor != null)
@@ -452,7 +453,7 @@ public class ESMaterialTabHost extends LinearLayout implements View.OnClickListe
 	/**
 	 * 修改时间：2016年04月26日 作者：杜明悦 功能：获取当前选择的索引
 	 */
-	public int getmIndex()
+	public int getIndex()
 	{
 		return mIndex;
 	}
@@ -460,7 +461,7 @@ public class ESMaterialTabHost extends LinearLayout implements View.OnClickListe
 	/**
 	 * 修改时间：2016年07月1日 作者：杜明悦 功能：设置当前选择的索引
 	 */
-	public void setmIndex(int mIndex)
+	public void setIndex(int mIndex)
 	{
 		if (viewPager != null)
 		{
