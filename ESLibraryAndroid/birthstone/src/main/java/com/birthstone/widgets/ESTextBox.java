@@ -314,11 +314,11 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
             }
             else if (this.mDataType.equals(DataType.Date))
             {
-                this.setText(DateTimeHelper.getDateString(data.getValue(), DateTimeHelper.getDateFormat()));
+                this.setText(DateTimeHelper.getDateString(data.getValue().toString(), DateTimeHelper.getDateFormat()));
             }
             else if (this.mDataType.equals(DataType.DateTime))
             {
-                this.setText(DateTimeHelper.getDateString(data.getValue(), DateTimeHelper.getDateTimeFormat()));
+                this.setText(DateTimeHelper.getDateString(data.getValue().toString(), DateTimeHelper.getDateTimeFormat()));
             }
             else
             {
