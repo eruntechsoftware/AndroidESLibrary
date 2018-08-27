@@ -105,9 +105,9 @@ public class DateTimeHelper
 	 * @param format
 	 * @return
 	 */
-	public static String getDateString(Object value, String format)
+	public static String getDateString(String value, String format)
 	{
-		Date date = (Date) value;
+		Date date = new Date(convertTimeToLong(value.toString()));
 		SimpleDateFormat ft = new SimpleDateFormat(format);
 		return ft.format(date);
 	}
@@ -268,6 +268,41 @@ public class DateTimeHelper
 	{
 		MINUTE = calendar.get(Calendar.MINUTE);
 		return MINUTE;
+	}
+
+	/**
+	 * 给一个时间戳字符串将其转化成 "xx年xx月xx日xx时xx分xx秒" 的格式
+	 *
+	 * @param timeStamp 时间戳字符串
+	 */
+	public static String convertToDateString(Long timeStamp)
+	{
+
+		SimpleDateFormat sdr = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String timeStr = sdr.format(new Date(timeStamp));
+
+		return timeStr;
+	}
+
+	/**
+	 * 转换时间日期格式字串为long型
+	 *
+	 * @param datetime
+	 */
+	public static Long convertTimeToLong(String datetime)
+	{
+		Date date = null;
+		try
+		{
+			SimpleDateFormat sdf = new SimpleDateFormat(DateTimeHelper.DATE_FORMAT);
+			date = sdf.parse(datetime);
+			return date.getTime();
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			return 0L;
+		}
 	}
 
 }
