@@ -403,6 +403,19 @@ public class ESMaterialTabHost extends LinearLayout implements View.OnClickListe
 	}
 
 	/**
+	 * 设置选项卡标题
+	 * @param index 选项卡下标
+	 * @param title 标题
+	 * */
+	public void setTitleText(int index, String title)
+	{
+		if(materialTabList!=null && materialTabList.size()>0 && materialTabList.size()>index)
+		{
+			materialTabList.get(index).setTitleText(title);
+		}
+	}
+
+	/**
 	 * 修改时间：2016年04月15日
 	 * 作者：杜明悦 功能：设置标题文本默认色
 	 *
