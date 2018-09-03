@@ -5,10 +5,7 @@ import android.util.Log;
 
 import com.birthstone.base.activity.Activity;
 import com.birthstone.base.security.ControlSearcher;
-import com.birthstone.core.interfaces.IControlSearcherHandler;
-import com.birthstone.core.interfaces.IFunctionProtected;
-import com.birthstone.core.interfaces.IReleasable;
-import com.birthstone.core.interfaces.IStateProtected;
+import com.birthstone.core.interfaces.*;
 import com.birthstone.widgets.ESHiddenFeild;
 
 import java.util.ArrayList;
@@ -16,15 +13,15 @@ import java.util.List;
 
 public class FunctionProtected implements IControlSearcherHandler
 {
-	private Activity activity;
-	public void setStateControl(Object activity)
+	private IChildView childView;
+	public void setStateControl(IChildView childView)
 	{
 		try
 		{
-			this.activity = (Activity) activity;
+			this.childView = childView;
 			List<IControlSearcherHandler> Controllist = new ArrayList<IControlSearcherHandler>();
 			Controllist.add(this);
-			new ControlSearcher(Controllist).search(activity);
+			new ControlSearcher(Controllist).search(childView);
 			Controllist.clear();
 			Controllist=null;
 		}
@@ -89,11 +86,11 @@ public class FunctionProtected implements IControlSearcherHandler
 	{
 		try
 		{
-			if(activity == null)
+			if(childView == null)
 			{
 				if(obj instanceof Activity)
 				{
-					activity = (Activity) obj;
+					childView = (Activity) obj;
 				}
 			}
 			
@@ -107,19 +104,19 @@ public class FunctionProtected implements IControlSearcherHandler
 					{
 						ESHiddenFeild hidden = null;
 						IReleasable release;
-						int size = activity.getViews().size();
+						int size = childView.getViews().size();
 						for(int i = 0; i < size; i++)
 						{
-							if(activity.getViews().get(i) instanceof IReleasable)
+							if(childView.getViews().get(i) instanceof IReleasable)
 							{
-								release = (IReleasable) activity.getViews().get(i);
+								release = (IReleasable) childView.getViews().get(i);
 								if(release.getName().equals(aprotected.getStateHiddenId()))
 								{
-									hidden = (ESHiddenFeild) activity.getViews().get(i);
+									hidden = (ESHiddenFeild) childView.getViews().get(i);
 								}
 							}
 						}
-						if(hidden == null) { throw new Exception("޷ҵΪ" + aprotected.getStateHiddenId() + "State Hidden"); }
+						if(hidden == null) { throw new Exception(" " + aprotected.getStateHiddenId() + " State Hidden"); }
 						aprotected.protectState(this.stateIsMatched(getValue, hidden.getText().toString()));
 					}
 				}

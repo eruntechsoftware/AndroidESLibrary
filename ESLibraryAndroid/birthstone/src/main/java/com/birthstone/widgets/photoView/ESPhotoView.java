@@ -2,6 +2,7 @@ package com.birthstone.widgets.photoView;
 
 
 import android.content.Intent;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -22,6 +23,7 @@ import com.github.chrisbanes.photoview.PhotoView;
 import com.github.chrisbanes.photoview.PhotoViewAttacher;
 
 import java.util.ArrayList;
+import java.util.List;
 
 //import com.birthstone.animation.switchlayout.SwichLayoutInterFace;
 //import com.birthstone.animation.switchlayout.SwitchLayout;
@@ -47,8 +49,10 @@ public class ESPhotoView extends AppCompatActivity implements View.OnClickListen
 	 * 声明变量
 	 **/
 	private ArrayList<PhotoView> listViews = null;
+	private List<Uri> fileURIList;
+	private List<String> filePahtList;
 	private ESPhotoViewAdapter adapter;
-	private int index;
+	private int index=0;
 
 	public void onCreate(Bundle savedInstanceState) {
 		try {
@@ -62,9 +66,6 @@ public class ESPhotoView extends AppCompatActivity implements View.OnClickListen
 
 			pager.setOnPageChangeListener(this);
 
-			Intent intent = getIntent();
-			index = intent.getIntExtra("index", 0);
-			initListViews();
 		}catch (Exception ex){
 			Log.e("初始化",ex.getMessage());
 		}
@@ -80,6 +81,40 @@ public class ESPhotoView extends AppCompatActivity implements View.OnClickListen
 		btnDelete.setOnClickListener(this);
 
 		setEnterSwichLayout();
+	}
+
+	/**
+	 *绑定并展示图片列表
+	 * @param fileURIList URI图片列表
+	 * @param index 默认显示的图片下标
+	 * **/
+	public void bindImageListUri(List<Uri> fileURIList,int index)
+	{
+		this.fileURIList=fileURIList;
+		this.index=index;
+		BitmapCollection.clear();
+		for(Uri uri:fileURIList)
+		{
+			BitmapCollection.add(uri);
+		}
+		initListViews();
+	}
+
+	/**
+	 *绑定并展示图片列表
+	 * @param filePahtList 图片列表
+	 * @param index 默认显示的图片下标
+	 * **/
+	public void bindImageListString(List<String> filePahtList,int index)
+	{
+		this.filePahtList=filePahtList;
+		this.index=index;
+		BitmapCollection.clear();
+		for(String uri:filePahtList)
+		{
+			BitmapCollection.add(uri);
+		}
+		initListViews();
 	}
 
 	/**
