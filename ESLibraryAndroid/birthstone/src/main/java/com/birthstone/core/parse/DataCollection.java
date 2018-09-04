@@ -14,8 +14,29 @@ public class DataCollection extends LinkedList<Data> implements Serializable, Cl
     {
     }
 
-    public boolean addAll (DataCollection params)
+    @Override
+    public boolean add(Data data)
     {
+        if(this.get(data.getName())!=null)
+        {
+            this.remove(data.getName());
+        }
+        return super.add(data);
+    }
+
+    public boolean addAll(DataCollection params)
+    {
+        if(params!=null)
+        {
+            int size = params.size();
+            for (int i = 0; i < size; ++i)
+            {
+                if(this.get(params.get(i).getName())!=null)
+                {
+                    this.remove(this.get(params.get(i).getName()));
+                }
+            }
+        }
         return super.addAll(params);
     }
 
