@@ -290,6 +290,18 @@ public class ESMaterialTabHost extends LinearLayout implements View.OnClickListe
 		cursor.startAnimation(animation);
 	}
 
+	/**
+	 * 添加OnPageChangeListener事件
+	 * @param onPageChangeListener viewpager监听对象
+	 * **/
+	public void addOnPageChangeListener(ViewPager.OnPageChangeListener onPageChangeListener)
+	{
+		if(onPageChangeListener!=null && viewPager!=null)
+		{
+			viewPager.addOnPageChangeListener(onPageChangeListener);
+		}
+	}
+
 	public void onClick(View v)
 	{
 		viewPager.setCurrentItem(((ESMaterialTab) v).getIndex());
