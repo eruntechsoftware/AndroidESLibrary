@@ -253,7 +253,7 @@ public class ESMaterialTabHost extends LinearLayout implements View.OnClickListe
 			}
 			viewPager.setAdapter(adapter);
 			viewPager.setCurrentItem(0);
-			viewPager.setOnPageChangeListener(new MyOnPageChangeListener());
+			viewPager.addOnPageChangeListener(new MyOnPageChangeListener());
 		}
 		adapter.notifyDataSetChanged();
 	}
@@ -304,25 +304,24 @@ public class ESMaterialTabHost extends LinearLayout implements View.OnClickListe
 	 */
 	public class MyOnPageChangeListener implements ViewPager.OnPageChangeListener
 	{
-
 		@Override
-		public void onPageScrolled(int i, float v, int i2)
+		public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels)
 		{
 
 		}
 
 		@Override
-		public void onPageSelected(int i)
+		public void onPageSelected(int position)
 		{
 			if (mOnChangIndexListener != null)
 			{
-				mOnChangIndexListener.changed(i);
+				mOnChangIndexListener.changed(position);
 			}
 			if (mDisplayTabar == true)
 			{
 				final int index = mIndex;
-				animation = new TranslateAnimation(cursorStartx + offset * mIndex, offset * i + cursorStartx, 0, 0);//这个比较简洁，只有一行代码。
-				mIndex = i;
+				animation = new TranslateAnimation(cursorStartx + offset * mIndex, offset * position + cursorStartx, 0, 0);//这个比较简洁，只有一行代码。
+				mIndex = position;
 				animation.setFillAfter(true);
 				animation.setDuration(300);
 				cursor.startAnimation(animation);
@@ -334,15 +333,15 @@ public class ESMaterialTabHost extends LinearLayout implements View.OnClickListe
 					//设置为默认字体大小
 					materialTabList.get(index).setTitleSize(mTabTitleTextSize);
 					//设置为选中颜色
-					materialTabList.get(i).setTextColor(mTabTitleTextActiveColor);
+					materialTabList.get(position).setTextColor(mTabTitleTextActiveColor);
 					//设置为选中字体大小
-					materialTabList.get(i).setTitleSize(mTabTitleTextSize+2);
+					materialTabList.get(position).setTitleSize(mTabTitleTextSize+2);
 				}
 			}
 		}
 
 		@Override
-		public void onPageScrollStateChanged(int i)
+		public void onPageScrollStateChanged(int state)
 		{
 
 		}
