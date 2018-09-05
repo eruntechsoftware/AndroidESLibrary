@@ -7,8 +7,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
-import android.util.TypedValue;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -16,7 +16,6 @@ import android.view.animation.TranslateAnimation;
 import android.widget.LinearLayout;
 import com.birthstone.R;
 import com.birthstone.base.activity.Activity;
-import com.birthstone.base.helper.ActivityHelper;
 
 import java.util.ArrayList;
 
@@ -127,8 +126,8 @@ public class ESMaterialTabHost extends LinearLayout implements View.OnClickListe
 		mTabTitleTextActiveColor = a.getColor(R.styleable.ESMaterialTabHost_tabHost_titleActiveColor, Color.BLUE);
 		//标题文字字号
 		mTabTitleTextSize = a.getFloat(R.styleable.ESMaterialTabHost_tabHost_titleSize, 16);
-//		a.getDimensionPixelSize(R.styleable.ESMaterialTabHost_tabHost_titleSize,
-//								(int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 16, getResources().getDisplayMetrics()));
+		//		a.getDimensionPixelSize(R.styleable.ESMaterialTabHost_tabHost_titleSize,
+		//								(int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 16, getResources().getDisplayMetrics()));
 		//游标高度
 		mIndexerHeight = a.getDimension(R.styleable.ESMaterialTabHost_tabHost_indexerHeight, 4);
 		//游标颜色
@@ -269,14 +268,14 @@ public class ESMaterialTabHost extends LinearLayout implements View.OnClickListe
 	{
 		//先获取屏幕宽度
 		int screenW = 0;
-//		if (this.mFragment != null)
-//		{
-//			screenW = ActivityHelper.getActivityWidth(this.mFragment.getActivity());
-//		}
-//		if (this.mFragmentActivity != null)
-//		{
-//			screenW = ActivityHelper.getActivityWidth(this.mFragmentActivity);
-//		}
+		//		if (this.mFragment != null)
+		//		{
+		//			screenW = ActivityHelper.getActivityWidth(this.mFragment.getActivity());
+		//		}
+		//		if (this.mFragmentActivity != null)
+		//		{
+		//			screenW = ActivityHelper.getActivityWidth(this.mFragmentActivity);
+		//		}
 		//每段title的宽度
 		offset = screenW / fragmentList.size();
 
@@ -292,11 +291,12 @@ public class ESMaterialTabHost extends LinearLayout implements View.OnClickListe
 
 	/**
 	 * 添加OnPageChangeListener事件
+	 *
 	 * @param onPageChangeListener viewpager监听对象
-	 * **/
+	 **/
 	public void addOnPageChangeListener(ViewPager.OnPageChangeListener onPageChangeListener)
 	{
-		if(onPageChangeListener!=null && viewPager!=null)
+		if (onPageChangeListener != null && viewPager != null)
 		{
 			viewPager.addOnPageChangeListener(onPageChangeListener);
 		}
@@ -304,7 +304,10 @@ public class ESMaterialTabHost extends LinearLayout implements View.OnClickListe
 
 	public void onClick(View v)
 	{
-		viewPager.setCurrentItem(((ESMaterialTab) v).getIndex());
+		if (viewPager != null)
+		{
+			viewPager.setCurrentItem(((ESMaterialTab) v).getIndex());
+		}
 	}
 
 	/**
@@ -347,7 +350,7 @@ public class ESMaterialTabHost extends LinearLayout implements View.OnClickListe
 					//设置为选中颜色
 					materialTabList.get(position).setTextColor(mTabTitleTextActiveColor);
 					//设置为选中字体大小
-					materialTabList.get(position).setTitleSize(mTabTitleTextSize+2);
+					materialTabList.get(position).setTitleSize(mTabTitleTextSize + 2);
 				}
 			}
 		}
@@ -357,6 +360,89 @@ public class ESMaterialTabHost extends LinearLayout implements View.OnClickListe
 		{
 
 		}
+	}
+
+	/**
+	 * 中断事件
+	 */
+	@Override
+	public boolean onInterceptTouchEvent(MotionEvent ev)
+	{
+		return true;
+	}
+
+	/**
+	 * 分发事件
+	 */
+	@Override
+	public boolean dispatchTouchEvent(MotionEvent ev)
+	{
+		return super.dispatchTouchEvent(ev);
+	}
+
+	/**
+	 * 实现多个ListView控件同时触发事件
+	 */
+	@Override
+	public boolean onTouchEvent(MotionEvent event)
+	{
+
+		int width = getWidth() / getChildCount();
+		int height = getHeight();
+		int count = getChildCount();
+
+		float eventX = event.getX();
+
+		if (eventX < width)
+		{    // 滑动左边的Fragment
+			event.setLocation(width / 2, event.getY());
+			getChildAt(0).dispatchTouchEvent(event);//移动位置后，分发事件
+			return true;
+
+		}
+		else if (eventX > width && eventX < 2 * width)
+		{ //滑动中间的 listView
+			float eventY = event.getY();
+			if (eventY < height / 2)
+			{
+				event.setLocation(width / 2, event.getY());
+				for (int i = 0; i < count; i++)
+				{
+					View child = getChildAt(i);
+					try
+					{
+						child.dispatchTouchEvent(event);
+					}
+					catch(Exception e)
+					{
+						e.printStackTrace();
+					}
+
+				}
+				return true;
+			}
+			else if (eventY > height / 2)
+			{
+				event.setLocation(width / 2, event.getY());
+				try
+				{
+					getChildAt(1).dispatchTouchEvent(event);
+				}
+				catch(Exception e)
+				{
+					e.printStackTrace();
+				}
+				return true;
+			}
+		}
+		else if (eventX > 2 * width)
+		{
+			event.setLocation(width / 2, event.getY());
+			getChildAt(2).dispatchTouchEvent(event);
+			return true;
+		}
+
+		return true;
 	}
 
 	/**
@@ -415,20 +501,20 @@ public class ESMaterialTabHost extends LinearLayout implements View.OnClickListe
 
 	/**
 	 * 设置选项卡标题
+	 *
 	 * @param index 选项卡下标
 	 * @param title 标题
-	 * */
+	 */
 	public void setTitleText(int index, String title)
 	{
-		if(materialTabList!=null && materialTabList.size()>0 && materialTabList.size()>index)
+		if (materialTabList != null && materialTabList.size() > 0 && materialTabList.size() > index)
 		{
 			materialTabList.get(index).setTitleText(title);
 		}
 	}
 
 	/**
-	 * 修改时间：2016年04月15日
-	 * 作者：杜明悦 功能：设置标题文本默认色
+	 * 修改时间：2016年04月15日 作者：杜明悦 功能：设置标题文本默认色
 	 *
 	 * @param titleTextDefaultColor 标题文本默认色
 	 */
