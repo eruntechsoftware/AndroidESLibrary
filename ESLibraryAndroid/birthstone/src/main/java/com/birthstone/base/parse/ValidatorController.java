@@ -20,6 +20,7 @@ public class ValidatorController implements IValidator, IControlSearcherHandler
 
 	public ValidatorController(IChildView childView)
 	{
+		this.result=true;
 		this.childView = childView;
 	}
 
@@ -27,11 +28,14 @@ public class ValidatorController implements IValidator, IControlSearcherHandler
 	{
 		try
 		{
-			List<IControlSearcherHandler> Controllist = new ArrayList<IControlSearcherHandler>();
-			Controllist.add(this);
-			new ControlSearcher(Controllist).search(childView);
-			Controllist.clear();
-			Controllist=null;
+			if (result)
+			{
+				List<IControlSearcherHandler> Controllist = new ArrayList<IControlSearcherHandler>();
+				Controllist.add(this);
+				new ControlSearcher(Controllist).search(childView);
+				Controllist.clear();
+				Controllist = null;
+			}
 		}
 		catch(Exception ex)
 		{
