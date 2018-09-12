@@ -7,9 +7,8 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-import android.text.Editable;
-import android.text.InputType;
-import android.text.TextWatcher;
+import android.text.*;
+import android.text.style.AbsoluteSizeSpan;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -41,6 +40,7 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
     protected Boolean mEmpty2Null = true;
     protected Boolean mached = true;
     protected Boolean isEmpty = true;
+    protected int hintTextSize=12;
     protected Activity mActivity;
     protected String mName;
     protected String mIsRequiredTooltip = "";
@@ -73,6 +73,7 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
             mIsRequired = a.getBoolean(R.styleable.ESTextBox_isRequired, false);
             mCollectSign = a.getString(R.styleable.ESTextBox_collectSign);
             mEmpty2Null = a.getBoolean(R.styleable.ESTextBox_empty2Null, true);
+			hintTextSize = a.getDimensionPixelOffset(R.styleable.ESTextBox_hintTextSize,12);
             this.addTextChangedListener(this);
             this.setOnFocusChangeListener(this);
             int value = a.getInt(R.styleable.ESTextBox_dataType, 0);
@@ -82,6 +83,12 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
 
             errorDrawable = this.getResources().getDrawable(R.mipmap.es_error);
             requiredDrawable = this.getResources().getDrawable(R.mipmap.es_required);
+
+			String hintStr = getHint().toString();
+			SpannableString spannableString =  new SpannableString(hintStr);
+			AbsoluteSizeSpan ass = new AbsoluteSizeSpan(hintTextSize, true);
+			spannableString.setSpan(ass, 0, spannableString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+			this.setHint(new SpannedString(spannableString));
         }
         catch (Exception ex)
         {

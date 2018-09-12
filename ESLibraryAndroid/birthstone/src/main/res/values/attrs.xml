@@ -184,6 +184,7 @@
 		<attr name="regularExpression"></attr>
 		<!--正则表达式校验错误提示-->
 		<attr name="regularTooltip"></attr>
+		<attr name="hintTextSize" format="dimension"></attr>
 	</declare-styleable>
 
 	<!--<declare-styleable name="ESTextBoxMobile">-->
