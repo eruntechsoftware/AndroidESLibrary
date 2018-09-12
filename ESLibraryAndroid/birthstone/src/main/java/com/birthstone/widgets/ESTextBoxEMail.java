@@ -13,8 +13,8 @@ public class ESTextBoxEMail extends ESTextBox {
     public ESTextBoxEMail(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.mRegularExpression = DataTypeExpression.eMail();
-        this.mRegularTooltip = "请输入正确的邮箱地址";
+//        this.mRegularTooltip = "请输入正确的邮箱地址";
         this.setInputTypeWithDataType(DataType.EMail.ordinal());
-        this.setHint("eMail地址");
+//        this.setHint("eMail地址");
     }
 }

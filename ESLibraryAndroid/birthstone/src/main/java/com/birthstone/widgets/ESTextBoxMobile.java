@@ -15,8 +15,8 @@ public class ESTextBoxMobile extends ESTextBox {
         super(context, attrs);
         this.mDataType = DataType.Mobile;
         this.mRegularExpression = DataTypeExpression.mobile();
-        this.mRegularTooltip = "请输入正确的手机号";
+//        this.mRegularTooltip = "请输入正确的手机号";
         this.setInputTypeWithDataType(DataType.Mobile.ordinal());
-        this.setHint("大陆地区手机号");
+//        this.setHint("大陆地区手机号");
     }
 }
