@@ -6,4 +6,9 @@ public interface IValidatible {
 	 * @return 是否校验成功 
 	 * **/
 	Boolean dataValidator();
+
+	/**
+	 * 提示校验错误
+	 * **/
+	void hint();
 }

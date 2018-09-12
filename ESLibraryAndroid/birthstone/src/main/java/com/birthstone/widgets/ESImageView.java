@@ -142,4 +142,12 @@ public class ESImageView extends SimpleDraweeView implements IDataInitialize,ICo
 	{
 		return true;
 	}
+
+	/**
+	 * 提示校验错误
+	 * **/
+	public void hint()
+	{
+//		ToastHelper.toastShow(this.getContext(),getHint().toString());
+	}
 }

@@ -11,6 +11,7 @@ import com.birthstone.base.helper.InitializeHelper;
 import com.birthstone.core.helper.DataType;
 import com.birthstone.core.helper.DataTypeHelper;
 import com.birthstone.core.helper.StringToArray;
+import com.birthstone.core.helper.ToastHelper;
 import com.birthstone.core.interfaces.ICellTitleStyleRequire;
 import com.birthstone.core.interfaces.ICollectible;
 import com.birthstone.core.interfaces.IDataInitialize;
@@ -72,7 +73,15 @@ public class ESCheckBox extends android.widget.CheckBox implements ICollectible,
 	 * **/
 	public Boolean dataValidator()
 	{
-		return null;
+		return true;
+	}
+
+	/**
+	 * 提示校验错误
+	 * **/
+	public void hint()
+	{
+		ToastHelper.toastShow(this.getContext(), getHint().toString());
 	}
 
 	public LinkedList<String> getRequest()

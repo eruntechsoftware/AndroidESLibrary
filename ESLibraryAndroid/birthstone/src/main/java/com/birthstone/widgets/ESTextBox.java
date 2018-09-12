@@ -21,12 +21,7 @@ import com.birthstone.R;
 import com.birthstone.base.activity.Activity;
 import com.birthstone.base.event.OnTextBoxChangedListener;
 import com.birthstone.base.helper.InitializeHelper;
-import com.birthstone.core.helper.DataType;
-import com.birthstone.core.helper.DataTypeExpression;
-import com.birthstone.core.helper.DataTypeHelper;
-import com.birthstone.core.helper.DateTimeHelper;
-import com.birthstone.core.helper.StringToArray;
-import com.birthstone.core.helper.ValidatorHelper;
+import com.birthstone.core.helper.*;
 import com.birthstone.core.interfaces.ICellTitleStyleRequire;
 import com.birthstone.core.interfaces.ICollectible;
 import com.birthstone.core.interfaces.IDataInitialize;
@@ -208,6 +203,14 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
             Log.e("Validator", ex.getMessage());
         }
         return true;
+    }
+
+    /**
+     * 提示校验错误
+     * **/
+    public void hint()
+    {
+        ToastHelper.toastShow(this.getContext(),getHint().toString());
     }
 
     private void shakeAnimation ()

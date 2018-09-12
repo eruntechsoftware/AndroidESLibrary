@@ -13,6 +13,7 @@ import com.birthstone.base.activity.Activity;
 import com.birthstone.base.helper.InitializeHelper;
 import com.birthstone.core.helper.DataType;
 import com.birthstone.core.helper.StringToArray;
+import com.birthstone.core.helper.ToastHelper;
 import com.birthstone.core.helper.ValidatorHelper;
 import com.birthstone.core.interfaces.ICellTitleStyleRequire;
 import com.birthstone.core.interfaces.ICollectible;
@@ -154,6 +155,14 @@ public class ESTimePicker extends android.widget.TimePicker implements ICollecti
 			Log.v("Validator", ex.getMessage());
 		}
 		return true;
+	}
+
+	/**
+	 * 提示校验错误
+	 * **/
+	public void hint()
+	{
+//		ToastHelper.toastShow(this.getContext(), getHint().toString());
 	}
 
 	protected void onDraw(Canvas canvas)
