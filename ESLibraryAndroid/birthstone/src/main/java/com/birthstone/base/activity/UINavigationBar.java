@@ -2,12 +2,14 @@ package com.birthstone.base.activity;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.birthstone.R;
+import com.birthstone.core.helper.File;
 
 
 /**
@@ -32,6 +34,19 @@ public class UINavigationBar extends RelativeLayout implements View.OnClickListe
 	 * 标题栏左边按钮文字
 	 */
 	private TextView mTvLeft;
+	/**
+	 * 标题栏文字标题
+	 */
+	private TextView mTvTilte;
+	/**
+	 * 标题栏的背景颜色
+	 */
+	public static int BACKGROUND_COLOR = 0;
+
+	/**
+	 * 标题栏的左侧返回按钮
+	 */
+	public static int LEFT_IMAGE_RESID = 0;
 
 	/**
 	 * 标题文字颜色
@@ -46,14 +61,8 @@ public class UINavigationBar extends RelativeLayout implements View.OnClickListe
 	 * 右边保存按钮的文字大小
 	 */
 	private int left_button_textSize;
-	/**
-	 * 标题栏文字标题
-	 */
-	private TextView mTvTilte;
-	/**
-	 * 标题栏的背景颜色
-	 */
-	public static int BACKGROUND_COLOR = 0;
+
+
 	/**
 	 * 标题栏的显示的标题文字
 	 */
@@ -123,23 +132,36 @@ public class UINavigationBar extends RelativeLayout implements View.OnClickListe
 
 	private void initView(Context context)
 	{
+		if(BACKGROUND_COLOR==0)
+		{
+			BACKGROUND_COLOR = R.color.es_white;
+		}
 		if(BUTTON_TEXT_COLOR==0)
 		{
-			BUTTON_TEXT_COLOR = getResources().getColor(R.color.es_white);
+			BUTTON_TEXT_COLOR = R.color.es_white;
 		}
 		if(TITLE_TEXT_COLOR==0)
 		{
-			TITLE_TEXT_COLOR = getResources().getColor(R.color.es_white);
+			TITLE_TEXT_COLOR = R.color.es_white;
 		}
+		if(LEFT_IMAGE_RESID==0)
+		{
+			LEFT_IMAGE_RESID=R.drawable.es_icon_back;
+		}
+
 		/**加载布局文件*/
 		View.inflate(context, R.layout.es_actionbar, this);
 		mRelativeLayout = (RelativeLayout) findViewById(R.id.relay_background);
 		mIvLeft = (ImageView) findViewById(R.id.iv_left);
+		mIvLeft.setImageResource( LEFT_IMAGE_RESID);
 		mIvLeft.setOnClickListener(this);
 		mTvLeft = (TextView) findViewById(R.id.tv_left);
+		mTvLeft.setTextColor(getResources().getColor(BUTTON_TEXT_COLOR));
 		mTvLeft.setOnClickListener(this);
 		mTvTilte = (TextView) findViewById(R.id.tv_title);
+		mTvTilte.setTextColor(getResources().getColor(TITLE_TEXT_COLOR));
 		mTvRight = (TextView) findViewById(R.id.tv_right);
+		mTvRight.setTextColor(getResources().getColor(BUTTON_TEXT_COLOR));
 		mTvRight.setOnClickListener(this);
 		mIvRight = (ImageView) findViewById(R.id.iv_right);
 		mIvRight.setOnClickListener(this);
@@ -174,6 +196,21 @@ public class UINavigationBar extends RelativeLayout implements View.OnClickListe
 		BACKGROUND_COLOR = color;
 	}
 
+	public static void setTitleTextColor(int rescolor)
+	{
+		TITLE_TEXT_COLOR=rescolor;
+	}
+
+	public static void setButtonTextColor(int rescolor)
+	{
+		BUTTON_TEXT_COLOR=rescolor;
+	}
+
+	public static void setLeftImageResid(int leftImageResid)
+	{
+		LEFT_IMAGE_RESID=leftImageResid;
+	}
+
 	/**
 	 * 设置标题栏文本
 	 * @param tilte 标题文本
@@ -198,8 +235,7 @@ public class UINavigationBar extends RelativeLayout implements View.OnClickListe
 	 * **/
 	public void setTitle(String tilte, int rescolor)
 	{
-		TITLE_TEXT_COLOR = getResources().getColor(rescolor);
-		mTvTilte.setTextColor(rescolor);
+		mTvTilte.setTextColor(getResources().getColor(rescolor));
 		if (TextUtils.isEmpty(tilte))
 		{
 			mTvTilte.setVisibility(GONE);
@@ -238,8 +274,7 @@ public class UINavigationBar extends RelativeLayout implements View.OnClickListe
 	 * **/
 	public void setLeftText(String text, int rescolor)
 	{
-		BUTTON_TEXT_COLOR = rescolor;
-		mTvLeft.setTextColor(BUTTON_TEXT_COLOR);
+		mTvLeft.setTextColor(getResources().getColor(rescolor));
 		if (TextUtils.isEmpty(text))
 		{
 			mTvLeft.setVisibility(GONE);
@@ -264,7 +299,6 @@ public class UINavigationBar extends RelativeLayout implements View.OnClickListe
 	 * **/
 	public void setRightText(String text)
 	{
-		mTvRight.setTextColor(BUTTON_TEXT_COLOR);
 		if (TextUtils.isEmpty(text))
 		{
 			mTvRight.setVisibility(GONE);
@@ -284,8 +318,7 @@ public class UINavigationBar extends RelativeLayout implements View.OnClickListe
 	 * **/
 	public void setRightText(String text, int rescolor)
 	{
-		BUTTON_TEXT_COLOR = rescolor;
-		mTvRight.setTextColor(BUTTON_TEXT_COLOR);
+		mTvRight.setTextColor(getResources().getColor(rescolor));
 		if (TextUtils.isEmpty(text))
 		{
 			mTvRight.setVisibility(GONE);
@@ -300,11 +333,11 @@ public class UINavigationBar extends RelativeLayout implements View.OnClickListe
 	/**
 	 * 设置右侧文字颜色
 	 *
-	 * @param textColor
+	 * @param rescolor res下的资源id
 	 */
-	public void setRightTextColor(int textColor)
+	public void setRightTextColor(int rescolor)
 	{
-		mTvRight.setTextColor(textColor);
+		mTvRight.setTextColor(getResources().getColor(rescolor));
 	}
 
 	/**

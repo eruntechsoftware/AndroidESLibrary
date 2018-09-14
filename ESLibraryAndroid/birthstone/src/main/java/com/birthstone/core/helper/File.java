@@ -1,11 +1,13 @@
 package com.birthstone.core.helper;
 
+import android.content.ContentResolver;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.PixelFormat;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Environment;
 import android.util.Log;
 
@@ -59,6 +61,19 @@ public class File
             Log.e("SDCard", ex.getMessage());
         }
         return null;
+    }
+
+    /**
+     * 获取资源文件的Uri地址
+     * @param context 上下文
+     * @param res 资源路径id
+     * **/
+    public static String getURIofResource(Context context,int res)
+    {
+        return ContentResolver.SCHEME_ANDROID_RESOURCE + "://"
+        + context.getResources().getResourcePackageName(res) + "/"
+        + context.getResources().getResourceTypeName(res) + "/"
+        + context.getResources().getResourceEntryName(res);
     }
 
     /**
