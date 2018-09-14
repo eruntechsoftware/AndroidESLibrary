@@ -1,6 +1,7 @@
 package com.birthstone.base.activity;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
@@ -144,6 +145,24 @@ public class UINavigationBar extends RelativeLayout implements View.OnClickListe
 		mIvRight.setOnClickListener(this);
 		line = findViewById(R.id.line);
 		mRelativeLayout.setBackgroundColor(BACKGROUND_COLOR);
+	}
+
+	@Override
+	public void setBackgroundColor(int backgroundColor)
+	{
+		if(mRelativeLayout!=null)
+		{
+			mRelativeLayout.setBackgroundColor(backgroundColor);
+		}
+	}
+
+	@Override
+	public void setBackground(Drawable background)
+	{
+		if(mRelativeLayout!=null)
+		{
+			mRelativeLayout.setBackground(background);
+		}
 	}
 
 	/*
