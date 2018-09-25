@@ -450,7 +450,7 @@ public class ESMaterialTabHost extends LinearLayout implements View.OnClickListe
 	 **/
 	public void removeAllViews()
 	{
-		super.removeAllViews();
+		titleLayout.removeAllViews();
 		if (fragmentList != null && fragmentList.size() > 0)
 		{
 			fragmentList.clear();
@@ -461,7 +461,7 @@ public class ESMaterialTabHost extends LinearLayout implements View.OnClickListe
 			materialTabList.clear();
 		}
 
-		adapter = null;
+		adapter.notifyDataSetChanged();
 	}
 
 	/**

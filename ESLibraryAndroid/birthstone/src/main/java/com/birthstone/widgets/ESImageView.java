@@ -60,11 +60,11 @@ public class ESImageView extends SimpleDraweeView implements IDataInitialize,ICo
 	/**
 	 * 设置图片显示的web路径
 	 *
-	 * @param url 图片url，可以只设置图片后段地址
+	 * @param uri 图片uri
 	 */
-	public void setImageURI(String url)
+	public void setImageURI(Uri uri)
 	{
-		this.setImageURI(Uri.parse(url));
+		this.setImageURI(uri);
 	}
 
 	public void dataInitialize ()

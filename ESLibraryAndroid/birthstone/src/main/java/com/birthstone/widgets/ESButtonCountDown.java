@@ -32,6 +32,7 @@ public class ESButtonCountDown extends ESButton implements OnClickingListener
 			this.setOnClickingListener(this);
 			TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ESButtonCountDown);
 			mMessage = a.getString(R.styleable.ESButtonCountDown_message);
+//			if(mMessage)
 		}
 		catch(Exception ex)
 		{
@@ -45,7 +46,7 @@ public class ESButtonCountDown extends ESButton implements OnClickingListener
 		ESButtonCountDown.this.setEnabled(false);
 		if(mSign==null && mSign.equals(""))
 		{
-			ToastHelper.toastShow(ESButtonCountDown.this.getContext(),"请设置按钮采集属性（sign）");
+			ToastHelper.toastShow(ESButtonCountDown.this.getContext(),"请设置按钮采集属性（sign='keyword'）");
 			this.setEnabled(true);
 			return true;
 		}
@@ -55,7 +56,7 @@ public class ESButtonCountDown extends ESButton implements OnClickingListener
 			DataCollection params = activity.collect(mSign);
 			if(params==null || params.size()==0)
 			{
-				new ESMessageBox(ESButtonCountDown.this.getContext(),"验证码","请设置验证码文本框采集属性（collectSign）").show();
+				new ESMessageBox(ESButtonCountDown.this.getContext(),"验证码","请设置验证码文本框采集属性（collectSign='ForKeyword'）").show();
 				ESButtonCountDown.this.setEnabled(true);
 				return true;
 			}
@@ -63,7 +64,7 @@ public class ESButtonCountDown extends ESButton implements OnClickingListener
 			{
 				if(params.getFirst().getStringValue().trim().equals(""))
 				{
-					new ESMessageBox(ESButtonCountDown.this.getContext(),"验证码","手机号、身份证号不能为空").show();
+					new ESMessageBox(ESButtonCountDown.this.getContext(),"验证码",mMessage).show();
 					ESButtonCountDown.this.setEnabled(true);
 					return true;
 				}
