@@ -107,12 +107,20 @@ public class Data implements Cloneable, Serializable
         {
             result = Boolean.valueOf(false);
         }
-        else
-        {
-            result = Boolean.valueOf(Boolean.parseBoolean(this.mValue.toString()));
-        }
 
         return result;
+    }
+
+    public void setBooleanValue (boolean value)
+    {
+        if (value)
+        {
+            mValue = 1;
+        }
+        else
+        {
+            mValue = 0;
+        }
     }
 
     public void setValue (Object value)

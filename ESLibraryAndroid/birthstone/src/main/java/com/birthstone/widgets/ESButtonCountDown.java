@@ -70,12 +70,20 @@ public class ESButtonCountDown extends ESButton implements OnClickingListener
 				}
 				else
 				{
-					//开始执行倒计时
-					new Thread(new MyCountDownTimer()).start();
+					startCountDown();
 				}
 			}
 		}
 		return false;
+	}
+
+	/**
+	 * 开始倒计时
+	 * **/
+	public void startCountDown()
+	{
+		//开始执行倒计时
+		new Thread(new MyCountDownTimer()).start();
 	}
 
 
