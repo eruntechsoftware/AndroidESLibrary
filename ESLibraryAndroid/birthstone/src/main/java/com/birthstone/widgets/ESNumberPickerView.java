@@ -104,6 +104,8 @@ public class ESNumberPickerView extends LinearLayout implements ICollectible, IV
 		btn_num_add.setImageResource(addResourceId);
 		btn_num_minus.setImageResource(subResourceId);
 
+		mCollectSign = typedArray.getString(R.styleable.ESNumberPickerView_collectSign);
+
 		//最大值
 		maxValue = typedArray.getInteger(R.styleable.ESNumberPickerView_maxValue, 100);
 
