@@ -231,6 +231,6 @@
         <attr name="textSize" format="float"></attr>
         <attr name="editable" format="boolean"></attr>
         <attr name="maxValue" format="integer"></attr>
-        <attr name="collectSign" format="string"></attr>
+        <attr name="collectSign"></attr>
     </declare-styleable>
 </resources>
