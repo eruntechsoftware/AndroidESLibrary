@@ -114,10 +114,10 @@ public class ESNumberPickerView extends LinearLayout implements ICollectible, IV
 		//		//+和-文本的宽度 geDiemension返回float getDimensionPixelSize四舍五入+  getDimensionPixeloffset四舍五入-
 		//		int buttonWidth = typedArray.getDimensionPixelSize(R.styleable.NumberButton_buttonWidth, -1);
 		//		//+和-文本的颜色
-		int textColor = typedArray.getColor(R.styleable.ESNumberPickerView_textColor, 0xff000000);
+		int textColor = typedArray.getColor(R.styleable.ESNumberPickerView_numberTextColor, 0xff000000);
 		mNumText.setTextColor(textColor);
 		//		//+和-文本的字体大小
-		int textSize = typedArray.getDimensionPixelSize(R.styleable.ESNumberPickerView_textSize, 12);
+		int textSize = typedArray.getDimensionPixelSize(R.styleable.ESNumberPickerView_numberTextSize, 12);
 		mNumText.setTextSize(textSize);
 		//		// 中间显示数量的按钮宽度
 		//		final int editextWidth = typedArray.getDimensionPixelSize(R.styleable.NumberButton_editextWidth, -1);
