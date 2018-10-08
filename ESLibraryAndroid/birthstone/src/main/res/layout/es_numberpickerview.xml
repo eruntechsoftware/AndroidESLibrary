@@ -8,12 +8,13 @@
             android:id="@+id/btn_num_minus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="10dp"
+            android:layout_marginRight="5dp"
+            android:padding="1dp"
             android:src="@mipmap/btn_minus_nor" />
 
     <com.birthstone.widgets.ESTextBoxNumber
             android:id="@+id/number"
-            android:layout_width="30dp"
+            android:layout_width="40dp"
             android:layout_height="match_parent"
             android:gravity="center"
             android:background="@null"
@@ -24,8 +25,8 @@
             android:id="@+id/btn_num_add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingRight="10dp"
-            android:padding="10dp"
+            android:layout_marginLeft="5dp"
+            android:padding="1dp"
             android:src="@mipmap/btn_add" />
 
 </LinearLayout>

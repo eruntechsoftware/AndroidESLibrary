@@ -56,7 +56,7 @@ public class ESNumberPickerView extends LinearLayout implements ICollectible, IV
 	private ESTextBoxNumber mNumText;
 
 	//默认输入框最小值
-	private int minDefaultNum = 0;
+	private int minValue = 1;
 
 	private ImageView btn_num_add, btn_num_minus;
 
@@ -107,7 +107,9 @@ public class ESNumberPickerView extends LinearLayout implements ICollectible, IV
 		mCollectSign = typedArray.getString(R.styleable.ESNumberPickerView_collectSign);
 
 		//最大值
-		maxValue = typedArray.getInteger(R.styleable.ESNumberPickerView_maxValue, 100);
+		maxValue = typedArray.getInteger(R.styleable.ESNumberPickerView_maxValue, 99);
+		//最小值
+		minValue = typedArray.getInteger(R.styleable.ESNumberPickerView_minValue, 1);
 
 		//中间的编辑框是否可编辑
 		boolean aBoolean = typedArray.getBoolean(R.styleable.ESNumberPickerView_editable, true);
@@ -158,8 +160,8 @@ public class ESNumberPickerView extends LinearLayout implements ICollectible, IV
 		catch(NumberFormatException e)
 		{
 			e.printStackTrace();
-			mNumText.setText(String.valueOf(minDefaultNum));
-			return minDefaultNum;
+			mNumText.setText(String.valueOf(minValue));
+			return minValue;
 		}
 	}
 
@@ -182,19 +184,19 @@ public class ESNumberPickerView extends LinearLayout implements ICollectible, IV
 
 	public int getMinDefaultNum()
 	{
-		return minDefaultNum;
+		return minValue;
 	}
 
 	/**
 	 * 设置默认的最小值
 	 *
-	 * @param minDefaultNum
+	 * @param minValue
 	 *
 	 * @return
 	 */
-	public ESNumberPickerView setMinDefaultNum(int minDefaultNum)
+	public ESNumberPickerView setMinDefaultNum(int minValue)
 	{
-		this.minDefaultNum = minDefaultNum;
+		this.minValue = minValue;
 		return this;
 	}
 
@@ -223,7 +225,7 @@ public class ESNumberPickerView extends LinearLayout implements ICollectible, IV
 	 */
 	public ESNumberPickerView setCurrentNum(int currentNum)
 	{
-		if(currentNum > minDefaultNum)
+		if(currentNum > minValue)
 		{
 			if(currentNum <= currentInventory)
 			{
@@ -240,7 +242,7 @@ public class ESNumberPickerView extends LinearLayout implements ICollectible, IV
 		}
 		else
 		{
-			mNumText.setText(String.valueOf(minDefaultNum));
+			mNumText.setText(String.valueOf(minValue));
 		}
 		return this;
 	}
@@ -258,13 +260,13 @@ public class ESNumberPickerView extends LinearLayout implements ICollectible, IV
 		int numText = getNumText();
 		if(widgetId == R.id.btn_num_minus)
 		{
-			if(numText > minDefaultNum + 1)
+			if(numText > minValue + 1)
 			{
 				mNumText.setText(String.valueOf(numText - 1));
 			}
 			else
 			{
-				mNumText.setText(String.valueOf(minDefaultNum));
+				mNumText.setText(String.valueOf(minValue));
 				//小于警戒值
 				warningForMinInput();
 				Log.d("NumberPicker", "减少已经到达极限");
@@ -317,9 +319,9 @@ public class ESNumberPickerView extends LinearLayout implements ICollectible, IV
 			if(!TextUtils.isEmpty(inputText))
 			{
 				int inputNum = Integer.parseInt(inputText);
-				if(inputNum < minDefaultNum)
+				if(inputNum < minValue)
 				{
-					mNumText.setText(String.valueOf(minDefaultNum));
+					mNumText.setText(String.valueOf(minValue));
 					// 小于警戒值
 					warningForMinInput();
 				}
@@ -365,7 +367,7 @@ public class ESNumberPickerView extends LinearLayout implements ICollectible, IV
 	private void warningForMinInput()
 	{
 		if(onClickInputListener != null)
-			onClickInputListener.onWarningMinInput(minDefaultNum);
+			onClickInputListener.onWarningMinInput(minValue);
 	}
 
 	/**
