@@ -56,9 +56,9 @@ public class ViewInjectUtils
                         field.setAccessible(true);
                         field.set(activity, resView);
                     }
-                    catch (Exception e)
+                    catch (Exception ex)
                     {
-                        e.printStackTrace();
+                        Log.e("BindView",ex.getMessage());
                     }
 
                 }
@@ -84,9 +84,9 @@ public class ViewInjectUtils
             {
                 activity.setContentView(contentViewLayoutId);
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                e.printStackTrace();
+                Log.e("ContentView",ex.getMessage());
             }
         }
     }
@@ -131,9 +131,9 @@ public class ViewInjectUtils
                         field.setAccessible(true);
                         field.set(fragmentActivity, resView);
                     }
-                    catch (Exception e)
+                    catch (Exception ex)
                     {
-                        e.printStackTrace();
+                        Log.e("BindView",ex.getMessage());
                     }
 
                 }
@@ -163,9 +163,9 @@ public class ViewInjectUtils
 //				method.setAccessible(true);
 //				method.invoke(fragmentActivity, contentViewLayoutId);
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                e.printStackTrace();
+                Log.e("ContentView",ex.getMessage());
             }
         }
     }
@@ -214,9 +214,9 @@ public class ViewInjectUtils
                         field.setAccessible(true);
                         field.set(fragment, resView);
                     }
-                    catch (Exception e)
+                    catch (Exception ex)
                     {
-                        e.printStackTrace();
+                        Log.e("BindView",ex.getMessage());
                     }
 
                 }
@@ -245,9 +245,9 @@ public class ViewInjectUtils
 //				method.setAccessible(true);
 //				method.invoke(fragment, contentViewLayoutId);
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                e.printStackTrace();
+                Log.e("ContentView",ex.getMessage());
             }
         }
     }
@@ -292,9 +292,9 @@ public class ViewInjectUtils
                         field.set(convertView, resView);
                         viewHolder.addView(resView);
                     }
-                    catch (Exception e)
+                    catch (Exception ex)
                     {
-                        e.printStackTrace();
+                        Log.e("BindView",ex.getMessage());
                     }
                 }
             }
