@@ -193,17 +193,23 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
     {
         try
         {
-            if (mIsRequired && getText().toString().trim().equals(""))
+            if (mIsRequired)
             {
-                isEmpty = true;
-                return false;
+                if(TextUtils.isEmpty(getText().toString().trim()))
+                {
+                    isEmpty = true;
+                }
+                else
+                {
+                    mached = ValidatorHelper.isMached(mRegularExpression, getText().toString());
+                    if (!mached)
+                    {
+                        invalidate();
+                    }
+                }
+                return mached;
             }
-            mached = ValidatorHelper.isMached(mRegularExpression, getText().toString());
-            if (!mached)
-            {
-                invalidate();
-            }
-            return mached;
+            return true;
         }
         catch (Exception ex)
         {
