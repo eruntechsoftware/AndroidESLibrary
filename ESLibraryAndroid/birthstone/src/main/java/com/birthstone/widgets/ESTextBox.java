@@ -112,35 +112,45 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
         switch (value)
         {
             case 0:
-//                ESTextBox.this.setInputType(InputType.TYPE_TEXT_FLAG_MULTI_LINE);
+                ESTextBox.this.setInputType(InputType.TYPE_TEXT_FLAG_MULTI_LINE);
+                mRegularExpression="";
                 break;
             case 1:
                 ESTextBox.this.setInputType(InputType.TYPE_CLASS_NUMBER);
+                mRegularExpression = DataTypeExpression.integer();
                 break;
             case 2:
                 ESTextBox.this.setInputType(InputType.TYPE_CLASS_NUMBER);
+                mRegularExpression = DataTypeExpression.numeric();
                 break;
             case 3:
                 ESTextBox.this.setInputType(InputType.TYPE_CLASS_DATETIME);
+                mRegularExpression = DataTypeExpression.date();
                 break;
             case 4:
                 ESTextBox.this.setInputType(InputType.TYPE_CLASS_DATETIME);
+                mRegularExpression = DataTypeExpression.dateTime();
                 break;
             case 5:
                 ESTextBox.this.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+                mRegularExpression = DataTypeExpression.eMail();
                 break;
             case 6:
                 ESTextBox.this.setInputType(InputType.TYPE_TEXT_VARIATION_URI);
+                mRegularExpression = DataTypeExpression.URL();
                 break;
             case 7:
                 ESTextBox.this.setSingleLine(true);
                 ESTextBox.this.setInputType(InputType.TYPE_CLASS_TEXT);
+                mRegularExpression = DataTypeExpression.idCard();
                 break;
             case 8:
                 ESTextBox.this.setInputType(InputType.TYPE_CLASS_PHONE);
+                mRegularExpression = DataTypeExpression.phone();
                 break;
             case 9:
                 ESTextBox.this.setInputType(InputType.TYPE_CLASS_PHONE);
+                mRegularExpression = DataTypeExpression.mobile();
                 break;
         }
     }
@@ -201,15 +211,15 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
                 }
                 return false;
             }
-            else
+            if(!TextUtils.isEmpty(mRegularExpression.trim()))
             {
                 mached = ValidatorHelper.isMached(mRegularExpression, getText().toString());
                 if(!mached)
                 {
                     invalidate();
                 }
-                return mached;
             }
+            return mached;
         }
         catch (Exception ex)
         {
