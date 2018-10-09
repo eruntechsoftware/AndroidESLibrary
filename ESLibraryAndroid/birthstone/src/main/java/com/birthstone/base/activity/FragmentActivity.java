@@ -213,6 +213,10 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
     public void initalizeNavigationBar ()
     {
         View rootView = ((ViewGroup) this.findViewById(android.R.id.content)).getChildAt(0);
+        if(rootView==null)
+        {
+            rootView = getWindow().getDecorView().findViewById(android.R.id.content);
+        }
         if (rootView instanceof ViewGroup)
         {
             ViewGroup viewGroup = (ViewGroup) rootView;
