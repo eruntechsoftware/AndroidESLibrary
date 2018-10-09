@@ -74,114 +74,115 @@ public class Activity extends android.app.Activity implements IUINavigationBar, 
     @SuppressLint("NewApi")
     protected void onCreate (Bundle savedInstanceState)
     {
-        if (Build.VERSION.SDK_INT > 13)
+        try
         {
-            StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().detectDiskReads()
-                                               .detectDiskWrites()
-                                               .detectNetwork()
-                                               .penaltyLog()
-                                               .build());
-            StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder().penaltyLog()
-                                           .penaltyDeath()
-                                           .build());
-        }
-        super.onCreate(savedInstanceState);
-        ViewInjectUtils.inject(this);
-        initalizeNavigationBar();
-        DisplayMetrics metric = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(metric);
-        DENSITY = metric.density;
+            if(Build.VERSION.SDK_INT > 13)
+            {
+                StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().detectDiskReads().detectDiskWrites().detectNetwork().penaltyLog().build());
+                StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder().penaltyLog().penaltyDeath().build());
+            }
+            super.onCreate(savedInstanceState);
+            ViewInjectUtils.inject(this);
+            initalizeNavigationBar();
+            DisplayMetrics metric = new DisplayMetrics();
+            getWindowManager().getDefaultDisplay().getMetrics(metric);
+            DENSITY = metric.density;
 
-        this.getFragment();
-        Intent intent = getIntent();
-        if (intent != null)
+            this.getFragment();
+            Intent intent = getIntent();
+            if(intent != null)
+            {
+                mShowBtnBack = intent.getBooleanExtra("ShowBtnBack", false);
+                if(mShowBtnBack)
+                {
+                    mUINavigationBar.setLeftButtonVisibility(View.VISIBLE);
+                }
+
+                String activityType = intent.getStringExtra("ActivityType");
+                mTransferParams = (ArrayList<Data>) intent.getSerializableExtra("Parameter");// intent.getStringExtra("Parameter");
+
+                if(activityType != null && activityType.equals("Activity"))
+                {
+                    if(ActivityManager.last() instanceof Activity)
+                    {
+                        this.mParentActivity = (Activity) ActivityManager.last();
+                    }
+                    this.mIsParentStart = true;
+                    if(mIsParentStart)
+                    {
+                        if(this.mReceiveDataParams == null)
+                        {
+                            this.mReceiveDataParams = new DataCollection();
+                        }
+                        for(Data data : mTransferParams)
+                        {
+                            this.mReceiveDataParams.add(data);
+                        }
+                    }
+                }
+
+                if(activityType != null && activityType.equals("Fragment"))
+                {
+                    android.support.v4.app.Fragment fragment = FragmentManager.last();
+                    if(fragment instanceof Fragment)
+                    {
+                        this.mParentFragment = (Fragment) fragment;
+                    }
+                    this.mIsParentStart = true;
+                    if(mIsParentStart)
+                    {
+                        if(this.mReceiveDataParams == null)
+                        {
+                            this.mReceiveDataParams = new DataCollection();
+                        }
+                        for(Data data : mTransferParams)
+                        {
+                            this.mReceiveDataParams.add(data);
+                        }
+                    }
+                }
+
+                if(activityType != null && activityType.equals("FragmentActivity"))
+                {
+                    android.support.v4.app.FragmentActivity fragmentActivity = FragmentActivityManager.last();
+                    if(fragmentActivity instanceof FragmentActivity)
+                    {
+                        this.mParentFragmentActivity = (FragmentActivity) fragmentActivity;
+                    }
+                    this.mIsParentStart = true;
+                    if(mIsParentStart)
+                    {
+                        if(this.mReceiveDataParams == null)
+                        {
+                            this.mReceiveDataParams = new DataCollection();
+                        }
+                        for(Data data : mTransferParams)
+                        {
+                            this.mReceiveDataParams.add(data);
+                        }
+                    }
+                }
+
+                if(activityType != null && activityType.equals("Context"))
+                {
+                    if(this.mReceiveDataParams == null)
+                    {
+                        this.mReceiveDataParams = new DataCollection();
+                    }
+                    for(Data data : mTransferParams)
+                    {
+                        this.mReceiveDataParams.add(data);
+                    }
+                }
+            }
+            releaseParams = mReceiveDataParams;
+            initView();
+            intent = null;
+        }
+        catch(Exception ex)
         {
-            mShowBtnBack = intent.getBooleanExtra("ShowBtnBack",false);
-            if(mShowBtnBack)
-            {
-                mUINavigationBar.setLeftButtonVisibility(View.VISIBLE);
-            }
-
-            String activityType = intent.getStringExtra("ActivityType");
-            mTransferParams = (ArrayList<Data>) intent.getSerializableExtra("Parameter");// intent.getStringExtra("Parameter");
-
-            if (activityType != null && activityType.equals("Activity"))
-            {
-                if (ActivityManager.last() instanceof Activity)
-                {
-                    this.mParentActivity = (Activity) ActivityManager.last();
-                }
-                this.mIsParentStart = true;
-                if (mIsParentStart)
-                {
-                    if (this.mReceiveDataParams == null)
-                    {
-                        this.mReceiveDataParams = new DataCollection();
-                    }
-                    for(Data data:mTransferParams)
-                    {
-                        this.mReceiveDataParams.add(data);
-                    }
-                }
-            }
-
-            if (activityType != null && activityType.equals("Fragment"))
-            {
-                android.support.v4.app.Fragment fragment = FragmentManager.last();
-                if (fragment instanceof Fragment)
-                {
-                    this.mParentFragment = (Fragment) fragment;
-                }
-                this.mIsParentStart = true;
-                if (mIsParentStart)
-                {
-                    if (this.mReceiveDataParams == null)
-                    {
-                        this.mReceiveDataParams = new DataCollection();
-                    }
-                    for(Data data:mTransferParams)
-                    {
-                        this.mReceiveDataParams.add(data);
-                    }
-                }
-            }
-
-            if (activityType != null && activityType.equals("FragmentActivity"))
-            {
-                android.support.v4.app.FragmentActivity fragmentActivity = FragmentActivityManager.last();
-                if (fragmentActivity instanceof FragmentActivity)
-                {
-                    this.mParentFragmentActivity = (FragmentActivity) fragmentActivity;
-                }
-                this.mIsParentStart = true;
-                if (mIsParentStart)
-                {
-                    if (this.mReceiveDataParams == null)
-                    {
-                        this.mReceiveDataParams = new DataCollection();
-                    }
-                    for(Data data:mTransferParams)
-                    {
-                        this.mReceiveDataParams.add(data);
-                    }
-                }
-            }
-
-            if (activityType != null && activityType.equals("Context"))
-            {
-                if (this.mReceiveDataParams == null)
-                {
-                    this.mReceiveDataParams = new DataCollection();
-                }
-                for(Data data:mTransferParams)
-                {
-                    this.mReceiveDataParams.add(data);
-                }
-            }
+            Log.e("onCreate",ex.getMessage());
         }
-        releaseParams = mReceiveDataParams;
-        initView();
-        intent = null;
     }
 
     /**
