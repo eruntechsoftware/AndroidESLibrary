@@ -31,6 +31,8 @@ import com.birthstone.core.parse.DataCollection;
 
 import java.util.LinkedList;
 
+import static android.text.InputType.*;
+
 
 public class ESTextBox extends EditText implements ICollectible, IValidatible, IReleasable, ICellTitleStyleRequire, IDataInitialize, View.OnFocusChangeListener, TextWatcher
 {
@@ -112,7 +114,7 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
         switch (value)
         {
             case 0:
-                ESTextBox.this.setInputType(InputType.TYPE_TEXT_FLAG_MULTI_LINE);
+                ESTextBox.this.setInputType(TYPE_CLASS_TEXT |TYPE_TEXT_VARIATION_NORMAL);
                 mRegularExpression="";
                 break;
             case 1:
@@ -120,7 +122,7 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
                 mRegularExpression = DataTypeExpression.integer();
                 break;
             case 2:
-                ESTextBox.this.setInputType(InputType.TYPE_CLASS_NUMBER);
+                ESTextBox.this.setInputType(TYPE_CLASS_NUMBER |TYPE_NUMBER_FLAG_DECIMAL);
                 mRegularExpression = DataTypeExpression.numeric();
                 break;
             case 3:
@@ -132,16 +134,16 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
                 mRegularExpression = DataTypeExpression.dateTime();
                 break;
             case 5:
-                ESTextBox.this.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+                ESTextBox.this.setInputType(TYPE_CLASS_TEXT | TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
                 mRegularExpression = DataTypeExpression.eMail();
                 break;
             case 6:
-                ESTextBox.this.setInputType(InputType.TYPE_TEXT_VARIATION_URI);
+                ESTextBox.this.setInputType(TYPE_CLASS_TEXT |TYPE_TEXT_VARIATION_URI);
                 mRegularExpression = DataTypeExpression.URL();
                 break;
             case 7:
                 ESTextBox.this.setSingleLine(true);
-                ESTextBox.this.setInputType(InputType.TYPE_CLASS_TEXT);
+                ESTextBox.this.setInputType(TYPE_CLASS_TEXT);
                 mRegularExpression = DataTypeExpression.idCard();
                 break;
             case 8:
