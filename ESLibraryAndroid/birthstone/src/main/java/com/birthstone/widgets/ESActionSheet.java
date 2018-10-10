@@ -74,6 +74,7 @@ public class ESActionSheet extends PopupWindow implements View.OnClickListener
 		this.parent = parent;
 		setParams();
 		this.itemName = itemName;
+		this.itemValue = itemValue;
 		if(this.itemName != null && this.itemName.length > 0)
 		{
 			createMenu();
@@ -218,9 +219,9 @@ public class ESActionSheet extends PopupWindow implements View.OnClickListener
 				//设置view的ID
 				btnItem.setId(i);
 				btnItem.setText(itemName[i]);
-				if(itemValue.length > i)
+				if(itemValue!=null && itemValue.length>i)
 				{
-					btnItem.setTag(itemValue[i]);
+					btnItem.setText(itemValue[i]);
 				}
 				//设置字体样式
 				btnItem.setTextColor(Color.BLUE);
