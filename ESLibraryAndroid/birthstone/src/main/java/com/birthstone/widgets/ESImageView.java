@@ -28,13 +28,16 @@ public class ESImageView extends SimpleDraweeView implements IDataInitialize,ICo
 	protected Activity mActivity;
 	protected String mName;
 	protected String murl;
+	protected int srcid;
 	public static String IMAGE_URL_HEAD = "";
 
 	public ESImageView(Context context, AttributeSet attrs)
 	{
 		super(context, attrs);
-		TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ESTextBox);
-		mCollectSign = a.getString(R.styleable.ESTextBox_collectSign);
+		TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ESImageView);
+		mCollectSign = a.getString(R.styleable.ESImageView_collectSign);
+		srcid = a.getResourceId(R.styleable.ESImageView_srcid,0);
+		setImageResource(srcid);
 		a.recycle();
 	}
 

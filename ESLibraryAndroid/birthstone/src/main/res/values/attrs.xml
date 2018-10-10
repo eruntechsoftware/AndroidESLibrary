@@ -234,4 +234,9 @@
         <attr name="minValue" format="integer"></attr>
         <attr name="collectSign"></attr>
     </declare-styleable>
+
+    <declare-styleable name="ESImageView">
+        <attr name="srcid" format="reference"></attr>
+        <attr name="collectSign"></attr>
+    </declare-styleable>
 </resources>

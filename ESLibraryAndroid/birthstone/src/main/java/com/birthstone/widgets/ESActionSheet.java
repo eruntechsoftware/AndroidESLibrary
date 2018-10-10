@@ -344,17 +344,11 @@ public class ESActionSheet extends PopupWindow implements View.OnClickListener
 		if(v.getId() == R.id.dialog_rootView)
 		{
 			dismiss();
+			return;
 		}
-		if(itemName!=null || dataTable!=null)
+		if(onActionSheetClickListener != null)
 		{
-			if(v.getId() < itemName.length || v.getId() < dataTable.size())
-			{
-				dismiss();
-				if(onActionSheetClickListener != null)
-				{
-					onActionSheetClickListener.onClick((Button) v);
-				}
-			}
+			onActionSheetClickListener.onClick((Button) v);
 		}
 	}
 
