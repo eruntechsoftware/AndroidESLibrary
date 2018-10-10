@@ -1,5 +1,6 @@
 package com.birthstone.core.helper;
 
+import android.text.TextUtils;
 import android.util.Log;
 
 import java.util.regex.Matcher;
@@ -32,7 +33,7 @@ public class ValidatorHelper
 		if(datatype == DataType.Numeric)
 		{
 			err = "请输入小数或整数类型";
-			expression = "^\\s*-?\\s*\\d+(.\\d+)?\\s*$";
+			expression = "^(([0-9]+\\\\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\\\\.[0-9]+)|([0-9]*[1-9][0-9]*))$";
 		}
 		if(datatype == DataType.Date)
 		{
@@ -73,26 +74,19 @@ public class ValidatorHelper
 
 	/**
 	 * 校验输入的正则表达式和输入值
-	 * @param Expression 正则表达式
+	 * @param expression 正则表达式
 	 * @param value 输入值
 	 * @return 是否合法
 	 */
-	public static Boolean isMached(String Expression, String value)
+	public static Boolean isMached(String expression, String value)
 	{
 		try
 		{
-			if(Expression == "") { return true; }
-			Pattern p = Pattern.compile(Expression);
+			if(TextUtils.isEmpty(expression)) { return true; }
+			Pattern p = Pattern.compile(expression);
 			Matcher m = p.matcher(value);
-			if(value != null)
-			{
-				if(!m.matches()) { return false; }
-			}
-			else
-			{
-				return true;
-			}
-			return true;
+			boolean b = m.matches();
+			return b;
 		}
 		catch(Exception ex)
 		{
