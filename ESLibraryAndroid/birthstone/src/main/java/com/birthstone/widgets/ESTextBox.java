@@ -114,7 +114,7 @@ public class ESTextBox extends EditText implements ICollectible, IValidatible, I
         switch (value)
         {
             case 0:
-                ESTextBox.this.setInputType(TYPE_CLASS_TEXT |TYPE_TEXT_VARIATION_NORMAL);
+//                ESTextBox.this.setInputType(TYPE_CLASS_TEXT |TYPE_TEXT_VARIATION_NORMAL);
                 mRegularExpression="";
                 break;
             case 1:

@@ -342,12 +342,16 @@ public class ESActionSheet extends PopupWindow implements View.OnClickListener
 	@SuppressLint("ResourceType")
 	public void onClick(View v)
 	{
-
-		if(v.getId() != R.id.dialog_rootView || v.getId()!=-10000)
+		if(v instanceof LinearLayout)
+		{
+			dismiss();
+			return;
+		}
+		if(v.getId() != -10000)
 		{
 			if(onActionSheetClickListener != null)
 			{
-				onActionSheetClickListener.onItemClick((Button) v);
+				onActionSheetClickListener.onItemClick ((Button) v);
 			}
 		}
 		dismiss();
