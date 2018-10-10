@@ -222,7 +222,7 @@ public class ESActionSheet extends PopupWindow implements View.OnClickListener
 				btnItem.setText(itemName[i]);
 				if(itemValue!=null && itemValue.length>i)
 				{
-					btnItem.setText(itemValue[i]);
+					btnItem.setTag(itemValue[i]);
 				}
 				//设置字体样式
 				btnItem.setTextColor(Color.BLUE);
