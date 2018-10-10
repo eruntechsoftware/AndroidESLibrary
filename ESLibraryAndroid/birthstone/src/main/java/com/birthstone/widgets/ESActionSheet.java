@@ -164,6 +164,7 @@ public class ESActionSheet extends PopupWindow implements View.OnClickListener
 				{
 					//设置字体样式
 					btnItem.setTextColor(Color.RED);
+					btnItem.setTag(-10000);
 					btnItem.setBackground(context.getResources().getDrawable(R.drawable.es_actionsheet_background_selector));
 				}
 				else
@@ -250,6 +251,7 @@ public class ESActionSheet extends PopupWindow implements View.OnClickListener
 				{
 					//设置字体样式
 					btnItem.setTextColor(Color.RED);
+					btnItem.setTag(-10000);
 					btnItem.setBackground(context.getResources().getDrawable(R.drawable.es_actionsheet_background_selector));
 				}
 				else
@@ -341,11 +343,12 @@ public class ESActionSheet extends PopupWindow implements View.OnClickListener
 	public void onClick(View v)
 	{
 
-		if(v.getId() == R.id.dialog_rootView)
+		if(v.getId() == R.id.dialog_rootView || v.getId()==-10000)
 		{
 			dismiss();
 			return;
 		}
+
 		if(onActionSheetClickListener != null)
 		{
 			onActionSheetClickListener.onClick((Button) v);
