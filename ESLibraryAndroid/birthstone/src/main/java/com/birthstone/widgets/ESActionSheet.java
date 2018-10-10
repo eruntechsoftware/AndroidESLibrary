@@ -342,7 +342,7 @@ public class ESActionSheet extends PopupWindow implements View.OnClickListener
 	@SuppressLint("ResourceType")
 	public void onClick(View v)
 	{
-		if(v instanceof LinearLayout)
+		if(v instanceof RelativeLayout)
 		{
 			dismiss();
 			return;
