@@ -216,7 +216,7 @@ public class ESPhotoAddView extends ESGridView implements AdapterView.OnItemClic
 	}
 
 	@Override
-	public void onClick(Button view)
+	public void onItemClick(Button view)
 	{
 		requestPermission();
 		switch(view.getId())

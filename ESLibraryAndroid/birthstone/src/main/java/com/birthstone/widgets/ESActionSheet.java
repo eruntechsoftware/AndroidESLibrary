@@ -347,7 +347,7 @@ public class ESActionSheet extends PopupWindow implements View.OnClickListener
 		{
 			if(onActionSheetClickListener != null)
 			{
-				onActionSheetClickListener.onClick((Button) v);
+				onActionSheetClickListener.onItemClick((Button) v);
 			}
 		}
 		dismiss();
@@ -442,6 +442,6 @@ public class ESActionSheet extends PopupWindow implements View.OnClickListener
 	public interface OnActionSheetClickListener
 	{
 
-		public void onClick(Button view);
+		public void onItemClick(Button view);
 	}
 }
