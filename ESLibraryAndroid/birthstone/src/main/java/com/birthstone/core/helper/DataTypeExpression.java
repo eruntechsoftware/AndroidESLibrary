@@ -16,7 +16,7 @@ public class DataTypeExpression {
      返回Numeric类型正则表达式
      */
     public static String numeric(){
-        return "^[0-9].[0-9]{1,4}$|^[0-9]$";
+        return "^//d+(//.//d+)?$";
     }
 
     /**
