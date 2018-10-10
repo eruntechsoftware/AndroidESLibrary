@@ -28,42 +28,32 @@ public class ValidatorHelper
 		if(datatype == DataType.Integer)
 		{
 			err = "请输入整数类型";
-			expression = "^\\s*-?\\s*\\d+\\s*$";
+			expression = DataTypeExpression.integer();
 		}
 		if(datatype == DataType.Numeric)
 		{
 			err = "请输入小数或整数类型";
-			expression = "^(([0-9]+\\\\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\\\\.[0-9]+)|([0-9]*[1-9][0-9]*))$";
+			expression = DataTypeExpression.numeric();
 		}
 		if(datatype == DataType.Date)
 		{
 			err = "请输入yyyy-MM-dd格式的日期";
-			expression = "^\\s*\\d{2,4}-\\d{1,2}-\\d{1,2}(\\s*\\d{1,2}:\\d{1,2}(:\\d{1,2})?)?\\s*$";
+			expression = DataTypeExpression.date();
 		}
 		if(datatype == DataType.DateTime)
 		{
 			err = "请输入yyyy-MM-dd HH:mm:ss格式的时间";
-			expression = "^\\s*\\d{2,4}-\\d{1,2}-\\d{1,2}(\\s*\\d{1,2}:\\d{1,2}(:\\d{1,2})?)?\\s*$";
-		}
-		if(datatype == DataType.DateTime)
-		{
-			err = "请输入yyyy-MM-dd HH:mm:ss格式的时间";
-			expression = "^\\s*\\d{2,4}-\\d{1,2}-\\d{1,2}(\\s*\\d{1,2}:\\d{1,2}(:\\d{1,2})?)?\\s*$";
+			expression = DataTypeExpression.date();
 		}
 		if(datatype == DataType.EMail)
 		{
 			err = "请输入正确的电子邮箱格式";
-			expression = "^[0-9A-Za-z]{1,50}";
-		}
-		if(datatype == DataType.EMail)
-		{
-			err = "请输入正确的电子邮箱格式";
-			expression = "^[0-9A-Za-z]{1,50}";
+			expression = DataTypeExpression.eMail();
 		}
 		if(datatype == DataType.URL)
 		{
 			err = "请输入正确的URL地址";
-			expression = "^[0-9A-Za-z]{1,50}";
+			expression = DataTypeExpression.URL();
 		}
 		if(isMached(expression, value))
 		{
@@ -100,7 +90,7 @@ public class ValidatorHelper
 	 */
 	public static Boolean isNumber(String value)
 	{
-		return isMached("^[A-Za-z0-9]+$", value);
+		return isMached(DataTypeExpression.numeric(), value);
 	}
 
 	/**
