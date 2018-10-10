@@ -56,16 +56,7 @@ public class ESImageView extends SimpleDraweeView implements IDataInitialize,ICo
 		String imageUrl = IMAGE_URL_HEAD + urlBody;
 		this.setImageURI(Uri.parse(imageUrl));
 	}
-
-	/**
-	 * 设置图片显示的web路径
-	 *
-	 * @param uri 图片uri
-	 */
-	public void setImageURI(Uri uri)
-	{
-		this.setImageURI(uri);
-	}
+	
 
 	/**
 	 * 设置图片显示的路径
