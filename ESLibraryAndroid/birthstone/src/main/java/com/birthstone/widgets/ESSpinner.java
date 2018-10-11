@@ -183,8 +183,8 @@ public class ESSpinner extends android.widget.Spinner implements ICollectible, I
 					break;
 				case 2:
 					swap(msg.arg1, msg.arg2);
-					ArrayAdapter<Object> adapter = new ArrayAdapter<Object>(mActivity, android.R.layout.simple_spinner_item, displayArray);
-					adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+					ArrayAdapter<Object> adapter = new ArrayAdapter<Object>(mActivity, R.layout.es_simple_spinner_item, displayArray);
+					adapter.setDropDownViewResource(R.layout.es_simple_spinner_item);
 					setAdapter(adapter);
 					break;
 				}
@@ -340,6 +340,7 @@ public class ESSpinner extends android.widget.Spinner implements ICollectible, I
 	{
 		mSelectValue = valueArray[arg2];
 		mSelectText = displayArray[arg2].toString();
+
 		if(ESSpinner.this.mOnItemSelectIndexChangeListener != null)
 		{
 			ESSpinner.this.mOnItemSelectIndexChangeListener.selectIndexChange(mSelectValue.toString());
@@ -411,7 +412,6 @@ public class ESSpinner extends android.widget.Spinner implements ICollectible, I
 				for(int i = 0; i < size; i++)
 				{
 					String operno = valueArray[i].toString().toLowerCase().trim();
-					Log.v("operno", operno);
 					if(operno.equals(curoperno.toLowerCase().trim()))
 					{
 						String tempValue = "";

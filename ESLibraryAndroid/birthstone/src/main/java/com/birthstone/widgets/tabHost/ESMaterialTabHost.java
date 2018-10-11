@@ -59,7 +59,7 @@ public class ESMaterialTabHost extends LinearLayout implements View.OnClickListe
 	/**
 	 * 标题布局高度
 	 **/
-	private float mLayoutTitleHeight = 50f;
+	private float mLayoutTitleHeight = 40f;
 	/**
 	 * 游标宽度
 	 **/
@@ -100,7 +100,7 @@ public class ESMaterialTabHost extends LinearLayout implements View.OnClickListe
 	/**
 	 * 分割线颜色
 	 * **/
-	private int mDividerColor = Color.rgb(229,229,229);
+	private int mDividerColor = Color.rgb(245,245,245);
 
 	/**
 	 * 字体是否加粗
