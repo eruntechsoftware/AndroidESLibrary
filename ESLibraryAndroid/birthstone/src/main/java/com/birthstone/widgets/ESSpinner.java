@@ -7,32 +7,29 @@ import android.os.Looper;
 import android.os.Message;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-
+import android.widget.BaseAdapter;
 import com.birthstone.R;
 import com.birthstone.base.activity.Activity;
 import com.birthstone.base.event.OnItemSelectIndexChangeListener;
 import com.birthstone.base.helper.InitializeHelper;
 import com.birthstone.base.parse.CollectController;
-import com.birthstone.core.sqlite.SQLiteDatabase;
 import com.birthstone.core.helper.DataType;
 import com.birthstone.core.helper.StringToArray;
-import com.birthstone.core.interfaces.ICellTitleStyleRequire;
-import com.birthstone.core.interfaces.ICollectible;
-import com.birthstone.core.interfaces.IDataInitialize;
-import com.birthstone.core.interfaces.IDataQuery;
-import com.birthstone.core.interfaces.IReleasable;
+import com.birthstone.core.interfaces.*;
 import com.birthstone.core.parse.Data;
 import com.birthstone.core.parse.DataCollection;
 import com.birthstone.core.parse.DataTable;
+import com.birthstone.core.sqlite.SQLiteDatabase;
 
 import java.util.LinkedList;
-import java.util.List;
 
 
-public class ESSpinner extends android.widget.Spinner implements ICollectible, IReleasable, IDataInitialize, ICellTitleStyleRequire, IDataQuery,AdapterView.OnItemSelectedListener
+public class ESSpinner extends android.widget.Spinner implements ICollectible, IReleasable, IDataInitialize, ICellTitleStyleRequire, IDataQuery, AdapterView.OnItemSelectedListener
 {
 	protected DataType mDataType;
 	protected Boolean mIsRequired;
@@ -54,11 +51,13 @@ public class ESSpinner extends android.widget.Spinner implements ICollectible, I
 
 	protected String mDefaultValue = "";
 	protected String mNameSpace = "http://schemas.android.com/res/com.birthStone.widgets";
-	protected Object[] displayArray = null;
-	protected Object[] valueArray = null;
+	protected DataTable dataTable = new DataTable();
+	//	protected Object[] displayArray = null;
+	//	protected Object[] valueArray = null;
+	protected SpinnerItemAdapter adapter;
 	protected OnItemSelectIndexChangeListener mOnItemSelectIndexChangeListener;
 
-	public ESSpinner(Context context, AttributeSet attrs )
+	public ESSpinner(Context context, AttributeSet attrs)
 	{
 		super(context, attrs);
 		try
@@ -72,7 +71,7 @@ public class ESSpinner extends android.widget.Spinner implements ICollectible, I
 
 			mBindValue = a.getString(R.styleable.ESSpinner_bindValue);
 			mSql = a.getString(R.styleable.ESSpinner_sql);
-			mIsRequired = a.getBoolean(R.styleable.ESSpinner_isRequired,false);
+			mIsRequired = a.getBoolean(R.styleable.ESSpinner_isRequired, false);
 			mCollectSign = a.getString(R.styleable.ESSpinner_collectSign);
 			mSign = a.getString(R.styleable.ESSpinner_sign);
 			if(mSign == null)
@@ -112,7 +111,7 @@ public class ESSpinner extends android.widget.Spinner implements ICollectible, I
 
 	/**
 	 * 执行sql查询并绑定到适配器
-	 * */
+	 */
 	public void query()
 	{
 		try
@@ -130,7 +129,7 @@ public class ESSpinner extends android.widget.Spinner implements ICollectible, I
 
 	/**
 	 * 绑定数据源
-	 * **/
+	 **/
 	public void bind()
 	{
 		try
@@ -146,9 +145,9 @@ public class ESSpinner extends android.widget.Spinner implements ICollectible, I
 	}
 
 	/**
-	 *数据源绑定处理线程
+	 * 数据源绑定处理线程
 	 */
-	class BindDataThread  extends Thread
+	class BindDataThread extends Thread
 	{
 		public void run()
 		{
@@ -168,7 +167,7 @@ public class ESSpinner extends android.widget.Spinner implements ICollectible, I
 
 	/**
 	 * 接收数据，并将数据绑定到适配器
-	 * **/
+	 **/
 	Handler handler = new Handler()
 	{
 		@Override
@@ -176,17 +175,14 @@ public class ESSpinner extends android.widget.Spinner implements ICollectible, I
 		{
 			try
 			{
-				switch(msg.what)
+				if(adapter == null)
 				{
-				case 1:
-					bindDataToAdapter();
-					break;
-				case 2:
-					swap(msg.arg1, msg.arg2);
-					ArrayAdapter<Object> adapter = new ArrayAdapter<Object>(mActivity, R.layout.es_simple_spinner_item, displayArray);
-					adapter.setDropDownViewResource(R.layout.es_simple_spinner_item);
+					adapter = new SpinnerItemAdapter(mActivity, dataTable);
 					setAdapter(adapter);
-					break;
+				}
+				else
+				{
+					adapter.notifyDataSetChanged();
 				}
 			}
 			catch(Exception ex)
@@ -196,44 +192,27 @@ public class ESSpinner extends android.widget.Spinner implements ICollectible, I
 		}
 	};
 
-	/**
-	 * 绑定数据到适配器
-	 * */
-	private void bindDataToAdapter()
-	{
-		SQLiteDatabase sqlDb = new SQLiteDatabase(mActivity.getApplicationContext());
-		mDataTable = sqlDb.executeTable(mSql, new CollectController(mActivity, mSign).collect(), mCharCode);
-		sqlDb.close();
-		dataTableToArray();
-		if(displayArray != null)
-		{
-			ArrayAdapter<Object> adapter = new ArrayAdapter<Object>(mActivity, android.R.layout.simple_spinner_item, displayArray);
-			adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-			setAdapter(adapter);
-			ESSpinner.this.setVisibility(View.VISIBLE);
-		}
-	}
+
 
 	/**
 	 * 绑定指定数据到适配器
-	 * @param displayArray 显示数据数组
-	 * @param valueArray 绑定数据数组
-	 * @param activity 屏幕对象
-	 * **/
-	public void bind(String[] displayArray, String[] valueArray, Activity activity)
+	 *
+	 * @param dataTable   绑定数据数组
+	 * @param activity     屏幕对象
+	 **/
+	public void bind(DataTable dataTable, Activity activity)
 	{
 		try
 		{
-			this.displayArray = displayArray;
-			this.valueArray = valueArray;
-			ArrayAdapter<String> adapter = new ArrayAdapter<String>(activity, android.R.layout.simple_spinner_item, displayArray);
-			adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-			this.setAdapter(adapter);
-			if(valueArray != null)
+			if(dataTable!=null)
 			{
-				mSelectValue = valueArray[0];
-				mSelectText = displayArray[0];
+				adapter = new SpinnerItemAdapter(activity, dataTable);
+				this.setAdapter(adapter);
+
+				mSelectValue = dataTable.getFirst().get(mBindValue).getStringValue();
+				mSelectText = dataTable.getFirst().get(mDisplayValue).getStringValue();
 			}
+
 			// this.setPrompt("ѡ");
 		}
 		catch(Exception ex)
@@ -244,8 +223,9 @@ public class ESSpinner extends android.widget.Spinner implements ICollectible, I
 
 	/**
 	 * 获取采集标签名称
+	 *
 	 * @return 标签名称
-	 * */
+	 */
 	public LinkedList<String> getRequest()
 	{
 		LinkedList<String> list = new LinkedList<String>();
@@ -254,9 +234,10 @@ public class ESSpinner extends android.widget.Spinner implements ICollectible, I
 	}
 
 	/**
-	 * 发布数据到UIView 
-	 *@param dataName 数据名称 
-	 *@param data 数据对象 
+	 * 发布数据到UIView
+	 *
+	 * @param dataName 数据名称
+	 * @param data     数据对象
 	 **/
 	public void release(String dataName, Data data)
 	{
@@ -271,8 +252,9 @@ public class ESSpinner extends android.widget.Spinner implements ICollectible, I
 
 	/**
 	 * 数据收集
+	 *
 	 * @return 数据集合对象
-	 * **/
+	 **/
 	public DataCollection collect()
 	{
 		DataCollection datas = new DataCollection();
@@ -292,54 +274,10 @@ public class ESSpinner extends android.widget.Spinner implements ICollectible, I
 		return StringToArray.stringConvertArray(this.mCollectSign);
 	}
 
-	/**
-	 * 将DataTable数据源转换为Array对象
-	 * */
-	private void dataTableToArray()
-	{
-		List<String>displayList = new LinkedList<>();
-		List<String>valueList = new LinkedList<>();
-		int size = 0;
-		try
-		{
-			if(mDataTable != null)
-			{
-				size = mDataTable.size();
-				for(int index = 0; index < size; index++)
-				{
-					displayList.add(mDataTable.get(index).get(mDisplayValue).getValue().toString());
-					valueList.add(mDataTable.get(index).get(mBindValue).getValue().toString());
-				}
-				if(displayList.size() > 0)
-				{
-					displayArray = displayList.toArray();
-					valueArray = valueList.toArray();
-					if(!mDefaultValue.equals(""))
-					{
-						setDefaultText(mDefaultValue);
-					}
-				}
-				if(mIsEmpty)
-				{
-					mSelectValue = "";
-				}
-				else if(valueArray != null && !mIsEmpty)
-				{
-					mSelectValue = valueArray[0].toString();
-					mSelectText = displayArray[0].toString();
-				}
-			}
-		}
-		catch(Exception ex)
-		{
-			Log.v("spinnertoArray", ex.getMessage());
-		}
-	}
-
 	public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3)
 	{
-		mSelectValue = valueArray[arg2];
-		mSelectText = displayArray[arg2].toString();
+		mSelectValue = dataTable.get(arg2).get(mBindValue).getStringValue();
+		mSelectText = dataTable.get(arg2).get(mDisplayValue).getStringValue();
 
 		if(ESSpinner.this.mOnItemSelectIndexChangeListener != null)
 		{
@@ -402,56 +340,27 @@ public class ESSpinner extends android.widget.Spinner implements ICollectible, I
 		}
 	}
 
-	private boolean setDefaultText(String curoperno)
+	private boolean setDefaultText(String mDefaultValue)
 	{
-		while(true)
+
+		if(dataTable != null)
 		{
-			if(valueArray != null)
+			int size = dataTable.size();
+			for(int i = 0; i < size; i++)
 			{
-				int size = valueArray.length;
-				for(int i = 0; i < size; i++)
+				if(dataTable.get(i).get(mDisplayValue).getStringValue().equals(mDefaultValue) || dataTable.get(i).get(mDisplayValue).getStringValue().equals(mDefaultValue))
 				{
-					String operno = valueArray[i].toString().toLowerCase().trim();
-					if(operno.equals(curoperno.toLowerCase().trim()))
-					{
-						String tempValue = "";
-						String tempText = "";
-						tempValue = valueArray[i].toString();
-						tempText = displayArray[i].toString();
-						valueArray[i] = valueArray[0];
-						displayArray[i] = displayArray[0];
-						valueArray[0] = tempValue;
-						displayArray[0] = tempText;
-						return true;
-					}
-					if(i + 1 == size) { return false; }
+					dataTable.addFirst(dataTable.get(i));
+					return true;
 				}
 			}
 		}
-	}
-
-	private boolean swap(int index, int index2)
-	{
-		while(true)
-		{
-			if(displayArray != null)
-			{
-				String tempValue = "";
-				String tempText = "";
-				tempValue = valueArray[index].toString();
-				tempText = displayArray[index].toString();
-				valueArray[index] = valueArray[index2];
-				displayArray[index] = displayArray[index2];
-				valueArray[index2] = tempValue;
-				displayArray[index2] = tempText;
-				return true;
-			}
-		}
+		return false;
 	}
 
 	/**
 	 * 设置选中下标
-	 * */
+	 */
 	public void setSelection(int position)
 	{
 		startSwap(0, position);
@@ -459,11 +368,12 @@ public class ESSpinner extends android.widget.Spinner implements ICollectible, I
 
 	/**
 	 * 获取选中值
+	 *
 	 * @return 选中值
-	 * */
+	 */
 	public String getSelectValue()
 	{
-		if(mSelectValue!=null)
+		if(mSelectValue != null)
 		{
 			return mSelectValue.toString();
 		}
@@ -472,8 +382,9 @@ public class ESSpinner extends android.widget.Spinner implements ICollectible, I
 
 	/**
 	 * 设置选中值
+	 *
 	 * @param selectValue 选中值
-	 * */
+	 */
 	public void setSelectValue(Object selectValue)
 	{
 		this.mSelectValue = selectValue;
@@ -481,8 +392,9 @@ public class ESSpinner extends android.widget.Spinner implements ICollectible, I
 
 	/**
 	 * 获取选中文本
+	 *
 	 * @return 选中文本
-	 * */
+	 */
 	public String getSelectText()
 	{
 		return mSelectText;
@@ -490,8 +402,9 @@ public class ESSpinner extends android.widget.Spinner implements ICollectible, I
 
 	/**
 	 * 设置选中文本
+	 *
 	 * @param selectText 选中文本
-	 * */
+	 */
 	public void setSelectText(Object selectText)
 	{
 		this.mSelectText = mSelectText;
@@ -513,25 +426,25 @@ public class ESSpinner extends android.widget.Spinner implements ICollectible, I
 	}
 
 
-	public Object[] getDisplayArray()
-	{
-		return displayArray;
-	}
-
-	public void setDisplayArray(String[] displayArray)
-	{
-		this.displayArray = displayArray;
-	}
-
-	public Object[] getValueArray()
-	{
-		return valueArray;
-	}
-
-	public void setValueArray(String[] valueArray)
-	{
-		this.valueArray = valueArray;
-	}
+	//	public Object[] getDisplayArray()
+	//	{
+	//		return displayArray;
+	//	}
+	//
+	//	public void setDisplayArray(String[] displayArray)
+	//	{
+	//		this.displayArray = displayArray;
+	//	}
+	//
+	//	public Object[] getValueArray()
+	//	{
+	//		return valueArray;
+	//	}
+	//
+	//	public void setValueArray(String[] valueArray)
+	//	{
+	//		this.valueArray = valueArray;
+	//	}
 
 	public String getDefaultValue()
 	{
@@ -540,22 +453,26 @@ public class ESSpinner extends android.widget.Spinner implements ICollectible, I
 
 
 	@Override
-	public void setDataType(DataType dataType) {
+	public void setDataType(DataType dataType)
+	{
 		this.mDataType = dataType;
 	}
 
 	@Override
-	public DataType getDataType() {
+	public DataType getDataType()
+	{
 		return mDataType;
 	}
 
 	@Override
-	public void setIsRequired(Boolean isRequired) {
+	public void setIsRequired(Boolean isRequired)
+	{
 		this.mIsRequired = isRequired;
 	}
 
 	@Override
-	public Boolean getIsRequired() {
+	public Boolean getIsRequired()
+	{
 		return mIsRequired;
 	}
 
@@ -570,7 +487,8 @@ public class ESSpinner extends android.widget.Spinner implements ICollectible, I
 	}
 
 	@Override
-	public Object getActivity() {
+	public Object getActivity()
+	{
 		return mActivity;
 	}
 
@@ -590,5 +508,52 @@ public class ESSpinner extends android.widget.Spinner implements ICollectible, I
 	public void setOnItemSelectIndexChangeListener(OnItemSelectIndexChangeListener onItemSelectIndexChangeListener)
 	{
 		this.mOnItemSelectIndexChangeListener = onItemSelectIndexChangeListener;
+	}
+
+	class SpinnerItemAdapter extends BaseAdapter
+	{
+		private DataTable dataTable;
+		private Context mContext;
+
+		public SpinnerItemAdapter(Context pContext, DataTable dataTable)
+		{
+			this.mContext = pContext;
+			this.dataTable = dataTable;
+		}
+
+		@Override
+		public int getCount()
+		{
+			return dataTable == null ? 0 : dataTable.size();
+		}
+
+		@Override
+		public Object getItem(int position)
+		{
+			return dataTable.get(position);
+		}
+
+		@Override
+		public long getItemId(int position)
+		{
+			return position;
+		}
+
+		/**
+		 * 下面是重要代码
+		 */
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent)
+		{
+			LayoutInflater _LayoutInflater = LayoutInflater.from(mContext);
+			DataCollection row = dataTable.get(position);
+			convertView = _LayoutInflater.inflate(R.layout.es_simple_spinner_item, null);
+			if(convertView != null)
+			{
+				//				TextView Tv1=(TextView)convertView.findViewById(R.id.text1);
+				//				Tv11.setText(mList.get(position).getPersonName());
+			}
+			return convertView;
+		}
 	}
 }

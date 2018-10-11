@@ -45,6 +45,12 @@ public class DataTable extends LinkedList<DataCollection> implements Serializabl
 		}
 	}
 
+	@Override
+	public void addFirst(DataCollection data)
+	{
+		super.addFirst(data);
+	}
+
 	/**
 	 * 获取某一列数据集合
 	 * @param columnName 列名
