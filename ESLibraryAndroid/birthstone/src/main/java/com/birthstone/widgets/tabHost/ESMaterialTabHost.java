@@ -178,7 +178,7 @@ public class ESMaterialTabHost extends LinearLayout implements View.OnClickListe
 		this.addView(cursor);
 
 		/**设置分割线布局方式(宽、高)**/
-		LinearLayout.LayoutParams dividerParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, Activity.px2dip(mContext, Activity.px2dip(mContext, 1)));
+		LinearLayout.LayoutParams dividerParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, Activity.px2dip(mContext, 1));
 		linearParams.gravity = Gravity.CENTER;
 		divider = new LinearLayout(context);
 		divider.setGravity(Gravity.CENTER);
