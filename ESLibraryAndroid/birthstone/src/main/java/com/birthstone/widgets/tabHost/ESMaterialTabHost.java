@@ -182,7 +182,7 @@ public class ESMaterialTabHost extends LinearLayout implements View.OnClickListe
 		linearParams.gravity = Gravity.CENTER;
 		divider = new LinearLayout(context);
 		divider.setGravity(Gravity.CENTER);
-		divider.setLayoutParams(linearParams);
+		divider.setLayoutParams(dividerParams);
 		divider.setOrientation(LinearLayout.HORIZONTAL);
 		divider.setBackgroundColor(mDividerColor);
 		this.addView(divider);
