@@ -34,6 +34,7 @@ public class ESMaterialTabHost extends LinearLayout implements View.OnClickListe
 	 **/
 	private LinearLayout titleLayout;
 	private LinearLayout cursor;
+	private LinearLayout divider;
 	private ViewPager viewPager;
 	//    private View parentView;
 
@@ -97,6 +98,16 @@ public class ESMaterialTabHost extends LinearLayout implements View.OnClickListe
 	private int mTabIndexerColor = Color.RED;
 
 	/**
+	 * 分割线颜色
+	 * **/
+	private int mDividerColor = Color.rgb(229,229,229);
+
+	/**
+	 * 字体是否加粗
+	 **/
+	private boolean mboldText = true;
+
+	/**
 	 * 上下文
 	 **/
 	private Context mContext;
@@ -115,9 +126,10 @@ public class ESMaterialTabHost extends LinearLayout implements View.OnClickListe
 	{
 		super(context, attrs);
 		mContext = context;
+		setBackgroundColor(Color.WHITE);
 		TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ESMaterialTabHost);
 		//tabhost高度
-		mLayoutTitleHeight = a.getDimension(R.styleable.ESMaterialTabHost_tabHost_height, 50);
+		mLayoutTitleHeight = a.getDimension(R.styleable.ESMaterialTabHost_tabHost_height, 40);
 		//标题栏背景色
 		mTabTitleBackgroundColor = a.getColor(R.styleable.ESMaterialTabHost_tabHost_BackgroundColor, Color.WHITE);
 		//tab默认状态时的颜色
@@ -128,6 +140,9 @@ public class ESMaterialTabHost extends LinearLayout implements View.OnClickListe
 		mTabTitleTextSize = a.getFloat(R.styleable.ESMaterialTabHost_tabHost_titleSize, 16);
 		//		a.getDimensionPixelSize(R.styleable.ESMaterialTabHost_tabHost_titleSize,
 		//								(int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 16, getResources().getDisplayMetrics()));
+
+		//字体是否加粗
+		mboldText = a.getBoolean(R.styleable.ESMaterialTabHost_tabHost_boldText, true);
 		//游标高度
 		mIndexerHeight = a.getDimension(R.styleable.ESMaterialTabHost_tabHost_indexerHeight, 4);
 		//游标颜色
@@ -151,6 +166,8 @@ public class ESMaterialTabHost extends LinearLayout implements View.OnClickListe
 		titleLayout.setBackgroundColor(mTabTitleBackgroundColor);
 		this.addView(titleLayout);
 
+
+
 		/**实例化游标**/
 		/**设置游标布局宽、高**/
 		mIndexerWidth = Activity.dip2px(mContext, 60);
@@ -159,6 +176,16 @@ public class ESMaterialTabHost extends LinearLayout implements View.OnClickListe
 		cursor.setBackgroundColor(mTabIndexerColor);
 		cursor.setLayoutParams(cursorLinearParams);
 		this.addView(cursor);
+
+		/**设置分割线布局方式(宽、高)**/
+		LinearLayout.LayoutParams dividerParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, Activity.px2dip(mContext, Activity.px2dip(mContext, 1)));
+		linearParams.gravity = Gravity.CENTER;
+		divider = new LinearLayout(context);
+		divider.setGravity(Gravity.CENTER);
+		divider.setLayoutParams(linearParams);
+		divider.setOrientation(LinearLayout.HORIZONTAL);
+		divider.setBackgroundColor(mDividerColor);
+		this.addView(divider);
 
 		/**实例化viewPager**/
 		viewPager = new ViewPager(context);
@@ -191,6 +218,7 @@ public class ESMaterialTabHost extends LinearLayout implements View.OnClickListe
 			ESMaterialTab subTab = new ESMaterialTab(mContext);
 			subTab.setTitleText(title);
 			subTab.setTitleSize(mTabTitleTextSize);
+			subTab.setFakeBoldText(mboldText);
 			materialTabList.add(subTab);
 			subTab.setIndex(materialTabList.size() - 1);
 			subTab.setOnClickListener(this);

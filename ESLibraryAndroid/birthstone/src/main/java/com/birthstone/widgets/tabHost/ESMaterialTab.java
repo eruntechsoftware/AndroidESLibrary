@@ -1,6 +1,7 @@
 package com.birthstone.widgets.tabHost;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -71,6 +72,19 @@ public class ESMaterialTab extends LinearLayout {
         {
             this.mTitle.setTextSize(titleSize);
         }
+    }
+
+    /**
+     * 设置标题是否加粗字体
+     * @param boldText 是否加粗字体
+     * **/
+    public void setFakeBoldText(boolean boldText)
+    {
+        if(mTitle!=null)
+        {
+            mTitle.getPaint().setFakeBoldText(boldText);
+        }
+
     }
 
     /**

@@ -214,6 +214,7 @@
         <attr name="tabHost_titleSize" format="float"></attr>
         <attr name="tabHost_indexerColor" format="color"></attr>
         <attr name="tabHost_indexerHeight" format="dimension"></attr>
+        <attr name="tabHost_boldText" format="boolean"></attr>
     </declare-styleable>
 
     <declare-styleable name="ESPhotoAddView">
