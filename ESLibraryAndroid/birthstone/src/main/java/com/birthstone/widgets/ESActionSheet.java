@@ -99,7 +99,8 @@ public class ESActionSheet extends PopupWindow implements View.OnClickListener
 		setParams();
 		this.dataTable = dataTable;
 		DataCollection cancelParams = new DataCollection();
-		cancelParams.add(new Data("cancel",cancel));
+		cancelParams.add(new Data(itemName,cancel));
+		cancelParams.add(new Data(itemValue,-10000));
 		this.dataTable.add(cancelParams);
 		if(this.dataTable != null && this.dataTable.size() > 0)
 		{
