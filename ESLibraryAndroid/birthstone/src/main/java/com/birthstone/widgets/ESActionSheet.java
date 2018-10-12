@@ -15,6 +15,8 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import com.birthstone.R;
+import com.birthstone.core.parse.Data;
+import com.birthstone.core.parse.DataCollection;
 import com.birthstone.core.parse.DataTable;
 
 /***
@@ -40,6 +42,7 @@ public class ESActionSheet extends PopupWindow implements View.OnClickListener
 	private String[] itemName;
 	private String[] itemValue;
 	private DataTable dataTable;
+	private String cancel;
 
 	/***
 	 * ActionSheet
@@ -87,13 +90,17 @@ public class ESActionSheet extends PopupWindow implements View.OnClickListener
 	 * @param context
 	 * @param dataTable 数据源
 	 */
-	public ESActionSheet(Context context, View parent, DataTable dataTable, String itemName, String itemValue)
+	public ESActionSheet(Context context, View parent, DataTable dataTable, String itemName, String itemValue,String cancel)
 	{
 		super(context);
 		this.context = context;
 		this.parent = parent;
+		this.cancel=cancel;
 		setParams();
 		this.dataTable = dataTable;
+		DataCollection cancelParams = new DataCollection();
+		cancelParams.add(new Data("cancel",cancel));
+		this.dataTable.add(cancelParams);
 		if(this.dataTable != null && this.dataTable.size() > 0)
 		{
 			createMenu(dataTable, itemName, itemValue);
@@ -128,6 +135,8 @@ public class ESActionSheet extends PopupWindow implements View.OnClickListener
 	{
 		if(table != null && table.size() > 0)
 		{
+			//设置button布局
+			ViewGroup.LayoutParams layoutParams;
 			int size = table.size();
 			for(int i = 0; i < size; i++)
 			{
@@ -145,7 +154,7 @@ public class ESActionSheet extends PopupWindow implements View.OnClickListener
 				btnItem.setOnClickListener(this);
 
 				//设置button布局
-				ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+				layoutParams = new ViewGroup.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 				btnItem.setLayoutParams(layoutParams);
 
 				if(i == 0 && i == size - 2)
