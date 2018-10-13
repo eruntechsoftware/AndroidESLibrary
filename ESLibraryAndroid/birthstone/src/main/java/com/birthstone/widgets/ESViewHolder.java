@@ -42,6 +42,25 @@ public class ESViewHolder extends RecyclerView.ViewHolder implements IChildView
     }
 
     /**
+     * 发布数据集到当前屏幕
+     * @param tag 发布数据时用以区分标识
+     * @param params 数据集
+     */
+    public void release (int tag,DataCollection params)
+    {
+        ReleaseHelper releaseHelper;
+        try
+        {
+            releaseHelper = new ReleaseHelper(params, this);
+            releaseHelper.release(null);
+        }
+        catch(Exception ex)
+        {
+            Log.e("", ex.getMessage());
+        }
+    }
+
+    /**
      *添加view到当前视图容器
      * @param view 视图
      * **/
