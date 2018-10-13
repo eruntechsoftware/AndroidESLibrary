@@ -206,6 +206,24 @@
         <attr name="collectSign"></attr>
     </declare-styleable>
 
+    <declare-styleable name="ESRelativeLayout">
+        <!--状态ViewID-->
+        <attr name="stateHiddenId"></attr>
+        <!--希望显示状态的值-->
+        <attr name="wantedStateValue"></attr>
+        <!--权限标记-->
+        <attr name="funcSign"></attr>
+    </declare-styleable>
+
+    <declare-styleable name="ESLinearLayout">
+        <!--状态ViewID-->
+        <attr name="stateHiddenId"></attr>
+        <!--希望显示状态的值-->
+        <attr name="wantedStateValue"></attr>
+        <!--权限标记-->
+        <attr name="funcSign"></attr>
+    </declare-styleable>
+
     <declare-styleable name="ESMaterialTabHost">
         <attr name="tabHost_height" format="dimension"></attr>
         <attr name="tabHost_BackgroundColor" format="color"></attr>
