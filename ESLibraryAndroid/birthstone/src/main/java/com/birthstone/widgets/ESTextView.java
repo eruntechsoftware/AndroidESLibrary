@@ -5,24 +5,25 @@ import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.util.Log;
 
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import com.birthstone.R;
 import com.birthstone.base.activity.Activity;
 import com.birthstone.base.helper.InitializeHelper;
-import com.birthstone.core.helper.DataType;
-import com.birthstone.core.helper.DataTypeHelper;
-import com.birthstone.core.helper.DateTimeHelper;
-import com.birthstone.core.helper.StringToArray;
+import com.birthstone.core.helper.*;
 import com.birthstone.core.interfaces.ICollectible;
 import com.birthstone.core.interfaces.IDataInitialize;
 import com.birthstone.core.interfaces.IReleasable;
+import com.birthstone.core.interfaces.IValidatible;
 import com.birthstone.core.parse.Data;
 import com.birthstone.core.parse.DataCollection;
 
 import java.util.LinkedList;
 
 
-public class ESTextView extends android.widget.TextView implements ICollectible, IReleasable, IDataInitialize
+public class ESTextView extends android.widget.TextView implements ICollectible, IValidatible, IReleasable, IDataInitialize
 {
+	protected Boolean mIsRequired;
 	protected DataType mDataType;
 	protected String mCollectSign;
 	protected Boolean mEmpty2Null = true;
@@ -36,6 +37,7 @@ public class ESTextView extends android.widget.TextView implements ICollectible,
 		try
 		{
 			TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ESTextView);
+			mIsRequired = a.getBoolean(R.styleable.ESTextView_isRequired, false);
 			mCollectSign = a.getString(R.styleable.ESTextView_collectSign);
 			mEmpty2Null = a.getBoolean(R.styleable.ESTextView_empty2Null,true);
 			this.mDataType = DataTypeHelper.valueOf(a.getInt(R.styleable.ESTextView_dataType,0));
@@ -176,4 +178,38 @@ public class ESTextView extends android.widget.TextView implements ICollectible,
 		this.mNameSpace = nameSpace;
 	}
 
+	public Boolean dataValidator ()
+	{
+		try
+		{
+			if (mIsRequired)
+			{
+				if(getText().toString().trim().equals(""))
+				{
+					return false;
+				}
+				return true;
+			}
+			return true;
+		}
+		catch (Exception ex)
+		{
+			Log.e("Validator", ex.getMessage());
+		}
+		return true;
+	}
+
+	/**
+	 * 提示校验错误
+	 * **/
+	public void hint()
+	{
+		ToastHelper.toastShow(this.getContext(),getHint().toString());
+	}
+
+	private void shakeAnimation ()
+	{
+		Animation shake = AnimationUtils.loadAnimation(this.getContext(), R.anim.es_shake);
+		this.startAnimation(shake);
+	}
 }
