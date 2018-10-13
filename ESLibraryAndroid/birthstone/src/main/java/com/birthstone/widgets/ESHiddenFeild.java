@@ -22,6 +22,5 @@ public class ESHiddenFeild extends ESTextBox
 	public void release (String dataName, Data data)
 	{
 		super.release(dataName, data);
-		ToastHelper.toastShow(this.getContext(),data.getIntValue());
 	}
 }
