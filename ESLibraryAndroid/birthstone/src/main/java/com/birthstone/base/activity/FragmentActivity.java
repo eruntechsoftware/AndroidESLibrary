@@ -356,6 +356,37 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
 	}
 
 	/**
+	 * 发布数据集到当前屏幕
+	 * @param tag 发布数据时用以区分标识
+	 * @param params 数据集
+	 */
+	public void release (int tag,DataCollection params)
+	{
+		releaseParams = (DataCollection) params.clone();
+		if (releaseParams != null && releaseParams.size() > 0)
+		{
+			ReleaseHelper releaseHelper;
+			try
+			{
+				//数据发布前处理方法
+				releaseing();
+
+				releaseHelper = new ReleaseHelper(releaseParams, this);
+				releaseHelper.release(null);
+
+				//数据发布完成后处理方法
+				released();
+
+				releaseParams.clear();
+			}
+			catch (Exception ex)
+			{
+				Log.e("", ex.getMessage());
+			}
+		}
+	}
+
+	/**
 	 * 收集当前Activity数据，并指定收集标签
 	 *
 	 * @param collectSign 收集标签
@@ -471,6 +502,28 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
 	public Boolean getIsParentStart()
 	{
 		return mIsParentStart;
+	}
+
+	/**
+	 * 获取当前Activity的父对象，有Activity、Fragment、FragmentActivity
+	 *
+	 * @return Activity、Fragment、FragmentActivity
+	 */
+	public IChildView getParentView ()
+	{
+		if(mParentActivity!=null)
+		{
+			return mParentActivity;
+		}
+		if(mParentFragment!=null)
+		{
+			return mParentFragment;
+		}
+		if(mParentFragmentActivity!=null)
+		{
+			return mParentFragmentActivity;
+		}
+		return null;
 	}
 
 	/**

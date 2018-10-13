@@ -112,7 +112,7 @@ public class ESNumberPickerView extends LinearLayout implements ICollectible, IV
 		minValue = typedArray.getInteger(R.styleable.ESNumberPickerView_minValue, 1);
 
 		//中间的编辑框是否可编辑
-		boolean aBoolean = typedArray.getBoolean(R.styleable.ESNumberPickerView_editable, true);
+		boolean editable = typedArray.getBoolean(R.styleable.ESNumberPickerView_editable, true);
 		//		//+和-文本的宽度 geDiemension返回float getDimensionPixelSize四舍五入+  getDimensionPixeloffset四舍五入-
 		//		int buttonWidth = typedArray.getDimensionPixelSize(R.styleable.NumberButton_buttonWidth, -1);
 		//		//+和-文本的颜色
@@ -121,13 +121,14 @@ public class ESNumberPickerView extends LinearLayout implements ICollectible, IV
 		//		//+和-文本的字体大小
 		int textSize = typedArray.getDimensionPixelSize(R.styleable.ESNumberPickerView_numberTextSize, 12);
 		mNumText.setTextSize(textSize);
+		mNumText.setText(minValue+"");
 		//		// 中间显示数量的按钮宽度
 		//		final int editextWidth = typedArray.getDimensionPixelSize(R.styleable.NumberButton_editextWidth, -1);
 		//必须调用这个，因为自定义View会随着Activity创建频繁的创建array
 		typedArray.recycle();
 
 		//设置输入框是否可用
-		setEditable(aBoolean);
+		setEditable(editable);
 	}
 
 	/**
