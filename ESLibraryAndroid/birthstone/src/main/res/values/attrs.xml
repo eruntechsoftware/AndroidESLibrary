@@ -258,4 +258,19 @@
         <attr name="srcid" format="reference"></attr>
         <attr name="collectSign"></attr>
     </declare-styleable>
+
+    <declare-styleable name="ESRatingBar">
+        <attr name="dataType"></attr>
+        <attr name="isRequired"></attr>
+        <attr name="empty2Null"></attr>
+        <attr name="collectSign"></attr>
+        <!--必填项错误提示-->
+        <attr name="isRequiredTooltip"></attr>
+        <!--正则表达式-->
+        <attr name="regularExpression"></attr>
+        <!--必填项提示-->
+        <attr name="hint"></attr>
+        <!--正则表达式校验错误提示-->
+        <attr name="regularTooltip"></attr>
+    </declare-styleable>
 </resources>
