@@ -269,7 +269,7 @@
         <!--正则表达式-->
         <attr name="regularExpression"></attr>
         <!--必填项提示-->
-        <attr name="hint"></attr>
+        <attr name="hint" format="string"></attr>
         <!--正则表达式校验错误提示-->
         <attr name="regularTooltip"></attr>
     </declare-styleable>

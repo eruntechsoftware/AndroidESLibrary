@@ -69,7 +69,7 @@ public class ESRatingBar extends RatingBar implements ICollectible, IValidatible
             mCollectSign = a.getString(R.styleable.ESRatingBar_collectSign);
             mEmpty2Null = a.getBoolean(R.styleable.ESRatingBar_empty2Null, true);
             hint = a.getString(R.styleable.ESRatingBar_hint);
-            
+
             int value = a.getInt(R.styleable.ESTextBox_dataType, 0);
             this.setDataType(DataTypeHelper.valueOf(value));
             a.recycle();
