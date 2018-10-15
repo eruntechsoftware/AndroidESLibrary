@@ -20,6 +20,7 @@ import com.birthstone.base.parse.*;
 import com.birthstone.core.interfaces.IChildView;
 import com.birthstone.core.parse.Data;
 import com.birthstone.core.parse.DataCollection;
+import com.gyf.barlibrary.ImmersionBar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -220,13 +221,14 @@ public class Fragment extends android.support.v4.app.Fragment implements IChildV
 
 			if(mUINavigationBar.getVisibility() == View.VISIBLE)
 			{
-				StatusBarUtil.setTranslucent(this.getActivity());
-				StatusBarUtil.setColorNoTranslucent(this.getActivity(), UINavigationBar.BACKGROUND_COLOR);
+				ImmersionBar.with(this).statusBarColor(UINavigationBar.BACKGROUND_COLOR).init();
+//				StatusBarUtil.setTranslucent(this.getActivity());
+//				StatusBarUtil.setColorNoTranslucent(this.getActivity(), UINavigationBar.BACKGROUND_COLOR);
 			}
 			if(mUINavigationBar.getVisibility() == View.GONE)
 			{
 				//				StatusBarUtil.setTranslucent(this);
-				StatusBarUtil.setColorNoTranslucent(this.getActivity(), Color.BLACK);
+//				StatusBarUtil.setColorNoTranslucent(this.getActivity(), Color.BLACK);
 			}
 
 			if(mRightButtonText != null)

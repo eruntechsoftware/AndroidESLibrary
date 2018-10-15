@@ -17,6 +17,7 @@ import com.birthstone.base.parse.*;
 import com.birthstone.core.interfaces.IChildView;
 import com.birthstone.core.parse.Data;
 import com.birthstone.core.parse.DataCollection;
+import com.gyf.barlibrary.ImmersionBar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -218,9 +219,10 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
 			mUINavigationBar.UINavigationBarDelegat = this;
 			viewGroup.addView(mUINavigationBar);
 
-			StatusBarUtil.setTranslucent(this);
-
-			StatusBarUtil.setColorNoTranslucent(this, UINavigationBar.BACKGROUND_COLOR);
+			ImmersionBar.with(this).statusBarColor(UINavigationBar.BACKGROUND_COLOR).init();
+//			StatusBarUtil.setTranslucent(this);
+//
+//			StatusBarUtil.setColorNoTranslucent(this, UINavigationBar.BACKGROUND_COLOR);
 
 			if(mRightButtonText != null)
 			{

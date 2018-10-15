@@ -32,6 +32,7 @@ import com.birthstone.base.parse.ValidatorController;
 import com.birthstone.core.interfaces.IChildView;
 import com.birthstone.core.parse.Data;
 import com.birthstone.core.parse.DataCollection;
+import com.gyf.barlibrary.ImmersionBar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -220,6 +221,7 @@ public class Activity extends android.app.Activity implements IUINavigationBar, 
      **/
     public void initalizeNavigationBar ()
     {
+
         View rootView = ((ViewGroup) this.findViewById(android.R.id.content)).getChildAt(0);
         if(rootView==null)
         {
@@ -235,13 +237,15 @@ public class Activity extends android.app.Activity implements IUINavigationBar, 
 
             if (mUINavigationBar.getVisibility() == View.VISIBLE)
             {
-                StatusBarUtil.setTranslucent(this);
-                StatusBarUtil.setColorNoTranslucent(this, UINavigationBar.BACKGROUND_COLOR);
+                ImmersionBar.with(this).statusBarColor(UINavigationBar.BACKGROUND_COLOR).init();
+//                StatusBarUtil.setTranslucent(this);
+//                StatusBarUtil.setColorNoTranslucent(this, UINavigationBar.BACKGROUND_COLOR);
             }
             if (mUINavigationBar.getVisibility() == View.GONE)
             {
+
 //				StatusBarUtil.setTranslucent(this);
-                StatusBarUtil.setColorNoTranslucent(this, Color.BLACK);
+//                StatusBarUtil.setColorNoTranslucent(this, Color.BLACK);
             }
 
             if (mRightButtonText != null)
