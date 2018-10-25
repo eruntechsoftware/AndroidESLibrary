@@ -254,7 +254,7 @@ public class UINavigationBar extends RelativeLayout implements View.OnClickListe
 	 * **/
 	public void setLeftText(String text)
 	{
-		mTvLeft.setTextColor(BUTTON_TEXT_COLOR);
+		mTvLeft.setTextColor(getResources().getColor(BUTTON_TEXT_COLOR));
 		if (TextUtils.isEmpty(text))
 		{
 			mTvLeft.setVisibility(GONE);
@@ -290,7 +290,7 @@ public class UINavigationBar extends RelativeLayout implements View.OnClickListe
 
 	public void setLeftTextColor(int textColor)
 	{
-		mTvLeft.setTextColor(textColor);
+		mTvLeft.setTextColor(getResources().getColor(textColor));
 	}
 
 	/**

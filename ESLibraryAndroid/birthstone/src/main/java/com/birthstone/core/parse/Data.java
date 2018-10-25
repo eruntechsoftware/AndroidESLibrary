@@ -98,6 +98,17 @@ public class Data implements Cloneable, Serializable
     public Boolean getBooleanValue ()
     {
         Boolean result = Boolean.valueOf(false);
+
+        if (this.mValue != null && this.mValue.toString().toUpperCase().equals("TRUE"))
+        {
+            result = Boolean.valueOf(true);
+        }
+
+        if (this.mValue != null && this.mValue.toString().toUpperCase().equals("False"))
+        {
+            result = Boolean.valueOf(false);
+        }
+
         if (this.mValue != null && this.mValue.toString().equals("1"))
         {
             result = Boolean.valueOf(true);

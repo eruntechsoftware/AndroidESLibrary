@@ -70,11 +70,17 @@ public class ESButtonCountDown extends ESButton implements OnClickingListener
 				}
 				else
 				{
-					startCountDown();
+					return false;
 				}
 			}
 		}
-		return false;
+	}
+
+	@Override
+	public void click()
+	{
+		super.click();
+		startCountDown();
 	}
 
 	/**

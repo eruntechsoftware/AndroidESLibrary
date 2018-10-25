@@ -33,10 +33,10 @@ public class ControlSearcher
                 IChildView iChildView = ((IChildView) view);
                 if (iChildView.getViews().size() > 0)
                 {
-                    int len = ((Activity) view).getViews().size();
+                    int len = iChildView.getViews().size();
                     for (int i = 0; i < len; i++)
                     {
-                        search(((Activity) view).getViews().get(i));
+                        search(iChildView.getViews().get(i));
                     }
                 }
             }

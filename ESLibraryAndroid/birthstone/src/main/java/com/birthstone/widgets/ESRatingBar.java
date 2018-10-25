@@ -30,7 +30,7 @@ import java.util.LinkedList;
 import static android.text.InputType.*;
 
 
-public class ESRatingBar extends RatingBar implements ICollectible, IValidatible, IReleasable, ICellTitleStyleRequire, IDataInitialize
+public class ESRatingBar extends ESRatingBarBase implements ICollectible, IValidatible, IReleasable, ICellTitleStyleRequire, IDataInitialize
 {
     protected DataType mDataType;
     protected Boolean mIsRequired;
@@ -46,11 +46,6 @@ public class ESRatingBar extends RatingBar implements ICollectible, IValidatible
     protected String hint;
     protected String mNameSpace = "http://schemas.android.com/res/com.birthstone.widgets";
 
-
-    public ESRatingBar(Context context)
-    {
-        super(context);
-    }
 
     public ESRatingBar(Context context, AttributeSet attrs)
     {
@@ -81,12 +76,6 @@ public class ESRatingBar extends RatingBar implements ICollectible, IValidatible
         }
 
     }
-
-    public ESRatingBar(Context context, AttributeSet attrs, int defStyle)
-    {
-        super(context, attrs, defStyle);
-    }
-
 
     public Boolean dataValidator ()
     {

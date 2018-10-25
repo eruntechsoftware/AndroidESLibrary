@@ -305,4 +305,76 @@ public class DateTimeHelper
 		}
 	}
 
+	/**
+	 * 在当前日期上按天数累积并返回日期
+	 *
+	 * @param datetime 日期
+	 * @param i 天
+	 */
+	public static String addDay(String datetime,int i)
+	{
+		Date date = null;
+		SimpleDateFormat sdf = new SimpleDateFormat(DateTimeHelper.DATE_FORMAT);
+		Calendar cal = Calendar.getInstance();
+		try
+		{
+			date = sdf.parse(datetime);
+			cal.setTime(date);//设置起时间
+			cal.add(Calendar.DATE,i);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return sdf.format(cal.getTime());
+	}
+
+	/**
+	 * 在当前日期上按天数累积并返回日期
+	 *
+	 * @param datetime 日期
+	 * @param i 月
+	 */
+	public static String addMonth(String datetime,int i)
+	{
+		Date date = null;
+		SimpleDateFormat sdf = new SimpleDateFormat(DateTimeHelper.DATE_FORMAT);
+		Calendar cal = Calendar.getInstance();
+		try
+		{
+			date = sdf.parse(datetime);
+			cal.setTime(date);//设置起时间
+			cal.add(Calendar.MONTH,i);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return sdf.format(cal.getTime());
+	}
+
+	/**
+	 * 在当前日期上按天数累积并返回日期
+	 *
+	 * @param datetime 日期
+	 * @param i 年
+	 */
+	public static String addYear(String datetime,int i)
+	{
+		Date date = null;
+		SimpleDateFormat sdf = new SimpleDateFormat(DateTimeHelper.DATE_FORMAT);
+		Calendar cal = Calendar.getInstance();
+		try
+		{
+			date = sdf.parse(datetime);
+			cal.setTime(date);//设置起时间
+			cal.add(Calendar.YEAR,i);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return sdf.format(cal.getTime());
+	}
+
 }

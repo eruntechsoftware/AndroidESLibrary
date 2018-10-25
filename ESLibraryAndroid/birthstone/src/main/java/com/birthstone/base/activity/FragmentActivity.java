@@ -17,7 +17,7 @@ import com.birthstone.base.parse.*;
 import com.birthstone.core.interfaces.IChildView;
 import com.birthstone.core.parse.Data;
 import com.birthstone.core.parse.DataCollection;
-import com.gyf.barlibrary.ImmersionBar;
+import com.birthstone.core.parse.DataTable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -219,7 +219,6 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
 			mUINavigationBar.UINavigationBarDelegat = this;
 			viewGroup.addView(mUINavigationBar);
 
-			ImmersionBar.with(this).statusBarColor(UINavigationBar.BACKGROUND_COLOR).init();
 //			StatusBarUtil.setTranslucent(this);
 //
 //			StatusBarUtil.setColorNoTranslucent(this, UINavigationBar.BACKGROUND_COLOR);
@@ -365,6 +364,41 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity im
 	public void release (int tag,DataCollection params)
 	{
 		releaseParams = (DataCollection) params.clone();
+		if (releaseParams != null && releaseParams.size() > 0)
+		{
+			ReleaseHelper releaseHelper;
+			try
+			{
+				//数据发布前处理方法
+				releaseing();
+
+				releaseHelper = new ReleaseHelper(releaseParams, this);
+				releaseHelper.release(null);
+
+				//数据发布完成后处理方法
+				released();
+
+				releaseParams.clear();
+			}
+			catch (Exception ex)
+			{
+				Log.e("", ex.getMessage());
+			}
+		}
+	}
+
+	/**
+	 * 发布数据集到当前屏幕
+	 * @param tag 发布数据时用以区分标识
+	 * @param dataTable 数据集
+	 */
+	public void release(int tag,DataTable dataTable)
+	{
+		if(dataTable==null)
+		{
+			return;
+		}
+		releaseParams = (DataCollection) dataTable.getFirst().clone();
 		if (releaseParams != null && releaseParams.size() > 0)
 		{
 			ReleaseHelper releaseHelper;

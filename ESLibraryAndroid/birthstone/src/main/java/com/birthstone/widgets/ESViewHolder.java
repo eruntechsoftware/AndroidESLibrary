@@ -7,6 +7,7 @@ import android.view.View;
 import com.birthstone.base.helper.ReleaseHelper;
 import com.birthstone.core.interfaces.IChildView;
 import com.birthstone.core.parse.DataCollection;
+import com.birthstone.core.parse.DataTable;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -58,6 +59,12 @@ public class ESViewHolder extends RecyclerView.ViewHolder implements IChildView
         {
             Log.e("", ex.getMessage());
         }
+    }
+
+    @Override
+    public void release(int tag, DataTable table)
+    {
+
     }
 
     /**

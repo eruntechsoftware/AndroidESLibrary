@@ -2,6 +2,7 @@ package com.birthstone.core.interfaces;
 
 import android.view.View;
 import com.birthstone.core.parse.DataCollection;
+import com.birthstone.core.parse.DataTable;
 
 import java.util.List;
 
@@ -15,4 +16,6 @@ public interface IChildView
     public void release(DataCollection params);
 
     public void release(int tag,DataCollection params);
+
+    public void release(int tag,DataTable table);
 }

@@ -557,22 +557,14 @@ public class ESNumberPickerView extends LinearLayout implements ICollectible, IV
 		{
 			if (data.getValue() == null)
 			{
-				this.setText("");
+				this.setText(minValue+"");
 				return;
 			}
-			if (this.mDataType == null)
+			if (TextUtils.isEmpty(data.getValue().toString().trim()))
 			{
-				this.setText(data.getValue().toString());
+				this.setText(minValue+"");
+				return;
 			}
-			else if (this.mDataType.equals(DataType.Date))
-			{
-				this.setText(DateTimeHelper.getDateString(data.getValue().toString(), DateTimeHelper.getDateFormat()));
-			}
-			else if (this.mDataType.equals(DataType.DateTime))
-			{
-				this.setText(DateTimeHelper.getDateString(data.getValue().toString(), DateTimeHelper.getDateTimeFormat()));
-			}
-			else
 			{
 				this.setText(data.getValue().toString());
 			}

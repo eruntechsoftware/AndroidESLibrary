@@ -126,7 +126,7 @@ public class ESMaterialTabHost extends LinearLayout implements View.OnClickListe
 	{
 		super(context, attrs);
 		mContext = context;
-		setBackgroundColor(Color.WHITE);
+
 		TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ESMaterialTabHost);
 		//tabhost高度
 		mLayoutTitleHeight = a.getDimension(R.styleable.ESMaterialTabHost_tabHost_height, 40);
@@ -140,6 +140,8 @@ public class ESMaterialTabHost extends LinearLayout implements View.OnClickListe
 		mTabTitleTextSize = a.getFloat(R.styleable.ESMaterialTabHost_tabHost_titleSize, 16);
 		//		a.getDimensionPixelSize(R.styleable.ESMaterialTabHost_tabHost_titleSize,
 		//								(int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 16, getResources().getDisplayMetrics()));
+
+		setBackgroundColor(mTabTitleBackgroundColor);
 
 		//字体是否加粗
 		mboldText = a.getBoolean(R.styleable.ESMaterialTabHost_tabHost_boldText, true);
